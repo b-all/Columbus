@@ -9,7 +9,7 @@ function start(req, res) {
 	var html = jade.renderFile('./public/views/index.jade');
 
 	// send the converted web page to the client
-	res.writeHead(200, {"Content-Type" : "text/html"});
+	res.writeHead(200, {"Content-Type" : "text/html; charset=utf-8"});
 	res.write(html);
 	res.end();
 }
@@ -57,6 +57,7 @@ function graph(req, res) {
 	// send query to database 
 	db.query(query, null, function(err, results) {
 		if (err) { // if error send blank response
+			res.write("Cannot communicate with Neo4j database.");
 			res.end();
 		} else {
 			var nodeArray = [];
@@ -113,6 +114,7 @@ function getAllRelationships(req, res, nodes, callback) {
 	db.query(query, null, function(err, results) {
 		if (typeof results !== 'undefined') {
 			if (err) { // if error send blank response
+				res.write("Cannot communicate with Neo4j database.")
 				res.end();
 			} else {
 				var relationships = [];

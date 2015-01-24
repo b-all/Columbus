@@ -5,6 +5,7 @@ var util = require("util");
 var static = require("node-static");
 var webroot = './public';
 
+var server; 
 
 //starts the web server
 function start(route, handle) {
@@ -22,10 +23,15 @@ function start(route, handle) {
 	}
 
 	// creates a web server listening on port 8888
-	http.createServer(onRequest).listen(8888);
+	server = http.createServer(onRequest).listen(8888);
 
 	console.log("Server has started...");
 }
 
-// export start function so that other modules can use it
+function stop() {
+	server.close();
+}
+
+// export functions so that other modules can use them
 exports.start = start; 
+exports.stop = stop;
