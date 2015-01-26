@@ -1,0 +1,612 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"get",
+				"getDate"
+			],
+			[
+				"project",
+				"ProjectCosts"
+			],
+			[
+				"slide",
+				"slideData"
+			],
+			[
+				"bizSe",
+				"bizSectTableRowDark"
+			],
+			[
+				"month",
+				"monthAbbr"
+			],
+			[
+				"months",
+				"monthsLabels"
+			],
+			[
+				"m",
+				"monthsDisplayed"
+			],
+			[
+				"res",
+				"resources"
+			],
+			[
+				"mon",
+				"monthAbbr"
+			],
+			[
+				"selecte",
+				"selectedResmanStartMonth"
+			],
+			[
+				"selected",
+				"selectedResmanStartYear"
+			],
+			[
+				"selec",
+				"selectedResmanEndYear"
+			],
+			[
+				"select",
+				"selectedResmanStartYear"
+			],
+			[
+				"alread",
+				"alreadyNamedIndex"
+			],
+			[
+				"selectedResm",
+				"selectedResmanStartYear"
+			],
+			[
+				"selectedRes",
+				"selectedResmanEndYear"
+			],
+			[
+				"O",
+				"October"
+			],
+			[
+				"resour",
+				"resourcePlan"
+			],
+			[
+				"ex",
+				"exportLoading"
+			],
+			[
+				"this",
+				"thisForm"
+			],
+			[
+				"Miles",
+				"MilestoneRow"
+			],
+			[
+				"li",
+				"list-unstyled"
+			],
+			[
+				"td",
+				"td"
+			],
+			[
+				"sli",
+				"slideshow_length"
+			],
+			[
+				"curr",
+				"currentSlide"
+			],
+			[
+				"psc",
+				"pscTable"
+			],
+			[
+				"execSumTable",
+				"execSumTableRow"
+			],
+			[
+				"execSumTabl",
+				"execSumTableRow"
+			],
+			[
+				"exec",
+				"execSumTableRow"
+			],
+			[
+				"progressPer",
+				"progressPercentInc"
+			],
+			[
+				"dev",
+				"devStrategy"
+			],
+			[
+				"pscTabl",
+				"pscTableLength"
+			],
+			[
+				"table-",
+				"table-row"
+			],
+			[
+				"proj",
+				"projScopeChanges"
+			],
+			[
+				"obj",
+				"obj"
+			],
+			[
+				"progre",
+				"progressDenominator"
+			],
+			[
+				"clicked",
+				"clickedOnPrevSlideBtn"
+			],
+			[
+				"left",
+				"left"
+			],
+			[
+				"background",
+				"background-color"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "test/BasicServerOps.test.js",
+			"settings":
+			{
+				"buffer_size": 1626,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app.js",
+			"settings":
+			{
+				"buffer_size": 789,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "requestHandlers.js",
+			"settings":
+			{
+				"buffer_size": 3642,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/views/layout.jade",
+			"settings":
+			{
+				"buffer_size": 441,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/scripts/graph-creator.js",
+			"settings":
+			{
+				"buffer_size": 19855,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/tadecker/Documents/Columbus/test/requestHandlers.test.js",
+		"/Users/tadecker/Documents/Columbus/public/views/index.jade",
+		"/Users/tadecker/Documents/Jira Project/Current/readme.txt",
+		"/Users/tadecker/Documents/Jira Project/Current/routes/dataStore.js",
+		"/Users/tadecker/Documents/Jira Project/Current/views/index.jade",
+		"/Users/tadecker/Documents/Jira Project/Current/public/javascripts/toolsController.js",
+		"/Users/tadecker/Documents/Jira Project/Current/jades/epsHome.jade",
+		"/Users/tadecker/Documents/Jira Project/Current/public/javascripts/global.js",
+		"/Users/tadecker/Documents/Jira Project/Current/public/javascripts/epsHomeController.js",
+		"/Users/tadecker/Documents/Jira Project/Current/public/javascripts/cdPreviewController.js",
+		"/Users/tadecker/Documents/Jira Project/Current/views/layout.jade",
+		"/Users/tadecker/Desktop/cdViewer.jade",
+		"/Users/tadecker/Desktop/commitDeckController.js",
+		"/Users/tadecker/Desktop/slideshowStyle.css",
+		"/Users/tadecker/Desktop/commit_deck.html",
+		"/Users/tadecker/Documents/Jira Project/Current/views/cdViewer.jade",
+		"/Users/tadecker/Documents/Jira Project/Current/public/stylesheets/style.css",
+		"/Users/tadecker/Documents/Jira Project/Current/public/stylesheets/slideshowStyle.css",
+		"/Users/tadecker/Desktop/cdViewerJIC.jade",
+		"/Users/tadecker/git/SASTeam08/SASTeam08/WebContent/javascripts/jquery.js",
+		"/Users/tadecker/Documents/Jira Project/Current/public/javascripts/commitDeckController.js",
+		"/Users/tadecker/Documents/Jira Project/Current/public/javascripts/cfdController.js",
+		"/Users/tadecker/Desktop/prettify_json.py",
+		"/Users/tadecker/Documents/Jira Project/CommitDeckTestData"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"resmanLoading",
+			"console.log",
+			"resourcePlan",
+			"Resource function",
+			"currentSlide",
+			"here",
+			"$scope.projectList",
+			"milestones",
+			"Milestones",
+			"removeDirForce",
+			"rootPath",
+			"$http.get",
+			"import",
+			"console.log",
+			"import",
+			"upload",
+			"image",
+			"export",
+			"getHeader",
+			"dataStore",
+			"pscTable",
+			"psc",
+			"while",
+			"psc",
+			"PSC",
+			"PCS",
+			"PSC",
+			"isPSC",
+			"sortPSC",
+			"isPSC",
+			"'false'",
+			"'true'",
+			"save",
+			"forms[currentSlide]",
+			"openLink",
+			"$(#id)",
+			"id",
+			"item",
+			"#scope",
+			"#",
+			"cdForm",
+			"Risks / Issues",
+			"$scope.currentSlide",
+			"$scope.risksIssues",
+			"new Form",
+			"POC",
+			"restoreModels",
+			"edit",
+			"PM Strategy",
+			"PM Strateg",
+			"hasOwnProperty",
+			"delete",
+			"track by",
+			"Test Strategy",
+			"new Form",
+			"edit",
+			"Development Strategy",
+			"new Form",
+			".ok",
+			"devStratCheckList ",
+			"devStratChecklist ",
+			"Key Perfor",
+			"choose",
+			"chooseF",
+			"Choose File",
+			"image",
+			"console.log",
+			"is",
+			"$scope.slideshow_length",
+			"isLast",
+			"isLas",
+			"isLast",
+			"image_delete",
+			"packUp",
+			"cleanDat",
+			"projScopeChanges",
+			"save",
+			"$scope.projScopeChanges",
+			"packUp",
+			"save",
+			"http",
+			"projScopeChanges",
+			"pscTable",
+			"ng-repeat",
+			"progressPercent",
+			"Project Scope",
+			"new Form",
+			".pscTableHeader",
+			"here",
+			"console.log",
+			"ref",
+			"packUp",
+			"save",
+			"console.log",
+			"key",
+			"console.log",
+			"isEditing",
+			"new Form",
+			"Form",
+			"fixVersion",
+			"fixVersions",
+			"3.9",
+			"Mobile 3.9",
+			"bug",
+			"AP",
+			"delete",
+			"2",
+			"image_upload",
+			"fstream",
+			"image_upload",
+			"leave",
+			"Are you",
+			"alert",
+			"confirm",
+			"submitImage",
+			"leave",
+			"getIMageForm",
+			"getImage",
+			"getImageForm",
+			"agent"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"psc",
+			"slideData"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "test/BasicServerOps.test.js",
+					"settings":
+					{
+						"buffer_size": 1626,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								209,
+								209
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 330.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app.js",
+					"settings":
+					{
+						"buffer_size": 789,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								789,
+								789
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "requestHandlers.js",
+					"settings":
+					{
+						"buffer_size": 3642,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1676,
+								1676
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 758.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/views/layout.jade",
+					"settings":
+					{
+						"buffer_size": 441,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								418,
+								418
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "public/scripts/graph-creator.js",
+					"settings":
+					{
+						"buffer_size": 19855,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								18519,
+								19569
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2250.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 263.0,
+	"status_bar_visible": true
+}

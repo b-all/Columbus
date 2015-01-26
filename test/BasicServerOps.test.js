@@ -1,6 +1,6 @@
-var server = require("../app");
-var router = require("../router");
-var requestHandlers = require("../requestHandlers")
+var server = require("../src/app");
+var router = require("../src/router");
+var requestHandlers = require("../src/requestHandlers")
 var http = require('http');
 var assert = require('assert');
 
