@@ -16,9 +16,6 @@ function start(route, handle) {
 
 		// route the request in router.js
 		route(handle, pathname, req, res);
-
-
-
 	};
 
 	// creates a web server listening on port 8888
