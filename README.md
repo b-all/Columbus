@@ -27,6 +27,19 @@ SonarQube<br>
 5. In a terminal, cd to the Columbus directory<br>
 6. Enter the command "make ci"<br>
 7. Access SonarQube reports with a browser at localhost:9000<br>
+8. Click the login button at the top-right of the window<br>
+9. Login with credentials: <br>
+-Login: admin<br>
+-Password: admin<br>
+10. Click Settings at the top-right of the screen<br>
+11. Click Exclusions tab under Category<br>
+12. Add patterns src/public/js_libs/* and src/public/reports/lcov-report/* to Coverage Exclusions<br>
+13. Click Files tab<br>
+14. Add patterns src/public/js_libs/* and src/public/reports/lcov-report/* to Global Source File Exclusions<br>
+15. Restart SonarQube<br>
+16. Enter the command "make ci" again in the Columbus directory. <br>
+-SonarQube should now be setup to analyze only the project's source files.
+
 
 Istanbul<br>
 1. In a terminal, cd to the Columbus directory<br>
