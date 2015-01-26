@@ -1,6 +1,0 @@
-<testsuite name="Mocha Tests" tests="4" failures="0" errors="0" skipped="0" timestamp="Mon, 26 Jan 2015 02:33:03 GMT" time="0.096">
-<testcase classname="app Basic Server Operations" name="should return 200 for /" time="0.04"/>
-<testcase classname="app Basic Server Operations" name="should return 200 - accessing public files" time="0.003"/>
-<testcase classname="app Basic Server Operations" name="should return 200 - talking to neo4j database" time="0.034"/>
-<testcase classname="app Basic Server Operations" name="should not return database communication error" time="0.013"/>
-</testsuite>
