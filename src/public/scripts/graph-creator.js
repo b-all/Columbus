@@ -605,19 +605,37 @@ var displayData = function (initialGraph, xLoc, yLoc, width, height) {
     var x1 = xLoc, y1 = yLoc;
     var mult = 20;
     
-    //var m = 30;
+    var theta = 0; 
+    var divisor = Math.PI / 4; 
+    var m = 30;
+    var r = 180;
+
+    for (var i = 0; i < nodes.length; i++) {
+
+    }
   
     for (var i = 0; i < nodes.length; i++) {
         //following code starts node at the same point
         /*nodes[i].x = xLoc;
         nodes[i].y = yLoc;
         console.log(nodes[i].x)*/
-        //var j = Math.floor(Math.random() * m); 
-        //nodes[i].x = Math.cos(j / m * 2 * Math.PI) * 200 + width / 2 + Math.random();
-        //nodes[i].y = Math.sin(j / m * 2 * Math.PI) * 200 + height / 2 + Math.random();
-        nodes[i].x = 1.618 * mult * Math.cos(mult) + xLoc;
-        nodes[i].y = 1.618 * mult * Math.sin(mult) + yLoc;
-        mult += 5; 
+        //nodes[i].x = Math.cos(1.618 * 2 * Math.PI) * 200 + width / 2 ;
+        //nodes[i].y = Math.sin(1.618 * 2 * Math.PI) * 200 + height / 2 ;
+        if (i === 0) {
+          nodes[i].x = x1;
+          nodes[i].y = y1; 
+        } else {
+          nodes[i].x = r * Math.cos(theta) + x1;
+          nodes[i].y = r * Math.sin(theta) + y1;
+          theta += divisor;
+          if (theta >= 2 * Math.PI) {
+
+            theta = 0;
+            r += 180;
+            divisor /= 1.5;  
+
+          }
+        } 
         /*var y1prev = y1;
         y1 = x1 * Math.tan(Math.log(Math.sqrt(x1*x1 + y1*y1)));
         x1 = y1Prev / Math.tan(Math.log(Math.sqrt(x1*x1 + y1*y1)));*/
