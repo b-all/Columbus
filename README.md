@@ -18,22 +18,22 @@ Graph manipulation (Neo4j interface not yet implemented)
 <b>Testing and Metrics</b>
 
 SonarQube<br>
-<ol><li>Download SonarQube (http://www.sonarqube.org/downloads/)</li>
-<li>Download SonarQube Javascript Plug-in (http://docs.sonarqube.org/display/SONAR/JavaScript+Plugin)</li>
-<li>Place the SonarQube Javascript Plug-in jar in the SonarQube install directory at ./extensions/plugins</li>
-<li>From the SonarQube install directory execute the following script to start the server:</li>
-<ul><li>On Linux/Mac OS: ./bin/<YOUR OS>/sonar.sh start</li>
-<li>-On Windows: bin/windows-x86-XX/StartSonar.bat</li></ul>
-<li>In a terminal, cd to the Columbus directory</li>
-<li>Enter the command "make ci"</li>
-<li>Access SonarQube reports with a browser at localhost:9000</li></ol>
+1. Download SonarQube (http://www.sonarqube.org/downloads/) <br>
+2. Download SonarQube Javascript Plug-in (http://docs.sonarqube.org/display/SONAR/JavaScript+Plugin)<br>
+3. Place the SonarQube Javascript Plug-in jar in the SonarQube install directory at ./extensions/plugins<br>
+4. From the SonarQube install directory execute the following script to start the server:<br>
+-On Linux/Mac OS: ./bin/<YOUR OS>/sonar.sh start<br>
+-On Windows: bin/windows-x86-XX/StartSonar.bat<br>
+5. In a terminal, cd to the Columbus directory<br>
+6. Enter the command "make ci"<br>
+7. Access SonarQube reports with a browser at localhost:9000<br>
 
 Istanbul<br>
-<ol><li>In a terminal, cd to the Columbus directory</li>
-<li>Enter the command "make ci"</li>
-<li>Coverage reports can be viewed with a browser at http://localhost:8888/reports/lcov-report/index.html</li></ol>
+1. In a terminal, cd to the Columbus directory<br>
+2. Enter the command "make ci"<br>
+3. Coverage reports can be viewed with a browser at http://localhost:8888/reports/lcov-report/index.html<br>
 
 Mocha<br>
-<ol><li>In a terminal, cd to the Columbus directory</li>
-<li>Enter the command "make ci"</li>
-<li>Unit test pass/fails will be displayed via command line</li></ol>
+1. In a terminal, cd to the Columbus directory<br>
+2. Enter the command "make ci"<br>
+3. Unit test pass/fails will be displayed via command line<br>
