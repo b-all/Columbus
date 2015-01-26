@@ -11,7 +11,7 @@ If your Neo4j database has data, it should be displayed in a directed graph.
 Graph manipulation (Neo4j interface not yet implemented)
 - use mouse wheel to zoom in and out
 - shift-click in empty space to add a new node 
-- shift-click on a node to edit it's title
+- shift-click on a node to edit its title
 - shift-click on a node and drag to another node to create a relationship
 - click and drag nodes to move them around
 
@@ -21,9 +21,11 @@ SonarQube<br>
 1. Download SonarQube (http://www.sonarqube.org/downloads/) <br>
 2. Download SonarQube Javascript Plug-in (http://docs.sonarqube.org/display/SONAR/JavaScript+Plugin)<br>
 3. Place the SonarQube Javascript Plug-in jar in the SonarQube install directory at ./extensions/plugins<br>
-4. From the SonarQube install directory execute the following script to start the server:<br>
-	-On Linux/Mac OS: ./bin/<YOUR OS>/sonar.sh start<br>
-	-On Windows: bin/windows-x86-XX/StartSonar.bat<br>
+<dl>
+</dt>4. From the SonarQube install directory execute the following script to start the server:</dt><br>
+	<dd>-On Linux/Mac OS: ./bin/<YOUR OS>/sonar.sh start</dd><br>
+	<dd>-On Windows: bin/windows-x86-XX/StartSonar.bat</dd><br>
+</dl>
 5. In a terminal, cd to the Columbus directory<br>
 6. Enter the command "make ci"<br>
 7. Access SonarQube reports with a browser at localhost:9000<br>
