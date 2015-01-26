@@ -20,11 +20,11 @@ Graph manipulation (Neo4j interface not yet implemented)
 SonarQube<br>
 1. Download SonarQube (http://www.sonarqube.org/downloads/) <br>
 2. Download SonarQube Javascript Plug-in (http://docs.sonarqube.org/display/SONAR/JavaScript+Plugin)<br>
-3. Place the SonarQube Javascript Plug-in jar in the SonarQube install directory at ./extensions/plugins<br>
+3. Place the SonarQube Javascript Plug-in jar in the SonarQube install directory at ./extensions/plugins
 <dl>
-</dt>4. From the SonarQube install directory execute the following script to start the server:</dt><br>
-	<dd>-On Linux/Mac OS: ./bin/<YOUR OS>/sonar.sh start</dd><br>
-	<dd>-On Windows: bin/windows-x86-XX/StartSonar.bat</dd><br>
+</dt>4. From the SonarQube install directory execute the following script to start the server:</dt>
+	<dd>-On Linux/Mac OS: ./bin/<YOUR OS>/sonar.sh start</dd>
+	<dd>-On Windows: bin/windows-x86-XX/StartSonar.bat</dd>
 </dl>
 5. In a terminal, cd to the Columbus directory<br>
 6. Enter the command "make ci"<br>
