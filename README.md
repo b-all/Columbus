@@ -17,23 +17,23 @@ Graph manipulation (Neo4j interface not yet implemented)
 
 <b>Testing and Metrics</b>
 
-SonarQube
-1. Download SonarQube (http://www.sonarqube.org/downloads/)
-2. Download SonarQube Javascript Plug-in (http://docs.sonarqube.org/display/SONAR/JavaScript+Plugin)
-3. Place the SonarQube Javascript Plug-in jar in the SonarQube install directory at ./extensions/plugins
-4. From the SonarQube install directory execute the following script to start the server:
-	-On Linux/Mac OS: ./bin/<YOUR OS>/sonar.sh start
-	-On Windows: bin/windows-x86-XX/StartSonar.bat
-5. In a terminal, cd to the Columbus directory
-6. Enter the command "make ci"
-7. Access SonarQube reports with a browser at localhost:9000
+SonarQube<br>
+1. Download SonarQube (http://www.sonarqube.org/downloads/) <br>
+2. Download SonarQube Javascript Plug-in (http://docs.sonarqube.org/display/SONAR/JavaScript+Plugin)<br>
+3. Place the SonarQube Javascript Plug-in jar in the SonarQube install directory at ./extensions/plugins<br>
+4. From the SonarQube install directory execute the following script to start the server:<br>
+	-On Linux/Mac OS: ./bin/<YOUR OS>/sonar.sh start<br>
+	-On Windows: bin/windows-x86-XX/StartSonar.bat<br>
+5. In a terminal, cd to the Columbus directory<br>
+6. Enter the command "make ci"<br>
+7. Access SonarQube reports with a browser at localhost:9000<br>
 
-Istanbul
-1. In a terminal, cd to the Columbus directory
-2. Enter the command "make ci"
-3. Coverage reports can be viewed with a browser at http://localhost:8888/reports/lcov-report/index.html
+Istanbul<br>
+1. In a terminal, cd to the Columbus directory<br>
+2. Enter the command "make ci"<br>
+3. Coverage reports can be viewed with a browser at http://localhost:8888/reports/lcov-report/index.html<br>
 
-Mocha
-1. In a terminal, cd to the Columbus directory
-2. Enter the command "make ci"
-3. Unit test pass/fails will be displayed via command line
+Mocha<br>
+1. In a terminal, cd to the Columbus directory<br>
+2. Enter the command "make ci"<br>
+3. Unit test pass/fails will be displayed via command line<br>
