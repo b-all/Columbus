@@ -604,13 +604,19 @@ var displayData = function (initialGraph, xLoc, yLoc, width, height) {
     edges = initialGraph.relationships;
     var x1 = xLoc, y1 = yLoc;
     var mult = 20;
+    
+    //var m = 30;
+  
     for (var i = 0; i < nodes.length; i++) {
         //following code starts node at the same point
         /*nodes[i].x = xLoc;
         nodes[i].y = yLoc;
         console.log(nodes[i].x)*/
-        nodes[i].x = 5 * mult * Math.cos(mult) + xLoc;
-        nodes[i].y = 5 * mult * Math.sin(mult) + yLoc;
+        //var j = Math.floor(Math.random() * m); 
+        //nodes[i].x = Math.cos(j / m * 2 * Math.PI) * 200 + width / 2 + Math.random();
+        //nodes[i].y = Math.sin(j / m * 2 * Math.PI) * 200 + height / 2 + Math.random();
+        nodes[i].x = 1.618 * mult * Math.cos(mult) + xLoc;
+        nodes[i].y = 1.618 * mult * Math.sin(mult) + yLoc;
         mult += 5; 
         /*var y1prev = y1;
         y1 = x1 * Math.tan(Math.log(Math.sqrt(x1*x1 + y1*y1)));
