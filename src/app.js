@@ -2,10 +2,9 @@ var http = require("http");
 var url = require("url");
 var fs = require("fs");
 var util = require("util");
-var static = require("node-static");
 var webroot = './public';
 
-var server; 
+var server;
 
 //starts the web server
 function start(route, handle) {
@@ -20,7 +19,7 @@ function start(route, handle) {
 
 
 
-	}
+	};
 
 	// creates a web server listening on port 8888
 	server = http.createServer(onRequest).listen(8888);
@@ -33,5 +32,5 @@ function stop() {
 }
 
 // export functions so that other modules can use them
-exports.start = start; 
+exports.start = start;
 exports.stop = stop;
