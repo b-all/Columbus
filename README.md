@@ -30,7 +30,7 @@ SonarQube<br>
 
 Istanbul<br>
 1. In a terminal, cd to the Columbus directory<br>
-2. Enter the command "make ci"<br>
+2. Enter the command "make ci" followed by "npm start"<br>
 3. Coverage reports can be viewed with a browser at http://localhost:8888/reports/lcov-report/index.html<br>
 
 Mocha<br>
