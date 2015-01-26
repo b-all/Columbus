@@ -585,50 +585,56 @@ $(document).ready(function() {
 
 
     var nodes, edges;
-    pullGraph(function (initialGraph) {
-        /**
-         * Basic data model
-         *
-         **
-        var nodes = [{title: "new concept", id: 0, x: xLoc, y: yLoc},
-                     {title: "new concept", id: 1, x: xLoc, y: yLoc + 200}];
-        var edges = [{source: nodes[1], target: nodes[0]}];
-        */
+    pullGraph(displayData);
+});
 
-        // initial node data
-        nodes = initialGraph.nodes;
-        edges = initialGraph.relationships;
-        var x1 = xLoc, y1 = yLoc;
-        var mult = 20;
-        for (var i = 0; i < nodes.length; i++) {
-            //following code starts node at the same point
-            /*nodes[i].x = xLoc;
-            nodes[i].y = yLoc;
-            console.log(nodes[i].x)*/
-            nodes[i].x = 5 * mult * Math.cos(mult) + xLoc;
-            nodes[i].y = 5 * mult * Math.sin(mult) + yLoc;
-            mult += 5; 
-            /*var y1prev = y1;
-            y1 = x1 * Math.tan(Math.log(Math.sqrt(x1*x1 + y1*y1)));
-            x1 = y1Prev / Math.tan(Math.log(Math.sqrt(x1*x1 + y1*y1)));*/
-        }
-        for (var i = 0; i < edges.length; i++) {
-            for (var j = 0; j < nodes.length; j++) {
-                if (nodes[j].id === edges[i].source) {
-                    edges[i].source = nodes[j];
-                }
-                if (nodes[j].id === edges[i].target) {
-                    edges[i].target = nodes[j];
-                }
+
+var displayData = function (initialGraph, xLoc, yLoc, width, height) {
+    /**
+     * Basic data model
+     *
+     **
+    var nodes = [{title: "new concept", id: 0, x: xLoc, y: yLoc},
+                 {title: "new concept", id: 1, x: xLoc, y: yLoc + 200}];
+    var edges = [{source: nodes[1], target: nodes[0]}];
+    */
+
+    // initial node data
+    nodes = initialGraph.nodes;
+    edges = initialGraph.relationships;
+    var x1 = xLoc, y1 = yLoc;
+    var mult = 20;
+    for (var i = 0; i < nodes.length; i++) {
+        //following code starts node at the same point
+        /*nodes[i].x = xLoc;
+        nodes[i].y = yLoc;
+        console.log(nodes[i].x)*/
+        nodes[i].x = 5 * mult * Math.cos(mult) + xLoc;
+        nodes[i].y = 5 * mult * Math.sin(mult) + yLoc;
+        mult += 5; 
+        /*var y1prev = y1;
+        y1 = x1 * Math.tan(Math.log(Math.sqrt(x1*x1 + y1*y1)));
+        x1 = y1Prev / Math.tan(Math.log(Math.sqrt(x1*x1 + y1*y1)));*/
+    }
+    for (var i = 0; i < edges.length; i++) {
+        for (var j = 0; j < nodes.length; j++) {
+            if (nodes[j].id === edges[i].source) {
+                edges[i].source = nodes[j];
+            }
+            if (nodes[j].id === edges[i].target) {
+                edges[i].target = nodes[j];
             }
         }
+    }
 
-        /** MAIN SVG **/
-        var svg = d3.select("body").append("svg")
-              .attr("width", width)
-              .attr("height", height);
-        var graph = new GraphCreator(svg, nodes, edges);
-        graph.setIdCt(2);
-        graph.updateGraph();
-    });
-});
+    /** MAIN SVG **/
+    if (typeof d3.select("#graphContainer").select("svg") !== 'undefined' ) {
+      d3.select("#graphContainer").select("svg").remove();
+    }
+    var svg = d3.select("#graphContainer").append("svg")
+          .attr("width", width)
+          .attr("height", height);
+    var graph = new GraphCreator(svg, nodes, edges);
+    graph.setIdCt(2);
+    graph.updateGraph();
+};
