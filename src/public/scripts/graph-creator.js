@@ -514,6 +514,7 @@ GraphCreator.prototype.updateGraph = function(){
   // update existing nodes
   thisGraph.circles = thisGraph.circles.data(thisGraph.nodes, function(d){ return d.id;});
   thisGraph.circles.attr("transform", function(d){return "translate(" + d.x + "," + d.y + ")";});
+  thisGraph.circles.select("circle").attr("color", function(d){return d.color;});
 
   // add new nodes
   var newGs= thisGraph.circles.enter()
@@ -538,7 +539,8 @@ GraphCreator.prototype.updateGraph = function(){
     .call(thisGraph.drag);
 
   newGs.append("circle")
-    .attr("r", String(consts.nodeRadius));
+    .attr("r", String(consts.nodeRadius))
+    .attr("fill", function(d){return d.color;});;
 
   newGs.each(function(d){
     thisGraph.insertTitleLinebreaks(d3.select(this), d.title);
@@ -578,8 +580,8 @@ $(document).ready(function() {
     var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
         height =  window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
 
-    var xLoc = width/2 - 25,
-        yLoc = 300;
+    var xLoc = 0,
+        yLoc = 0;
 
     //var edges = initialGraph.relationships;
 
@@ -587,78 +589,3 @@ $(document).ready(function() {
     var nodes, edges;
     pullGraph(displayData);
 });
-
-
-var displayData = function (initialGraph, xLoc, yLoc, width, height) {
-    /**
-     * Basic data model
-     *
-     **
-    var nodes = [{title: "new concept", id: 0, x: xLoc, y: yLoc},
-                 {title: "new concept", id: 1, x: xLoc, y: yLoc + 200}];
-    var edges = [{source: nodes[1], target: nodes[0]}];
-    */
-
-    // initial node data
-    nodes = initialGraph.nodes;
-    edges = initialGraph.relationships;
-    var x1 = xLoc, y1 = yLoc;
-    var mult = 20;
-    
-    var theta = 0; 
-    var divisor = Math.PI / 4; 
-    var m = 30;
-    var r = 180;
-
-    for (var i = 0; i < nodes.length; i++) {
-
-    }
-  
-    for (var i = 0; i < nodes.length; i++) {
-        //following code starts node at the same point
-        /*nodes[i].x = xLoc;
-        nodes[i].y = yLoc;
-        console.log(nodes[i].x)*/
-        //nodes[i].x = Math.cos(1.618 * 2 * Math.PI) * 200 + width / 2 ;
-        //nodes[i].y = Math.sin(1.618 * 2 * Math.PI) * 200 + height / 2 ;
-        if (i === 0) {
-          nodes[i].x = x1;
-          nodes[i].y = y1; 
-        } else {
-          nodes[i].x = r * Math.cos(theta) + x1;
-          nodes[i].y = r * Math.sin(theta) + y1;
-          theta += divisor;
-          if (theta >= 2 * Math.PI) {
-
-            theta = 0;
-            r += 180;
-            divisor /= 1.5;  
-
-          }
-        } 
-        /*var y1prev = y1;
-        y1 = x1 * Math.tan(Math.log(Math.sqrt(x1*x1 + y1*y1)));
-        x1 = y1Prev / Math.tan(Math.log(Math.sqrt(x1*x1 + y1*y1)));*/
-    }
-    for (var i = 0; i < edges.length; i++) {
-        for (var j = 0; j < nodes.length; j++) {
-            if (nodes[j].id === edges[i].source) {
-                edges[i].source = nodes[j];
-            }
-            if (nodes[j].id === edges[i].target) {
-                edges[i].target = nodes[j];
-            }
-        }
-    }
-
-    /** MAIN SVG **/
-    if (typeof d3.select("#graphContainer").select("svg") !== 'undefined' ) {
-      d3.select("#graphContainer").select("svg").remove();
-    }
-    var svg = d3.select("#graphContainer").append("svg")
-          .attr("width", width)
-          .attr("height", height);
-    var graph = new GraphCreator(svg, nodes, edges);
-    graph.setIdCt(2);
-    graph.updateGraph();
-};

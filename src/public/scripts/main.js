@@ -5,8 +5,8 @@ function pullGraph(callback) {
     var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
         height =  window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
 
-    var xLoc = width/2 - 25,
-        yLoc = 300;
+    var xLoc = width/2 - 300,
+        yLoc = 200;
 	$.get('graph').done(function (data) {
 		data = JSON.parse(data);
 		if (typeof callback !== 'undefined') {
