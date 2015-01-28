@@ -1,0 +1,52 @@
+.navigationBar {
+	position: fixed;
+	background-color : rgba(0,0,0,.25);
+	height: 40px; 
+	width: 100vw;
+	padding: 2px;
+	box-shadow: 0px 0px 4px black; 
+	z-index: 2;
+}
+
+#graphContainer {
+	position: fixed;
+	height:100vh;
+	width:100vw;
+	right:0;
+	top:0;
+	z-index:1;
+}
+
+#nodePropertiesPane {
+	position: fixed;
+	height: 100vh;
+	width: 400px;
+	right: -400px;
+	top:0;
+	background-color: rgba(230,230,230,1);
+	z-index: 3;
+	box-shadow: 2px 0px 6px -2px #888 inset,
+				2px 0px 6px 2px #888 inset;
+	padding-left: 25px;
+}
+
+#relPropertiesPane {
+	position: fixed;
+	height: 100vh;
+	width: 400px;
+	right: -400px;
+	top:0;
+	background-color: rgba(230,230,230,1);
+	z-index: 3;
+	box-shadow: 2px 0px 6px -2px #888 inset,
+				2px 0px 6px 2px #888 inset;
+	padding-left: 25px;
+}
+
+.propertyTable {
+
+}
+
+.propertyTable td {
+	padding: 5px;
+}

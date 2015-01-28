@@ -1,7 +1,18 @@
 extends layout
 
 block content
-	button.btn.btn-primary(onclick="pullGraph()") Pull Graph
-	button.btn.btn-primary(onclick="addNode()") Add Node
+	.navigationBar
+		button.btn.btn-primary(onclick="pullGraph()") Pull Graph
+		button.btn.btn-primary(onclick="addNode()") Add Node
 	br
-	div(id="graphContainer" width="100vw" height="95vh")
+	#graphContainer
+	#nodePropertiesPane
+		h2 Node Properties
+		br
+		#nodeFixedProperties
+		#nodeEditableProperties
+	#relPropertiesPane
+		h2 Relationship Properties
+		br
+		#relFixedProperties
+		#relEditableProperties

@@ -1,0 +1,49 @@
+.fancyTable {
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	width:100%;
+	border-collapse:collapse;
+}
+		
+.fancyTable td, .fancyTable th {
+	font-size:.8em;
+	background-color: #FFFFFF;
+	border:1px solid #4F708D;
+	padding:2px 2px 2px 2px;
+}
+
+.fancyTable .testName {
+    padding:2px 2px 2px 10px;
+    font-size: 1.0em;
+}
+
+.fancyTable th {
+	font-size:1em;
+	text-align:center;
+	padding-top:0px;
+	padding-bottom:0px;
+	background-color:#4F708D;
+	color:#ffffff;
+}
+
+.fancyTable tr td {
+    color:#000000;
+    background-color:#EEE;
+}
+
+.fancyTable tr.alt td {
+	color:#000000;
+	background-color:#DDDDFF;
+}
+
+.fancyTable a {
+    color: rgb(0,0,0);
+    text-decoration: none;
+}
+
+.fancyTable a:hover{
+     text-decoration: underline;
+}
+
+.fancyTable ul, .fancyTable ol {
+    padding-left: 25px;
+}

@@ -19,7 +19,7 @@ Graph manipulation (Neo4j interface not yet implemented)
 
 Black Box Test Plan<br>
 -The Black Box Test Plan xml document can be found at src/public/reports/bbtp/BlackBoxTestPlan.xml <br>
--The BBTP can be viewed when the server is running in a browser at http://localhost:8888/reports/bbtp/BlackBoxTestPlan.xml<br>
+-The BBTP can be viewed when the server is running in a browser at http://localhost:8888/bbtp/BlackBoxTestPlan.xml<br>
 
 Mocha<br>
 1. In a terminal, cd to the Columbus directory<br>
