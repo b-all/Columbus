@@ -1,6 +1,5 @@
-var showingPropertiesLeft = false; 
-var showingPropertiesRight = false; 
-var editingProperties = false; 
+var showingNodeProps = false; 
+var showingRelProps = false; 
 
 var showNodeData = function (d) {
 	var docEl = document.documentElement,
@@ -9,41 +8,25 @@ var showNodeData = function (d) {
         height =  docEl.clientHeight;
 
     //slide open edit view
-    $('.navigationBar').animate({'top':'-100'}, 200);
-   	if (d.x * zoomRatio + translateDelta[0] < width / 2) {
-   		if (showingPropertiesRight) {
-   			$('#nodePropertiesPane').css({'left': '-400px', 'right':''});
-   			$('#graphContainer').animate({'left': '0px'}, 100, function () {
-   				$('#graphContainer').css({'left': ''});
-   				$('#graphContainer').animate({'right': '-400px'}, 100);
-   				$('#nodePropertiesPane').animate({'left': '0px'}, 100);
-   				showingPropertiesRight = false; 
-   			});
-   		} else if (!showingPropertiesLeft) {
-   			$('#nodePropertiesPane').css({'left': '-400px', 'right':''});
-   			$('#graphContainer').animate({'right': '-400px'}, 100);
-   			$('#nodePropertiesPane').animate({'left': '0px'}, 100);
-   		}
-		showingPropertiesLeft = true;
+   	if (d.x * zoomRatio + translateDelta[0] < width - 400) {
+   		if (!showingSideMenu) {
+   			$('#sideMenu').css({'right': '-365px'});
+   			$('#sideMenu').animate({'right': '0px'}, 100);
+   		} 
    	} else {
-   		if (showingPropertiesLeft) {
-   			$('#nodePropertiesPane').css({'right': '-400px', 'left':''});
-   			$('#graphContainer').animate({'right': '0px'}, 100, function () {
-   				$('#graphContainer').css({'right': ''});
-   				$('#graphContainer').animate({'left': '-400px'}, 100);
-   				$('#nodePropertiesPane').animate({'right': '0px'}, 100);
-   				showingPropertiesLeft = false; 
-   			});
-   		} else if (!showingPropertiesRight) {
-   			$('#nodePropertiesPane').css({'right': '-400px', 'left':''});
-   			$('#graphContainer').animate({'left': '-400px'}, 100);
-   			$('#nodePropertiesPane').animate({'right': '0px'}, 100);
-   		}
-   		showingPropertiesRight = true; 
+   		if (!showingSideMenu) {
+   			$('#sideMenu').css({'right': '-365px'});
+   			$('#graphContainer').animate({'left': '-365px'}, 500);
+   			$('#sideMenu').animate({'right': '0px'}, 100);
+   		} 		
 	}
+	showingSideMenu = true;
+	showingNodeProps = true; 
 
 	//show node's properties
-	var fixedProps = $('#nodeFixedProperties');
+	var header = $('.sideMenuHeader');
+	header.text("Node Properties");
+	var fixedProps = $('#fixedProperties');
 	fixedProps.empty();
 	fixedProps.append(	"<table class=\"propertyTable\">" +
 							"<tr>" + 
@@ -54,43 +37,125 @@ var showNodeData = function (d) {
 								"<td>id:</td>" + 
 								"<td>" + d.id + "</td>" +
 							"</tr>" + 
-						"</table>");
-	fixedProps.append("<br />")
-	var editableProps = $('#nodeEditableProperties');
-	editableProps.empty();
-	for (var i in d.data) {
-		editableProps.append(	"<table class=\"propertyTable\">" + 
-									"<tr>" + 
-										"<td>" + i + ":</td>" +
-										"<td><input type=\"text\" class=\"form-control\" value=\"" + d.data[i] + "\"></input></td>" +
-									"</tr>" +
-								"</table>");
-	}
+						"</table><br/>");
 
-	$('#nodePropertiesPane').on('click', function () {
+
+	var editableProps = $('#editableProperties');
+	editableProps.empty();
+	var ePropsString = "<table class=\"propertyTable\">";
+	for (var i in d.data) {
+		ePropsString += "<tr>" + 
+							"<td>" + i + ":</td>" +
+							"<td><input type=\"text\" class=\"form-control\" value=\"" + d.data[i] + "\"></input></td>" +
+						"</tr>";
+	}
+	ePropsString += "</table>";
+	editableProps.append(ePropsString);
+
+	$('#sideMenu').on('click', function () {
 		editingProperties = true;
 	});
+
+	//show save button
+	$('.saveBtn').show();
 };
 
 var hideNodeData = function () {
-	$('.navigationBar').animate({'top':'0'}, 200);
-	if (showingPropertiesLeft) {
-		$('#nodePropertiesPane').animate({'left' : '-400px'}, 100, function () {
-			$('#graphContainer').css({'left' : ''});
-			$('#graphContainer').animate({'right': '0px'}, 100, function () {
-				$('#graphContainer').css({'left': '', 'right' : '0'});
-				showingPropertiesLeft = false; 
-	   		});
-		});
-	} else if (showingPropertiesRight) {
-		$('#nodePropertiesPane').animate({'right' :'-400px'}, 100, function () {
+	if (showingSideMenu) {
+		$('#sideMenu').animate({'right' :'-365px'}, 100, function () {
 			$('#graphContainer').css({'right' : ''});
-			$('#graphContainer').animate({'left': '0px'}, 100, function () {
+			$('#graphContainer').animate({'left': '0px'}, 400, function () {
 				$('#graphContainer').css({'left': ''});
-				showingPropertiesRight = false; 
 	   		});
 		});
 	}
+	showingSideMenu = false; 
 	editingProperties = false; 
-	$('#nodePropertiesPane').off('click');
+
+	//hide save button
+	$('.saveBtn').hide();
+
+	$('#sideMenu').off('click');
+};
+
+
+var showRelData = function (d) {
+	var docEl = document.documentElement,
+        bodyEl = document.getElementsByTagName('body')[0];
+    var width =  docEl.clientWidth,
+        height =  docEl.clientHeight;
+
+    var rel_center = (d.source.x + d.target.x) / 2;
+    
+    //slide open edit view
+   	if (rel_center * zoomRatio + translateDelta[0] < width - 400) {
+   		if (!showingSideMenu) {
+   			$('#sideMenu').css({'right': '-365px'});
+   			$('#sideMenu').animate({'right': '0px'}, 100);
+   		} 
+   	} else {
+   		if (!showingSideMenu) {
+   			$('#sideMenu').css({'right': '-365px', 'left':''});
+   			$('#graphContainer').animate({'left': '-365px'}, 400);
+   			$('#sideMenu').animate({'right': '0px'}, 100);
+   		}
+	}
+
+	showingSideMenu = true; 
+	showingRelProps = true; 
+
+	//show relationship's properties
+	var header = $('.sideMenuHeader');
+	header.text('Relationship Properties');
+	var fixedProps = $('#fixedProperties');
+	fixedProps.empty();
+	fixedProps.append(	"<table class=\"propertyTable\">" +
+							"<tr>" + 
+								"<td>type:</td>" + 
+								"<td>" + d.type + "</td>" +
+							"</tr>" + 
+							"<tr>" + 
+								"<td>id:</td>" + 
+								"<td>" + d.id + "</td>" +
+							"</tr>" + 
+						"</table><br/>");
+
+
+	var editableProps = $('#editableProperties');
+	editableProps.empty();
+	var ePropsString = "<table class=\"propertyTable\">";
+	for (var i in d.data) {
+		ePropsString += "<tr>" + 
+							"<td>" + i + ":</td>" +
+							"<td><input type=\"text\" class=\"form-control\" value=\"" + d.data[i] + "\"></input></td>" +
+						"</tr>";
+	}
+	ePropsString += "</table>";
+	editableProps.append(ePropsString);
+
+	$('#sideMenu').on('click', function () {
+		editingProperties = true;
+	});
+
+	//show save button
+	$('.saveBtn').show();
+};
+
+var hideRelData = function () {
+	//$('.navigationBar').animate({'top':'0'}, 200);
+	if (showingSideMenu) {
+		$('#sideMenu').animate({'right' :'-365px'}, 100, function () {
+			$('#graphContainer').css({'right' : ''});
+			$('#graphContainer').animate({'left': '0px'}, 400, function () {
+				$('#graphContainer').css({'left': ''});
+	   		});
+		});
+	}
+	showingSideMenu = false; 
+	editingProperties = false; 
+	showingRelProps = false;
+	$('#sideMenu').off('click');
+
+	//hide save button
+	$('.saveBtn').hide();
 };

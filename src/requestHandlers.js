@@ -127,7 +127,10 @@ function getAllRelationships(req, res, nodes, callback) {
 					var endNodeURI = results[i].r._data.end.split("/");
 					relationships.push({
 						source: parseInt(startNodeURI[startNodeURI.length - 1]),
-						target: parseInt(endNodeURI[endNodeURI.length - 1])
+						target: parseInt(endNodeURI[endNodeURI.length - 1]),
+						id: results[i].r._data.metadata.id, 
+						type: results[i].r._data.metadata.type,
+						data: results[i].r._data.data
 					});
 				}
 				

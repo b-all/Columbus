@@ -26,6 +26,17 @@ function addNode() {
 	});
 }
 
+$(document).ready(function() {
+	$('.navArrowContainer').on('click', function() {
+		if (showingSideMenu) {
+			hideSideMenu('default');
+		} else {
+			showSideMenu('default');
+		}
+	});
+});
+
+
 function getEdges(graph) {
 
 }

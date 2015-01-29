@@ -285,8 +285,10 @@ GraphCreator.prototype.pathMouseDown = function(d3path, d){
   var prevEdge = state.selectedEdge;  
   if (!prevEdge || prevEdge !== d){
     thisGraph.replaceSelectEdge(d3path, d);
+    showSideMenu('relationship', d);
   } else{
     thisGraph.removeSelectFromEdge();
+    hideSideMenu('relationship');
   }
 };
 
@@ -405,7 +407,12 @@ GraphCreator.prototype.svgMouseDown = function(){
     if (prevNode) {
         this.removeSelectFromNode();
     }
-    hideNodeData();
+    var prevRel = this.state.selectedEdge; 
+    if (prevRel) {
+        this.removeSelectFromEdge();
+    }
+    hideSideMenu('relationship');
+    hideSideMenu('node');
 };
 
 // mouseup on main svg
@@ -533,7 +540,7 @@ GraphCreator.prototype.updateGraph = function(){
       thisGraph.circleMouseDown.call(thisGraph, d3.select(this), d);
     })
     .on('dblclick', function(d) {
-        showNodeData(d);
+        showSideMenu('node', d);
 
         var prevNode = state.selectedNode;            
         

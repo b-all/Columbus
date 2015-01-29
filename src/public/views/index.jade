@@ -6,13 +6,12 @@ block content
 		button.btn.btn-primary(onclick="addNode()") Add Node
 	br
 	#graphContainer
-	#nodePropertiesPane
-		h2 Node Properties
+	#sideMenu
+		.navArrowContainer
+			svg.navArrow(width="20px" height="20px" viewbox="0 0 .9 .9")
+				use(xlink:href="#back-arrow")
+		h2.sideMenuHeader
 		br
-		#nodeFixedProperties
-		#nodeEditableProperties
-	#relPropertiesPane
-		h2 Relationship Properties
-		br
-		#relFixedProperties
-		#relEditableProperties
+		#fixedProperties
+		#editablePrperties
+		button.saveBtn.btn.btn-default(onclick="saveProperties()") Save

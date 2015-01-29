@@ -11,6 +11,7 @@ var displayData = function (initialGraph, xLoc, yLoc, width, height) {
     // initial node data
     nodes = initialGraph.nodes;
     edges = initialGraph.relationships;
+
     var x1 = xLoc, y1 = yLoc;
     var mult = 20;
     
@@ -108,8 +109,8 @@ var displayData = function (initialGraph, xLoc, yLoc, width, height) {
           nodes[i].x = r * Math.cos(theta) + x1;
           nodes[i].y = r * Math.sin(theta) + y1;
           labels[lab].currentTheta += radian;
+          theta += radian;
           if (theta >= 2 * Math.PI) {
-
             labels[lab].currentR += 180;
             labels[lab].currentDivisor += 2; 
             labels[lab].currentRadian = Math.PI / labels[lab].currentDivisor;

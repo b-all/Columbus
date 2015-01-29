@@ -9,8 +9,12 @@ html
 		script(src="js_libs/d3.min.js")
 		script(src="scripts/graph-creator.js")
 		script(src="scripts/colors.js")
+		script(src="scripts/displaySideMenu.js")
 		script(src="scripts/main.js")
 		script(src="scripts/displayGraph.js")
 		script(src="scripts/displayProperties.js")
 	body
+		svg(height="0" width="0" style="position:absolute;margin-left: -100%;")
+			path(id="back-arrow" d="M .5,0 l -.4,.4 l .4,.4 z")                    
+
 		block content
