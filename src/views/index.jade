@@ -1,0 +1,17 @@
+extends layout
+
+block content
+	.navigationBar
+		span
+			input(type="text" class="search rounded" placeholder="Search...")
+	br
+	#graphContainer
+	#sideMenu
+		.navArrowContainer
+			svg.navArrow(width="20px" height="20px" viewbox="0 0 .9 .9")
+				use(xlink:href="#back-arrow")
+		h2.sideMenuHeader
+		br
+		#fixedProperties
+		#editableProperties
+		button.saveBtn.btn.btn-default(onclick="saveProperties()") Save

@@ -1,0 +1,35 @@
+{
+  "name": "Columbus",
+  "authors": [
+    {
+      "name": "David Ball"
+    },
+    {
+      "name": "Taylor Deckard"
+    },
+    {
+      "name": "Aaron Mahler"
+    },
+    {
+      "name": "Vatslav Orlov"
+    }
+  ],
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "debug": "*",
+    "express": "^5.0.0-alpha.1",
+    "istanbul": "^0.3.5",
+    "jade": "*",
+    "mocha": "^2.1.0",
+    "morgan": "*",
+    "neo4j": "^1.1.1",
+    "serve-favicon": "*",
+    "winston": "^0.8.3"
+  }
+}

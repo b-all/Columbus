@@ -1,27 +1,36 @@
 {
-    "author": "Taylor Deckard <taylor999@gmail.com>", 
-    "contributors": [
-        {
-            "email": "dball@ncsu.edu", 
-            "name": "David Ball"
-        }, 
-        {
-            "email": "almahler@ncsu.edu", 
-            "name": "Aaron Mahler"
-        }, 
-        {
-            "email": "vorlovs@ncsu.edu", 
-            "name": "Vatslav Orlov"
-        }
-    ], 
-    "description": "Neo4j Graph Visualization and Editing Tool", 
-    "name": "Columbus", 
-    "repository": {
-        "type": "git", 
-        "url": "https://github.ncsu.edu/engr-csc-sdc/2015springTeam17.git"
-    }, 
-    "scripts": {
-        "start": "node src/index.js"
-    }, 
-    "version": "0.0.1"
+  "name": "Columbus",
+  "authors": [
+    {
+      "name": "David Ball"
+    },
+    {
+      "name": "Taylor Deckard"
+    },
+    {
+      "name": "Aaron Mahler"
+    },
+    {
+      "name": "Vatslav Orlov"
+    }
+  ],
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "debug": "*",
+    "express": "^5.0.0-alpha.1",
+    "istanbul": "^0.3.5",
+    "jade": "*",
+    "mocha": "^2.1.0",
+    "morgan": "*",
+    "neo4j": "^1.1.1",
+    "serve-favicon": "*",
+    "winston": "^0.8.3",
+    "supertest":"*"
+  }
 }
