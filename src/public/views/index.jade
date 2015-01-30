@@ -2,8 +2,9 @@ extends layout
 
 block content
 	.navigationBar
-		button.btn.btn-primary(onclick="pullGraph()") Pull Graph
-		button.btn.btn-primary(onclick="addNode()") Add Node
+		form
+			span
+				input(type="text" class="search rounded" placeholder="Search...")
 	br
 	#graphContainer
 	#sideMenu

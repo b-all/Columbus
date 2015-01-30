@@ -30,6 +30,8 @@ function webroot(req, res, pathname) {
 			res.writeHead(200, {"Content-Type" : 'text/xsl'});
 		} else if (path.extname(pathname) === '.xml') {
 			res.writeHead(200, {"Content-Type" : 'text/xml'});
+		} else if (path.extname(pathname) === '.png') {
+			res.writeHead(200, {"Content-Type" : 'image/png'});
 		}
 		
 		// send files to the client
