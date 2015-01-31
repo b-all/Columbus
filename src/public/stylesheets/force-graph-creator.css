@@ -1,0 +1,22 @@
+
+
+path {
+	fill: 'black';
+	stroke-width: 4px;
+}
+
+.node {
+ 	stroke: #000;
+  	stroke-width: 1.5px;
+  	z-index:0;
+}
+
+.node text {
+	stroke-width: .5px;
+	font-family: Verdana;
+}
+
+
+.node.fixed {
+  	fill: #f00;
+}

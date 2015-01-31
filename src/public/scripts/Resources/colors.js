@@ -1,5 +1,5 @@
 //all css colors
-var colors = ["Aqua","Aquamarine","Bisque","Blue",
+var colors = ["Aqua","Aquamarine","Blue",
 "BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Crimson","Cyan",
 "DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange",
 "DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet",
@@ -8,8 +8,8 @@ var colors = ["Aqua","Aquamarine","Bisque","Blue",
 "LawnGreen","LightBlue","LightCoral","LightGoldenRodYellow","LightGray","LightGrey",
 "LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue",
 "Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue",
-"MediumSpringGreen","MediumTurquoise","MediumVioletRed","MistyRose","Moccasin","NavajoWhite",
-"Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru",
+"MediumSpringGreen","MediumTurquoise","MediumVioletRed","MistyRose",
+"Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","Peru",
 "Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","Sienna","Silver",
 "SkyBlue","SlateBlue","SlateGray","SlateGrey","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat",
 "Yellow","YellowGreen"];

@@ -18,7 +18,6 @@ router.get('/graph', function(req, res, next) {
 
 	// send query to database 
 	db.query(query, null, function(err, results) {
-		console.log(err);
 		if (err) { // if error send blank response
 			res.send({err:"Cannot communicate with Neo4j database."});
 		} else {

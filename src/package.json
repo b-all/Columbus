@@ -20,7 +20,7 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "body-parser": "*",
+    "body-parser": "^1.11.0",
     "cookie-parser": "*",
     "debug": "*",
     "express": "^5.0.0-alpha.1",
@@ -30,6 +30,7 @@
     "morgan": "*",
     "neo4j": "^1.1.1",
     "serve-favicon": "*",
+    "supertest": "*",
     "winston": "^0.8.3"
   }
 }

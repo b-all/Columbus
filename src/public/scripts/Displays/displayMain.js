@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 
     var nodes, edges;
-    pullGraph(displayData);
+    pullGraph(displayForceData);
 });
 
 function pullGraph(callback) {
@@ -38,7 +38,7 @@ function pullGraph(callback) {
 		if (typeof callback !== 'undefined') {
 			callback(data, xLoc, yLoc, width, height);
 		} else {
-			displayData(data, xLoc, yLoc, width, height);
+			displayForceData(data, xLoc, yLoc, width, height);
 		}
 		return data;
 	});

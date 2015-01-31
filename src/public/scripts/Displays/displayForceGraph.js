@@ -1,11 +1,11 @@
-var displayData = function (initialGraph, xLoc, yLoc, width, height) {
+var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
     /**
      * Basic data model
      *
      **
     var nodes = [{title: "new concept", id: 0, x: xLoc, y: yLoc},
                  {title: "new concept", id: 1, x: xLoc, y: yLoc + 200}];
-    var edges = [{source: nodes[1], target: nodes[0]}];
+    var edges = [{source: nodesIndex, target: nodesIndex}];
     */
 
     // initial node data
@@ -36,6 +36,7 @@ var displayData = function (initialGraph, xLoc, yLoc, width, height) {
     //space out node spheres by amount of nodes with similar labels
     var firstTimeThrough = true; 
     var prevXLoc, prevYLoc, prevRadius; 
+    var c = colors;
     for (var i in labels) {
         if (labels[i].count === 0) {
              continue;
@@ -78,7 +79,10 @@ var displayData = function (initialGraph, xLoc, yLoc, width, height) {
         labels[i]["currentDivisor"] = 4; 
         labels[i]["currentRadian"] = Math.PI / 4;
         labels[i]["currentJ"] = 0;
-        labels[i]["color"] = colors[Math.floor(Math.random() * colors.length)];  
+        var colorIndex = Math.floor(Math.random() * c.length)
+        var randColor = c[colorIndex];
+        c.splice(colorIndex, 1);
+        labels[i]["color"] = randColor;  
     }
   
     var theta = 0; 
@@ -122,10 +126,10 @@ var displayData = function (initialGraph, xLoc, yLoc, width, height) {
     for (var i = 0; i < edges.length; i++) {
         for (var j = 0; j < nodes.length; j++) {
             if (nodes[j].id === edges[i].source) {
-                edges[i].source = nodes[j];
+                edges[i].source = j;
             }
             if (nodes[j].id === edges[i].target) {
-                edges[i].target = nodes[j];
+                edges[i].target = j;
             }
         }
     }
@@ -139,7 +143,6 @@ var displayData = function (initialGraph, xLoc, yLoc, width, height) {
           .attr("height", height);
     
     // change which type of graph to create
-    var graph = new StickyGraphCreator(svg, nodes, edges);
-    graph.setIdCt(2);
+    var graph = new ForceGraphCreator(svg, nodes, edges);
     graph.updateGraph();
 };
