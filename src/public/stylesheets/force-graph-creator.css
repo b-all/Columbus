@@ -1,8 +1,13 @@
-
-
 path {
 	fill: 'black';
 	stroke-width: 4px;
+}
+
+.link text {
+	font-size: 4px;
+	font-family: Verdana;
+	fill: gray;
+	cursor:default;
 }
 
 .node {

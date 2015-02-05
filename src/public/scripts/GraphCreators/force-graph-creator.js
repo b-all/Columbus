@@ -5,6 +5,18 @@ var ForceGraphCreator = function(svg, nodes, edges){
 
     var thisGraph = this;
 
+    thisGraph.state = {
+        selectedNode: null,
+        selectedEdge: null,
+        mouseDownNode: null,
+        mouseDownLink: null,
+        justDragged: false,
+        justScaleTransGraph: false,
+        lastKeyDown: -1,
+        shiftNodeDrag: false,
+        selectedText: null
+    };
+
     ForceGraphCreator.prototype.consts = {
         selectedClass: "selected",
         connectClass: "connect-node",
@@ -27,6 +39,56 @@ var ForceGraphCreator = function(svg, nodes, edges){
             thisGraph.updateGraph();
         }
     };
+
+    // keydown on main svg
+    ForceGraphCreator.prototype.svgKeyDown = function() {
+        var thisGraph = this,
+            state = thisGraph.state,
+            consts = thisGraph.consts;
+        // make sure repeated key presses don't register for each keydown
+        if(state.lastKeyDown !== -1) return;
+
+        state.lastKeyDown = d3.event.keyCode;
+        var selectedNode = state.selectedNode,
+            selectedEdge = state.selectedEdge;
+
+
+        switch(d3.event.keyCode) {
+            case consts.BACKSPACE_KEY:
+            case consts.DELETE_KEY:
+                if (selectedNode && !editingProperties){
+                    d3.event.preventDefault();
+                    requestDeleteNode(selectedNode, function () {
+                        nodes.splice(nodes.indexOf(selectedNode), 1);
+                        thisGraph.spliceLinksForNode(selectedNode);
+                        state.selectedNode = null;
+                        thisGraph.updateGraph();
+                    });
+                } else if (selectedEdge && !editingProperties){
+                    d3.event.preventDefault();
+                    requestDeleteRelationship(selectedEdge, function () {
+                        edges.splice(edges.indexOf(selectedEdge), 1);
+                        state.selectedEdge = null;
+                        thisGraph.updateGraph();
+                    });
+                }
+                break;
+        }
+    };
+
+    ForceGraphCreator.prototype.svgKeyUp = function() {
+        this.state.lastKeyDown = -1;
+    };
+
+    // listen for key events
+    d3.select(window).on("keydown", function(){
+        thisGraph.svgKeyDown.call(thisGraph);
+    });
+
+    // listen for key events
+    d3.select(window).on("keyup", function(){
+        thisGraph.svgKeyUp.call(thisGraph);
+    });
 
     //drag graph behavior
     thisGraph.drag = d3.behavior.drag()
@@ -161,6 +223,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
             .on("dragend", dragend);
 
         var container = d3.select('.graph');
+        container.selectAll("*").remove();
         var link = container.selectAll(".link"),
             node = container.selectAll(".node");
 
@@ -176,6 +239,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
             .append('svg:path')
             .attr('d', 'M0,-5L10,0L0,5');
 
+
         force
             .nodes(nodes)
             .links(edges)
@@ -184,43 +248,14 @@ var ForceGraphCreator = function(svg, nodes, edges){
         link = link.data(edges)
             .enter().append("svg:g")
             .attr("class", "link")
-            .on('mousedown', function(d) {
-                d3.event.stopPropagation();
-                var allNodes = d3.selectAll('.node')
-                    .attr('selected', 'false')
-                    .select('circle')
-                    .attr('fill', function(d){return d.color;});
-                var allLinks = d3.selectAll('.link')
-                    .attr('selected', 'false')
-                    .select('path')
-                    .attr('stroke', function(d){return 'black'});
-                d3.select(this)
-                    .attr('selected', 'true')
-                    .select('path')
-                    .attr("stroke", "rgb(255, 214, 168)");
-                showSideMenu('relationship', d);
-            })
+            .on('mousedown', linkMouseDown)
             .append("svg:path")
-            .attr("marker-end", "url(#end)");
+            .attr("marker-end", "url(#end)")
+            .attr("id", function(d) { return 'path' + d.id;});
 
         node = node.data(nodes)
             .enter().append("g")
-            .on('mousedown', function(d) {
-                d3.event.stopPropagation();
-                var allNodes = d3.selectAll('.node')
-                    .attr('selected', 'false')
-                    .select('circle')
-                    .attr('fill', function(d){return d.color;});
-                var allLinks = d3.selectAll('.link')
-                    .attr('selected', 'false')
-                    .select('path')
-                    .attr('stroke', function(d){return 'black'});
-                d3.select(this).attr('selected', 'true')
-                    .select('circle')
-                    .attr("fill", "rgb(255, 214, 168)");
-                showSideMenu('node', d);
-                
-            })
+            .on('mousedown', nodeMouseDown)
             .call(drag)
             .attr("class", "node")
             .append("circle")
@@ -229,6 +264,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
 
         // place text on each node
         var labels = d3.select(".graph").selectAll(".node").append("text");
+        //var relLabels = d3.select(".graph").selectAll(".link").append("text");
 
         function tick() {
             link.attr("d", function(d){
@@ -250,12 +286,27 @@ var ForceGraphCreator = function(svg, nodes, edges){
                     return (d3.select(this.parentNode).attr('selected') === 'true') ? "rgb(255,214,168)" : d.color;
                 });
 
+            // label nodes
+            labels.selectAll("*").remove();
             labels.attr("x", function(d){ return isNaN(d.x) ?  d.x : parseFloat(d.x) - 10;  })
                 .attr("y", function(d){ return isNaN(d.y) ?  d.y : parseFloat(d.y) + 3; })
                 .attr("fill", "black")
                 .attr("font-size", "10")
                 .style("cursor", 'default')
                 .text(function(d){return d.id});
+
+            // removed this feature (considering performance)
+            /*// label relationships 
+            relLabels.selectAll("*").remove();
+            relLabels.attr("x", "2")
+                .attr("y", "20%")
+                .attr("fill", "black")
+                .append("textPath")
+                .attr("xlink:href", function(d){
+                    return '#path' + d.id;
+                }).attr("startOffset", "30%")
+                .html(function(d){ return d.type});*/
+            
         }
 
 
@@ -266,9 +317,58 @@ var ForceGraphCreator = function(svg, nodes, edges){
         function dragend(d) {
             d3.select(this).classed("fixed", d.fixed = false);
         }
-    }  
+    }
+
+    function nodeMouseDown(d) {
+        thisGraph.state.selectedNode = d; 
+        thisGraph.state.selectedEdge = null;
+        d3.event.stopPropagation();
+        var allNodes = d3.selectAll('.node')
+            .attr('selected', 'false')
+            .select('circle')
+            .attr('fill', function(d){return d.color;});
+        var allLinks = d3.selectAll('.link')
+            .attr('selected', 'false')
+            .select('path')
+            .attr('stroke', function(d){return 'black'});
+        d3.select(this).attr('selected', 'true')
+            .select('circle')
+            .attr("fill", "rgb(255, 214, 168)");
+        showSideMenu('node', d);
+    }
+
+    function linkMouseDown(d) {
+        thisGraph.state.selectedEdge = d;
+        thisGraph.state.selectedNode = null; 
+        d3.event.stopPropagation();
+        var allNodes = d3.selectAll('.node')
+            .attr('selected', 'false')
+            .select('circle')
+            .attr('fill', function(d){return d.color;});
+        var allLinks = d3.selectAll('.link')
+            .attr('selected', 'false')
+            .select('path')
+            .attr('stroke', function(d){return 'black'});
+        d3.select(this)
+            .attr('selected', 'true')
+            .select('path')
+            .attr("stroke", "rgb(255, 214, 168)");
+        showSideMenu('relationship', d);
+    }
+
+    // remove edges associated with a node
+    ForceGraphCreator.prototype.spliceLinksForNode = function(node) {
+        var thisGraph = this,
+
+        toSplice = edges.filter(function(l) {
+            return (l.source === node || l.target === node);
+        });
+        toSplice.map(function(l) {
+            edges.splice(edges.indexOf(l), 1);
+        });
+    };
+
 };
 
 var zoomRatio = 1;
 var translateDelta = [0,0];
-var clickedOnNodeOrRelationship = true;

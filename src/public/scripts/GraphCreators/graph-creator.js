@@ -7,15 +7,15 @@ var GraphCreator = function(svg, nodes, edges){
     thisGraph.edges = edges || [];
 
     thisGraph.state = {
-    selectedNode: null,
-    selectedEdge: null,
-    mouseDownNode: null,
-    mouseDownLink: null,
-    justDragged: false,
-    justScaleTransGraph: false,
-    lastKeyDown: -1,
-    shiftNodeDrag: false,
-    selectedText: null
+      selectedNode: null,
+      selectedEdge: null,
+      mouseDownNode: null,
+      mouseDownLink: null,
+      justDragged: false,
+      justScaleTransGraph: false,
+      lastKeyDown: -1,
+      shiftNodeDrag: false,
+      selectedText: null
     };
 
     // define arrow markers for graph links

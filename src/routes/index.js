@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 /* GET all nodes from neo4j database */
 router.get('/graph', function(req, res, next) {
 	//query all nodes in db
-	var query = 'MATCH (n) RETURN n'; 
+	var query = 'MATCH (n) RETURN n LIMIT 100'; 
 
 	// send query to database 
 	db.query(query, null, function(err, results) {
@@ -67,9 +67,39 @@ router.post('/addNode', function(req, res, next) {
 	});
 });
 
+/* Delete a node from the Neo4j DB */
+router.post('/deleteNode', function(req, res, next) { 
+	var node_id = req.body.id
+	//query to delete node and all connected relationships
+	var query = "START n=node(" + node_id + ") MATCH (n) - [r] - () DELETE n,r";
+	db.query(query, null, function (err, results) {
+		if (err) { // if error send blank response
+			res.send({err:"Cannot communicate with Neo4j database."});
+		} else {
+			res.send("Node deleted...")
+		}
+	});
+
+});
+
+/* Delete a relationship from the Neo4j DB */
+router.post('/deleteRelationship', function(req, res, next) { 
+	var rel_id = req.body.id
+	//query to delete node and all connected relationships
+	var query = "START r=rel(" + rel_id + ") DELETE r";
+	db.query(query, null, function (err, results) {
+		if (err) { // if error send blank response
+			res.send({err:"Cannot communicate with Neo4j database."});
+		} else {
+			res.send("Node deleted...")
+		}
+	});
+
+});
+
 function getAllRelationships(req, res, nodes, callback) {
 	//query all relationships in db
-	var query = 'START r=rel(*) RETURN r'; 
+	var query = 'START r=rel(*) RETURN r LIMIT 100'; 
 
 	// send query to database 
 	db.query(query, null, function(err, results) {
