@@ -1,3 +1,4 @@
+var graph;
 var displayData = function (initialGraph, xLoc, yLoc, width, height) {
     /**
      * Basic data model
@@ -139,7 +140,7 @@ var displayData = function (initialGraph, xLoc, yLoc, width, height) {
           .attr("height", height);
     
     // change which type of graph to create
-    var graph = new StickyGraphCreator(svg, nodes, edges);
+    graph = new StickyGraphCreator(svg, nodes, edges);
     graph.setIdCt(2);
     graph.updateGraph();
 };

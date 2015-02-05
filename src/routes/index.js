@@ -110,15 +110,19 @@ router.delete('/deleteRelationship', function(req, res, next) {
 
 /* Update a node in the Neo4j DB*/
 router.post('/updateNode', function(req, res, next) { 
-	var node_id = req.body.id
-	var properties = req.body.data
+	var data = JSON.parse(req.body.node);
+	var node_id = data.id;
+	var properties = data.data;
+	console.log(req.body)
+	console.log(properties);
 	//query to delete node and all connected relationships
-	var query = "START n=node(" + node_id + ") SET {" + JSON.stringify(properties) + "}";
+	var query = "START n=node(" + node_id + ") SET n = " + CleanJSONForNeo4j(JSON.stringify(properties)) ;
 	db.query(query, null, function (err, results) {
 		if (err) { // if error send blank response
+			console.log(err);
 			res.send({err:"Cannot communicate with Neo4j database."});
 		} else {
-			res.send("Node deleted...")
+			res.send("Node updated...")
 		}
 	});
 
@@ -152,6 +156,10 @@ function getAllRelationships(req, res, nodes, callback) {
 			}
 		}
 	});
+}
+
+function CleanJSONForNeo4j(json) {
+    return json.replace(/"(\w+)"\s*:/g, '$1:');
 }
 
 module.exports = router;

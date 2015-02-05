@@ -45,7 +45,7 @@ var showNodeData = function (d) {
 	var ePropsString = "<table class=\"propertyTable\">";
 	for (var i in d.data) {
 		ePropsString += "<tr>" + 
-							"<td>" + i + ":</td>" +
+							"<td class=\"propertyName\">" + i + ":</td>" +
 							"<td><input type=\"text\" class=\"form-control\" value=\"" + d.data[i] + "\"></input></td>" +
 						"</tr>";
 	}
@@ -58,6 +58,32 @@ var showNodeData = function (d) {
 
 	//show save button
 	$('.saveBtn').show();
+
+	// set save button onclick function
+	$('.saveBtn').off('click');
+	$('.saveBtn').on('click', function () {
+		var updatedProps = {
+			id: d.id,
+			data: {}
+		};
+		var propRows = $('tr', '#editableProperties');
+		console.log(propRows);
+		propRows.each(function() {
+			// remove trailing ':' from property name
+			var s = $('.propertyName', this).html();
+			s = s.substring(0, s.length - 1);
+			// add inputs to update object
+			updatedProps.data[s] = $('input', this).val();
+		});
+
+		updatedProps = {
+			node: JSON.stringify(updatedProps)
+		};
+		updateNodeProperties(updatedProps, function () {
+			console.log(d);
+			d.data = JSON.parse(updatedProps.node).data;
+		});
+	});
 };
 
 var hideNodeData = function () {
@@ -74,6 +100,7 @@ var hideNodeData = function () {
 
 	//hide save button
 	$('.saveBtn').hide();
+	$('.saveBtn').off('click');
 
 	$('#sideMenu').off('click');
 };

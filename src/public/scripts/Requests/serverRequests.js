@@ -60,3 +60,11 @@ function requestDeleteRelationship(rel, callback) {
 		console.log(msg);
 	});
 }
+
+function updateNodeProperties(node, callback) {
+	console.log(node);
+	$.post('updateNode', node).done(function (data) {
+		console.log(data);
+		callback();
+	});
+}
