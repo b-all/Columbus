@@ -27,7 +27,11 @@ function addNode(data) {
 }
 
 function requestDeleteNode(node, callback) {
-	$.post('deleteNode', node).done(function(data){
+	$.ajax({
+		url : 'deleteNode',
+		type : 'DELETE',
+		data : node
+	}).done(function (data) {
 		if (!data.err) {
 			callback();
 		} else {
@@ -41,7 +45,11 @@ function requestDeleteNode(node, callback) {
 }
 
 function requestDeleteRelationship(rel, callback) {
-	$.post('deleteRelationship', rel).done(function(data){
+	$.ajax({
+		url : 'deleteRelationship',
+		type : 'DELETE',
+		data : rel
+	}).done(function(data){
 		if (!data.err) {
 			callback();
 		} else {

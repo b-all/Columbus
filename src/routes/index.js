@@ -47,7 +47,7 @@ router.get('/graph', function(req, res, next) {
 	});
 });
 
-/* GET home page. */
+/* add a node to the neo4j database */
 router.post('/addNode', function(req, res, next) {
 	var postData = "";
 	req.addListener('data', function (chunk) {
@@ -68,10 +68,36 @@ router.post('/addNode', function(req, res, next) {
 });
 
 /* Delete a node from the Neo4j DB */
-router.post('/deleteNode', function(req, res, next) { 
+router.delete('/deleteNode', function(req, res, next) { 
 	var node_id = req.body.id
+	//query to delete all connected relationships
+	var query = "START n=node(" + node_id + ") MATCH (n) - [r] - () DELETE r";
+	db.query(query, null, function (err, results) {
+		if (err) { // if error send blank response
+			console.log(err);
+			res.send({err:"Cannot communicate with Neo4j database."});
+		} else {
+			//query to delete the node 
+			var query2 = "START n=node(" + node_id +") DELETE n";
+			db.query(query2, null, function (err, results) {
+				if (err) {
+					console.log(err);
+					res.send({err:"Cannot communicate with Neo4j database."});
+				} else {
+					res.send("Node deleted...")
+				}
+			});
+			
+		}
+	});
+
+});
+
+/* Delete a relationship from the Neo4j DB */
+router.delete('/deleteRelationship', function(req, res, next) { 
+	var rel_id = req.body.id
 	//query to delete node and all connected relationships
-	var query = "START n=node(" + node_id + ") MATCH (n) - [r] - () DELETE n,r";
+	var query = "START r=rel(" + rel_id + ") DELETE r";
 	db.query(query, null, function (err, results) {
 		if (err) { // if error send blank response
 			res.send({err:"Cannot communicate with Neo4j database."});
@@ -82,11 +108,12 @@ router.post('/deleteNode', function(req, res, next) {
 
 });
 
-/* Delete a relationship from the Neo4j DB */
-router.post('/deleteRelationship', function(req, res, next) { 
-	var rel_id = req.body.id
+/* Update a node in the Neo4j DB*/
+router.post('/updateNode', function(req, res, next) { 
+	var node_id = req.body.id
+	var properties = req.body.data
 	//query to delete node and all connected relationships
-	var query = "START r=rel(" + rel_id + ") DELETE r";
+	var query = "START n=node(" + node_id + ") SET {" + JSON.stringify(properties) + "}";
 	db.query(query, null, function (err, results) {
 		if (err) { // if error send blank response
 			res.send({err:"Cannot communicate with Neo4j database."});
