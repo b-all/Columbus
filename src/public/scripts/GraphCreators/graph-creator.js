@@ -52,7 +52,7 @@ var GraphCreator = function(svg, nodes, edges){
         .attr('d', 'M0,0L0,0')
         .style('marker-end', 'url(#mark-end-arrow)');
 
-    // svg nodes and edges 
+    // svg nodes and edges
     thisGraph.paths = svgG.append("g").selectAll("g");
     thisGraph.circles = svgG.append("g").selectAll("g");
 
@@ -124,7 +124,7 @@ var GraphCreator = function(svg, nodes, edges){
     if (window.File && window.FileReader && window.FileList && window.Blob) {
         var uploadFile = this.files[0];
         var filereader = new window.FileReader();
-      
+
         filereader.onload = function(){
             var txtRes = filereader.result;
             // TODO better error handling
@@ -146,7 +146,7 @@ var GraphCreator = function(svg, nodes, edges){
             }
         };
         filereader.readAsText(uploadFile);
-      
+
     } else {
       alert("Your browser won't let you save this graph -- try upgrading your browser to IE 10+ or Chrome or Firefox.");
     }
@@ -281,8 +281,8 @@ GraphCreator.prototype.pathMouseDown = function(d3path, d){
   if (state.selectedNode){
     thisGraph.removeSelectFromNode();
   }
-  
-  var prevEdge = state.selectedEdge;  
+
+  var prevEdge = state.selectedEdge;
   if (!prevEdge || prevEdge !== d){
     thisGraph.replaceSelectEdge(d3path, d);
     showSideMenu('relationship', d);
@@ -353,11 +353,11 @@ GraphCreator.prototype.circleMouseUp = function(d3node, d){
       state = thisGraph.state,
       consts = thisGraph.consts;
   // reset the states
-  state.shiftNodeDrag = false;    
+  state.shiftNodeDrag = false;
   d3node.classed(consts.connectClass, false);
-  
+
   var mouseDownNode = state.mouseDownNode;
-  
+
   if (!mouseDownNode) return;
 
   thisGraph.dragLine.classed("hidden", true);
@@ -397,7 +397,7 @@ GraphCreator.prototype.circleMouseUp = function(d3node, d){
   }
   state.mouseDownNode = null;
   return;
-  
+
 }; // end of circles mouseup
 
 // mousedown on main svg
@@ -407,7 +407,7 @@ GraphCreator.prototype.svgMouseDown = function(){
     if (prevNode) {
         this.removeSelectFromNode();
     }
-    var prevRel = this.state.selectedEdge; 
+    var prevRel = this.state.selectedEdge;
     if (prevRel) {
         this.removeSelectFromEdge();
     }
@@ -480,11 +480,11 @@ GraphCreator.prototype.svgKeyUp = function() {
 
 // call to propagate changes to graph
 GraphCreator.prototype.updateGraph = function(){
-  
+
   var thisGraph = this,
       consts = thisGraph.consts,
       state = thisGraph.state;
-  
+
   thisGraph.paths = thisGraph.paths.data(thisGraph.edges, function(d){
     return String(d.source.id) + "+" + String(d.target.id);
   });
@@ -516,7 +516,7 @@ GraphCreator.prototype.updateGraph = function(){
 
   // remove old links
   paths.exit().remove();
-  
+
   // update existing nodes
   thisGraph.circles = thisGraph.circles.data(thisGraph.nodes, function(d){ return d.id;});
   thisGraph.circles.attr("transform", function(d){return "translate(" + d.x + "," + d.y + ")";});
@@ -528,7 +528,7 @@ GraphCreator.prototype.updateGraph = function(){
 
   newGs.classed(consts.circleGClass, true)
     .attr("transform", function(d){return "translate(" + d.x + "," + d.y + ")";})
-    .on("mouseover", function(d){        
+    .on("mouseover", function(d){
       if (state.shiftNodeDrag){
         d3.select(this).classed(consts.connectClass, true);
       }
@@ -542,8 +542,8 @@ GraphCreator.prototype.updateGraph = function(){
     .on('dblclick', function(d) {
         showSideMenu('node', d);
 
-        var prevNode = state.selectedNode;            
-        
+        var prevNode = state.selectedNode;
+
         if (!prevNode || prevNode.id !== d.id){
           thisGraph.replaceSelectNode(d3.select(this), d);
         }
@@ -555,7 +555,7 @@ GraphCreator.prototype.updateGraph = function(){
 
   newGs.append("circle")
     .attr("r", String(consts.nodeRadius))
-    .attr("fill", function(d){return d.color;});;
+    .attr("fill", function(d){return d.color;});
 
   newGs.each(function(d){
     thisGraph.insertTitleLinebreaks(d3.select(this), d.title);
@@ -570,7 +570,7 @@ var translateDelta = [0,0];
 GraphCreator.prototype.zoomed = function(){
   this.state.justScaleTransGraph = true;
   d3.select("." + this.consts.graphClass)
-    .attr("transform", "translate(" + (translateDelta = d3.event.translate) + ") scale(" + (zoomRatio = d3.event.scale) + ")"); 
+    .attr("transform", "translate(" + (translateDelta = d3.event.translate) + ") scale(" + (zoomRatio = d3.event.scale) + ")");
 };
 
 GraphCreator.prototype.updateWindow = function(svg){

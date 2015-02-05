@@ -96,7 +96,6 @@ var ForceGraphCreator = function(svg, nodes, edges){
             return {x: d.x, y: d.y};
         })
         .on("drag", function(args){
-            console.log("here")
             thisGraph.state.justDragged = true;
             thisGraph.dragmove.call(thisGraph, args);
         })
@@ -104,7 +103,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
             // todo check if edge-mode is selected
         });
 
-    
+
     thisGraph.state = {
         selectedNode: null,
         selectedEdge: null,
@@ -126,8 +125,9 @@ var ForceGraphCreator = function(svg, nodes, edges){
 
     svg.on("mousedown", function(d){svgMouseDown(thisGraph, d);});
     svg.on("mouseup", function(d){svgMouseUp(thisGraph, d);});
+    svg.on("dblclick", function(d){svgMouseDblClick(thisGraph, d);});
 
-    
+
     var svgG = thisGraph.svgG;
 
     function svgMouseUp (d) {
@@ -135,25 +135,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
         if (state.justScaleTransGraph) {
             // dragged not clicked
             state.justScaleTransGraph = false;
-        } else if (state.graphMouseDown && d3.event.shiftKey){
-            // clicked not dragged from svg
-            var xycoords = d3.mouse(thisGraph.svgG.node()),
-            d = {id: thisGraph.idct++, title: "new concept", x: xycoords[0], y: xycoords[1]};
-            thisGraph.nodes.push(d);
-            thisGraph.updateGraph();
-            // make title of text immediently editable
-            var d3txt = thisGraph.changeTextOfNode(thisGraph.circles.filter(function(dval){
-                return dval.id === d.id;
-            }), d),
-            txtNode = d3txt.node();
-            thisGraph.selectElementContents(txtNode);
-            txtNode.focus();
-        } else if (state.shiftNodeDrag){
-            // dragged from node
-            state.shiftNodeDrag = false;
-            thisGraph.dragLine.classed("hidden", true);
         }
-        state.graphMouseDown = false;
     }
 
     function svgMouseDown(d){
@@ -161,7 +143,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
         if (prevNode) {
             this.removeSelectFromNode();
         }
-        var prevRel = this.state.selectedEdge; 
+        var prevRel = this.state.selectedEdge;
         if (prevRel) {
             this.removeSelectFromEdge();
         }*/
@@ -172,13 +154,20 @@ var ForceGraphCreator = function(svg, nodes, edges){
             .attr('fill', function(d){return d.color;});
         d3.selectAll('.link').attr('selected',false)
             .select('path')
-            .attr('stroke', function(d){return 'black'});
+            .attr('stroke', function(d){return 'black';});
+    }
+
+    function svgMouseDblClick(thisGraph, d) {
+        var xycoords = d3.mouse(thisGraph.svgG.node());
+
+        // bring up create node side menu
+        showCreateNodeSideMenu(xycoords);
     }
 
     function zoomed () {
         thisGraph.state.justScaleTransGraph = true;
         d3.select("." + thisGraph.consts.graphClass)
-            .attr("transform", "translate(" + (translateDelta = d3.event.translate) + ") scale(" + (zoomRatio = d3.event.scale) + ")"); 
+            .attr("transform", "translate(" + (translateDelta = d3.event.translate) + ") scale(" + (zoomRatio = d3.event.scale) + ")");
     }
 
     function updateWindow (svg){
@@ -187,7 +176,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
         var x = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth;
         var y = window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
         svg.attr("width", x).attr("height", y);
-    };
+    }
 
     // listen for dragging
     var dragSvg = d3.behavior.zoom()
@@ -209,7 +198,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
 
     svg.call(dragSvg).on("dblclick.zoom", null);
 
-    
+
 
     ForceGraphCreator.prototype.updateGraph = function () {
         var force = d3.layout.force()
@@ -260,7 +249,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
             .attr("class", "node")
             .append("circle")
             .attr("r", 30);
-            
+
 
         // place text on each node
         var labels = d3.select(".graph").selectAll(".node").append("text");
@@ -293,10 +282,10 @@ var ForceGraphCreator = function(svg, nodes, edges){
                 .attr("fill", "black")
                 .attr("font-size", "10")
                 .style("cursor", 'default')
-                .text(function(d){return d.id});
+                .text(function(d){return d.id;});
 
             // removed this feature (considering performance)
-            /*// label relationships 
+            /*// label relationships
             relLabels.selectAll("*").remove();
             relLabels.attr("x", "2")
                 .attr("y", "20%")
@@ -306,7 +295,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
                     return '#path' + d.id;
                 }).attr("startOffset", "30%")
                 .html(function(d){ return d.type});*/
-            
+
         }
 
 
@@ -317,10 +306,10 @@ var ForceGraphCreator = function(svg, nodes, edges){
         function dragend(d) {
             d3.select(this).classed("fixed", d.fixed = false);
         }
-    }
+    };
 
     function nodeMouseDown(d) {
-        thisGraph.state.selectedNode = d; 
+        thisGraph.state.selectedNode = d;
         thisGraph.state.selectedEdge = null;
         d3.event.stopPropagation();
         var allNodes = d3.selectAll('.node')
@@ -330,7 +319,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
         var allLinks = d3.selectAll('.link')
             .attr('selected', 'false')
             .select('path')
-            .attr('stroke', function(d){return 'black'});
+            .attr('stroke', function(d){return 'black';});
         d3.select(this).attr('selected', 'true')
             .select('circle')
             .attr("fill", "rgb(255, 214, 168)");
@@ -339,7 +328,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
 
     function linkMouseDown(d) {
         thisGraph.state.selectedEdge = d;
-        thisGraph.state.selectedNode = null; 
+        thisGraph.state.selectedNode = null;
         d3.event.stopPropagation();
         var allNodes = d3.selectAll('.node')
             .attr('selected', 'false')
@@ -348,7 +337,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
         var allLinks = d3.selectAll('.link')
             .attr('selected', 'false')
             .select('path')
-            .attr('stroke', function(d){return 'black'});
+            .attr('stroke', function(d){return 'black';});
         d3.select(this)
             .attr('selected', 'true')
             .select('path')

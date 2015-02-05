@@ -11,6 +11,7 @@ html
 		script(src="scripts/GraphCreators/force-graph-creator.js")
 		script(src="scripts/Resources/colors.js")
 		script(src="scripts/SideMenus/sideMenuProperties.js")
+		script(src="scripts/SideMenus/sideMenuCreateNode.js")
 		script(src="scripts/Displays/displaySideMenu.js")
 		script(src="scripts/Displays/displayGraph.js")
 		script(src="scripts/Displays/displayForceGraph.js")
@@ -19,6 +20,26 @@ html
 		
 	body
 		svg(height="0" width="0" style="position:absolute;margin-left: -100%;")
-			path(id="back-arrow" d="M .5,0 l -.4,.4 l .4,.4 z")                    
+			path(id="back-arrow" d="M .5,0 l -.4,.4 l .4,.4 z")
+		
+		svg(width='0', height='0', xmlns='http://www.w3.org/2000/svg', xmlns:svg='http://www.w3.org/2000/svg')
+			g#deleteSVG
+				title Delete SVG
+				|   
+				line#svg_14(filter='url(#svg_14_blur)', y2='14', x2='13.9', y1='2.4', x1='2.2', stroke-linecap='null', stroke-linejoin='null', stroke-dasharray='null', stroke-width='2', stroke='#000000', fill='none')
+				|   
+				line#svg_16(filter='url(#svg_16_blur)', transform='rotate(-90 8.050000190734865,8.200000762939453) ', y2='14', x2='13.9', y1='2.4', x1='2.2', stroke-linecap='null', stroke-linejoin='null', stroke-dasharray='null', stroke-width='2', stroke='#000000', fill='none')
+				|   
+				line#svg_17(y2='14', x2='13.9', y1='2.4', x1='2.2', stroke-linecap='null', stroke-linejoin='null', stroke-dasharray='null', stroke-width='2', stroke='#000000', fill='none')
+				|   
+				line#svg_18(transform='rotate(-90 8.049999237060549,8.200000762939453) ', y2='14', x2='13.9', y1='2.4', x1='2.2', stroke-linecap='null', stroke-linejoin='null', stroke-dasharray='null', stroke-width='2', stroke='#000000', fill='none')
+			|  
+			defs
+				filter#svg_14_blur
+				fegaussianblur(stddeviation='0.4', in='SourceGraphic')
+				|   
+				filter#svg_16_blur
+				fegaussianblur(stddeviation='0.4', in='SourceGraphic')
+                    
 
 		block content
