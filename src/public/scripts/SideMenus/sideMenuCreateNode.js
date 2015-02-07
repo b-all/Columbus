@@ -135,6 +135,7 @@ function setCreateNodeSaveBtnOnClick (x, y) {
                 newNode[0].color = labels[newNode[0].labels[0]].color;
                 graph.addNode(newNode[0]);
                 graph.updateGraph();
+                toastSuccess("Node Created");
             });
         });
     });

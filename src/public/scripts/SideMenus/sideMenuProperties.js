@@ -205,6 +205,7 @@ function setNodeSaveBtnOnClick (d) {
 		};
 		updateNodeProperties(updatedProps, function () {
 			d.data = JSON.parse(updatedProps.node).data;
+			toastSuccess("Properties Updated");
 		});
 	});
 }

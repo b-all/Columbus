@@ -109,8 +109,6 @@ router.post('/updateNode', function(req, res, next) {
 	var data = JSON.parse(req.body.node);
 	var node_id = data.id;
 	var properties = data.data;
-	console.log(req.body);
-	console.log(properties);
 	//query to delete node and all connected relationships
 	var query = "START n=node(" + node_id + ") SET n = " + CleanJSONForNeo4j(JSON.stringify(properties)) ;
 	db.query(query, null, function (err, results) {
