@@ -114,39 +114,23 @@
 	float:right;
 }
 
-.successToast {
+#labelKey {
 	position: fixed;
-	left: calc(50vw - 200px);
-	bottom: 25px;
-	z-index:4;
-	display:none;
-	background-color: rgba(183, 219, 74, 1);
-	width:400px;
-	text-align: center;
-	border:none;
-	border-radius:16px;
-	padding:10px;
+	left: 10px;
+	top: 55px;
+	background-color: rgba(230,230,230,.5);
+	color: black;
 	font-family: Helvetica;
-	box-shadow: 0px 5px 10px rgba(0,0,0,.2),
-				0px -2px 10px rgba(131,163,47,.5) inset,
-				0px 5px 4px rgba(232,247,190, .6) inset;
+	width: 200px;
+	overflow: auto;
+	border-radius: 4px;
+	padding: 10px;
+	box-shadow: 2px 2px 10px rgba(0,0,0,.2);
+	text-align:center;
+	display:none;
+	z-index: 4;
 }
 
-.failToast {
-	color: white;
-	position: fixed;
-	left: calc(50vw - 200px);
-	bottom: 25px;
-	z-index:4;
-	display:none;
-	background-color: rgba(247,45,45,1);
-	width:400px;
-	text-align: center;
-	border:none;
-	border-radius:16px;
-	padding:10px;
-	font-family: Helvetica;
-	box-shadow: 0px 5px 10px rgba(0,0,0,.2),
-				0px -2px 10px rgba(131,163,47,.5) inset,
-				0px 5px 4px rgba(232,247,190, .6) inset;
+#labelKey td {
+	padding: 5px;
 }

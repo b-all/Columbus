@@ -146,4 +146,26 @@ var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
     // change which type of graph to create
     graph = new ForceGraphCreator(svg, nodes, edges);
     graph.updateGraph();
+
+    createLabelKey();
 };
+
+
+function createLabelKey() {
+    var labelKeyString = "";
+    for (var i in labels) {
+        if (i === '_unlabeled' && labels[i].count === 0) continue;
+        labelKeyString += "<tr>" +
+                                "<td>" +
+                                    "<svg height=\"20px\" width=\"20px\">" +
+                                        "<circle cx=\"10\" cy=\"10\" r=\"10px\" fill=\"" + labels[i].color + "\" />" +
+                                    "</svg>" +
+                                "</td>" +
+                                "<td>" +
+                                    i +
+                                "</td>" +
+                            "</tr>";
+    }
+    $('#labelKey').append(labelKeyString);
+    $('#labelKey').show();
+}

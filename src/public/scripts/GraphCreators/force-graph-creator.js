@@ -75,6 +75,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
                     });
                 }
                 if (!editingProperties){
+                    d3.event.preventDefault();
                     hideSideMenu('default');
                 }
                 break;
