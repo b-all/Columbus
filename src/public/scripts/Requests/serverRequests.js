@@ -18,11 +18,11 @@ function pullGraph(callback) {
 	});
 }
 
-function addNode(data) {
-	var data = JSON.stringify({properties: {name:'Jane Doe'}, label: 'Person'});
+function createNode(data, label, callback) {
+	data = { data: JSON.stringify(data), label: label};
 	$.post('addNode', data).done(function (data) {
-		console.log(data)
-		pullGraph();
+		console.log('Node Created');
+		callback(data[0]['id(n)']);
 	});
 }
 
@@ -41,7 +41,7 @@ function requestDeleteNode(node, callback) {
 		alert("There was an error communicating with the server");
 		console.log(msg);
 	});
-	
+
 }
 
 function requestDeleteRelationship(rel, callback) {
@@ -64,7 +64,23 @@ function requestDeleteRelationship(rel, callback) {
 function updateNodeProperties(node, callback) {
 	console.log(node);
 	$.post('updateNode', node).done(function (data) {
-		console.log(data);
-		callback();
+		if (!data.err) {
+			callback();
+		} else {
+			console.log(data.err);
+			alert("There was an error communicating with the server");
+		}
+	}).fail(function (msg) {
+		alert("There was an error communicating with the server");
+		console.log(msg);
+	});
+}
+
+function getSingleNode(nodeId, callback) {
+	$.get('getNode/' + nodeId).done(function(data) {
+		callback(data);
+	}).fail(function(msg) {
+		alert("There was an error communicating with the server");
+		console.log(msg);
 	});
 }

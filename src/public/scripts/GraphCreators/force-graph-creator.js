@@ -4,6 +4,8 @@ var ForceGraphCreator = function(svg, nodes, edges){
         height =  window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
 
     var thisGraph = this;
+    thisGraph.nodes = nodes;
+    thisGraph.edges = edges;
 
     thisGraph.state = {
         selectedNode: null,
@@ -59,7 +61,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
                 if (selectedNode && !editingProperties){
                     d3.event.preventDefault();
                     requestDeleteNode(selectedNode, function () {
-                        nodes.splice(nodes.indexOf(selectedNode), 1);
+                        thisGraph.nodes.splice(thisGraph.nodes.indexOf(selectedNode), 1);
                         thisGraph.spliceLinksForNode(selectedNode);
                         state.selectedNode = null;
                         thisGraph.updateGraph();
@@ -67,10 +69,13 @@ var ForceGraphCreator = function(svg, nodes, edges){
                 } else if (selectedEdge && !editingProperties){
                     d3.event.preventDefault();
                     requestDeleteRelationship(selectedEdge, function () {
-                        edges.splice(edges.indexOf(selectedEdge), 1);
+                        thisGraph.edges.splice(thisGraph.edges.indexOf(selectedEdge), 1);
                         state.selectedEdge = null;
                         thisGraph.updateGraph();
                     });
+                }
+                if (!editingProperties){
+                    hideSideMenu('default');
                 }
                 break;
         }
@@ -149,6 +154,8 @@ var ForceGraphCreator = function(svg, nodes, edges){
         }*/
         hideSideMenu('relationship');
         hideSideMenu('node');
+        thisGraph.state.selectedNode = null;
+        thisGraph.state.selectedEdge = null;
         d3.selectAll('.node').attr('selected',false)
             .select('circle')
             .attr('fill', function(d){return d.color;});
@@ -230,11 +237,11 @@ var ForceGraphCreator = function(svg, nodes, edges){
 
 
         force
-            .nodes(nodes)
-            .links(edges)
+            .nodes(thisGraph.nodes)
+            .links(thisGraph.edges)
             .start();
 
-        link = link.data(edges)
+        link = link.data(thisGraph.edges)
             .enter().append("svg:g")
             .attr("class", "link")
             .on('mousedown', linkMouseDown)
@@ -242,7 +249,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
             .attr("marker-end", "url(#end)")
             .attr("id", function(d) { return 'path' + d.id;});
 
-        node = node.data(nodes)
+        node = node.data(thisGraph.nodes)
             .enter().append("g")
             .on('mousedown', nodeMouseDown)
             .call(drag)
@@ -355,6 +362,11 @@ var ForceGraphCreator = function(svg, nodes, edges){
         toSplice.map(function(l) {
             edges.splice(edges.indexOf(l), 1);
         });
+    };
+
+    ForceGraphCreator.prototype.addNode = function (node) {
+        thisGraph.nodes.push(node);
+        console.log(thisGraph.nodes);
     };
 
 };

@@ -1,3 +1,4 @@
+var graph, labels;
 var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
     /**
      * Basic data model
@@ -15,7 +16,7 @@ var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
     var x1 = xLoc, y1 = yLoc;
     var mult = 20;
 
-    var labels = { '_unlabeled' : { count: 0, x_center : 0, y_center: 0 }};
+    labels = { '_unlabeled' : { count: 0, x_center : 0, y_center: 0 }};
 
     //get a count for number of nodes with a specific label
     for (var i = 0; i < nodes.length; i++) {
@@ -143,6 +144,6 @@ var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
           .attr("height", height);
 
     // change which type of graph to create
-    var graph = new ForceGraphCreator(svg, nodes, edges);
+    graph = new ForceGraphCreator(svg, nodes, edges);
     graph.updateGraph();
 };

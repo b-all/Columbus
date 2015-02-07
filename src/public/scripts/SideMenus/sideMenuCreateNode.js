@@ -1,4 +1,3 @@
-
 function showCreateNodeSideMenu(xycoords) {
     var docEl = document.documentElement,
         bodyEl = document.getElementsByTagName('body')[0];
@@ -8,6 +7,7 @@ function showCreateNodeSideMenu(xycoords) {
         y = xycoords[1];
 
     //slide open edit view
+    if (!showingSideMenu) {
        if (x * zoomRatio + translateDelta[0] < width - 400) {
            if (!showingSideMenu) {
                $('#sideMenu').css({'right': '-365px'});
@@ -19,6 +19,7 @@ function showCreateNodeSideMenu(xycoords) {
                $('#graphContainer').animate({'left': '-365px'}, 500);
                $('#sideMenu').animate({'right': '0px'}, 100);
            }
+       }
     }
     showingSideMenu = true;
     showingCreateNode = true;
@@ -33,10 +34,21 @@ function showCreateNodeSideMenu(xycoords) {
 
     var editableProps = $('#editableProperties');
     editableProps.empty();
+    var labelInput = "<table class=\"createLabelInput\">" +
+                            "<tr>" +
+                                "<td>Label:&nbsp;&nbsp;</td>" +
+                                "<td>" +
+                                    "<input type=\"text\" class=\"form-control labelInput\"></input>"+
+                                "</td>" +
+                        "</table><br/>";
+    editableProps.append(labelInput);
+
     var ePropsString = "<table class=\"propertyTable\">";
         ePropsString += "<tr>" +
                             "<td>" +
                                 "Property" +
+                            "</td>" +
+                            "<td>" +
                             "</td>" +
                             "<td>" +
                                 "Value" +
@@ -45,13 +57,14 @@ function showCreateNodeSideMenu(xycoords) {
     ePropsString += "</table>";
     editableProps.append(ePropsString);
 
+    $('#sideMenu').on('click', function () {
+        editingProperties = true;
+    });
+
     addProperty();
+    $('.saveBtn').show();
+    setCreateNodeSaveBtnOnClick(x, y);
 
-}
-
-function NewProp (name, value) {
-    this.name = name;
-    this.value = value;
 }
 
 function addProperty () {
@@ -61,6 +74,9 @@ function addProperty () {
     var newRow = "<tr>" +
                     "<td>" +
                         "<input type=\"text\" class=\"form-control pNameInput\"></input>" +
+                    "</td>" +
+                    "<td>" +
+                        ":" +
                     "</td>" +
                     "<td>" +
                         "<input type=\"text\" class=\"form-control pValueInput\"></input>" +
@@ -85,5 +101,41 @@ function addProperty () {
     $('.addPropBtn').on('click', function () {
         addProperty();
     });
+}
 
+function gatherPropsForReq() {
+    var propTable = $('#editableProperties > .propertyTable');
+    var rows = $('tr', propTable);
+    var properties = {};
+    rows.each(function() {
+        // remove trailing ':' from property name
+        var s = $('.pNameInput', this).val();
+        // add inputs to update object
+        if (typeof s !== 'undefined') {
+            properties[s] = $('.pValueInput', this).val();
+        }
+    });
+    return properties;
+}
+
+
+function setCreateNodeSaveBtnOnClick (x, y) {
+    $('.saveBtn').off('click');
+    $('.saveBtn').on('click', function () {
+        var props = gatherPropsForReq();
+        var label = $('.labelInput').val();
+        createNode(props, label, function (id) {
+            //add node to graph here
+            showingSideMenu = false;
+            showingCreateNode = false;
+            $('#sideMenu').animate({'right': '-365px'}, 100);
+            getSingleNode(id, function (newNode) {
+                newNode[0].x = x;
+                newNode[0].y = y;
+                newNode[0].color = labels[newNode[0].labels[0]].color;
+                graph.addNode(newNode[0]);
+                graph.updateGraph();
+            });
+        });
+    });
 }

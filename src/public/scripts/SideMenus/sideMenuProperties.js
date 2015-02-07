@@ -1,5 +1,5 @@
-var showingNodeProps = false; 
-var showingRelProps = false; 
+var showingNodeProps = false;
+var showingRelProps = false;
 
 var showNodeData = function (d) {
 	var docEl = document.documentElement,
@@ -12,16 +12,16 @@ var showNodeData = function (d) {
    		if (!showingSideMenu) {
    			$('#sideMenu').css({'right': '-365px'});
    			$('#sideMenu').animate({'right': '0px'}, 100);
-   		} 
+   		}
    	} else {
    		if (!showingSideMenu) {
    			$('#sideMenu').css({'right': '-365px'});
    			$('#graphContainer').animate({'left': '-365px'}, 500);
    			$('#sideMenu').animate({'right': '0px'}, 100);
-   		} 		
+   		}
 	}
 	showingSideMenu = true;
-	showingNodeProps = true; 
+	showingNodeProps = true;
 
 	//show node's properties
 	var header = $('.sideMenuHeader');
@@ -29,14 +29,14 @@ var showNodeData = function (d) {
 	var fixedProps = $('#fixedProperties');
 	fixedProps.empty();
 	fixedProps.append(	"<table class=\"propertyTable\">" +
-							"<tr>" + 
-								"<td>Label:</td>" + 
+							"<tr>" +
+								"<td>Label:</td>" +
 								"<td>" + d.labels[0] + "</td>" +
-							"</tr>" + 
-							"<tr>" + 
-								"<td>id:</td>" + 
+							"</tr>" +
+							"<tr>" +
+								"<td>id:</td>" +
 								"<td>" + d.id + "</td>" +
-							"</tr>" + 
+							"</tr>" +
 						"</table><br/>");
 
 
@@ -44,13 +44,32 @@ var showNodeData = function (d) {
 	editableProps.empty();
 	var ePropsString = "<table class=\"propertyTable\">";
 	for (var i in d.data) {
-		ePropsString += "<tr>" + 
-							"<td class=\"propertyName\">" + i + ":</td>" +
-							"<td><input type=\"text\" class=\"form-control\" value=\"" + d.data[i] + "\"></input></td>" +
+		ePropsString += "<tr>" +
+							"<td><input type=\"text\" class=\"form-control pNameInput\" value=\"" + i + "\"></input></td>" +
+							"<td> : </td>" +
+							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + d.data[i] + "\"></input></td>" +
+							"<td>" +
+								"<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
+									"<use xlink:href=\"#deleteSVG\">" +
+								"</svg>" +
+							"</td>" +
 						"</tr>";
 	}
 	ePropsString += "</table>";
 	editableProps.append(ePropsString);
+	$('tr', editableProps).each(function (){
+		var row = this;
+		$('.deletePropBtn', row).on('click', function() {
+			$(row).remove();
+		});
+	});
+
+
+	editableProps.append("<button class=\"btn btn-default addPropBtn\">Add</button>");
+	$('.addPropBtn').show();
+	$('.addPropBtn').on('click', function () {
+		addProperty();
+	});
 
 	$('#sideMenu').on('click', function () {
 		editingProperties = true;
@@ -60,30 +79,7 @@ var showNodeData = function (d) {
 	$('.saveBtn').show();
 
 	// set save button onclick function
-	$('.saveBtn').off('click');
-	$('.saveBtn').on('click', function () {
-		var updatedProps = {
-			id: d.id,
-			data: {}
-		};
-		var propRows = $('tr', '#editableProperties');
-		console.log(propRows);
-		propRows.each(function() {
-			// remove trailing ':' from property name
-			var s = $('.propertyName', this).html();
-			s = s.substring(0, s.length - 1);
-			// add inputs to update object
-			updatedProps.data[s] = $('input', this).val();
-		});
-
-		updatedProps = {
-			node: JSON.stringify(updatedProps)
-		};
-		updateNodeProperties(updatedProps, function () {
-			console.log(d);
-			d.data = JSON.parse(updatedProps.node).data;
-		});
-	});
+	setNodeSaveBtnOnClick(d);
 };
 
 var hideNodeData = function () {
@@ -95,8 +91,8 @@ var hideNodeData = function () {
 	   		});
 		});
 	}
-	showingSideMenu = false; 
-	editingProperties = false; 
+	showingSideMenu = false;
+	editingProperties = false;
 
 	//hide save button
 	$('.saveBtn').hide();
@@ -113,13 +109,13 @@ var showRelData = function (d) {
         height =  docEl.clientHeight;
 
     var rel_center = (d.source.x + d.target.x) / 2;
-    
+
     //slide open edit view
    	if (rel_center * zoomRatio + translateDelta[0] < width - 400) {
    		if (!showingSideMenu) {
    			$('#sideMenu').css({'right': '-365px'});
    			$('#sideMenu').animate({'right': '0px'}, 100);
-   		} 
+   		}
    	} else {
    		if (!showingSideMenu) {
    			$('#sideMenu').css({'right': '-365px', 'left':''});
@@ -128,8 +124,8 @@ var showRelData = function (d) {
    		}
 	}
 
-	showingSideMenu = true; 
-	showingRelProps = true; 
+	showingSideMenu = true;
+	showingRelProps = true;
 
 	//show relationship's properties
 	var header = $('.sideMenuHeader');
@@ -137,14 +133,14 @@ var showRelData = function (d) {
 	var fixedProps = $('#fixedProperties');
 	fixedProps.empty();
 	fixedProps.append(	"<table class=\"propertyTable\">" +
-							"<tr>" + 
-								"<td>type:</td>" + 
+							"<tr>" +
+								"<td>type:</td>" +
 								"<td>" + d.type + "</td>" +
-							"</tr>" + 
-							"<tr>" + 
-								"<td>id:</td>" + 
+							"</tr>" +
+							"<tr>" +
+								"<td>id:</td>" +
 								"<td>" + d.id + "</td>" +
-							"</tr>" + 
+							"</tr>" +
 						"</table><br/>");
 
 
@@ -152,7 +148,7 @@ var showRelData = function (d) {
 	editableProps.empty();
 	var ePropsString = "<table class=\"propertyTable\">";
 	for (var i in d.data) {
-		ePropsString += "<tr>" + 
+		ePropsString += "<tr>" +
 							"<td>" + i + ":</td>" +
 							"<td><input type=\"text\" class=\"form-control\" value=\"" + d.data[i] + "\"></input></td>" +
 						"</tr>";
@@ -178,11 +174,37 @@ var hideRelData = function () {
 	   		});
 		});
 	}
-	showingSideMenu = false; 
-	editingProperties = false; 
+	showingSideMenu = false;
+	editingProperties = false;
 	showingRelProps = false;
 	$('#sideMenu').off('click');
 
 	//hide save button
 	$('.saveBtn').hide();
 };
+
+function setNodeSaveBtnOnClick (d) {
+	$('.saveBtn').off('click');
+	$('.saveBtn').on('click', function () {
+		var updatedProps = {
+			id: d.id,
+			data: {}
+		};
+		var propRows = $('tr', '#editableProperties');
+		propRows.each(function() {
+			// remove trailing ':' from property name
+			var s = $('.pNameInput', this).val();
+			// add inputs to update object
+			if (typeof s !== 'undefined') {
+				updatedProps.data[s] = $('.pValueInput', this).val();
+			}
+		});
+
+		updatedProps = {
+			node: JSON.stringify(updatedProps)
+		};
+		updateNodeProperties(updatedProps, function () {
+			d.data = JSON.parse(updatedProps.node).data;
+		});
+	});
+}

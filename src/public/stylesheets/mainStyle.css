@@ -48,7 +48,7 @@
 
 .deletePropBtn:hover {
 	cursor: pointer;
-	background-color: rgba(0,0,0, .1);
+	background-color: rgba(255,0,0, .1);
 }
 
 .propertyTable {
@@ -94,4 +94,22 @@
 
 .rounded {
 	border-radius: 15px;
+}
+
+.createLabelInput {
+	background-color: #FEEAAC;
+	border-radius: 5px;
+	border:none;
+	box-shadow: 1px 1px 2px rgba(0,0,0,.4) inset;
+}
+
+.createLabelInput td {
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.labelInput {
+	float:right;
 }
