@@ -16,9 +16,14 @@ path {
   	z-index:0;
 }
 
+.node:hover {
+	stroke: gray;
+}
+
 .node text {
 	stroke-width: .5px;
 	font-family: Verdana;
+	cursor:default;
 }
 
 

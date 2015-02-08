@@ -320,21 +320,25 @@ var ForceGraphCreator = function(svg, nodes, edges){
     };
 
     function nodeMouseDown(d) {
-        thisGraph.state.selectedNode = d;
-        thisGraph.state.selectedEdge = null;
         d3.event.stopPropagation();
-        var allNodes = d3.selectAll('.node')
-            .attr('selected', 'false')
-            .select('circle')
-            .attr('fill', function(d){return d.color;});
-        var allLinks = d3.selectAll('.link')
-            .attr('selected', 'false')
-            .select('path')
-            .attr('stroke', function(d){return 'black';});
-        d3.select(this).attr('selected', 'true')
-            .select('circle')
-            .attr("fill", "rgb(255, 214, 168)");
-        showSideMenu('node', d);
+        if (selectingEndNode) {
+            loadSelectedEndNode(d.id);
+        } else {
+            showSideMenu('node', d);
+            thisGraph.state.selectedNode = d;
+            thisGraph.state.selectedEdge = null;
+            var allNodes = d3.selectAll('.node')
+                .attr('selected', 'false')
+                .select('circle')
+                .attr('fill', function(d){return d.color;});
+            var allLinks = d3.selectAll('.link')
+                .attr('selected', 'false')
+                .select('path')
+                .attr('stroke', function(d){return 'black';});
+            d3.select(this).attr('selected', 'true')
+                .select('circle')
+                .attr("fill", "rgb(255, 214, 168)");
+        }
     }
 
     function linkMouseDown(d) {
@@ -396,7 +400,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
                 return i;
             }
         }
-        return false; 
+        return false;
     };
 
 };

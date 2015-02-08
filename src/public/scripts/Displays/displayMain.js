@@ -1,12 +1,20 @@
 $(document).ready(function() {
     "use strict";
 
+    $('.navArrowContainer').on('click', function() {
+        if (showingSideMenu) {
+            hideSideMenu('default');
+        } else {
+            showSideMenu('default');
+        }
+    });
+
     /**** MAIN ****/
 
     /*/ warn the user when leaving
     window.onbeforeunload = function(){
       return "Make sure to save your graph locally before leaving";
-    };*/      
+    };*/
 
     var docEl = document.documentElement,
         bodyEl = document.getElementsByTagName('body')[0];
@@ -22,16 +30,6 @@ $(document).ready(function() {
 
     var nodes, edges;
     pullGraph(displayForceData);
-});
-
-$(document).ready(function() {
-	$('.navArrowContainer').on('click', function() {
-		if (showingSideMenu) {
-			hideSideMenu('default');
-		} else {
-			showSideMenu('default');
-		}
-	});
 });
 
 

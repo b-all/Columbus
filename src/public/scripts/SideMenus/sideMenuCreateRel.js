@@ -1,3 +1,5 @@
+var selectingEndNode = false;
+
 function showCreateRelSideMenu (d) {
     var docEl = document.documentElement,
         bodyEl = document.getElementsByTagName('body')[0];
@@ -34,25 +36,37 @@ function showCreateRelSideMenu (d) {
     editableProps.empty();
     var labelInput = "<table class=\"createLabelInput\">" +
                             "<tr>" +
-                                "<td>Type:&nbsp;&nbsp;</td>" +
+                                "<td>Type</td>" +
+                                "<td>" +
+                                    ":" +
+                                "</td>" +
                                 "<td>" +
                                     "<input type=\"text\" class=\"form-control labelInput\"></input>"+
                                 "</td>" +
                             "</tr>" +
                             "<tr>" +
-                                "<td>From Node:&nbsp;&nbsp;</td>" +
+                                "<td>From Node</td>" +
+                                "<td>" +
+                                    ":" +
+                                "</td>" +
                                 "<td>" +
                                     "<input type=\"text\" class=\"form-control startNodeInput\" value=\"" + d.id + "\" disabled></input>"+
                                 "</td>" +
                             "</tr>" +
                             "<tr>" +
-                                "<td>To Node:&nbsp;&nbsp;</td>" +
+                                "<td><button class=\"btn btn-default selectEndNodeBtn\" type=\"button\" data-toggle=\"tooltip\"" +
+                                "title=\"Click to Select End Node\" data-delay=\"2000\">To Node</button></td>" +
+                                "<td>" +
+                                    ":" +
+                                "</td>" +
                                 "<td>" +
                                     "<input type=\"text\" class=\"form-control endNodeInput\"></input>"+
                                 "</td>" +
                             "</tr>" +
                         "</table><br/>";
     editableProps.append(labelInput);
+    $('[data-toggle="tooltip"]').tooltip({'placement': 'bottom'});
+    setSelectEndNodeBtnOnClick();
 
     var ePropsString = "<table class=\"propertyTable\">";
         ePropsString += "<tr>" +
@@ -102,4 +116,19 @@ function setCreateRelSaveBtnOnClick (d) {
             });
         });
     });
+}
+
+
+function setSelectEndNodeBtnOnClick () {
+    $('.selectEndNodeBtn').off('click');
+    $('.selectEndNodeBtn').on('click', function () {
+        $('body').css({'cursor' : 'nw-resize'});
+        selectingEndNode = true;
+    });
+}
+
+function loadSelectedEndNode (id) {
+    selectingEndNode = false;
+    $('.endNodeInput').val(id);
+    $('body').css({'cursor' : 'default'});
 }
