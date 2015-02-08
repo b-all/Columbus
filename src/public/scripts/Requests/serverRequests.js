@@ -8,6 +8,10 @@ function pullGraph(callback) {
     var xLoc = width/2 - 300,
         yLoc = 200;
 	$.get('graph').done(function (data) {
+		if (data.err) {
+			toastFail("Cannot communicate with Neo4j database.");
+			return;
+		}
 		data = JSON.parse(data);
 		if (typeof callback !== 'undefined') {
 			callback(data, xLoc, yLoc, width, height);
@@ -35,10 +39,10 @@ function requestDeleteNode(node, callback) {
 		if (!data.err) {
 			callback();
 		} else {
-			alert("There was an error communicating with the server");
+			toastFail("There was an error communicating with the server");
 		}
 	}).fail(function (msg) {
-		alert("There was an error communicating with the server");
+		toastFail("There was an error communicating with the server");
 		console.log(msg);
 	});
 
@@ -53,25 +57,40 @@ function requestDeleteRelationship(rel, callback) {
 		if (!data.err) {
 			callback();
 		} else {
-			alert("There was an error communicating with the server");
+			toastFail("There was an error communicating with the server");
 		}
 	}).fail(function (msg) {
-		alert("There was an error communicating with the server");
+		toastFail("There was an error communicating with the server");
 		console.log(msg);
 	});
 }
 
 function updateNodeProperties(node, callback) {
-	console.log(node);
 	$.post('updateNode', node).done(function (data) {
 		if (!data.err) {
+			toastSuccess("Properties Updated");
 			callback();
 		} else {
 			console.log(data.err);
-			alert("There was an error communicating with the server");
+			toastFail("There was an error communicating with the server");
 		}
 	}).fail(function (msg) {
-		alert("There was an error communicating with the server");
+		toastFail("There was an error communicating with the server");
+		console.log(msg);
+	});
+}
+
+function updateRelProperties(rel, callback) {
+	$.post('updateRel', rel).done(function (data) {
+		if (!data.err) {
+			toastSuccess("Properties Updated");
+			callback();
+		} else {
+			console.log(data.err);
+			toastFail("There was an error communicating with the server");
+		}
+	}).fail(function (msg) {
+		toastFail("There was an error communicating with the server");
 		console.log(msg);
 	});
 }
@@ -80,7 +99,7 @@ function getSingleNode(nodeId, callback) {
 	$.get('getNode/' + nodeId).done(function(data) {
 		callback(data);
 	}).fail(function(msg) {
-		alert("There was an error communicating with the server");
+		toastFail("There was an error communicating with the server");
 		console.log(msg);
 	});
 }

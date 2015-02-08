@@ -1,4 +1,4 @@
-var graph, labels;
+var graph, labels, c = colors;
 var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
     /**
      * Basic data model
@@ -37,7 +37,6 @@ var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
     //space out node spheres by amount of nodes with similar labels
     var firstTimeThrough = true;
     var prevXLoc, prevYLoc, prevRadius;
-    var c = colors;
     for (var index in labels) {
         if (labels[index].count === 0) {
              continue;
@@ -154,7 +153,7 @@ var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
 function createLabelKey() {
     var labelKeyString = "";
     for (var i in labels) {
-        if (i === '_unlabeled' && labels[i].count === 0) continue;
+        if (labels[i].count === 0) continue;
         labelKeyString += "<tr>" +
                                 "<td>" +
                                     "<svg height=\"20px\" width=\"20px\">" +
@@ -166,6 +165,7 @@ function createLabelKey() {
                                 "</td>" +
                             "</tr>";
     }
+    $('#labelKey').empty();
     $('#labelKey').append(labelKeyString);
     $('#labelKey').show();
 }

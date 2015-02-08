@@ -149,12 +149,32 @@ var showRelData = function (d) {
 	var ePropsString = "<table class=\"propertyTable\">";
 	for (var i in d.data) {
 		ePropsString += "<tr>" +
-							"<td>" + i + ":</td>" +
-							"<td><input type=\"text\" class=\"form-control\" value=\"" + d.data[i] + "\"></input></td>" +
+							"<td><input type=\"text\" class=\"form-control pNameInput\" value=\"" + i + "\"></input></td>" +
+							"<td> : </td>" +
+							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + d.data[i] + "\"></input></td>" +
+							"<td>" +
+								"<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
+									"<use xlink:href=\"#deleteSVG\">" +
+								"</svg>" +
+							"</td>" +
 						"</tr>";
 	}
 	ePropsString += "</table>";
 	editableProps.append(ePropsString);
+
+	//set delete button on click
+	$('tr', editableProps).each(function (){
+		var row = this;
+		$('.deletePropBtn', row).on('click', function() {
+			$(row).remove();
+		});
+	});
+
+	editableProps.append("<button class=\"btn btn-default addPropBtn\">Add</button>");
+	$('.addPropBtn').show();
+	$('.addPropBtn').on('click', function () {
+		addProperty();
+	});
 
 	$('#sideMenu').on('click', function () {
 		editingProperties = true;
@@ -162,6 +182,7 @@ var showRelData = function (d) {
 
 	//show save button
 	$('.saveBtn').show();
+	setRelSaveBtnOnClick(d);
 };
 
 var hideRelData = function () {
@@ -192,7 +213,6 @@ function setNodeSaveBtnOnClick (d) {
 		};
 		var propRows = $('tr', '#editableProperties');
 		propRows.each(function() {
-			// remove trailing ':' from property name
 			var s = $('.pNameInput', this).val();
 			// add inputs to update object
 			if (typeof s !== 'undefined') {
@@ -205,7 +225,31 @@ function setNodeSaveBtnOnClick (d) {
 		};
 		updateNodeProperties(updatedProps, function () {
 			d.data = JSON.parse(updatedProps.node).data;
-			toastSuccess("Properties Updated");
+		});
+	});
+}
+
+function setRelSaveBtnOnClick (d) {
+	$('.saveBtn').off('click');
+	$('.saveBtn').on('click', function () {
+		var updatedProps = {
+			id: d.id,
+			data: {}
+		};
+		var propRows = $('tr', '#editableProperties');
+		propRows.each(function() {
+			var s = $('.pNameInput', this).val();
+			// add inputs to update object
+			if (typeof s !== 'undefined') {
+				updatedProps.data[s] = $('.pValueInput', this).val();
+			}
+		});
+
+		updatedProps = {
+			rel: JSON.stringify(updatedProps)
+		};
+		updateRelProperties(updatedProps, function () {
+			d.data = JSON.parse(updatedProps.rel).data;
 		});
 	});
 }

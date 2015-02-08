@@ -115,9 +115,6 @@
 }
 
 #labelKey {
-	position: fixed;
-	left: 10px;
-	top: 55px;
 	background-color: rgba(230,230,230,.5);
 	color: black;
 	font-family: Helvetica;
@@ -128,9 +125,19 @@
 	box-shadow: 2px 2px 10px rgba(0,0,0,.2);
 	text-align:center;
 	display:none;
-	z-index: 4;
 }
 
 #labelKey td {
 	padding: 5px;
+}
+
+.labelKeyContainer {
+	height: 200px;
+	width: 220px;
+	position: fixed;
+	left: 10px;
+	top: 55px;
+	overflow: auto;
+	z-index: 4;
+	padding: 4px;
 }

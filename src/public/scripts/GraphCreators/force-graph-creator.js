@@ -63,8 +63,10 @@ var ForceGraphCreator = function(svg, nodes, edges){
                     requestDeleteNode(selectedNode, function () {
                         thisGraph.nodes.splice(thisGraph.nodes.indexOf(selectedNode), 1);
                         thisGraph.spliceLinksForNode(selectedNode);
+                        labels[selectedNode.labels[0]].count--;
                         state.selectedNode = null;
                         thisGraph.updateGraph();
+                        createLabelKey();
                     });
                 } else if (selectedEdge && !editingProperties){
                     d3.event.preventDefault();
@@ -367,7 +369,6 @@ var ForceGraphCreator = function(svg, nodes, edges){
 
     ForceGraphCreator.prototype.addNode = function (node) {
         thisGraph.nodes.push(node);
-        console.log(thisGraph.nodes);
     };
 
 };

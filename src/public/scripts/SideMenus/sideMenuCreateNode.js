@@ -130,11 +130,22 @@ function setCreateNodeSaveBtnOnClick (x, y) {
             showingCreateNode = false;
             $('#sideMenu').animate({'right': '-365px'}, 100);
             getSingleNode(id, function (newNode) {
+                if (!labels.hasOwnProperty(newNode[0].labels[0])) {
+                    var colorIndex = Math.floor(Math.random() * c.length);
+                    var randColor = c[colorIndex];
+                    labels[newNode[0].labels] = { count: 1, x_center : 0, y_center: 0 };
+                    labels[newNode[0].labels[0]].color = randColor;
+                    c.splice(colorIndex, 1);
+                } else {
+                    labels[newNode[0].labels[0]].count++;
+                }
                 newNode[0].x = x;
                 newNode[0].y = y;
                 newNode[0].color = labels[newNode[0].labels[0]].color;
+                createLabelKey();
                 graph.addNode(newNode[0]);
                 graph.updateGraph();
+                editingProperties = false;
                 toastSuccess("Node Created");
             });
         });

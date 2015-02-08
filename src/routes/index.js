@@ -122,6 +122,24 @@ router.post('/updateNode', function(req, res, next) {
 
 });
 
+/* Update a relationship in the Neo4j DB*/
+router.post('/updateRel', function(req, res, next) {
+	var data = JSON.parse(req.body.rel);
+	var rel_id = data.id;
+	var properties = data.data;
+	//query to delete node and all connected relationships
+	var query = "START r=rel(" + rel_id + ") SET r = " + CleanJSONForNeo4j(JSON.stringify(properties)) ;
+	db.query(query, null, function (err, results) {
+		if (err) { // if error send blank response
+			console.log(err);
+			res.send({err:"Cannot communicate with Neo4j database."});
+		} else {
+			res.send("Relationship updated...");
+		}
+	});
+
+});
+
 /* Get a single relationship by id */
 router.get('/getNode/:id', function(req,res,next) {
 	var id = req.params.id;
