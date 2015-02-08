@@ -63,6 +63,27 @@ router.post('/addNode', function(req, res, next) {
 	});
 });
 
+/* add a relationship to the neo4j database */
+router.post('/addRel', function(req, res, next) {
+	var query = (typeof req.body.data !== 'undefined') ?
+	 				'START n=node(' + req.body.startNode + '),' +
+	 				'p=node(' + req.body.endNode + ')' +
+					'CREATE (n) - [r:'+ req.body.type + ' ' +
+					CleanJSONForNeo4j(req.body.data) + '] -> (p) RETURN id(r)' :
+					'START n=node(' + req.body.startNode + '),' +
+					'p=node(' + req.body.endNode + ')' +
+					'CREATE (n) - [r:'+ req.body.type + '] -> (p) RETURN id(r)';
+
+	db.query(query, null, function(err, results) {
+		if (err) {
+			console.log(err);
+			res.send(err.message);
+		} else {
+			res.send(results);
+		}
+	});
+});
+
 /* Delete a node from the Neo4j DB */
 router.delete('/deleteNode', function(req, res, next) {
 	var node_id = req.body.id;
@@ -140,7 +161,7 @@ router.post('/updateRel', function(req, res, next) {
 
 });
 
-/* Get a single relationship by id */
+/* Get a single node by id */
 router.get('/getNode/:id', function(req,res,next) {
 	var id = req.params.id;
 	var q = 'START n=node('+ id +') RETURN n';
@@ -166,6 +187,34 @@ router.get('/getNode/:id', function(req,res,next) {
 		}
 	});
 });
+
+/* Get a single relationship by id */
+router.get('/getRel/:id', function(req,res,next) {
+	var id = req.params.id;
+	var q = 'START r=rel('+ id +') RETURN r';
+
+	db.query(q, null, function(err, results) {
+		if (err) { // if error send blank response
+			console.log(err);
+			res.send({err:"Cannot communicate with Neo4j database."});
+		} else {
+			var relArray = [];
+			for (var i = 0; i < results.length; i++) {
+				var startNodeURI = results[i].r._data.start.split("/");
+				var endNodeURI = results[i].r._data.end.split("/");
+				relArray.push({
+					source: parseInt(startNodeURI[startNodeURI.length - 1]),
+					target: parseInt(endNodeURI[endNodeURI.length - 1]),
+					id: results[i].r._data.metadata.id,
+					type: results[i].r._data.metadata.type,
+					data: results[i].r._data.data
+				});
+			}
+			res.send(relArray);
+		}
+	});
+});
+
 
 function getAllRelationships(req, res, nodes, callback) {
 	//query all relationships in db

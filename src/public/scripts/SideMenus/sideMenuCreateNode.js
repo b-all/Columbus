@@ -146,7 +146,6 @@ function setCreateNodeSaveBtnOnClick (x, y) {
                 graph.addNode(newNode[0]);
                 graph.updateGraph();
                 editingProperties = false;
-                toastSuccess("Node Created");
             });
         });
     });

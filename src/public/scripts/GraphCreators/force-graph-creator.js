@@ -255,6 +255,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
         node = node.data(thisGraph.nodes)
             .enter().append("g")
             .on('mousedown', nodeMouseDown)
+            .on('dblclick', nodeDblClick)
             .call(drag)
             .attr("class", "node")
             .append("circle")
@@ -355,20 +356,47 @@ var ForceGraphCreator = function(svg, nodes, edges){
         showSideMenu('relationship', d);
     }
 
+    function nodeDblClick (d) {
+        d3.event.stopPropagation();
+        showCreateRelSideMenu(d);
+    }
+
     // remove edges associated with a node
     ForceGraphCreator.prototype.spliceLinksForNode = function(node) {
         var thisGraph = this,
 
-        toSplice = edges.filter(function(l) {
+        toSplice = thisGraph.edges.filter(function(l) {
             return (l.source === node || l.target === node);
         });
         toSplice.map(function(l) {
-            edges.splice(edges.indexOf(l), 1);
+            thisGraph.edges.splice(thisGraph.edges.indexOf(l), 1);
         });
     };
 
     ForceGraphCreator.prototype.addNode = function (node) {
         thisGraph.nodes.push(node);
+    };
+
+    ForceGraphCreator.prototype.addRel = function (rel) {
+        thisGraph.edges.push(rel);
+    };
+
+    ForceGraphCreator.prototype.hasNode = function(id) {
+        for (var i = 0; i < thisGraph.nodes.length; i++) {
+            if (nodes[i].id === id) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    ForceGraphCreator.prototype.getNodeIndexById = function(id) {
+        for (var i = 0; i < thisGraph.nodes.length; i++) {
+            if (nodes[i].id === id) {
+                return i;
+            }
+        }
+        return false; 
     };
 
 };

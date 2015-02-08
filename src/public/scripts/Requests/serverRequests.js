@@ -25,8 +25,44 @@ function pullGraph(callback) {
 function createNode(data, label, callback) {
 	data = { data: JSON.stringify(data), label: label};
 	$.post('addNode', data).done(function (data) {
-		console.log('Node Created');
-		callback(data[0]['id(n)']);
+		if (!data.err) {
+			callback(data[0]['id(n)']);
+			toastSuccess("Node Created");
+		} else {
+			toastFail("There was an error communicating with the server");
+		}
+	});
+}
+
+function createRel(data, type, startNode, endNode, callback) {
+	if (!validateRelationship(type, startNode, endNode)) {
+		return;
+	}
+	if (hasProperties(data)) {
+		data =
+			{
+				data: JSON.stringify(data),
+				type: type,
+				startNode: startNode,
+				endNode: endNode
+			};
+	} else {
+		data =
+			{
+				type: type,
+				startNode: startNode,
+				endNode: endNode
+			};
+	}
+
+
+	$.post('addRel', data).done(function (data) {
+		if (!data.err) {
+			callback(data[0]['id(r)']);
+			toastSuccess("Relationship Created");
+		} else {
+			toastFail("There was an error communicating with the server");
+		}
 	});
 }
 
@@ -97,7 +133,26 @@ function updateRelProperties(rel, callback) {
 
 function getSingleNode(nodeId, callback) {
 	$.get('getNode/' + nodeId).done(function(data) {
-		callback(data);
+		if (!data.err) {
+			callback(data);
+		} else {
+			console.log(data.err);
+			toastFail("There was an error communicating with the server");
+		}
+	}).fail(function(msg) {
+		toastFail("There was an error communicating with the server");
+		console.log(msg);
+	});
+}
+
+function getSingleRel(relId, callback) {
+	$.get('getRel/' + relId).done(function(data) {
+		if (!data.err) {
+			callback(data);
+		} else {
+			console.log(data.err);
+			toastFail("There was an error communicating with the server");
+		}
 	}).fail(function(msg) {
 		toastFail("There was an error communicating with the server");
 		console.log(msg);
