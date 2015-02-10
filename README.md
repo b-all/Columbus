@@ -27,11 +27,11 @@ Mocha<br>
 3. Unit test pass/fails will be displayed via command line<br>
 
 Nightwatch<br>
-1. In a terminal type 'sudo npm install -g nightwatch'
-2. cd to into the project's src directory
-3. Enter 'nightwatch' to run automated black box tests
-4. Nightwatch tests are located in the nightwatch_tests folder
-5. Nightwatch reports are located in the nightwatch_reports folder
+1. In a terminal type 'sudo npm install -g nightwatch'<br>
+2. cd to into the project's src directory<br>
+3. Enter 'nightwatch' to run automated black box tests<br>
+4. Nightwatch tests are located in the nightwatch_tests folder<br>
+5. Nightwatch reports are located in the nightwatch_reports folder<br>
 
 
 Istanbul<br>
