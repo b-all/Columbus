@@ -1,0 +1,36 @@
+12:48:24.462 INFO - Launching a standalone server
+12:48:24.497 INFO - Java: Oracle Corporation 25.20-b23
+12:48:24.497 INFO - OS: Mac OS X 10.10.2 x86_64
+12:48:24.505 INFO - v2.44.0, with Core v2.44.0. Built from revision 76d78cf
+12:48:24.559 INFO - Default driver org.openqa.selenium.ie.InternetExplorerDriver registration is skipped: registration capabilities Capabilities [{ensureCleanSession=true, browserName=internet explorer, version=, platform=WINDOWS}] does not match with current platform: MAC
+12:48:24.604 INFO - RemoteWebDriver instances should connect to: http://127.0.0.1:4444/wd/hub
+12:48:24.605 INFO - Version Jetty/5.1.x
+12:48:24.606 INFO - Started HttpContext[/selenium-server,/selenium-server]
+12:48:24.629 INFO - Started org.openqa.jetty.jetty.servlet.ServletHandler@47f37ef1
+12:48:24.630 INFO - Started HttpContext[/wd,/wd]
+12:48:24.630 INFO - Started HttpContext[/selenium-server/driver,/selenium-server/driver]
+12:48:24.630 INFO - Started HttpContext[/,/]
+12:48:24.633 INFO - Started SocketListener on 0.0.0.0:4444
+12:48:24.633 INFO - Started org.openqa.jetty.jetty.Server@6e2c634b
+12:48:24.796 INFO - Executing: [new session: Capabilities [{acceptSslCerts=true, name=Server Running Test, browserName=firefox, javascriptEnabled=true, platform=ANY}]])
+12:48:24.804 INFO - Creating a new session for Capabilities [{acceptSslCerts=true, name=Server Running Test, browserName=firefox, javascriptEnabled=true, platform=ANY}]
+12:48:26.830 INFO - Done: [new session: Capabilities [{acceptSslCerts=true, name=Server Running Test, browserName=firefox, javascriptEnabled=true, platform=ANY}]]
+12:48:26.838 INFO - Executing: [get: http://localhost:8888])
+12:48:27.008 INFO - Done: [get: http://localhost:8888]
+12:48:27.012 INFO - Executing: [find element: By.selector: body])
+12:48:27.068 INFO - Done: [find element: By.selector: body]
+12:48:27.071 INFO - Executing: [is displayed: 0 [[FirefoxDriver: firefox on MAC (87ad8093-22b1-bc46-92a3-74a2f9e9c62b)] -> css selector: body]])
+12:48:27.094 INFO - Done: [is displayed: 0 [[FirefoxDriver: firefox on MAC (87ad8093-22b1-bc46-92a3-74a2f9e9c62b)] -> css selector: body]]
+12:48:27.096 INFO - Executing: [get title])
+12:48:27.108 INFO - Done: [get title]
+12:48:27.111 INFO - Executing: [find element: By.selector: .navArrowContainer])
+12:48:27.116 INFO - Done: [find element: By.selector: .navArrowContainer]
+12:48:27.118 INFO - Executing: [click: 1 [[FirefoxDriver: firefox on MAC (87ad8093-22b1-bc46-92a3-74a2f9e9c62b)] -> css selector: .navArrowContainer]])
+12:48:27.183 INFO - Done: [click: 1 [[FirefoxDriver: firefox on MAC (87ad8093-22b1-bc46-92a3-74a2f9e9c62b)] -> css selector: .navArrowContainer]]
+12:48:27.186 INFO - Executing: [find element: By.selector: #sideMenu])
+12:48:27.197 INFO - Done: [find element: By.selector: #sideMenu]
+12:48:27.199 INFO - Executing: [get text: 2 [[FirefoxDriver: firefox on MAC (87ad8093-22b1-bc46-92a3-74a2f9e9c62b)] -> css selector: #sideMenu]])
+12:48:27.291 INFO - Done: [get text: 2 [[FirefoxDriver: firefox on MAC (87ad8093-22b1-bc46-92a3-74a2f9e9c62b)] -> css selector: #sideMenu]]
+12:48:27.294 INFO - Executing: [delete session: 1112a65b-683b-4e5b-8fdc-244f6adcb17a])
+12:48:27.369 INFO - Done: [delete session: 1112a65b-683b-4e5b-8fdc-244f6adcb17a]
+12:48:27.384 INFO - Shutting down...

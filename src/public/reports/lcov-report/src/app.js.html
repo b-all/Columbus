@@ -195,20 +195,20 @@
     </style>
 </head>
 <body>
-<div class="header medium">
+<div class="header high">
     <h1>Code coverage report for <span class="entity">src/app.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">77.42% <small>(24 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">93.1% <small>(27 / 29)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">16.67% <small>(1 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">50% <small>(3 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class="metric">0% <small>(0 / 3)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">66.67% <small>(2 / 3)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">77.42% <small>(24 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">93.1% <small>(27 / 29)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
@@ -275,16 +275,13 @@
 57
 58
 59
-60
-61
-62</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+60</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
@@ -303,23 +300,22 @@
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -346,7 +342,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 &nbsp;
 var routes = require('./routes/index');
-var users = require('./routes/users');
 &nbsp;
 var app = express();
 app.listen(8888);
@@ -364,13 +359,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 &nbsp;
 app.use('/', routes);
-app.use('/users', users);
 &nbsp;
 // catch 404 and forward to error handler
-app.use(<span class="fstat-no" title="function not covered" >function(req, res, next) {</span>
-<span class="cstat-no" title="statement not covered" >    var err = new Error('Not Found');</span>
-<span class="cstat-no" title="statement not covered" >    err.status = 404;</span>
-<span class="cstat-no" title="statement not covered" >    next(err);</span>
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 &nbsp;
 // error handlers
@@ -378,9 +372,9 @@ app.use(<span class="fstat-no" title="function not covered" >function(req, res, 
 // development error handler
 // will print stacktrace
 <span class="missing-if-branch" title="else path not taken" >E</span>if (app.get('env') === 'development') {
-    app.use(<span class="fstat-no" title="function not covered" >function(err, req, res, next) {</span>
-<span class="cstat-no" title="statement not covered" >        res.status(err.status || 500);</span>
-<span class="cstat-no" title="statement not covered" >        res.render('error', {</span>
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
             message: err.message,
             error: err
         });
@@ -404,7 +398,7 @@ module.exports = app;
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Feb 02 2015 12:48:58 GMT-0500 (EST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Feb 10 2015 09:30:35 GMT-0500 (EST)</div>
 </div>
 
 <script src="../prettify.js"></script>

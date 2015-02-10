@@ -1,0 +1,2068 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/public/scripts/GraphCreators/graph-creator.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../../../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">src/public/scripts/GraphCreators/graph-creator.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">0% <small>(0 / 284)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 96)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 68)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">0% <small>(0 / 274)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">src/public/scripts/GraphCreators/</a> &#187; graph-creator.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// define graphcreator object
+<span class="cstat-no" title="statement not covered" >var GraphCreator = <span class="fstat-no" title="function not covered" >function(svg, nodes, edges){</span></span>
+<span class="cstat-no" title="statement not covered" >    var thisGraph = this;</span>
+<span class="cstat-no" title="statement not covered" >        thisGraph.idct = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    thisGraph.nodes = nodes || [];</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.edges = edges || [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    thisGraph.state = {</span>
+      selectedNode: null,
+      selectedEdge: null,
+      mouseDownNode: null,
+      mouseDownLink: null,
+      justDragged: false,
+      justScaleTransGraph: false,
+      lastKeyDown: -1,
+      shiftNodeDrag: false,
+      selectedText: null
+    };
+&nbsp;
+    // define arrow markers for graph links
+<span class="cstat-no" title="statement not covered" >    var defs = svg.append('svg:defs');</span>
+<span class="cstat-no" title="statement not covered" >    defs.append('svg:marker')</span>
+    .attr('id', 'end-arrow')
+    .attr('viewBox', '0 -5 10 10')
+    .attr('refX', "32")
+    .attr('markerWidth', 3.5)
+    .attr('markerHeight', 3.5)
+    .attr('orient', 'auto')
+    .append('svg:path')
+    .attr('d', 'M0,-5L10,0L0,5');
+&nbsp;
+    // define arrow markers for leading arrow
+<span class="cstat-no" title="statement not covered" >    defs.append('svg:marker')</span>
+    .attr('id', 'mark-end-arrow')
+    .attr('viewBox', '0 -5 10 10')
+    .attr('refX', 7)
+    .attr('markerWidth', 3.5)
+    .attr('markerHeight', 3.5)
+    .attr('orient', 'auto')
+    .append('svg:path')
+    .attr('d', 'M0,-5L10,0L0,5');
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    thisGraph.svg = svg;</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.svgG = svg.append("g")</span>
+        .classed(thisGraph.consts.graphClass, true);
+<span class="cstat-no" title="statement not covered" >    var svgG = thisGraph.svgG;</span>
+&nbsp;
+    // displayed when dragging between nodes
+<span class="cstat-no" title="statement not covered" >    thisGraph.dragLine = svgG.append('svg:path')</span>
+        .attr('class', 'link dragline hidden')
+        .attr('d', 'M0,0L0,0')
+        .style('marker-end', 'url(#mark-end-arrow)');
+&nbsp;
+    // svg nodes and edges
+<span class="cstat-no" title="statement not covered" >    thisGraph.paths = svgG.append("g").selectAll("g");</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.circles = svgG.append("g").selectAll("g");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    thisGraph.drag = d3.behavior.drag()</span>
+        .origin(<span class="fstat-no" title="function not covered" >function(d){</span>
+<span class="cstat-no" title="statement not covered" >            return {x: d.x, y: d.y};</span>
+        })
+        .on("drag", <span class="fstat-no" title="function not covered" >function(args){</span>
+<span class="cstat-no" title="statement not covered" >            thisGraph.state.justDragged = true;</span>
+<span class="cstat-no" title="statement not covered" >            thisGraph.dragmove.call(thisGraph, args);</span>
+        })
+        .on("dragend", <span class="fstat-no" title="function not covered" >function() {</span>
+            // todo check if edge-mode is selected
+        });
+&nbsp;
+    // listen for key events
+<span class="cstat-no" title="statement not covered" >    d3.select(window).on("keydown", <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.svgKeyDown.call(thisGraph);</span>
+    })
+    .on("keyup", <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.svgKeyUp.call(thisGraph);</span>
+    });
+<span class="cstat-no" title="statement not covered" >    svg.on("mousedown", <span class="fstat-no" title="function not covered" >function(d){<span class="cstat-no" title="statement not covered" ></span>thisGraph.svgMouseDown.call(thisGraph, d);}</span>);</span>
+<span class="cstat-no" title="statement not covered" >    svg.on("mouseup", <span class="fstat-no" title="function not covered" >function(d){<span class="cstat-no" title="statement not covered" ></span>thisGraph.svgMouseUp.call(thisGraph, d);}</span>);</span>
+&nbsp;
+    // listen for dragging
+<span class="cstat-no" title="statement not covered" >    var dragSvg = d3.behavior.zoom()</span>
+        .on("zoom", <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >            if (d3.event.sourceEvent.shiftKey){</span>
+                // TODO  the internal d3 state is still changing
+<span class="cstat-no" title="statement not covered" >                return false;</span>
+            } else{
+<span class="cstat-no" title="statement not covered" >                thisGraph.zoomed.call(thisGraph);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            return true;</span>
+        })
+        .on("zoomstart", <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >            var ael = d3.select("#" + thisGraph.consts.activeEditId).node();</span>
+<span class="cstat-no" title="statement not covered" >            if (ael){</span>
+<span class="cstat-no" title="statement not covered" >                ael.blur();</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (!d3.event.sourceEvent.shiftKey) <span class="cstat-no" title="statement not covered" >d3.select('body').style("cursor", "move");</span></span>
+        })
+        .on("zoomend", <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >            d3.select('body').style("cursor", "auto");</span>
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    svg.call(dragSvg).on("dblclick.zoom", null);</span>
+&nbsp;
+    // listen for resize
+<span class="cstat-no" title="statement not covered" >    window.onresize = <span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>thisGraph.updateWindow(svg);}</span>;</span>
+&nbsp;
+    // handle download data
+<span class="cstat-no" title="statement not covered" >    d3.select("#download-input").on("click", <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >    var saveEdges = [];</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.edges.forEach(<span class="fstat-no" title="function not covered" >function(val, i){</span></span>
+<span class="cstat-no" title="statement not covered" >        saveEdges.push({source: val.source.id, target: val.target.id});</span>
+    });
+<span class="cstat-no" title="statement not covered" >    var blob = new Blob([window.JSON.stringify({"nodes": thisGraph.nodes, "edges": saveEdges})], {type: "text/plain;charset=utf-8"});</span>
+<span class="cstat-no" title="statement not covered" >    saveAs(blob, "mydag.json");</span>
+    });
+&nbsp;
+&nbsp;
+    // handle uploaded data
+<span class="cstat-no" title="statement not covered" >    d3.select("#upload-input").on("click", <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >    document.getElementById("hidden-file-upload").click();</span>
+    });
+<span class="cstat-no" title="statement not covered" >    d3.select("#hidden-file-upload").on("change", <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >    if (window.File &amp;&amp; window.FileReader &amp;&amp; window.FileList &amp;&amp; window.Blob) {</span>
+<span class="cstat-no" title="statement not covered" >        var uploadFile = this.files[0];</span>
+<span class="cstat-no" title="statement not covered" >        var filereader = new window.FileReader();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        filereader.onload = <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >            var txtRes = filereader.result;</span>
+            // TODO better error handling
+<span class="cstat-no" title="statement not covered" >            try{</span>
+<span class="cstat-no" title="statement not covered" >                var jsonObj = JSON.parse(txtRes);</span>
+<span class="cstat-no" title="statement not covered" >                thisGraph.deleteGraph(true);</span>
+<span class="cstat-no" title="statement not covered" >                thisGraph.nodes = jsonObj.nodes;</span>
+<span class="cstat-no" title="statement not covered" >                thisGraph.setIdCt(jsonObj.nodes.length + 1);</span>
+<span class="cstat-no" title="statement not covered" >                var newEdges = jsonObj.edges;</span>
+<span class="cstat-no" title="statement not covered" >                newEdges.forEach(<span class="fstat-no" title="function not covered" >function(e, i){</span></span>
+<span class="cstat-no" title="statement not covered" >                    newEdges[i] = {source: thisGraph.nodes.filter(<span class="fstat-no" title="function not covered" >function(n){<span class="cstat-no" title="statement not covered" ></span>return n.id == e.source;}</span>)[0],</span>
+                    target: thisGraph.nodes.filter(<span class="fstat-no" title="function not covered" >function(n){<span class="cstat-no" title="statement not covered" ></span>return n.id == e.target;}</span>)[0]};
+                });
+<span class="cstat-no" title="statement not covered" >            thisGraph.edges = newEdges;</span>
+<span class="cstat-no" title="statement not covered" >            thisGraph.updateGraph();</span>
+            }catch(err){
+<span class="cstat-no" title="statement not covered" >                window.alert("Error parsing uploaded file\nerror message: " + err.message);</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+        };
+<span class="cstat-no" title="statement not covered" >        filereader.readAsText(uploadFile);</span>
+&nbsp;
+    } else {
+<span class="cstat-no" title="statement not covered" >      alert("Your browser won't let you save this graph -- try upgrading your browser to IE 10+ or Chrome or Firefox.");</span>
+    }
+&nbsp;
+    });
+&nbsp;
+    // handle delete graph
+<span class="cstat-no" title="statement not covered" >    d3.select("#delete-graph").on("click", <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.deleteGraph(false);</span>
+    });
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.setIdCt = <span class="fstat-no" title="function not covered" >function(idct){</span></span>
+<span class="cstat-no" title="statement not covered" >  this.idct = idct;</span>
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.consts =  {</span>
+  selectedClass: "selected",
+  connectClass: "connect-node",
+  circleGClass: "conceptG",
+  graphClass: "graph",
+  activeEditId: "active-editing",
+  BACKSPACE_KEY: 8,
+  DELETE_KEY: 46,
+  ENTER_KEY: 13,
+  nodeRadius: 50
+};
+&nbsp;
+/* PROTOTYPE FUNCTIONS */
+&nbsp;
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.dragmove = <span class="fstat-no" title="function not covered" >function(d) {</span></span>
+<span class="cstat-no" title="statement not covered" >  var thisGraph = this;</span>
+<span class="cstat-no" title="statement not covered" >  if (thisGraph.state.shiftNodeDrag){</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.dragLine.attr('d', 'M' + d.x + ',' + d.y + 'L' + d3.mouse(thisGraph.svgG.node())[0] + ',' + d3.mouse(this.svgG.node())[1]);</span>
+  } else{
+<span class="cstat-no" title="statement not covered" >    d.x += d3.event.dx;</span>
+<span class="cstat-no" title="statement not covered" >    d.y +=  d3.event.dy;</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.updateGraph();</span>
+  }
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.deleteGraph = <span class="fstat-no" title="function not covered" >function(skipPrompt){</span></span>
+<span class="cstat-no" title="statement not covered" >  var thisGraph = this,</span>
+      doDelete = true;
+<span class="cstat-no" title="statement not covered" >  if (!skipPrompt){</span>
+<span class="cstat-no" title="statement not covered" >    doDelete = window.confirm("Press OK to delete this graph");</span>
+  }
+<span class="cstat-no" title="statement not covered" >  if(doDelete){</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.nodes = [];</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.edges = [];</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.updateGraph();</span>
+  }
+};
+&nbsp;
+/* select all text in element: taken from http://stackoverflow.com/questions/6139107/programatically-select-text-in-a-contenteditable-html-element */
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.selectElementContents = <span class="fstat-no" title="function not covered" >function(el) {</span></span>
+<span class="cstat-no" title="statement not covered" >  var range = document.createRange();</span>
+<span class="cstat-no" title="statement not covered" >  range.selectNodeContents(el);</span>
+<span class="cstat-no" title="statement not covered" >  var sel = window.getSelection();</span>
+<span class="cstat-no" title="statement not covered" >  sel.removeAllRanges();</span>
+<span class="cstat-no" title="statement not covered" >  sel.addRange(range);</span>
+};
+&nbsp;
+&nbsp;
+/* insert svg line breaks: taken from http://stackoverflow.com/questions/13241475/how-do-i-include-newlines-in-labels-in-d3-charts */
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.insertTitleLinebreaks = <span class="fstat-no" title="function not covered" >function (gEl, title) {</span></span>
+<span class="cstat-no" title="statement not covered" >  var words = title.split(/\s+/g),</span>
+      nwords = words.length;
+<span class="cstat-no" title="statement not covered" >  var el = gEl.append("text")</span>
+        .attr("text-anchor","middle")
+        .attr("dy", "-" + (nwords-1)*7.5);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  for (var i = 0; i &lt; words.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >    var tspan = el.append('tspan').text(words[i]);</span>
+<span class="cstat-no" title="statement not covered" >    if (i &gt; 0)</span>
+<span class="cstat-no" title="statement not covered" >      tspan.attr('x', 0).attr('dy', '15');</span>
+  }
+};
+&nbsp;
+&nbsp;
+// remove edges associated with a node
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.spliceLinksForNode = <span class="fstat-no" title="function not covered" >function(node) {</span></span>
+<span class="cstat-no" title="statement not covered" >  var thisGraph = this,</span>
+      toSplice = thisGraph.edges.filter(<span class="fstat-no" title="function not covered" >function(l) {</span>
+<span class="cstat-no" title="statement not covered" >    return (l.source === node || l.target === node);</span>
+  });
+<span class="cstat-no" title="statement not covered" >  toSplice.map(<span class="fstat-no" title="function not covered" >function(l) {</span></span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.edges.splice(thisGraph.edges.indexOf(l), 1);</span>
+  });
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.replaceSelectEdge = <span class="fstat-no" title="function not covered" >function(d3Path, edgeData){</span></span>
+<span class="cstat-no" title="statement not covered" >  var thisGraph = this;</span>
+<span class="cstat-no" title="statement not covered" >  d3Path.classed(thisGraph.consts.selectedClass, true);</span>
+<span class="cstat-no" title="statement not covered" >  if (thisGraph.state.selectedEdge){</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.removeSelectFromEdge();</span>
+  }
+<span class="cstat-no" title="statement not covered" >  thisGraph.state.selectedEdge = edgeData;</span>
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.replaceSelectNode = <span class="fstat-no" title="function not covered" >function(d3Node, nodeData){</span></span>
+<span class="cstat-no" title="statement not covered" >  var thisGraph = this;</span>
+<span class="cstat-no" title="statement not covered" >  d3Node.classed(this.consts.selectedClass, true);</span>
+<span class="cstat-no" title="statement not covered" >  if (thisGraph.state.selectedNode){</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.removeSelectFromNode();</span>
+  }
+<span class="cstat-no" title="statement not covered" >  thisGraph.state.selectedNode = nodeData;</span>
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.removeSelectFromNode = <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >  var thisGraph = this;</span>
+<span class="cstat-no" title="statement not covered" >  thisGraph.circles.filter(<span class="fstat-no" title="function not covered" >function(cd){</span></span>
+<span class="cstat-no" title="statement not covered" >    return cd.id === thisGraph.state.selectedNode.id;</span>
+  }).classed(thisGraph.consts.selectedClass, false);
+<span class="cstat-no" title="statement not covered" >  thisGraph.state.selectedNode = null;</span>
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.removeSelectFromEdge = <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >  var thisGraph = this;</span>
+<span class="cstat-no" title="statement not covered" >  thisGraph.paths.filter(<span class="fstat-no" title="function not covered" >function(cd){</span></span>
+<span class="cstat-no" title="statement not covered" >    return cd === thisGraph.state.selectedEdge;</span>
+  }).classed(thisGraph.consts.selectedClass, false);
+<span class="cstat-no" title="statement not covered" >  thisGraph.state.selectedEdge = null;</span>
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.pathMouseDown = <span class="fstat-no" title="function not covered" >function(d3path, d){</span></span>
+<span class="cstat-no" title="statement not covered" >  var thisGraph = this,</span>
+      state = thisGraph.state;
+<span class="cstat-no" title="statement not covered" >  d3.event.stopPropagation();</span>
+<span class="cstat-no" title="statement not covered" >  state.mouseDownLink = d;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (state.selectedNode){</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.removeSelectFromNode();</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var prevEdge = state.selectedEdge;</span>
+<span class="cstat-no" title="statement not covered" >  if (!prevEdge || prevEdge !== d){</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.replaceSelectEdge(d3path, d);</span>
+<span class="cstat-no" title="statement not covered" >    showSideMenu('relationship', d);</span>
+  } else{
+<span class="cstat-no" title="statement not covered" >    thisGraph.removeSelectFromEdge();</span>
+<span class="cstat-no" title="statement not covered" >    hideSideMenu('relationship');</span>
+  }
+};
+&nbsp;
+// mousedown on node
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.circleMouseDown = <span class="fstat-no" title="function not covered" >function(d3node, d){</span></span>
+<span class="cstat-no" title="statement not covered" >  var thisGraph = this,</span>
+      state = thisGraph.state;
+<span class="cstat-no" title="statement not covered" >  d3.event.stopPropagation();</span>
+<span class="cstat-no" title="statement not covered" >  state.mouseDownNode = d;</span>
+<span class="cstat-no" title="statement not covered" >  if (d3.event.shiftKey){</span>
+<span class="cstat-no" title="statement not covered" >    state.shiftNodeDrag = d3.event.shiftKey;</span>
+    // reposition dragged directed edge
+<span class="cstat-no" title="statement not covered" >    thisGraph.dragLine.classed('hidden', false)</span>
+      .attr('d', 'M' + d.x + ',' + d.y + 'L' + d.x + ',' + d.y);
+<span class="cstat-no" title="statement not covered" >    return;</span>
+  }
+};
+&nbsp;
+/* place editable text on node in place of svg text */
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.changeTextOfNode = <span class="fstat-no" title="function not covered" >function(d3node, d){</span></span>
+<span class="cstat-no" title="statement not covered" >  var thisGraph= this,</span>
+      consts = thisGraph.consts,
+      htmlEl = d3node.node();
+<span class="cstat-no" title="statement not covered" >  d3node.selectAll("text").remove();</span>
+<span class="cstat-no" title="statement not covered" >  var nodeBCR = htmlEl.getBoundingClientRect(),</span>
+      curScale = nodeBCR.width/consts.nodeRadius,
+      placePad  =  5*curScale,
+      useHW = curScale &gt; 1 ? nodeBCR.width*0.71 : consts.nodeRadius*1.42;
+  // replace with editableconent text
+<span class="cstat-no" title="statement not covered" >  var d3txt = thisGraph.svg.selectAll("foreignObject")</span>
+        .data([d])
+        .enter()
+        .append("foreignObject")
+        .attr("x", nodeBCR.left + placePad )
+        .attr("y", nodeBCR.top + placePad)
+        .attr("height", 2*useHW)
+        .attr("width", useHW)
+        .append("xhtml:p")
+        .attr("id", consts.activeEditId)
+        .attr("contentEditable", "true")
+        .text(d.title)
+        .on("mousedown", <span class="fstat-no" title="function not covered" >function(d){</span>
+<span class="cstat-no" title="statement not covered" >          d3.event.stopPropagation();</span>
+        })
+        .on("keydown", <span class="fstat-no" title="function not covered" >function(d){</span>
+<span class="cstat-no" title="statement not covered" >          d3.event.stopPropagation();</span>
+<span class="cstat-no" title="statement not covered" >          if (d3.event.keyCode == consts.ENTER_KEY &amp;&amp; !d3.event.shiftKey){</span>
+<span class="cstat-no" title="statement not covered" >            this.blur();</span>
+          }
+        })
+        .on("blur", <span class="fstat-no" title="function not covered" >function(d){</span>
+<span class="cstat-no" title="statement not covered" >          d.title = this.textContent;</span>
+<span class="cstat-no" title="statement not covered" >          thisGraph.insertTitleLinebreaks(d3node, d.title);</span>
+<span class="cstat-no" title="statement not covered" >          d3.select(this.parentElement).remove();</span>
+        });
+<span class="cstat-no" title="statement not covered" >  return d3txt;</span>
+};
+&nbsp;
+// mouseup on nodes
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.circleMouseUp = <span class="fstat-no" title="function not covered" >function(d3node, d){</span></span>
+<span class="cstat-no" title="statement not covered" >  var thisGraph = this,</span>
+      state = thisGraph.state,
+      consts = thisGraph.consts;
+  // reset the states
+<span class="cstat-no" title="statement not covered" >  state.shiftNodeDrag = false;</span>
+<span class="cstat-no" title="statement not covered" >  d3node.classed(consts.connectClass, false);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var mouseDownNode = state.mouseDownNode;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (!mouseDownNode) <span class="cstat-no" title="statement not covered" >return;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  thisGraph.dragLine.classed("hidden", true);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (mouseDownNode !== d){</span>
+    // we're in a different node: create new edge for mousedown edge and add to graph
+<span class="cstat-no" title="statement not covered" >    var newEdge = {source: mouseDownNode, target: d};</span>
+<span class="cstat-no" title="statement not covered" >    var filtRes = thisGraph.paths.filter(<span class="fstat-no" title="function not covered" >function(d){</span></span>
+<span class="cstat-no" title="statement not covered" >      if (d.source === newEdge.target &amp;&amp; d.target === newEdge.source){</span>
+<span class="cstat-no" title="statement not covered" >        thisGraph.edges.splice(thisGraph.edges.indexOf(d), 1);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return d.source === newEdge.source &amp;&amp; d.target === newEdge.target;</span>
+    });
+<span class="cstat-no" title="statement not covered" >    if (!filtRes[0].length) {</span>
+<span class="cstat-no" title="statement not covered" >      thisGraph.edges.push(newEdge);</span>
+<span class="cstat-no" title="statement not covered" >      thisGraph.updateGraph();</span>
+    }
+  } else {
+    // we're in the same node
+<span class="cstat-no" title="statement not covered" >    if (state.justDragged) {</span>
+      // dragged, not clicked
+<span class="cstat-no" title="statement not covered" >      state.justDragged = false;</span>
+    } else{
+      // clicked, not dragged
+<span class="cstat-no" title="statement not covered" >      if (d3.event.shiftKey){</span>
+        // shift-clicked node: edit text content
+<span class="cstat-no" title="statement not covered" >        var d3txt = thisGraph.changeTextOfNode(d3node, d);</span>
+<span class="cstat-no" title="statement not covered" >        var txtNode = d3txt.node();</span>
+<span class="cstat-no" title="statement not covered" >        thisGraph.selectElementContents(txtNode);</span>
+<span class="cstat-no" title="statement not covered" >        txtNode.focus();</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        if (state.selectedEdge){</span>
+<span class="cstat-no" title="statement not covered" >          thisGraph.removeSelectFromEdge();</span>
+        }
+      }
+    }
+  }
+<span class="cstat-no" title="statement not covered" >  state.mouseDownNode = null;</span>
+<span class="cstat-no" title="statement not covered" >  return;</span>
+&nbsp;
+}; // end of circles mouseup
+&nbsp;
+// mousedown on main svg
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.svgMouseDown = <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >    this.state.graphMouseDown = true;</span>
+<span class="cstat-no" title="statement not covered" >    var prevNode = this.state.selectedNode;</span>
+<span class="cstat-no" title="statement not covered" >    if (prevNode) {</span>
+<span class="cstat-no" title="statement not covered" >        this.removeSelectFromNode();</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var prevRel = this.state.selectedEdge;</span>
+<span class="cstat-no" title="statement not covered" >    if (prevRel) {</span>
+<span class="cstat-no" title="statement not covered" >        this.removeSelectFromEdge();</span>
+    }
+<span class="cstat-no" title="statement not covered" >    hideSideMenu('relationship');</span>
+<span class="cstat-no" title="statement not covered" >    hideSideMenu('node');</span>
+};
+&nbsp;
+// mouseup on main svg
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.svgMouseUp = <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >  var thisGraph = this,</span>
+      state = thisGraph.state;
+<span class="cstat-no" title="statement not covered" >  if (state.justScaleTransGraph) {</span>
+    // dragged not clicked
+<span class="cstat-no" title="statement not covered" >    state.justScaleTransGraph = false;</span>
+  } else <span class="cstat-no" title="statement not covered" >if (state.graphMouseDown &amp;&amp; d3.event.shiftKey){</span>
+    // clicked not dragged from svg
+<span class="cstat-no" title="statement not covered" >    var xycoords = d3.mouse(thisGraph.svgG.node()),</span>
+        d = {id: thisGraph.idct++, title: "new concept", x: xycoords[0], y: xycoords[1]};
+<span class="cstat-no" title="statement not covered" >    thisGraph.nodes.push(d);</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.updateGraph();</span>
+    // make title of text immediently editable
+<span class="cstat-no" title="statement not covered" >    var d3txt = thisGraph.changeTextOfNode(thisGraph.circles.filter(<span class="fstat-no" title="function not covered" >function(dval){</span></span>
+<span class="cstat-no" title="statement not covered" >      return dval.id === d.id;</span>
+    }), d),
+        txtNode = d3txt.node();
+<span class="cstat-no" title="statement not covered" >    thisGraph.selectElementContents(txtNode);</span>
+<span class="cstat-no" title="statement not covered" >    txtNode.focus();</span>
+  } else <span class="cstat-no" title="statement not covered" >if (state.shiftNodeDrag){</span>
+    // dragged from node
+<span class="cstat-no" title="statement not covered" >    state.shiftNodeDrag = false;</span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.dragLine.classed("hidden", true);</span>
+  }
+<span class="cstat-no" title="statement not covered" >  state.graphMouseDown = false;</span>
+};
+&nbsp;
+// keydown on main svg
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.svgKeyDown = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >  var thisGraph = this,</span>
+      state = thisGraph.state,
+      consts = thisGraph.consts;
+  // make sure repeated key presses don't register for each keydown
+<span class="cstat-no" title="statement not covered" >  if(state.lastKeyDown !== -1) <span class="cstat-no" title="statement not covered" >return;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  state.lastKeyDown = d3.event.keyCode;</span>
+<span class="cstat-no" title="statement not covered" >  var selectedNode = state.selectedNode,</span>
+      selectedEdge = state.selectedEdge;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    switch(d3.event.keyCode) {</span>
+        case consts.BACKSPACE_KEY:
+        case consts.DELETE_KEY:
+<span class="cstat-no" title="statement not covered" >            if (selectedNode &amp;&amp; !editingProperties){</span>
+<span class="cstat-no" title="statement not covered" >                d3.event.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >                thisGraph.nodes.splice(thisGraph.nodes.indexOf(selectedNode), 1);</span>
+<span class="cstat-no" title="statement not covered" >                thisGraph.spliceLinksForNode(selectedNode);</span>
+<span class="cstat-no" title="statement not covered" >                state.selectedNode = null;</span>
+<span class="cstat-no" title="statement not covered" >                thisGraph.updateGraph();</span>
+            } else <span class="cstat-no" title="statement not covered" >if (selectedEdge){</span>
+<span class="cstat-no" title="statement not covered" >                d3.event.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >                thisGraph.edges.splice(thisGraph.edges.indexOf(selectedEdge), 1);</span>
+<span class="cstat-no" title="statement not covered" >                state.selectedEdge = null;</span>
+<span class="cstat-no" title="statement not covered" >                thisGraph.updateGraph();</span>
+            }
+<span class="cstat-no" title="statement not covered" >            break;</span>
+    }
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.svgKeyUp = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >  this.state.lastKeyDown = -1;</span>
+};
+&nbsp;
+// call to propagate changes to graph
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.updateGraph = <span class="fstat-no" title="function not covered" >function(){</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var thisGraph = this,</span>
+      consts = thisGraph.consts,
+      state = thisGraph.state;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  thisGraph.paths = thisGraph.paths.data(thisGraph.edges, <span class="fstat-no" title="function not covered" >function(d){</span></span>
+<span class="cstat-no" title="statement not covered" >    return String(d.source.id) + "+" + String(d.target.id);</span>
+  });
+<span class="cstat-no" title="statement not covered" >  var paths = thisGraph.paths;</span>
+  // update existing paths
+<span class="cstat-no" title="statement not covered" >  paths.style('marker-end', 'url(#end-arrow)')</span>
+    .classed(consts.selectedClass, <span class="fstat-no" title="function not covered" >function(d){</span>
+<span class="cstat-no" title="statement not covered" >      return d === state.selectedEdge;</span>
+    })
+    .attr("d", <span class="fstat-no" title="function not covered" >function(d){</span>
+<span class="cstat-no" title="statement not covered" >      return "M" + d.source.x + "," + d.source.y + "L" + d.target.x + "," + d.target.y;</span>
+    });
+&nbsp;
+  // add new paths
+<span class="cstat-no" title="statement not covered" >  paths.enter()</span>
+    .append("path")
+    .style('marker-end','url(#end-arrow)')
+    .classed("link", true)
+    .attr("d", <span class="fstat-no" title="function not covered" >function(d){</span>
+<span class="cstat-no" title="statement not covered" >      return "M" + d.source.x + "," + d.source.y + "L" + d.target.x + "," + d.target.y;</span>
+    })
+    .on("mousedown", <span class="fstat-no" title="function not covered" >function(d){</span>
+<span class="cstat-no" title="statement not covered" >      thisGraph.pathMouseDown.call(thisGraph, d3.select(this), d);</span>
+      }
+    )
+    .on("mouseup", <span class="fstat-no" title="function not covered" >function(d){</span>
+<span class="cstat-no" title="statement not covered" >      state.mouseDownLink = null;</span>
+    });
+&nbsp;
+  // remove old links
+<span class="cstat-no" title="statement not covered" >  paths.exit().remove();</span>
+&nbsp;
+  // update existing nodes
+<span class="cstat-no" title="statement not covered" >  thisGraph.circles = thisGraph.circles.data(thisGraph.nodes, <span class="fstat-no" title="function not covered" >function(d){</span> <span class="cstat-no" title="statement not covered" >return d.id;}</span>);</span>
+<span class="cstat-no" title="statement not covered" >  thisGraph.circles.attr("transform", <span class="fstat-no" title="function not covered" >function(d){<span class="cstat-no" title="statement not covered" ></span>return "translate(" + d.x + "," + d.y + ")";}</span>);</span>
+<span class="cstat-no" title="statement not covered" >  thisGraph.circles.select("circle").attr("color", <span class="fstat-no" title="function not covered" >function(d){<span class="cstat-no" title="statement not covered" ></span>return d.color;}</span>);</span>
+&nbsp;
+  // add new nodes
+<span class="cstat-no" title="statement not covered" >  var newGs= thisGraph.circles.enter()</span>
+        .append("g");
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  newGs.classed(consts.circleGClass, true)</span>
+    .attr("transform", <span class="fstat-no" title="function not covered" >function(d){<span class="cstat-no" title="statement not covered" ></span>return "translate(" + d.x + "," + d.y + ")";}</span>)
+    .on("mouseover", <span class="fstat-no" title="function not covered" >function(d){</span>
+<span class="cstat-no" title="statement not covered" >      if (state.shiftNodeDrag){</span>
+<span class="cstat-no" title="statement not covered" >        d3.select(this).classed(consts.connectClass, true);</span>
+      }
+    })
+    .on("mouseout", <span class="fstat-no" title="function not covered" >function(d){</span>
+<span class="cstat-no" title="statement not covered" >      d3.select(this).classed(consts.connectClass, false);</span>
+    })
+    .on("mousedown", <span class="fstat-no" title="function not covered" >function(d){</span>
+<span class="cstat-no" title="statement not covered" >      thisGraph.circleMouseDown.call(thisGraph, d3.select(this), d);</span>
+    })
+    .on('dblclick', <span class="fstat-no" title="function not covered" >function(d) {</span>
+<span class="cstat-no" title="statement not covered" >        showSideMenu('node', d);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var prevNode = state.selectedNode;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!prevNode || prevNode.id !== d.id){</span>
+<span class="cstat-no" title="statement not covered" >          thisGraph.replaceSelectNode(d3.select(this), d);</span>
+        }
+    })
+    .on("mouseup", <span class="fstat-no" title="function not covered" >function(d){</span>
+<span class="cstat-no" title="statement not covered" >      thisGraph.circleMouseUp.call(thisGraph, d3.select(this), d);</span>
+    })
+    .call(thisGraph.drag);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  newGs.append("circle")</span>
+    .attr("r", String(consts.nodeRadius))
+    .attr("fill", <span class="fstat-no" title="function not covered" >function(d){<span class="cstat-no" title="statement not covered" ></span>return d.color;}</span>);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  newGs.each(<span class="fstat-no" title="function not covered" >function(d){</span></span>
+<span class="cstat-no" title="statement not covered" >    thisGraph.insertTitleLinebreaks(d3.select(this), d.title);</span>
+  });
+&nbsp;
+  // remove old nodes
+<span class="cstat-no" title="statement not covered" >  thisGraph.circles.exit().remove();</span>
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >var zoomRatio = 1;</span>
+<span class="cstat-no" title="statement not covered" >var translateDelta = [0,0];</span>
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.zoomed = <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >  this.state.justScaleTransGraph = true;</span>
+<span class="cstat-no" title="statement not covered" >  d3.select("." + this.consts.graphClass)</span>
+    .attr("transform", "translate(" + (translateDelta = d3.event.translate) + ") scale(" + (zoomRatio = d3.event.scale) + ")");
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >GraphCreator.prototype.updateWindow = <span class="fstat-no" title="function not covered" >function(svg){</span></span>
+<span class="cstat-no" title="statement not covered" >  var docEl = document.documentElement,</span>
+      bodyEl = document.getElementsByTagName('body')[0];
+<span class="cstat-no" title="statement not covered" >  var x = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth;</span>
+<span class="cstat-no" title="statement not covered" >  var y = window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;</span>
+<span class="cstat-no" title="statement not covered" >  svg.attr("width", x).attr("height", y);</span>
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Feb 08 2015 23:29:28 GMT-0500 (EST)</div>
+</div>
+
+<script src="../../../../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

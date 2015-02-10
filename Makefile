@@ -6,7 +6,7 @@ ISTANBUL=src/node_modules/.bin/istanbul
 JSHINT=src/node_modules/.bin/jshint
 
 # test files must end with ".test.js"
-TESTS=$(shell find ./src/test/ -name "*.test.js")
+TESTS=$(shell find ./src/test -name "*.test.js")
 
 clean:
 	rm -rf ./src/public/reports
@@ -29,4 +29,3 @@ sonar:
 	PATH="$$PWD/tools/sonar-runner-2.4/bin:$$PATH" sonar-runner
 
 ci: clean xunit coverage sonar
-

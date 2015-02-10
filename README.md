@@ -1,4 +1,4 @@
-To run locally: 
+To run locally:
 
 1. Download and install node. (http://nodejs.org/#download)
 2. Open an command prompt or terminal window and cd into the Columbus/src directory
@@ -6,11 +6,11 @@ To run locally:
 4. Make sure you have an instance of Neo4j running at localhost:7474
 5. Open a web browser and enter http://localhost:8888 as the url
 
-If your Neo4j database has data, it should be displayed in a directed graph. 
+If your Neo4j database has data, it should be displayed in a directed graph.
 
 Graph manipulation (Neo4j interface not yet implemented)
 - use mouse wheel to zoom in and out
-- shift-click in empty space to add a new node 
+- shift-click in empty space to add a new node
 - shift-click on a node to edit its title
 - shift-click on a node and drag to another node to create a relationship
 - click and drag nodes to move them around
@@ -25,6 +25,14 @@ Mocha<br>
 1. In a terminal, cd to the Columbus/src directory<br>
 2. Enter the command "make ci"<br>
 3. Unit test pass/fails will be displayed via command line<br>
+
+Nightwatch<br>
+1. In a terminal type 'sudo npm install -g nightwatch'
+2. cd to into the project's src directory
+3. Enter 'nightwatch' to run automated black box tests
+4. Nightwatch tests are located in the nightwatch_tests folder
+5. Nightwatch reports are located in the nightwatch_reports folder
+
 
 Istanbul<br>
 1. In a terminal, cd to the Columbus/src directory<br>

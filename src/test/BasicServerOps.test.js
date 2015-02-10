@@ -4,7 +4,7 @@ var assert = require('assert');
 
 describe('app', function () {
 	before(function () {
-		
+
 	});
 
 	describe('Basic Server Operations', function () {
@@ -35,6 +35,23 @@ describe('app', function () {
 			request('http://localhost:8888').get('/graph').end(function (err, res) {
 				assert.equal(200, res.statusCode);
 				assert.notEqual("Cannot communicate with Neo4j database.", res.body.err);
+				done();
+			});
+		});
+
+		it('should return a 404 error', function (done) {
+			request('http://localhost:8888').get('/error.jpeg').end(function (err, res) {
+				assert.equal(404, res.statusCode);
+				done();
+			});
+		});
+
+		it('should return a 500 error', function (done) {
+			var data = {rel : {id: 22, data:{name : 'Test'}}};
+			request('http://localhost:8888').post('/updateRel')
+			.send(data)
+			.end( function (err, res) {
+				assert.equal(500, res.statusCode);
 				done();
 			});
 		});

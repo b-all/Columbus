@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="github"
+             errors="1"
+             failures="1"
+             tests="3">
+  
+  <testsuite errors="1" failures="1" hostname="" id=""
+    name="Test that Columbus server is running" package="github" skipped="0"
+    tests="3" time="" timestamp="">
+    
+    
+      <testcase name="Element &lt;body&gt; was visible after 93 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if the page title equals &quot;Columbus - Neo4j Editor and Visualization Tool&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;Search..&gt; contains text: &quot;undefined&quot;. Element could not be located.">
+        
+          <failure message="Expected &quot;undefined&quot; but got: &quot;null&quot;"></failure>
+        
+        
+      </testcase>
+    
+    
+      <system-err>
+        Unable to locate element: &quot;Search..&quot; using: css selector
+      </system-err>
+    
+    </testsuite>
+  
+</testsuites>

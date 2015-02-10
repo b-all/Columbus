@@ -49,10 +49,15 @@ router.get('/graph', function(req, res, next) {
 
 /* add a node to the neo4j database */
 router.post('/addNode', function(req, res, next) {
-	var query = 'CREATE (n:' + req.body.label + ' ' +
-					CleanJSONForNeo4j(req.body.data) + ')' +
-					'RETURN id(n)';
-
+	var query;
+ 	if (typeof req.body.data !== 'undefined') {
+		query = 'CREATE (n:' + req.body.label + ' ' +
+						CleanJSONForNeo4j(req.body.data) + ')' +
+						'RETURN id(n)';
+	} else {
+		query = 'CREATE (n:' + req.body.label + ')' +
+						'RETURN id(n)';
+	}
 	db.query(query, null, function(err, results) {
 		if (err) {
 			console.log(err);
@@ -119,7 +124,7 @@ router.delete('/deleteRelationship', function(req, res, next) {
 		if (err) { // if error send blank response
 			res.send({err:"Cannot communicate with Neo4j database."});
 		} else {
-			res.send("Node deleted...");
+			res.send("Relationship deleted...");
 		}
 	});
 
