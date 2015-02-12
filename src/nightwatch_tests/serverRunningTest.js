@@ -5,8 +5,10 @@ module.exports = {
       .url('http://localhost:8888')
       .waitForElementVisible('body', 1000)
       .assert.title('Columbus - Neo4j Editor and Visualization Tool')
-      .click('.navArrowContainer')
-      .assert.containsText('#sideMenu', 'Welcome to Columbus');
+      .click('.navArrowContainer', function() {
+          client.assert.containsText('#sideMenu', 'Welcome to Columbus');
+      });
+
 
 
   },

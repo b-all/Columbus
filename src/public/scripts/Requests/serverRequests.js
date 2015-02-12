@@ -23,7 +23,12 @@ function pullGraph(callback) {
 }
 
 function createNode(data, label, callback) {
-	data = { data: JSON.stringify(data), label: label};
+	if (!data.hasOwnProperty("")) {
+		data = { data: JSON.stringify(data), label: label};
+	} else {
+		data = { label: label};
+	}
+
 	$.post('addNode', data).done(function (data) {
 		if (!data.err) {
 			callback(data[0]['id(n)']);
