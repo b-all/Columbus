@@ -2,8 +2,21 @@ extends layout
 
 block content
 	.navigationBar
-		span
-			input(type="text" class="search rounded" placeholder="Search...")
+		.navBarBtnList
+			span
+				button.btn.btn-success.navBarBtn(onclick="showCreateNodeSideMenu([0,0])")
+					svg(width="30" height="30")
+						use(xlink:href="#createNodeIcon")
+				button.btn.btn-success.navBarBtn
+					svg(width="25" height="25")
+						use(xlink:href="#createRelIcon")
+				button.btn.btn-success.navBarBtn
+					i.glyphicon.glyphicon-filter
+				button.btn.btn-success.navBarBtn
+					i.glyphicon.glyphicon-search
+				
+				
+				
 	br
 	.labelKeyContainer
 		table.table.table-hover#labelKey
