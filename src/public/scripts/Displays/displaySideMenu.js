@@ -2,6 +2,7 @@ var showingSideMenu = false;
 var editingProperties = false;
 
 var showSideMenu = function (type, d) {
+	$('#searchTable').remove();
 	if (type === 'node') {
 		showNodeData(d);
 	} else if (type === 'relationship'){
