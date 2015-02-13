@@ -60,21 +60,10 @@ var ForceGraphCreator = function(svg, nodes, edges){
             case consts.DELETE_KEY:
                 if (selectedNode && !editingProperties){
                     d3.event.preventDefault();
-                    requestDeleteNode(selectedNode, function () {
-                        thisGraph.nodes.splice(thisGraph.nodes.indexOf(selectedNode), 1);
-                        thisGraph.spliceLinksForNode(selectedNode);
-                        labels[selectedNode.labels[0]].count--;
-                        state.selectedNode = null;
-                        thisGraph.updateGraph();
-                        createLabelKey();
-                    });
+                    requestDeleteNode(selectedNode, thisGraph.deleteNode);
                 } else if (selectedEdge && !editingProperties){
                     d3.event.preventDefault();
-                    requestDeleteRelationship(selectedEdge, function () {
-                        thisGraph.edges.splice(thisGraph.edges.indexOf(selectedEdge), 1);
-                        state.selectedEdge = null;
-                        thisGraph.updateGraph();
-                    });
+                    requestDeleteRelationship(selectedEdge, thisGraph.deleteRel);
                 }
                 if (!editingProperties){
                     d3.event.preventDefault();
@@ -82,6 +71,23 @@ var ForceGraphCreator = function(svg, nodes, edges){
                 }
                 break;
         }
+    };
+
+    ForceGraphCreator.prototype.deleteNode = function () {
+        var selectedNode = state.selectedNode;
+        thisGraph.nodes.splice(thisGraph.nodes.indexOf(selectedNode), 1);
+        thisGraph.spliceLinksForNode(selectedNode);
+        labels[selectedNode.labels[0]].count--;
+        state.selectedNode = null;
+        thisGraph.updateGraph();
+        createLabelKey();
+    };
+
+    ForceGraphCreator.prototype.deleteRel = function () {
+        var selectedEdge = state.selectedEdge;
+        thisGraph.edges.splice(thisGraph.edges.indexOf(selectedEdge), 1);
+        state.selectedEdge = null;
+        thisGraph.updateGraph();
     };
 
     ForceGraphCreator.prototype.svgKeyUp = function() {

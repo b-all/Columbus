@@ -9,37 +9,12 @@
     tests="31" time="" timestamp="">
     
     
-      <testcase name="Element &lt;body&gt; was visible after 67 milliseconds.">
+      <testcase name="Element &lt;body&gt; was visible after 82 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 15 milliseconds.">
-        
-        
-      </testcase>
-    
-      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Create Node&quot;.">
-        
-        
-      </testcase>
-    
-      <testcase name="Element &lt;.successToast&gt; was visible after 114 milliseconds.">
-        
-        
-      </testcase>
-    
-      <testcase name="Testing if element &lt;.successToast&gt; contains text: &quot;Node Created&quot;.">
-        
-        
-      </testcase>
-    
-      <testcase name="Element &lt;.successToast&gt; was not visible after 3168 milliseconds.">
-        
-        
-      </testcase>
-    
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 100 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 8 milliseconds.">
         
         
       </testcase>
@@ -49,7 +24,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was visible after 114 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was visible after 116 milliseconds.">
         
         
       </testcase>
@@ -59,12 +34,37 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was not visible after 2670 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was not visible after 3139 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 19 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 16 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Create Node&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was visible after 110 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.successToast&gt; contains text: &quot;Node Created&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was not visible after 3138 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 12 milliseconds.">
         
         
       </testcase>
@@ -74,7 +74,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was visible after 82 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was visible after 31 milliseconds.">
         
         
       </testcase>
@@ -84,12 +84,12 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was not visible after 2723 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was not visible after 3166 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 7 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 10 milliseconds.">
         
         
       </testcase>
@@ -99,7 +99,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was present after 14 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was present after 80 milliseconds.">
         
         
       </testcase>
@@ -109,12 +109,12 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was not visible after 2654 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was not visible after 3148 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;#sideMenu&gt; was present after 84 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 91 milliseconds.">
         
         
       </testcase>
@@ -124,7 +124,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was present after 34 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was present after 19 milliseconds.">
         
         
       </testcase>
@@ -134,12 +134,12 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was not visible after 3158 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was not visible after 3087 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;#sideMenu&gt; was present after 7 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 7 milliseconds.">
         
         
       </testcase>
@@ -149,12 +149,12 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was not visible after 13 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was not visible after 15 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;#sideMenu&gt; was present after 9 milliseconds.">
+      <testcase name="Element &lt;#sideMenu&gt; was visible after 113 milliseconds.">
         
         
       </testcase>

@@ -77,9 +77,12 @@ var showNodeData = function (d) {
 
 	//show save button
 	$('.saveBtn').show();
+	$('.deleteBtn').show();
 
 	// set save button onclick function
 	setNodeSaveBtnOnClick(d);
+	// set delete button onclick function
+	setNodeDeleteBtnOnClick(d);
 };
 
 var hideNodeData = function () {
@@ -96,7 +99,7 @@ var hideNodeData = function () {
 
 	//hide save button
 	$('.saveBtn').hide();
-	$('.saveBtn').off('click');
+	$('.deleteBtn').hide();
 
 	$('#sideMenu').off('click');
 };
@@ -182,7 +185,10 @@ var showRelData = function (d) {
 
 	//show save button
 	$('.saveBtn').show();
+	$('.deleteBtn').show();
 	setRelSaveBtnOnClick(d);
+	// set delete button onclick function
+	setRelDeleteBtnOnClick(d);
 };
 
 var hideRelData = function () {
@@ -202,6 +208,7 @@ var hideRelData = function () {
 
 	//hide save button
 	$('.saveBtn').hide();
+	$('.deleteBtn').hide();
 };
 
 function setNodeSaveBtnOnClick (d) {
@@ -251,5 +258,21 @@ function setRelSaveBtnOnClick (d) {
 		updateRelProperties(updatedProps, function () {
 			d.data = JSON.parse(updatedProps.rel).data;
 		});
+	});
+}
+
+function setNodeDeleteBtnOnClick (d) {
+	$('.deleteBtn').off('click');
+	$('.deleteBtn').on('click', function () {
+		requestDeleteNode(graph.state.selectedNode, graph.deleteNode);
+		hideSideMenu('node');
+	});
+}
+
+function setRelDeleteBtnOnClick (d) {
+	$('.deleteBtn').off('click');
+	$('.deleteBtn').on('click', function () {
+		requestDeleteRelationship(graph.state.selectedEdge, graph.deleteRel);
+		hideSideMenu('relationship');
 	});
 }

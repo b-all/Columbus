@@ -40,6 +40,13 @@
 	display:none;
 }
 
+.deleteBtn {
+	position: absolute;
+	top: 22px;
+	right: 25px;
+	display:none;
+}
+
 .addPropBtn {
 	margin-left: 20px;
 	margin-bottom: 10px;

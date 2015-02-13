@@ -6,6 +6,8 @@ function showCreateRelSideMenu (d) {
     var width =  docEl.clientWidth,
         height =  docEl.clientHeight;
 
+    $('.deleteBtn').hide();
+
     //slide open edit view
     if (!showingSideMenu) {
        if (d.x * zoomRatio + translateDelta[0] < width - 400) {

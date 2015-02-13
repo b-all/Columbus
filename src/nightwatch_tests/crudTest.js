@@ -78,13 +78,16 @@ module.exports = {
           client
           .waitForElementPresent('.successToast', 1000)
           .assert.containsText('.successToast', 'Relationship Created')
-          .waitForElementNotVisible('.successToast', 3000)
-          .click('.link :last-of-type', editRel);
+          .waitForElementNotVisible('.successToast', 3000);
+          client
+          .useXpath()
+          .click('//*[local-name() = \'g\'][@class="link"][last()]', editRel);
       }
 
       function editRel() {
           client
-          .waitForElementPresent('#sideMenu', 1000)
+          .useCss()
+          .waitForElementPresent('.sideMenuHeader', 1000)
           .assert.containsText('#sideMenu', 'Relationship Properties')
           .click('.saveBtn', relUpdateSaveBtnClicked);
 
@@ -94,38 +97,43 @@ module.exports = {
           client
           .waitForElementPresent('.successToast',1000)
           .assert.containsText('.successToast', 'Properties Updated')
-          .waitForElementNotVisible('.successToast', 3000)
-          .click('.link :last-of-type', deleteRel);
+          .waitForElementNotVisible('.successToast', 3000);
+          client
+          .useXpath()
+          .click('//*[local-name() = \'g\'][@class="link"][last()]', deleteRel);
       }
 
       function deleteRel() {
           client
-          .waitForElementPresent('#sideMenu', 1000)
+          .useCss()
+          .waitForElementPresent('.sideMenuHeader', 1000)
           .assert.containsText('#sideMenu', 'Relationship Properties')
           .waitForElementNotVisible('.successToast', 3000)
-          .sendKeys('.link :last-of-type', [client.Keys.BACK_SPACE], function () {
+          .click('.deleteBtn', function () {
               client
-              .keys([client.Keys.NULL], function () {
-                  client
-                  .click('.node :last-of-type', deleteNodes);
-              });
+              .useXpath()
+              .click('//*[local-name() = \'g\'][@class="node"][last()]', deleteNodes);
           });
       }
       var nodes_deleted = 0;
       function deleteNodes() {
           nodes_deleted++;
           if (nodes_deleted === 2){
-              client.end();
+              client
+              .useCss()
+              .click('.deleteBtn', function () {
+                  client
+                  .end();
+              });
           } else {
               client
-              .waitForElementPresent('#sideMenu', 1000)
+              .useCss()
+              .waitForElementVisible('#sideMenu', 1000)
               .assert.containsText('#sideMenu', 'Node Properties')
-              .keys([client.Keys.DELETE], function () {
+              .click('.deleteBtn', function () {
                   client
-                  .keys([client.Keys.NULL], function () {
-                      client
-                      .click('.node :last-of-type', deleteNodes);
-                  });
+                  .useXpath()
+                  .click('//*[local-name() = \'g\'][@class="node"][last()]', deleteNodes);
               });
           }
 
