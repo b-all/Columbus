@@ -21,7 +21,7 @@ function validateRelationship(type, startNode, endNode) {
         return false;
     }
 
-    if (!graph.hasNode(parseInt(endNode))) {
+    if (!graph.hasNode(parseInt(endNode)) || !graph.hasNode(parseInt(startNode)) ) {
         toastFail("There is no node with that id");
         return false;
     }

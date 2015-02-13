@@ -327,7 +327,9 @@ var ForceGraphCreator = function(svg, nodes, edges){
 
     function nodeMouseDown(d) {
         d3.event.stopPropagation();
-        if (selectingEndNode) {
+        if (selectingStartNode) {
+            loadSelectedStartNode(d.id);
+        } else if (selectingEndNode) {
             loadSelectedEndNode(d.id);
         } else {
             showSideMenu('node', d);
