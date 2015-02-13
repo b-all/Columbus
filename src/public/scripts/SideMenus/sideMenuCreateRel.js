@@ -1,5 +1,5 @@
 var selectingEndNode = false;
-var selectedStartNode = false;
+var selectingStartNode = false;
 
 function showCreateRelSideMenu (d) {
     var docEl = document.documentElement,
