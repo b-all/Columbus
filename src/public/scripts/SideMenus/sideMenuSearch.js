@@ -22,11 +22,35 @@ function showSearchSideMenu() {
                     '<button class="btn btn-default searchBtn">Search</button>' +
                 '</td>' +
             '</tr>' +
+            '<tr>' +
+                '<td colspan=\"2\" style="padding:6px;padding-right:20px">' +
+                    '<div class=\"searchDesc\">This search will query the database for property values matching your search term.</div>' +
+                '</td>' +
+            '</tr>' +
         '</table>'
     );
 
     $('#sideMenu').on('click', function () {
         editingProperties = true;
+    });
+
+    $('#searchInput').unbind();
+    $('.searchBtn').off('click');
+
+    $('.searchBtn').on('click', function () {
+        var target = $('#searchInput').val();
+        search(target, function () {
+
+        });
+    });
+
+    $("#searchInput").keyup(function (e) {
+        if (e.keyCode === 13) {
+            var target = $('#searchInput').val();
+            search(target, function () {
+
+            });
+        }
     });
 
     showingSideMenu = true;

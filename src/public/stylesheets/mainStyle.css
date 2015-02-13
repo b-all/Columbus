@@ -106,7 +106,7 @@
 }
 
 .search {
-	padding: 6px 6px 6px 35px;
+	padding: 6px 6px 6px 6px;
 	margin: 3px;
 	background: url('../images/search.png') no-repeat 95% 50%;
 	background-color: white;
@@ -114,6 +114,11 @@
 
 .search:focus {
 	outline:0;
+}
+
+.searchDesc {
+	color: rgba(0,0,0,.25);
+	font-size: 12px;
 }
 
 .rounded {

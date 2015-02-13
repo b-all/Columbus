@@ -18,7 +18,7 @@ router.get('/search/:target', function(req,res,next) {
                 var found = false;
                 // iterate over node data
                 for(var j in nodes[i].n.data) {
-                    if (nodes[i].n.data[j] === target) {
+                    if (nodes[i].n.data[j].toLowerCase() === target.toLowerCase()) {
                         found = true;
                         break;
                     }

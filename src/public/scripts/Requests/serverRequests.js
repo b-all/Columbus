@@ -163,3 +163,32 @@ function getSingleRel(relId, callback) {
 		console.log(msg);
 	});
 }
+
+function search(target, callback) {
+	var docEl = document.documentElement,
+	bodyEl = document.getElementsByTagName('body')[0];
+
+	var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
+	height =  window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
+
+	var xLoc = width/2 - 300,
+		yLoc = 200;
+
+	if (typeof target === 'undefined' || target === '') {
+		pullGraph();
+		return;
+	}
+
+	$.get('search/'+ target).done(function(data) {
+		if (!data.err) {
+			displayForceData(data, xLoc, yLoc, width, height);
+			callback();
+		} else {
+			console.log(data.err);
+			toastFail("There was an error communicating with the server");
+		}
+	}).fail(function(msg) {
+		toastFail("There was an error communicating with the server");
+		console.log(msg);
+	});
+}
