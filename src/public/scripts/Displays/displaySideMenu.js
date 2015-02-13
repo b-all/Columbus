@@ -1,29 +1,31 @@
 var showingSideMenu = false;
-var editingProperties = false; 
+var editingProperties = false;
 
 var showSideMenu = function (type, d) {
 	if (type === 'node') {
 		showNodeData(d);
 	} else if (type === 'relationship'){
-		showRelData(d)
+		showRelData(d);
 	} else if (type === 'default') {
 		showDefaultMenu();
 	}
 	$('.navArrowContainer').css({'transform':'rotate(180deg)'});
-	
-}
+
+};
 
 var hideSideMenu = function (type) {
 	if (type === 'node') {
 		hideNodeData();
 	} else if (type === 'relationship'){
-		hideRelData()
+		hideRelData();
 	} else if (type === 'default') {
 		hideDefaultMenu();
 	}
 
+	$('#searchTable').remove();
+
 	$('.navArrowContainer').css({'transform':'rotate(0deg)'});
-}
+};
 
 var showDefaultMenu = function () {
 	// clear any previous menu items
@@ -38,7 +40,7 @@ var showDefaultMenu = function () {
 	$('.sideMenuHeader').text('Welcome to Columbus');
 
 	showingSideMenu = true;
-}
+};
 
 var hideDefaultMenu = function () {
 	$('#sideMenu').animate({'right':'-365px'}, 100);
@@ -46,5 +48,6 @@ var hideDefaultMenu = function () {
 	$('#graphContainer').animate({'left': '0px'}, 400, function () {
 		$('#graphContainer').css({'left': ''});
 		showingSideMenu = false;
+		editingProperties = false;
 	});
-}
+};

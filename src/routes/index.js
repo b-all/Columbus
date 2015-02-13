@@ -251,6 +251,8 @@ function getAllRelationships(req, res, nodes, callback) {
 	});
 }
 
+
+
 function CleanJSONForNeo4j(json) {
     return json.replace(/"(\w+)"\s*:/g, '$1:');
 }
