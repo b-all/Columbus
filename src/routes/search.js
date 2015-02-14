@@ -5,8 +5,9 @@ var db = new neo4j.GraphDatabase('http://localhost:7474');
 var express = require('express');
 var router = express.Router();
 
-router.get('/search/:target', function(req,res,next) {
-    var target = req.params.target;
+router.get('/search', function(req,res,next) {
+    var target = req.query.target;
+    console.log(req.query.target);
     db.query('MATCH n RETURN n', function (err, results) {
         if (err) {
             console.log(err);
@@ -18,9 +19,11 @@ router.get('/search/:target', function(req,res,next) {
                 var found = false;
                 // iterate over node data
                 for(var j in nodes[i].n.data) {
-                    if (nodes[i].n.data[j].toLowerCase() === target.toLowerCase()) {
-                        found = true;
-                        break;
+                    if (typeof nodes[i].n.data[j] !== 'undefined') {
+                        if (nodes[i].n.data[j].toString().toLowerCase() === target.toLowerCase()) {
+                            found = true;
+                            break;
+                        }
                     }
                 }
                 if (!found) {

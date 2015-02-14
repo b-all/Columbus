@@ -179,7 +179,9 @@ function search(target, callback) {
 		return;
 	}
 
-	$.get('search/'+ target).done(function(data) {
+	var obj = { target: target };
+
+	$.get('search', obj).done(function(data) {
 		if (!data.err) {
 			displayForceData(data, xLoc, yLoc, width, height);
 			callback();

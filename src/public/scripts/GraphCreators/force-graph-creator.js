@@ -219,7 +219,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
     ForceGraphCreator.prototype.updateGraph = function () {
         var force = d3.layout.force()
             .size([width, height])
-            .charge(-400)
+            .charge(-1000)
             .linkDistance(100)
             .on("tick", tick);
 
