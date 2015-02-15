@@ -123,7 +123,7 @@ var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
           }
         }
     }
-    
+
     for (var i = 0; i < edges.length; i++) {
         var sourceFound = false;
         var targetFound = false;
@@ -158,7 +158,6 @@ var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
 
     createLabelKey();
 };
-
 
 function createLabelKey() {
     var labelKeyString = "";
