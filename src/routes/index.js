@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 /* GET all nodes from neo4j database */
 router.get('/graph', function(req, res, next) {
 	//query all nodes in db
-	var query = 'MATCH (n) RETURN n LIMIT 100';
+	var query = 'MATCH (n) RETURN n';
 
 	// send query to database
 	db.query(query, null, function(err, results) {

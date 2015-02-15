@@ -250,6 +250,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
             .links(thisGraph.edges)
             .start();
 
+
         link = link.data(thisGraph.edges)
             .enter().append("svg:g")
             .attr("class", "link")

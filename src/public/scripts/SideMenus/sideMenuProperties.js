@@ -47,7 +47,7 @@ var showNodeData = function (d) {
 		ePropsString += "<tr>" +
 							"<td><input type=\"text\" class=\"form-control pNameInput\" value=\"" + i + "\"></input></td>" +
 							"<td> : </td>" +
-							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + d.data[i] + "\"></input></td>" +
+							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + escapeHtml(d.data[i]) + "\"></input></td>" +
 							"<td>" +
 								"<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
 									"<use xlink:href=\"#deleteSVG\">" +
@@ -154,7 +154,7 @@ var showRelData = function (d) {
 		ePropsString += "<tr>" +
 							"<td><input type=\"text\" class=\"form-control pNameInput\" value=\"" + i + "\"></input></td>" +
 							"<td> : </td>" +
-							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + d.data[i] + "\"></input></td>" +
+							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + escapeHtml(d.data[i]) + "\"></input></td>" +
 							"<td>" +
 								"<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
 									"<use xlink:href=\"#deleteSVG\">" +
@@ -275,4 +275,13 @@ function setRelDeleteBtnOnClick (d) {
 		requestDeleteRelationship(graph.state.selectedEdge, graph.deleteRel);
 		hideSideMenu('relationship');
 	});
+}
+
+function escapeHtml(unsafe) {
+	return unsafe.toString()
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&#039;");
 }

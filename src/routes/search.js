@@ -8,7 +8,7 @@ var router = express.Router();
 router.get('/search', function(req,res,next) {
     var target = req.query.target;
     console.log(req.query.target);
-    db.query('MATCH n RETURN n', function (err, results) {
+    db.query('MATCH n RETURN n LIMIT 400', function (err, results) {
         if (err) {
             console.log(err);
             res.send({err:"Cannot communicate with Neo4j database."});
