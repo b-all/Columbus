@@ -9,7 +9,7 @@ var routes = require('./routes/index');
 var search = require('./routes/search');
 
 var app = express();
-app.listen(8080);
+app.listen(80);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

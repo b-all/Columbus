@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 /* GET all nodes from neo4j database */
 router.get('/graph', function(req, res, next) {
 	//query all nodes in db
-	var query = 'MATCH (n) RETURN n';
+	var query = 'MATCH (n) RETURN n LIMIT 450';
 
 	// send query to database
 	db.query(query, null, function(err, results) {
@@ -223,7 +223,7 @@ router.get('/getRel/:id', function(req,res,next) {
 
 function getAllRelationships(req, res, nodes, callback) {
 	//query all relationships in db
-	var query = 'START r=rel(*) RETURN r LIMIT 100';
+	var query = 'START r=rel(*) RETURN r LIMIT 450';
 
 	// send query to database
 	db.query(query, null, function(err, results) {
