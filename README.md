@@ -20,7 +20,7 @@ Graph manipulation (Neo4j interface not yet implemented)
 
 Black Box Test Plan<br>
 -The Black Box Test Plan xml document can be found at src/public/reports/bbtp/BlackBoxTestPlan.xml <br>
--The BBTP can be viewed when the server is running in a browser at http://localhost:8888/bbtp/BlackBoxTestPlan.xml<br>
+-The BBTP can be viewed when the server is running in a browser at http://localhost/bbtp/BlackBoxTestPlan.xml<br>
 
 Mocha<br>
 1. In a terminal, cd to the Columbus/src directory<br>
@@ -39,7 +39,7 @@ Istanbul<br>
 1. MAKE SURE the server is not already running (otherwise coverage will be incorrect)<br>
 2. In a terminal, cd to the Columbus/src directory<br>
 3. Enter the command "make ci" followed by "npm start"<br>
-4. Coverage reports can be viewed with a browser at http://localhost:8888/reports/lcov-report/index.html<br>
+4. Coverage reports can be viewed with a browser at http://localhost/reports/lcov-report/index.html<br>
 
 SonarQube<br>
 1. Download SonarQube (http://www.sonarqube.org/downloads/) <br>
