@@ -1,4 +1,5 @@
 function showCreateNodeSideMenu(xycoords) {
+    $('#searchTable').remove();
     var docEl = document.documentElement,
         bodyEl = document.getElementsByTagName('body')[0];
     var width =  docEl.clientWidth,
