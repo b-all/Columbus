@@ -199,16 +199,16 @@
     <h1>Code coverage report for <span class="entity">src/routes/search.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">10.39% <small>(8 / 77)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">10.13% <small>(8 / 79)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">0% <small>(0 / 26)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">0% <small>(0 / 28)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Functions: <span class="metric">0% <small>(0 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">10.39% <small>(8 / 77)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">10.13% <small>(8 / 79)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
@@ -371,7 +371,10 @@
 153
 154
 155
-156</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+156
+157
+158
+159</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -384,16 +387,19 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -533,9 +539,10 @@ var db = new neo4j.GraphDatabase('http://localhost:7474');
 var express = require('express');
 var router = express.Router();
 &nbsp;
-router.get('/search/:target', <span class="fstat-no" title="function not covered" >function(req,res,next) {</span>
-<span class="cstat-no" title="statement not covered" >    var target = req.params.target;</span>
-<span class="cstat-no" title="statement not covered" >    db.query('MATCH n RETURN n', <span class="fstat-no" title="function not covered" >function (err, results) {</span></span>
+router.get('/search', <span class="fstat-no" title="function not covered" >function(req,res,next) {</span>
+<span class="cstat-no" title="statement not covered" >    var target = req.query.target;</span>
+<span class="cstat-no" title="statement not covered" >    console.log(req.query.target);</span>
+<span class="cstat-no" title="statement not covered" >    db.query('MATCH n RETURN n LIMIT 400', <span class="fstat-no" title="function not covered" >function (err, results) {</span></span>
 <span class="cstat-no" title="statement not covered" >        if (err) {</span>
 <span class="cstat-no" title="statement not covered" >            console.log(err);</span>
 <span class="cstat-no" title="statement not covered" >            res.send({err:"Cannot communicate with Neo4j database."});</span>
@@ -546,9 +553,11 @@ router.get('/search/:target', <span class="fstat-no" title="function not covered
 <span class="cstat-no" title="statement not covered" >                var found = false;</span>
                 // iterate over node data
 <span class="cstat-no" title="statement not covered" >                for(var j in nodes[i].n.data) {</span>
-<span class="cstat-no" title="statement not covered" >                    if (nodes[i].n.data[j].toLowerCase() === target.toLowerCase()) {</span>
-<span class="cstat-no" title="statement not covered" >                        found = true;</span>
-<span class="cstat-no" title="statement not covered" >                        break;</span>
+<span class="cstat-no" title="statement not covered" >                    if (typeof nodes[i].n.data[j] !== 'undefined') {</span>
+<span class="cstat-no" title="statement not covered" >                        if (nodes[i].n.data[j].toString().toLowerCase() === target.toLowerCase()) {</span>
+<span class="cstat-no" title="statement not covered" >                            found = true;</span>
+<span class="cstat-no" title="statement not covered" >                            break;</span>
+                        }
                     }
                 }
 <span class="cstat-no" title="statement not covered" >                if (!found) {</span>
@@ -686,7 +695,7 @@ module.exports = router;
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Feb 13 2015 15:59:46 GMT-0500 (EST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Feb 15 2015 22:00:32 GMT-0500 (EST)</div>
 </div>
 
 <script src="../../prettify.js"></script>
