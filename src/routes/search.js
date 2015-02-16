@@ -107,7 +107,7 @@ function getAllNodeRelationships(nodes, callback) {
 
 function getNodesBasedOnRelationships (edges, callback) {
     if (edges.length === 0) {
-        return;
+        callback([]);
     }
     var q = 'START n=node(';
     var nodeIDs = [];
