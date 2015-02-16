@@ -2,10 +2,11 @@ To run locally:
 
 1. Download and install node. (http://nodejs.org/#download)
 2. Open an command prompt or terminal window and cd into the Columbus/src directory
-3. Enter the command 'sudo npm start' to start the server
+3. Enter the command 'npm start' to start the server
 4. Enter your admin credentials
 4. Make sure you have an instance of Neo4j running at localhost:7474
 5. Open a web browser and enter http://localhost as the url
+-- To stop the server enter the command 'npm stop' in a terminal
 
 If your Neo4j database has data, it should be displayed in a directed graph.
 

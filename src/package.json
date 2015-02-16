@@ -17,8 +17,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js",
-    "stop" : "pkill columbus"
+    "start": "forever start app.js",
+    "stop" : "forever stopall"
   },
   "dependencies": {
     "body-parser": "^1.11.0",
