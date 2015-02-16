@@ -69,7 +69,7 @@ router.get('/search', function(req,res,next) {
 
 function getAllNodeRelationships(nodes, callback) {
     if (nodes.length === 0) {
-        return;
+        callback([]);
     }
     var q = 'START n=node(';
     for (var i = 0; i < nodes.length; i++) {
