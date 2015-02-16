@@ -9,6 +9,12 @@ $(document).ready(function() {
         }
     });
 
+    $(document).keydown(function (e){
+        if (e.keyCode === 46 && !editingProperties) {
+            e.preventDefault();
+        }
+    });
+
     /**** MAIN ****/
 
     /*/ warn the user when leaving

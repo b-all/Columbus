@@ -128,21 +128,20 @@ var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
         var sourceFound = false;
         var targetFound = false;
         for (var j = 0; j < nodes.length; j++) {
-            if (nodes[j].id === edges[i].source) {
+            if (nodes[j].id === edges[i].source && !sourceFound) {
                 edges[i].source = j;
                 sourceFound = true;
             }
-            if (nodes[j].id === edges[i].target) {
+            if (nodes[j].id === edges[i].target && !targetFound) {
                 edges[i].target = j;
                 targetFound = true;
             }
         }
         if (!sourceFound || !targetFound) {
             edges.splice(i, 1);
-            i = -1;
+            i--;
         }
     }
-
 
     /** MAIN SVG **/
     if (typeof d3.select("#graphContainer").select("svg") !== 'undefined' ) {

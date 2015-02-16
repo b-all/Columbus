@@ -199,16 +199,16 @@
     <h1>Code coverage report for <span class="entity">src/routes/search.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">10.13% <small>(8 / 79)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">9.41% <small>(8 / 85)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">0% <small>(0 / 28)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">0% <small>(0 / 34)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Functions: <span class="metric">0% <small>(0 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">10.13% <small>(8 / 79)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">9.41% <small>(8 / 85)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
@@ -374,7 +374,16 @@
 156
 157
 158
-159</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -423,10 +432,19 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -542,7 +560,7 @@ var router = express.Router();
 router.get('/search', <span class="fstat-no" title="function not covered" >function(req,res,next) {</span>
 <span class="cstat-no" title="statement not covered" >    var target = req.query.target;</span>
 <span class="cstat-no" title="statement not covered" >    console.log(req.query.target);</span>
-<span class="cstat-no" title="statement not covered" >    db.query('MATCH n RETURN n LIMIT 400', <span class="fstat-no" title="function not covered" >function (err, results) {</span></span>
+<span class="cstat-no" title="statement not covered" >    db.query('MATCH n RETURN n', <span class="fstat-no" title="function not covered" >function (err, results) {</span></span>
 <span class="cstat-no" title="statement not covered" >        if (err) {</span>
 <span class="cstat-no" title="statement not covered" >            console.log(err);</span>
 <span class="cstat-no" title="statement not covered" >            res.send({err:"Cannot communicate with Neo4j database."});</span>
@@ -554,7 +572,7 @@ router.get('/search', <span class="fstat-no" title="function not covered" >funct
                 // iterate over node data
 <span class="cstat-no" title="statement not covered" >                for(var j in nodes[i].n.data) {</span>
 <span class="cstat-no" title="statement not covered" >                    if (typeof nodes[i].n.data[j] !== 'undefined') {</span>
-<span class="cstat-no" title="statement not covered" >                        if (nodes[i].n.data[j].toString().toLowerCase() === target.toLowerCase()) {</span>
+<span class="cstat-no" title="statement not covered" >                        if (nodes[i].n.data[j].toString().toLowerCase().indexOf(target.toLowerCase()) !== -1) {</span>
 <span class="cstat-no" title="statement not covered" >                            found = true;</span>
 <span class="cstat-no" title="statement not covered" >                            break;</span>
                         }
@@ -562,7 +580,7 @@ router.get('/search', <span class="fstat-no" title="function not covered" >funct
                 }
 <span class="cstat-no" title="statement not covered" >                if (!found) {</span>
 <span class="cstat-no" title="statement not covered" >                    nodes.splice(i, 1);</span>
-<span class="cstat-no" title="statement not covered" >                    i = -1;</span>
+<span class="cstat-no" title="statement not covered" >                    i--;</span>
                 }
             }
 <span class="cstat-no" title="statement not covered" >            var nodeArray = [];</span>
@@ -577,15 +595,24 @@ router.get('/search', <span class="fstat-no" title="function not covered" >funct
                 });
 &nbsp;
             }
-<span class="cstat-no" title="statement not covered" >            getAllNodeRelationships(nodeArray, <span class="fstat-no" title="function not covered" >function (relationshipArray) {</span></span>
-<span class="cstat-no" title="statement not covered" >                getNodesBasedOnRelationships(relationshipArray, <span class="fstat-no" title="function not covered" >function (nodeArray) {</span></span>
-<span class="cstat-no" title="statement not covered" >                    var graph = {</span>
-                        nodes: nodeArray,
-                        relationships: relationshipArray
-                    };
-<span class="cstat-no" title="statement not covered" >                    res.send(graph);</span>
+<span class="cstat-no" title="statement not covered" >            if (nodeArray.length &gt; 1000) {</span>
+<span class="cstat-no" title="statement not covered" >                res.send({err:"Too many results."});</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (nodeArray.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                getAllNodeRelationships(nodeArray, <span class="fstat-no" title="function not covered" >function (relationshipArray) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    getNodesBasedOnRelationships(relationshipArray, <span class="fstat-no" title="function not covered" >function (relNodes) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        var graph = {</span>
+                            nodes: (relNodes.length !== 0) ? relNodes: nodeArray,
+                            relationships: relationshipArray
+                        };
+<span class="cstat-no" title="statement not covered" >                        res.send(graph);</span>
+                    });
                 });
-            });
+            } else {
+<span class="cstat-no" title="statement not covered" >                res.send({err:"No matching results."});</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
 &nbsp;
 &nbsp;
         }
@@ -594,7 +621,7 @@ router.get('/search', <span class="fstat-no" title="function not covered" >funct
 &nbsp;
 <span class="fstat-no" title="function not covered" >function getAllNodeRelationships(nodes, callback) {</span>
 <span class="cstat-no" title="statement not covered" >    if (nodes.length === 0) {</span>
-<span class="cstat-no" title="statement not covered" >        return;</span>
+<span class="cstat-no" title="statement not covered" >        callback([]);</span>
     }
 <span class="cstat-no" title="statement not covered" >    var q = 'START n=node(';</span>
 <span class="cstat-no" title="statement not covered" >    for (var i = 0; i &lt; nodes.length; i++) {</span>
@@ -609,7 +636,7 @@ router.get('/search', <span class="fstat-no" title="function not covered" >funct
 <span class="cstat-no" title="statement not covered" >    db.query(q, null, <span class="fstat-no" title="function not covered" >function(err, results) {</span></span>
 <span class="cstat-no" title="statement not covered" >        if (err) { // if error send blank response</span>
 <span class="cstat-no" title="statement not covered" >            console.log(err);</span>
-<span class="cstat-no" title="statement not covered" >            res.send({err:"Cannot communicate with Neo4j database."});</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
         } else {
 <span class="cstat-no" title="statement not covered" >            var relationships = [];</span>
 <span class="cstat-no" title="statement not covered" >            for (var i = 0; i &lt; results.length; i++) {</span>
@@ -632,7 +659,7 @@ router.get('/search', <span class="fstat-no" title="function not covered" >funct
 &nbsp;
 <span class="fstat-no" title="function not covered" >function getNodesBasedOnRelationships (edges, callback) {</span>
 <span class="cstat-no" title="statement not covered" >    if (edges.length === 0) {</span>
-<span class="cstat-no" title="statement not covered" >        return;</span>
+<span class="cstat-no" title="statement not covered" >        callback([]);</span>
     }
 <span class="cstat-no" title="statement not covered" >    var q = 'START n=node(';</span>
 <span class="cstat-no" title="statement not covered" >    var nodeIDs = [];</span>
@@ -667,7 +694,7 @@ router.get('/search', <span class="fstat-no" title="function not covered" >funct
 <span class="cstat-no" title="statement not covered" >    db.query(q, null, <span class="fstat-no" title="function not covered" >function(err, results) {</span></span>
 <span class="cstat-no" title="statement not covered" >        if (err) { // if error send blank response</span>
 <span class="cstat-no" title="statement not covered" >            console.log(err);</span>
-<span class="cstat-no" title="statement not covered" >            results.send({err:"Cannot communicate with Neo4j database."});</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
         } else {
 <span class="cstat-no" title="statement not covered" >            var nodeArray = [];</span>
 <span class="cstat-no" title="statement not covered" >            for (var k = 0; k &lt; results.length; k++) {</span>
@@ -695,7 +722,7 @@ module.exports = router;
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Feb 16 2015 00:29:14 GMT-0500 (EST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Feb 16 2015 14:18:30 GMT-0500 (EST)</div>
 </div>
 
 <script src="../../prettify.js"></script>
