@@ -49,9 +49,9 @@ router.get('/search', function(req,res,next) {
             }
             if (nodeArray.length > 0) {
                 getAllNodeRelationships(nodeArray, function (relationshipArray) {
-                    getNodesBasedOnRelationships(relationshipArray, function (nodeArray) {
+                    getNodesBasedOnRelationships(relationshipArray, function (relNodes) {
                         var graph = {
-                            nodes: nodeArray,
+                            nodes: (relNodes.length !== 0) ? relNodes: nodeArray,
                             relationships: relationshipArray
                         };
                         res.send(graph);
