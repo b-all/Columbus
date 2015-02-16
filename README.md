@@ -55,11 +55,11 @@ SonarQube<br>
 -SonarQube should now be setup to analyze only the project's source files.
 
 <b> Automatic Deployment </b><br>
-Our server at http://sd-vm18.ncsu.edu:8080 updates automatically when it receives a push. <br>
+Our server at http://sd-vm18.csc.ncsu.edu:8080 updates automatically when it receives a push. <br>
 <br>
 To push to the server: <br>
 1. Enter command 'git remote add production stdeckar@sd-vm18.csc.ncsu.edu:2015springTeam17' (This only has to be done the first time)<br> 
 You will be prompted for a password. Email me for it (stdeckar@ncsu.edu) <br>
 3. Push to the master branch on GitHub as usual. <br>
 4. Then, push to the server with 'git push production master'<br>
-5. The results can be viewed with a browser on NCSU's network at http://sd-vm18.ncsu.edu:8080
+5. The results can be viewed with a browser on NCSU's network at http://sd-vm18.csc.ncsu.edu:8080
