@@ -57,5 +57,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
+process.title = 'columbus';
+
 
 module.exports = app;
