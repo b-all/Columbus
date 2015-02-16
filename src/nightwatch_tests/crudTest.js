@@ -3,8 +3,8 @@ module.exports = {
   'Test CRUD Operations' : function (client) {
       var nodes_created = 0;
     client
-      .url('http://localhost:8888')
-      .waitForElementVisible('body', 1000)
+      .url('http://localhost:8080')
+      .waitForElementVisible('#graphContainer svg', 10000)
       // first create a node - calls createNode function
       .moveToElement('#graphContainer svg', 400, 400, createNode);
 
@@ -13,7 +13,7 @@ module.exports = {
       function createNode () {
           client.doubleClick(function() {
               client
-              .waitForElementPresent('.sideMenuHeader', 1000)
+              .waitForElementPresent('.sideMenuHeader', 10000)
               .assert.containsText('#sideMenu', 'Create Node')
               .setValue('.labelInput', "Test")
               .click('.saveBtn', saveBtnClick);
@@ -25,13 +25,13 @@ module.exports = {
           nodes_created++;
           if (nodes_created === 2) {
               client
-              .waitForElementVisible('.successToast', 1000)
+              .waitForElementVisible('.successToast', 10000)
               .assert.containsText('.successToast', 'Node Created')
               .waitForElementNotVisible('.successToast', 3000)
               .click('.node', editNode);
           } else {
               client
-              .waitForElementVisible('.successToast', 1000)
+              .waitForElementVisible('.successToast', 10000)
               .assert.containsText('.successToast', 'Node Created')
               .waitForElementNotVisible('.successToast', 3000)
               // create another node
@@ -43,7 +43,7 @@ module.exports = {
       // start editing after 2 nodes have been created
       function editNode() {
           client
-          .waitForElementPresent('.sideMenuHeader', 1000)
+          .waitForElementPresent('.sideMenuHeader', 10000)
           .assert.containsText('#sideMenu', 'Node Properties')
           .setValue('input', 'test')
           .click('.saveBtn', editSaveBtnClick);
@@ -52,31 +52,34 @@ module.exports = {
       // save the edit
       function editSaveBtnClick() {
           client
-          .waitForElementVisible('.successToast', 1000)
+          .waitForElementVisible('.successToast', 10000)
           .assert.containsText('.successToast', 'Properties Updated')
           .waitForElementNotVisible('.successToast', 3000)
-          .moveToElement('.node circle', 400, 400, createRelationship);
+          .useXpath()
+          .getText('//*[local-name() = \'g\'][@class="node"][last() - 1]', createRelationship);
       }
 
-      function createRelationship () {
-          var endNodeId;
-          client.getText('.node + .node text', function (result){
-              endNodeId = result.value;
+      function createRelationship (endNodeId) {
+          endNodeId = endNodeId.value;
               client
-              .doubleClick(function () {
+              .getText('//*[local-name() = \'g\'][@class="node"][last()]', function (startNodeId) {
                   client
-                  .waitForElementPresent('.sideMenuHeader', 1000)
-                  .assert.containsText('#sideMenu', 'Create Relationship')
-                  .setValue('.labelInput', "EDGE")
-                  .setValue('.endNodeInput', endNodeId)
-                  .click('.saveBtn', relSaveBtnClick);
+                  .useCss()
+                  .click('#createRelBtn',function () {
+                      client
+                      .waitForElementPresent('.selectEndNodeBtn', 10000)
+                      .assert.containsText('#sideMenu', 'Create Relationship')
+                      .setValue('.labelInput', "EDGE")
+                      .setValue('.startNodeInput', startNodeId.value)
+                      .setValue('.endNodeInput', endNodeId)
+                      .click('.saveBtn', relSaveBtnClick);
               });
           });
       }
 
       function relSaveBtnClick() {
           client
-          .waitForElementPresent('.successToast', 1000)
+          .waitForElementPresent('.successToast', 10000)
           .assert.containsText('.successToast', 'Relationship Created')
           .waitForElementNotVisible('.successToast', 3000);
           client
@@ -87,7 +90,7 @@ module.exports = {
       function editRel() {
           client
           .useCss()
-          .waitForElementPresent('.sideMenuHeader', 1000)
+          .waitForElementPresent('.sideMenuHeader', 10000)
           .assert.containsText('#sideMenu', 'Relationship Properties')
           .click('.saveBtn', relUpdateSaveBtnClicked);
 
@@ -95,7 +98,7 @@ module.exports = {
 
       function relUpdateSaveBtnClicked () {
           client
-          .waitForElementPresent('.successToast',1000)
+          .waitForElementPresent('.successToast',10000)
           .assert.containsText('.successToast', 'Properties Updated')
           .waitForElementNotVisible('.successToast', 3000);
           client
@@ -106,7 +109,7 @@ module.exports = {
       function deleteRel() {
           client
           .useCss()
-          .waitForElementPresent('.sideMenuHeader', 1000)
+          .waitForElementPresent('.sideMenuHeader', 10000)
           .assert.containsText('#sideMenu', 'Relationship Properties')
           .waitForElementNotVisible('.successToast', 3000)
           .click('.deleteBtn', function () {
@@ -128,7 +131,7 @@ module.exports = {
           } else {
               client
               .useCss()
-              .waitForElementVisible('#sideMenu', 1000)
+              .waitForElementVisible('#sideMenu', 10000)
               .assert.containsText('#sideMenu', 'Node Properties')
               .click('.deleteBtn', function () {
                   client

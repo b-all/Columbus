@@ -2,7 +2,7 @@ module.exports = {
   tags: ['Columbus'],
   'Test that Columbus server is running' : function (client) {
     client
-      .url('http://localhost:8888')
+      .url('http://localhost:8080')
       .waitForElementVisible('body', 1000)
       .assert.title('Columbus - Neo4j Editor and Visualization Tool')
       .click('.navArrowContainer', function() {

@@ -4,6 +4,7 @@ MOCHA=src/node_modules/.bin/mocha
 _MOCHA=src/node_modules/.bin/_mocha
 ISTANBUL=src/node_modules/.bin/istanbul
 JSHINT=src/node_modules/.bin/jshint
+NIGHTWATCH=src/node_modules/.bin/nightwatch
 
 # test files must end with ".test.js"
 TESTS=$(shell find ./src/test -name "*.test.js")
@@ -11,7 +12,7 @@ TESTS=$(shell find ./src/test -name "*.test.js")
 clean:
 	rm -rf ./src/public/reports
 
-test:
+mocha:
 	$(MOCHA) -R spec $(TESTS)
 
 xunit:
@@ -28,4 +29,10 @@ sonar:
 	@# add the sonar sonar-runner executable to the PATH
 	PATH="$$PWD/tools/sonar-runner-2.4/bin:$$PATH" sonar-runner
 
-ci: clean xunit coverage sonar
+nightwatch:
+	@# run nightwatch automated blackbox tests
+	cd src; npm start; cd ..;\
+	$(NIGHTWATCH) --config nightwatch.json;\
+	cd src; npm stop; cd ..;\
+
+test: clean xunit coverage nightwatch sonar
