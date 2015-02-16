@@ -8,7 +8,7 @@ var router = express.Router();
 router.get('/search', function(req,res,next) {
     var target = req.query.target;
     console.log(req.query.target);
-    db.query('MATCH n RETURN n LIMIT 400', function (err, results) {
+    db.query('MATCH n RETURN n', function (err, results) {
         if (err) {
             console.log(err);
             res.send({err:"Cannot communicate with Neo4j database."});
@@ -20,7 +20,7 @@ router.get('/search', function(req,res,next) {
                 // iterate over node data
                 for(var j in nodes[i].n.data) {
                     if (typeof nodes[i].n.data[j] !== 'undefined') {
-                        if (nodes[i].n.data[j].toString().toLowerCase() === target.toLowerCase()) {
+                        if (nodes[i].n.data[j].toString().toLowerCase().indexOf(target.toLowerCase()) !== -1) {
                             found = true;
                             break;
                         }
@@ -28,7 +28,7 @@ router.get('/search', function(req,res,next) {
                 }
                 if (!found) {
                     nodes.splice(i, 1);
-                    i = -1;
+                    i--;
                 }
             }
             var nodeArray = [];
@@ -43,15 +43,24 @@ router.get('/search', function(req,res,next) {
                 });
 
             }
-            getAllNodeRelationships(nodeArray, function (relationshipArray) {
-                getNodesBasedOnRelationships(relationshipArray, function (nodeArray) {
-                    var graph = {
-                        nodes: nodeArray,
-                        relationships: relationshipArray
-                    };
-                    res.send(graph);
+            if (nodeArray.length > 1000) {
+                res.send({err:"Too many results."});
+                return;
+            }
+            if (nodeArray.length > 0) {
+                getAllNodeRelationships(nodeArray, function (relationshipArray) {
+                    getNodesBasedOnRelationships(relationshipArray, function (nodeArray) {
+                        var graph = {
+                            nodes: nodeArray,
+                            relationships: relationshipArray
+                        };
+                        res.send(graph);
+                    });
                 });
-            });
+            } else {
+                res.send({err:"No matching results."});
+                return;
+            }
 
 
         }
@@ -75,7 +84,7 @@ function getAllNodeRelationships(nodes, callback) {
     db.query(q, null, function(err, results) {
         if (err) { // if error send blank response
             console.log(err);
-            res.send({err:"Cannot communicate with Neo4j database."});
+            return;
         } else {
             var relationships = [];
             for (var i = 0; i < results.length; i++) {
@@ -133,7 +142,7 @@ function getNodesBasedOnRelationships (edges, callback) {
     db.query(q, null, function(err, results) {
         if (err) { // if error send blank response
             console.log(err);
-            results.send({err:"Cannot communicate with Neo4j database."});
+            return;
         } else {
             var nodeArray = [];
             for (var k = 0; k < results.length; k++) {

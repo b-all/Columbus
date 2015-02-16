@@ -187,7 +187,7 @@ function search(target, callback) {
 			callback();
 		} else {
 			console.log(data.err);
-			toastFail("There was an error communicating with the server");
+			toastFail(data.err);
 		}
 	}).fail(function(msg) {
 		toastFail("There was an error communicating with the server");
