@@ -12,9 +12,8 @@ If your Neo4j database has data, it should be displayed in a directed graph.
 
 Graph manipulation (Neo4j interface not yet implemented)
 - use mouse wheel to zoom in and out
-- shift-click in empty space to add a new node
-- shift-click on a node to edit its title
-- shift-click on a node and drag to another node to create a relationship
+- double-click in empty space to add a new node
+- double-click on a node to create a relationship
 - click and drag nodes to move them around
 
 <b>Testing and Metrics</b>
@@ -58,8 +57,8 @@ SonarQube<br>
 Our server at http://sd-vm18.csc.ncsu.edu:8080 updates automatically when it receives a push. <br>
 <br>
 To push to the server: <br>
-1. Enter command 'git remote add production stdeckar@sd-vm18.csc.ncsu.edu:2015springTeam17' (This only has to be done the first time)<br> 
+1. Enter command ```git remote add production stdeckar<span>@<span>sd-vm18.csc.ncsu.edu:2015springTeam17``` (This only has to be done the first time)<br> 
 You will be prompted for a password. Email me for it (stdeckar@ncsu.edu) <br>
 3. Push to the master branch on GitHub as usual. <br>
-4. Then, push to the server with 'git push production master'<br>
+4. Then, push to the server with ```git push production master```<br>
 5. The results can be viewed with a browser on NCSU's network at http://sd-vm18.csc.ncsu.edu:8080
