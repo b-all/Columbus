@@ -6,7 +6,7 @@ To run locally:
 4. Enter the command ```npm start``` to start the server
 5. Enter your admin credentials
 6. Make sure you have an instance of Neo4j running at localhost:7474
-7. Open a web browser and enter http://localhost as the url
+7. Open a web browser and enter http://localhost:8080 as the url
 -- To stop the server enter the command ```npm stop``` in a terminal
 
 If your Neo4j database has data, it should be displayed in a directed graph.
@@ -39,7 +39,7 @@ Istanbul<br>
 1. MAKE SURE the server is not already running (otherwise coverage will be incorrect)<br>
 2. In a terminal, cd to the Columbus/src directory<br>
 3. Enter the command ```make test``` followed by ```npm start```<br>
-4. Coverage reports can be viewed with a browser at http://localhost/reports/lcov-report/index.html<br>
+4. Coverage reports can be viewed with a browser at http://localhost:8080/reports/lcov-report/index.html<br>
 
 SonarQube<br>
 1. Download SonarQube (http://www.sonarqube.org/downloads/) <br>
