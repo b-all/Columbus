@@ -4,6 +4,8 @@ block content
 	.navigationBar
 		.navBarBtnList
 			span
+				button.btn.btn-success.navBarBtn#hoverInfoBtn(onclick="toggleInfoOnHover()")
+					i.glyphicon.glyphicon-hand-up
 				button.btn.btn-success.navBarBtn#createNodeBtn(onclick="showCreateNodeSideMenu([0,0])")
 					svg(width="30" height="30")
 						use(xlink:href="#createNodeIcon")
@@ -36,3 +38,5 @@ block content
 	.successToast
 	.failToast
 	.infoToast
+	.nodeDataHover.container
+		table.table.table-striped#nodeDataHoverTable

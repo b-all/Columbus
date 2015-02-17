@@ -1,3 +1,4 @@
+var hoverInfoOn = false;
 $(document).ready(function() {
     "use strict";
 
@@ -12,6 +13,13 @@ $(document).ready(function() {
     $(document).keydown(function (e){
         if (e.keyCode === 46 && !editingProperties) {
             e.preventDefault();
+        }
+    });
+
+    $(document).mousemove(function (event){
+        if (isHovering) {
+            $('.nodeDataHover').css({ 'left' : event.clientX + 10,
+                            'top' : event.clientY + 10});
         }
     });
 
@@ -45,4 +53,17 @@ function getEdges(graph) {
 
 function getNodes(graph) {
 
+}
+
+function toggleInfoOnHover() {
+    hoverInfoOn = !hoverInfoOn;
+    if (!hoverInfoOn) {
+        $('#hoverInfoBtn').removeClass('btn-primary');
+        $('#hoverInfoBtn').addClass('btn-success');
+        toastInfo("Hover info turned off.");
+    } else {
+        $('#hoverInfoBtn').addClass('btn-primary');
+        $('#hoverInfoBtn').removeClass('btn-success');
+        toastInfo("Hover info turned on.");
+    }
 }

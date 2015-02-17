@@ -75,7 +75,7 @@ function createRel(data, type, startNode, endNode, callback) {
 }
 
 function requestDeleteNode(node, callback) {
-	currentRequest = $.ajax({
+	$.ajax({
 		url : 'deleteNode',
 		type : 'DELETE',
 		data : node
@@ -93,7 +93,7 @@ function requestDeleteNode(node, callback) {
 }
 
 function requestDeleteRelationship(rel, callback) {
-	currentRequest = $.ajax({
+	$.ajax({
 		url : 'deleteRelationship',
 		type : 'DELETE',
 		data : rel

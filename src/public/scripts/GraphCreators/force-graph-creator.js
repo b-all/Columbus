@@ -1,4 +1,5 @@
 // define ForceGraphCreator object
+var isHovering = false;
 var ForceGraphCreator = function(svg, nodes, edges){
     var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
         height =  window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
@@ -263,22 +264,33 @@ var ForceGraphCreator = function(svg, nodes, edges){
             .enter().append("g")
             .on('mousedown', nodeMouseDown)
             .on('dblclick', nodeDblClick)
+            .on('mouseover', nodeMouseOver)
+            .on('mouseleave', nodeMouseLeave)
             .call(drag)
-            .attr("class", "node")
+            .attr("class", "node");
+
+        node
             .append("circle")
             .attr("r", 30);
 
 
         // place text on each node
-        var labels = d3.select(".graph").selectAll(".node").append("text");
+        var labels = node.append("text")
+                        .attr("text-anchor", "middle");
+
         //var relLabels = d3.select(".graph").selectAll(".link").append("text");
 
+        $('.node').hover(function(){
+            $(this).find('circle').css('stroke', 'gray');
+        }, function () {
+            $(this).find('circle').css('stroke', 'black');
+        });
         function tick() {
             link.attr("d", function(d){
                 return "M" + d.source.x + "," + d.source.y + "L" + d.target.x + "," + d.target.y;
             });
 
-            node.attr("cx", function(d) { return d.x; })
+            node.select('circle').attr("cx", function(d) { return d.x; })
                 .attr("cy", function(d) { return d.y; });
 
             //color lines
@@ -295,7 +307,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
 
             // label nodes
             labels.selectAll("*").remove();
-            labels.attr("x", function(d){ return isNaN(d.x) ?  d.x : parseFloat(d.x) - 10;  })
+            node.select('text').attr("x", function(d){ return isNaN(d.x) ?  d.x : parseFloat(d.x);  })
                 .attr("y", function(d){ return isNaN(d.y) ?  d.y : parseFloat(d.y) + 3; })
                 .attr("fill", "black")
                 .attr("font-size", "10")
@@ -347,6 +359,37 @@ var ForceGraphCreator = function(svg, nodes, edges){
             d3.select(this).attr('selected', 'true')
                 .select('circle')
                 .attr("fill", "rgb(255, 214, 168)");
+        }
+    }
+
+    function nodeMouseOver (d) {
+        if (hoverInfoOn) {
+            isHovering = true;
+            $('#nodeDataHoverTable').empty();
+            for (var i in d.data) {
+                $('#nodeDataHoverTable').append(
+                    '<tr>' +
+                        '<td>' +
+                            i +
+                        '</td>' +
+                        '<td width="5px">' +
+                            ':' +
+                        '</td>' +
+                        '<td>' +
+                            d.data[i] +
+                        '</td>' +
+                    '</tr>'
+                );
+            }
+            $('.nodeDataHover').show();
+        }
+    }
+
+    function nodeMouseLeave (d) {
+        if (hoverInfoOn) {
+            isHovering = false;
+            $('#nodeDataHoverTable').empty();
+            $('.nodeDataHover').fadeOut('fast');
         }
     }
 

@@ -16,10 +16,6 @@ path {
   	z-index:0;
 }
 
-.node circle:hover {
-	stroke: gray;
-}
-
 .node text {
 	stroke-width: .5px;
 	font-family: Verdana;
