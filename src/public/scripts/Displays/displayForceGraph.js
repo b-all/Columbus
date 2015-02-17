@@ -164,8 +164,8 @@ function createLabelKey() {
         if (labels[i].count === 0) continue;
         labelKeyString += "<tr>" +
                                 "<td>" +
-                                    "<svg height=\"20px\" width=\"20px\">" +
-                                        "<circle cx=\"10\" cy=\"10\" r=\"10px\" fill=\"" + labels[i].color + "\" />" +
+                                    "<svg height=\"22px\" width=\"22px\">" +
+                                        "<circle cx=\"11\" cy=\"11\" r=\"10px\" stroke=\"black\" fill=\"" + labels[i].color + "\" />" +
                                     "</svg>" +
                                 "</td>" +
                                 "<td>" +
