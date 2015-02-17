@@ -4,20 +4,20 @@ block content
 	.navigationBar
 		.navBarBtnList
 			span
-				button.btn.btn-success.navBarBtn#hoverInfoBtn(onclick="toggleInfoOnHover()")
-					i.glyphicon.glyphicon-hand-up
 				button.btn.btn-success.navBarBtn#createNodeBtn(onclick="showCreateNodeSideMenu([0,0])")
 					svg(width="30" height="30")
 						use(xlink:href="#createNodeIcon")
 				button.btn.btn-success.navBarBtn#createRelBtn(onclick="showCreateRelSideMenuFromBtn()")
 					svg(width="25" height="25")
 						use(xlink:href="#createRelIcon")
+				button.btn.btn-success.navBarBtn#menuPrefsBtn(onclick="showSideMenuPrefs()")
+					i.glyphicon.glyphicon-menu-hamburger
+				button.btn.btn-success.navBarBtn#hoverInfoBtn(onclick="toggleInfoOnHover()")
+					i.glyphicon.glyphicon-hand-up
 				button.btn.btn-success.navBarBtn#filterBtn
 					i.glyphicon.glyphicon-filter
 				button.btn.btn-success.navBarBtn#searchBtn(onclick="showSearchSideMenu()")
-					i.glyphicon.glyphicon-search
-				
-				
+					i.glyphicon.glyphicon-search		
 				
 	br
 	.labelKeyContainer

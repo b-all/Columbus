@@ -22,6 +22,10 @@
 	padding:0;
 }
 
+#createRelBtn {
+	margin-right: 20px;
+}
+
 #graphContainer {
 	position: fixed;
 	height:100vh;
