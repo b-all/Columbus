@@ -3,6 +3,7 @@ var editingProperties = false;
 
 var showSideMenu = function (type, d) {
 	$('#searchTable').remove();
+	killSearch();
 	if (type === 'node') {
 		showNodeData(d);
 	} else if (type === 'relationship'){
@@ -24,6 +25,7 @@ var hideSideMenu = function (type) {
 	}
 
 	$('#searchTable').remove();
+	killSearch();
 
 	$('.navArrowContainer').css({'transform':'rotate(0deg)'});
 };

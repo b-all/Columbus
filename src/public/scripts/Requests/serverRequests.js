@@ -1,3 +1,5 @@
+var currentRequest;
+
 function pullGraph(callback) {
 	 var docEl = document.documentElement,
         bodyEl = document.getElementsByTagName('body')[0];
@@ -7,7 +9,8 @@ function pullGraph(callback) {
 
     var xLoc = width/2 - 300,
         yLoc = 200;
-	$.get('graph').done(function (data) {
+	currentRequest = $.get('graph').done(function (data) {
+		$('#loader').hide();
 		if (data.err) {
 			toastFail("Cannot communicate with Neo4j database.");
 			return;
@@ -29,7 +32,7 @@ function createNode(data, label, callback) {
 		data = { label: label};
 	}
 
-	$.post('addNode', data).done(function (data) {
+	currentRequest = $.post('addNode', data).done(function (data) {
 		if (!data.err) {
 			callback(data[0]['id(n)']);
 			toastSuccess("Node Created");
@@ -61,7 +64,7 @@ function createRel(data, type, startNode, endNode, callback) {
 	}
 
 
-	$.post('addRel', data).done(function (data) {
+	currentRequest = $.post('addRel', data).done(function (data) {
 		if (!data.err) {
 			callback(data[0]['id(r)']);
 			toastSuccess("Relationship Created");
@@ -72,7 +75,7 @@ function createRel(data, type, startNode, endNode, callback) {
 }
 
 function requestDeleteNode(node, callback) {
-	$.ajax({
+	currentRequest = $.ajax({
 		url : 'deleteNode',
 		type : 'DELETE',
 		data : node
@@ -90,7 +93,7 @@ function requestDeleteNode(node, callback) {
 }
 
 function requestDeleteRelationship(rel, callback) {
-	$.ajax({
+	currentRequest = $.ajax({
 		url : 'deleteRelationship',
 		type : 'DELETE',
 		data : rel
@@ -107,7 +110,7 @@ function requestDeleteRelationship(rel, callback) {
 }
 
 function updateNodeProperties(node, callback) {
-	$.post('updateNode', node).done(function (data) {
+	currentRequest = $.post('updateNode', node).done(function (data) {
 		if (!data.err) {
 			toastSuccess("Properties Updated");
 			callback();
@@ -122,7 +125,7 @@ function updateNodeProperties(node, callback) {
 }
 
 function updateRelProperties(rel, callback) {
-	$.post('updateRel', rel).done(function (data) {
+	currentRequest = $.post('updateRel', rel).done(function (data) {
 		if (!data.err) {
 			toastSuccess("Properties Updated");
 			callback();
@@ -137,7 +140,7 @@ function updateRelProperties(rel, callback) {
 }
 
 function getSingleNode(nodeId, callback) {
-	$.get('getNode/' + nodeId).done(function(data) {
+	currentRequest = $.get('getNode/' + nodeId).done(function(data) {
 		if (!data.err) {
 			callback(data);
 		} else {
@@ -151,7 +154,7 @@ function getSingleNode(nodeId, callback) {
 }
 
 function getSingleRel(relId, callback) {
-	$.get('getRel/' + relId).done(function(data) {
+	currentRequest = $.get('getRel/' + relId).done(function(data) {
 		if (!data.err) {
 			callback(data);
 		} else {
@@ -181,16 +184,20 @@ function search(target, callback) {
 
 	var obj = { target: target };
 
-	$.get('search', obj).done(function(data) {
+	currentRequest = $.get('search', obj).done(function(data) {
 		if (!data.err) {
 			displayForceData(data, xLoc, yLoc, width, height);
-			callback();
+			callback(data.matches);
 		} else {
 			console.log(data.err);
 			toastFail(data.err);
 		}
 	}).fail(function(msg) {
-		toastFail("There was an error communicating with the server");
+		if (msg.statusText === 'abort') {
+			toastInfo("Search Canceled");
+		} else {
+			toastFail("There was an error communicating with the server");
+		}
 		console.log(msg);
 	});
 }

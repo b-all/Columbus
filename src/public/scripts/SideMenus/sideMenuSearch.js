@@ -43,22 +43,38 @@ function showSearchSideMenu() {
     $('.searchBtn').off('click');
 
     $('.searchBtn').on('click', function () {
-        var target = $('#searchInput').val();
-        $('#loader').show();
-        search(target, function () {
-            $('#loader').hide();
-        });
+        sendSearchRequest();
     });
 
     $("#searchInput").keyup(function (e) {
         if (e.keyCode === 13) {
-            var target = $('#searchInput').val();
-            $('#loader').show();
-            search(target, function () {
-                $('#loader').hide();
-            });
+            sendSearchRequest();
         }
     });
 
     showingSideMenu = true;
+}
+
+function sendSearchRequest() {
+    var target = $('#searchInput').val();
+    $('#loader').show();
+    search(target, function (matches) {
+        var matchText = (matches === 1) ? 'match' : 'matches';
+
+        $('#loader').hide();
+        $('#searchTable').append(
+            '<tr>' +
+                '<td colspan=\"2\" style="padding:6px;padding-right:20px">' +
+                    '<br/>' +
+                    '<div class=\"resultsDesc\">Found <span style="color:green">' +
+                    matches + ' </span>'+ matchText + '...</div>' +
+                '</td>' +
+            '</tr>'
+        );
+    });
+}
+
+function killSearch() {
+    $('#loader').hide();
+    currentRequest.abort();
 }

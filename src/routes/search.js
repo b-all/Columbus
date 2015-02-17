@@ -5,6 +5,8 @@ var db = new neo4j.GraphDatabase('http://localhost:7474');
 var express = require('express');
 var router = express.Router();
 
+var nodesFound = 0;
+
 router.get('/search', function(req,res,next) {
     var target = req.query.target;
     console.log(req.query.target);
@@ -43,7 +45,8 @@ router.get('/search', function(req,res,next) {
                 });
 
             }
-            if (nodeArray.length > 1000) {
+            nodesFound = nodeArray.length;
+            if (nodesFound > 1000) {
                 res.send({err:"Too many results."});
                 return;
             }
@@ -52,7 +55,8 @@ router.get('/search', function(req,res,next) {
                     getNodesBasedOnRelationships(relationshipArray, function (relNodes) {
                         var graph = {
                             nodes: (relNodes.length !== 0) ? relNodes: nodeArray,
-                            relationships: relationshipArray
+                            relationships: relationshipArray,
+                            matches: nodesFound
                         };
                         res.send(graph);
                     });

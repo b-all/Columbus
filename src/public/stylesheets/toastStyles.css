@@ -41,7 +41,7 @@
     left: calc(50vw - 200px);
     bottom: 25px;
     z-index:4;
-    /*display:none;*/
+    display:none;
     background-color: rgba(80,80,80,1);
     width:400px;
     text-align: center;
