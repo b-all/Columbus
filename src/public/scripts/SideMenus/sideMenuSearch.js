@@ -62,8 +62,9 @@ function sendSearchRequest() {
         var matchText = (matches === 1) ? 'match' : 'matches';
 
         $('#loader').hide();
+        $('#searchMatchesRow').remove();
         $('#searchTable').append(
-            '<tr>' +
+            '<tr id="searchMatchesRow">' +
                 '<td colspan=\"2\" style="padding:6px;padding-right:20px">' +
                     '<br/>' +
                     '<div class=\"resultsDesc\">Found <span style="color:green">' +
