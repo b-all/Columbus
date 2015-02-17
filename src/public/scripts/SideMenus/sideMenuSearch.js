@@ -31,6 +31,10 @@ function showSearchSideMenu() {
         '</table>'
     );
 
+
+    $('#sideMenu').append('<span id="loader" style="position:absolute"><img src="images/loader.gif"></img></span>');
+
+
     $('#sideMenu').on('click', function () {
         editingProperties = true;
     });
@@ -40,16 +44,18 @@ function showSearchSideMenu() {
 
     $('.searchBtn').on('click', function () {
         var target = $('#searchInput').val();
+        $('#loader').show();
         search(target, function () {
-
+            $('#loader').hide();
         });
     });
 
     $("#searchInput").keyup(function (e) {
         if (e.keyCode === 13) {
             var target = $('#searchInput').val();
+            $('#loader').show();
             search(target, function () {
-
+                $('#loader').hide();
             });
         }
     });

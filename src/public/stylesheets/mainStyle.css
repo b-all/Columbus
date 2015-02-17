@@ -171,3 +171,13 @@
 	z-index: 4;
 	padding: 4px;
 }
+
+#loader {
+	display: none;
+	top: 103px;
+	right: 28px;
+}
+
+#searchTable {
+	width: 90%
+}
