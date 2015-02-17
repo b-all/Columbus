@@ -60,6 +60,7 @@ function toggleInfoOnHover() {
     if (!hoverInfoOn) {
         $('#hoverInfoBtn').removeClass('btn-primary');
         $('#hoverInfoBtn').addClass('btn-success');
+        $('.nodeDataHover').hide();
         toastInfo("Hover info turned off.");
     } else {
         $('#hoverInfoBtn').addClass('btn-primary');

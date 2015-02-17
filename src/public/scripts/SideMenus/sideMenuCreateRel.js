@@ -221,6 +221,9 @@ function setSelectEndNodeBtnOnClick () {
     $('.selectEndNodeBtn').on('click', function () {
         $('body').css({'cursor' : 'nw-resize'});
         selectingEndNode = true;
+        if (!hoverInfoOn) {
+            toggleInfoOnHover();
+        }
     });
 }
 
@@ -229,16 +232,25 @@ function setSelectStartNodeBtnOnClick () {
     $('.selectStartNodeBtn').on('click', function () {
         $('body').css({'cursor' : 'nw-resize'});
         selectingStartNode = true;
+        if (!hoverInfoOn) {
+            toggleInfoOnHover();
+        }
     });
 }
 
 function loadSelectedEndNode (id) {
+    if (hoverInfoOn) {
+        toggleInfoOnHover();
+    }
     selectingEndNode = false;
     $('.endNodeInput').val(id);
     $('body').css({'cursor' : 'default'});
 }
 
 function loadSelectedStartNode (id) {
+    if (hoverInfoOn) {
+        toggleInfoOnHover();
+    }
     selectingStartNode = false;
     $('.startNodeInput').val(id);
     $('body').css({'cursor' : 'default'});

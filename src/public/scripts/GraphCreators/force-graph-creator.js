@@ -132,7 +132,8 @@ var ForceGraphCreator = function(svg, nodes, edges){
     };
     thisGraph.svg = svg;
     thisGraph.svgG = svg.append("g")
-        .classed(thisGraph.consts.graphClass, true);
+        .classed(thisGraph.consts.graphClass, true)
+        .attr("id", "graph");
 
     // listen for resize
     window.onresize = function(){updateWindow(svg);};
@@ -164,6 +165,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
         }*/
         hideSideMenu('relationship');
         hideSideMenu('node');
+        hideSideMenu('default');
         thisGraph.state.selectedNode = null;
         thisGraph.state.selectedEdge = null;
         d3.selectAll('.node').attr('selected',false)

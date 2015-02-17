@@ -14,6 +14,13 @@ module.exports = {
           client.doubleClick(function() {
               client
               .waitForElementPresent('.sideMenuHeader', 10000)
+              //zoom out so most nodes are visible in window
+              .execute(function () {
+                  var d = document.getElementById("graph");
+                  d.setAttribute("transform", "translate("+ 540 + "," + 196 +
+                  ") scale(" + 0.16 + ")");
+
+              })
               .assert.containsText('#sideMenu', 'Create Node')
               .setValue('.labelInput', "Test")
               .click('.saveBtn', saveBtnClick);
@@ -28,7 +35,8 @@ module.exports = {
               .waitForElementVisible('.successToast', 10000)
               .assert.containsText('.successToast', 'Node Created')
               .waitForElementNotVisible('.successToast', 3000)
-              .click('.node', editNode);
+              .useXpath()
+              .click('//*[local-name() = \'g\'][@class="node"][last() - 1]', editNode);
           } else {
               client
               .waitForElementVisible('.successToast', 10000)
@@ -43,10 +51,14 @@ module.exports = {
       // start editing after 2 nodes have been created
       function editNode() {
           client
+          .useCss()
           .waitForElementPresent('.sideMenuHeader', 10000)
           .assert.containsText('#sideMenu', 'Node Properties')
-          .setValue('input', 'test')
-          .click('.saveBtn', editSaveBtnClick);
+          .click('.addPropBtn', function () {
+              client
+              .setValue('input', 'test')
+              .click('.saveBtn', editSaveBtnClick);
+          });
       }
 
       // save the edit

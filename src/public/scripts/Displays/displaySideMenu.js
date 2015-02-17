@@ -46,6 +46,11 @@ var showDefaultMenu = function () {
 };
 
 var hideDefaultMenu = function () {
+	if ((selectingStartNode || selectingEndNode) && hoverInfoOn) {
+		selectingStartNode = false;
+		selectingEndNode = false;
+		toggleInfoOnHover();
+	}
 	$('#sideMenu').animate({'right':'-365px'}, 100);
 	//bring graphContainer back to initial position
 	$('#graphContainer').animate({'left': '0px'}, 400, function () {
