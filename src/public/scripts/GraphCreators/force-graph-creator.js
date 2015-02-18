@@ -365,20 +365,44 @@ var ForceGraphCreator = function(svg, nodes, edges){
     }
 
     function nodeMouseOver (d) {
+        var props = [];
+        var data = [];
+        for (var i in d.data) {
+            var obj = {};
+            obj[i] = d.data[i];
+            data.push(obj);
+        }
         if (hoverInfoOn) {
             isHovering = true;
             $('#nodeDataHoverTable').empty();
-            for (var i in d.data) {
+            if (typeof localStorage.columbusPreferences !== 'undefined') {
+                var lsProps = JSON.parse(localStorage.columbusPreferences).hoverPriorities;
+                for (var i = 0; i < lsProps.length; i++) {
+                    if (d.labels[0] === lsProps[i].label) {
+                        props.push(lsProps[i].property);
+                    }
+                }
+            }
+            for (var i = 0; i < props.length; i++) {
+                for (var j = 0; j < data.length; j++) {
+                    if (data[j].hasOwnProperty(props[i])) {
+                        var dataToMove = data[j];
+                        data.splice(j, 1);
+                        data.unshift(dataToMove);
+                    }
+                }
+            }
+            for (var i = 0; i < data.length; i++) {
                 $('#nodeDataHoverTable').append(
                     '<tr>' +
                         '<td>' +
-                            i +
+                            Object.getOwnPropertyNames(data[i])[0] +
                         '</td>' +
                         '<td width="5px">' +
                             ':' +
                         '</td>' +
                         '<td>' +
-                            d.data[i] +
+                            data[i][Object.getOwnPropertyNames(data[i])[0]] +
                         '</td>' +
                     '</tr>'
                 );

@@ -220,6 +220,32 @@ router.get('/getRel/:id', function(req,res,next) {
 	});
 });
 
+/* Get all labels in the database */
+router.get('/getLabels', function (req, res, next) {
+	var q = 'MATCH n RETURN distinct labels(n)';
+	db.query(q, null, function (err, results){
+		if (err) {
+			console.log(err);
+			res.send({err:"Cannot communicate with Neo4j database."});
+		} else {
+			var labelArray = [];
+			for (var i = 0; i < results.length; i++) {
+				var found = false;
+				for (var j = 0; j < labelArray.length; j++) {
+					if (labelArray[j] === results[i]['labels(n)'][0]) {
+						found = true;
+					}
+				}
+				if (!found) {
+					labelArray.push(results[i]['labels(n)'][0]);
+				}
+			}
+			res.send(labelArray);
+		}
+	});
+
+});
+
 
 function getAllRelationships(req, res, nodes, callback) {
 	//query all relationships in db
@@ -250,6 +276,7 @@ function getAllRelationships(req, res, nodes, callback) {
 		}
 	});
 }
+
 
 
 

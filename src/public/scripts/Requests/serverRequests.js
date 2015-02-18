@@ -190,6 +190,7 @@ function search(target, callback) {
 			callback(data.matches);
 		} else {
 			console.log(data.err);
+			$('#loader').hide();
 			toastFail(data.err);
 		}
 	}).fail(function(msg) {
@@ -199,5 +200,18 @@ function search(target, callback) {
 			toastFail("There was an error communicating with the server");
 		}
 		console.log(msg);
+	});
+}
+
+function getAllLabels(callback) {
+	$.get('getLabels').done(function(data) {
+		if(!data.err) {
+			callback(data);
+		} else {
+			console.log(data.err);
+			toastFail(data.err);
+		}
+	}).fail(function(msg) {
+		toastFail("There was an error communicating with the server");
 	});
 }

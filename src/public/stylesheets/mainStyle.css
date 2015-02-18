@@ -83,6 +83,16 @@
 	padding: 5px;
 }
 
+.priorityPrefTable {
+	width:85%;
+}
+
+.priorityPrefTable td {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+
 .navArrowContainer {
 	position: absolute;
 	top: calc(50vh - 40px);
@@ -116,10 +126,6 @@
 	background-color: white;
 }
 
-.search:focus {
-	outline:0;
-}
-
 .searchDesc {
 	color: rgba(0,0,0,.25);
 	font-size: 12px;
@@ -128,6 +134,10 @@
 .resultsDesc {
 	font-size: 16px;
 	color: rgba(0,0,0,.25);
+}
+
+.selectLabel {
+	width:
 }
 
 .rounded {
