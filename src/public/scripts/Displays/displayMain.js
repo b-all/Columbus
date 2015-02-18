@@ -20,6 +20,14 @@ $(document).ready(function() {
         if (isHovering) {
             $('.nodeDataHover').css({ 'left' : event.clientX + 10,
                             'top' : event.clientY + 10});
+
+    $("#devModeInput").keyup(function (e) {
+        if (e.keyCode === 13) {
+            var target = $('#devModeInput').val();
+            console.log(target);
+            // search(target, function () {
+            //
+            // });
         }
     });
 
