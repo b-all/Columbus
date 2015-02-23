@@ -512,6 +512,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
                 }
             }
         }
+        
 
         for (var k = 0; k < thisGraph.edges.length; k++) {
             thisGraph.edges[k].filtered = true;
