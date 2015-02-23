@@ -166,6 +166,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
         hideSideMenu('relationship');
         hideSideMenu('node');
         hideSideMenu('default');
+        thisGraph.unfilter();
         thisGraph.state.selectedNode = null;
         thisGraph.state.selectedEdge = null;
         d3.selectAll('.node').attr('selected',false)
@@ -247,7 +248,6 @@ var ForceGraphCreator = function(svg, nodes, edges){
             .append('svg:path')
             .attr('d', 'M0,-5L10,0L0,5');
 
-
         force
             .nodes(thisGraph.nodes)
             .links(thisGraph.edges)
@@ -260,7 +260,14 @@ var ForceGraphCreator = function(svg, nodes, edges){
             .on('mousedown', linkMouseDown)
             .append("svg:path")
             .attr("marker-end", "url(#end)")
-            .attr("id", function(d) { return 'path' + d.id;});
+            .attr("id", function(d) { return 'path' + d.id;})
+            .style('opacity', function(d) {
+                if (d.filtered) {
+                    return 1;
+                } else {
+                    return 0.1;
+                }
+            });
 
         node = node.data(thisGraph.nodes)
             .enter().append("g")
@@ -268,6 +275,13 @@ var ForceGraphCreator = function(svg, nodes, edges){
             .on('dblclick', nodeDblClick)
             .on('mouseover', nodeMouseOver)
             .on('mouseleave', nodeMouseLeave)
+            .style('opacity', function(d) {
+                if (d.filtered) {
+                    return 1;
+                } else {
+                    return 0.1;
+                }
+            })
             .call(drag)
             .attr("class", "node");
 
@@ -479,6 +493,62 @@ var ForceGraphCreator = function(svg, nodes, edges){
             }
         }
         return false;
+    };
+
+    ForceGraphCreator.prototype.filter = function (term) {
+        var count = 0;
+        var filteredIds = [];
+
+        for (var i = 0; i < thisGraph.nodes.length; i++) {
+            thisGraph.nodes[i].filtered = true;
+            for (var j in thisGraph.nodes[i].data) {
+                if (thisGraph.nodes[i].data[j].toString().toLowerCase().indexOf(term.toLowerCase()) !== -1) {
+                    thisGraph.nodes[i].filtered = true;
+                    filteredIds.push(thisGraph.nodes[i].id);
+                    count++;
+                    break;
+                } else {
+                    thisGraph.nodes[i].filtered = false;
+                }
+            }
+        }
+
+        for (var k = 0; k < thisGraph.edges.length; k++) {
+            thisGraph.edges[k].filtered = true;
+            var foundSource = false;
+            var foundTarget = false;
+            for (var l = 0; l < filteredIds.length; l++) {
+                if (thisGraph.edges[k].target.id === filteredIds[l]) {
+                    foundTarget = true;
+                }
+                if (thisGraph.edges[k].source.id === filteredIds[l]) {
+                    foundSource = true;
+                }
+                if (foundSource && foundTarget) {
+                    break;
+                }
+            }
+
+            if (foundSource && foundTarget) {
+                thisGraph.edges[k].filtered = true;
+            } else {
+                thisGraph.edges[k].filtered = false;
+            }
+
+        }
+
+        thisGraph.updateGraph();
+        return count;
+    };
+
+    ForceGraphCreator.prototype.unfilter = function () {
+        for (var i = 0; i < thisGraph.nodes.length; i++) {
+            thisGraph.nodes[i].filtered = true;
+        }
+        for (var k = 0; k < thisGraph.edges.length; k++) {
+            thisGraph.edges[k].filtered = true;
+        }
+        thisGraph.updateGraph();
     };
 
 };

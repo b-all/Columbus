@@ -13,6 +13,7 @@ function showSearchSideMenu() {
     }
     $('.sideMenuHeader').text('Search');
     $('#searchTable').remove();
+    $('#filterTable').remove();
     $('#sideMenu').append(
         '<table id="searchTable">' +
             '<tr>' +

@@ -41,7 +41,8 @@ router.get('/search', function(req,res,next) {
                     x: 0,
                     y: 0,
                     labels: nodes[k].n._data.metadata.labels,
-                    data: nodes[k].n._data.data
+                    data: nodes[k].n._data.data,
+					filtered: true
                 });
 
             }
@@ -99,7 +100,8 @@ function getAllNodeRelationships(nodes, callback) {
                     target: parseInt(endNodeURI[endNodeURI.length - 1]),
                     id: results[i].r._data.metadata.id,
                     type: results[i].r._data.metadata.type,
-                    data: results[i].r._data.data
+                    data: results[i].r._data.data,
+                    filtered: true
                 });
             }
 
@@ -156,7 +158,8 @@ function getNodesBasedOnRelationships (edges, callback) {
                     x: 0,
                     y: 0,
                     labels: results[k].n._data.metadata.labels,
-                    data: results[k].n._data.data
+                    data: results[k].n._data.data,
+					filtered: true
                 });
 
             }

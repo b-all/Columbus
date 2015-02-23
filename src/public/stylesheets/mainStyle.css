@@ -126,6 +126,13 @@
 	background-color: white;
 }
 
+.filter {
+	padding: 6px 6px 6px 6px;
+	margin: 3px;
+	background: url('../images/filter.png') no-repeat 95% 50%;
+	background-color: white;
+}
+
 .searchDesc {
 	color: rgba(0,0,0,.25);
 	font-size: 12px;
@@ -207,7 +214,7 @@
 	right: 28px;
 }
 
-#searchTable {
+#searchTable, #filterTable{
 	width: 90%
 }
 

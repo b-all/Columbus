@@ -29,7 +29,8 @@ router.get('/graph', function(req, res, next) {
 					x: 0,
 					y: 0,
 					labels: results[i].n._data.metadata.labels,
-					data: results[i].n._data.data
+					data: results[i].n._data.data,
+					filtered: true
 				});
 
 			}
@@ -184,7 +185,8 @@ router.get('/getNode/:id', function(req,res,next) {
 					x: 0,
 					y: 0,
 					labels: results[i].n._data.metadata.labels,
-					data: results[i].n._data.data
+					data: results[i].n._data.data,
+					filtered: true
 				});
 
 			}
@@ -212,7 +214,8 @@ router.get('/getRel/:id', function(req,res,next) {
 					target: parseInt(endNodeURI[endNodeURI.length - 1]),
 					id: results[i].r._data.metadata.id,
 					type: results[i].r._data.metadata.type,
-					data: results[i].r._data.data
+					data: results[i].r._data.data,
+					filtered: true
 				});
 			}
 			res.send(relArray);
@@ -267,7 +270,8 @@ function getAllRelationships(req, res, nodes, callback) {
 						target: parseInt(endNodeURI[endNodeURI.length - 1]),
 						id: results[i].r._data.metadata.id,
 						type: results[i].r._data.metadata.type,
-						data: results[i].r._data.data
+						data: results[i].r._data.data,
+						filtered: true
 					});
 				}
 
