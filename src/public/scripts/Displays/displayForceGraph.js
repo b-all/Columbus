@@ -37,6 +37,45 @@ var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
     //space out node spheres by amount of nodes with similar labels
     var firstTimeThrough = true;
     var prevXLoc, prevYLoc, prevRadius;
+    var colorIndex;
+    var lablen = Object.keys(labels).length;
+    console.log("Label count: "+lablen);
+
+    //Attempt at randomizing color algorithm
+    // var colorA = [];
+    // var rc,gc,bc;
+    // var maxc = 0xff + 0xff + 0x80;
+    // var minc = 0xa0;
+    // var mindiff = 0x60;
+    // for(colorIndex = 0; colorIndex<=lablen; colorIndex++){
+    //   rc = Math.floor(Math.random() * 255);
+    //   gc = Math.floor(Math.random() * 255);
+    //   bc = Math.floor(Math.random() * 255);
+    //   var csum = rc+bc+gc;
+    //   if(csum > maxc || csum < minc){
+    //     colorIndex--;
+    //     continue;
+    //   } else {  //Check different than other colors
+    //     for(var li=0; li<colorIndex; li++){
+    //       var diff = Math.abs(rc - getRed(colorA[li]));
+    //       diff += Math.abs(gc - getGreen(colorA[li]));
+    //       diff += Math.abs(bc - getBlue(colorA[li]));
+    //       if(diff < mindiff){
+    //         colorIndex--;
+    //         continue;
+    //       }
+    //     }
+    //     if(!(diff < mindiff)){  //Add if was unique enough
+    //       // colorA[colorIndex] = makeColor(rc,gc,bc);
+    //       colorA.push(makeColor(rc,gc,bc));
+    //     }else if(colorIndex === 0){
+    //       // colorA[colorIndex] = makeColor(rc,gc,bc);
+    //       colorA.push(makeColor(rc,gc,bc));
+    //     }
+    //   }
+    // }
+    colorIndex = -1; //reset color index
+
     for (var index in labels) {
         if (labels[index].count === 0) {
              continue;
@@ -79,10 +118,14 @@ var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
         labels[index].currentDivisor = 4;
         labels[index].currentRadian = Math.PI / 4;
         labels[index].currentJ = 0;
-        var colorIndex = Math.floor(Math.random() * c.length);
-        var randColor = c[colorIndex];
-        c.splice(colorIndex, 1);
-        labels[index].color = randColor;
+
+        // c.splice(colorIndex, 1);
+        if(colorIndex === -1){
+          colorIndex = Math.floor(Math.random() * colors.length);
+        }else{
+          colorIndex = (colorIndex+1) % lablen;
+        }
+        labels[index].color = colors[colorIndex];
     }
 
     var theta = 0;
@@ -176,4 +219,20 @@ function createLabelKey() {
     $('#labelKey').empty();
     $('#labelKey').append(labelKeyString);
     $('#labelKey').show();
+}
+
+function getRed(color) {
+  return color / 0x10000;
+}
+
+function getGreen(color) {
+  return (color % 0x10000) / 0x100;
+}
+
+function getBlue(color) {
+  return color % 0x100;
+}
+
+function makeColor(rc, gc, bc){
+  return '#'+(rc*0x10000 + gc*0x100 + bc).toString(16);
 }

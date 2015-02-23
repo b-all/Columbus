@@ -18,6 +18,8 @@ block content
 					i.glyphicon.glyphicon-filter
 				button.btn.btn-success.navBarBtn#searchBtn(onclick="showSearchSideMenu()")
 					i.glyphicon.glyphicon-search
+				button.btn.btn-success.navBarBtn#advancedModeBtn(onclick="toggleAdvcancedMode()")
+					i.glyphicon.glyphicon-sunglasses
 
 	br
 	.labelKeyContainer
@@ -44,5 +46,6 @@ block content
 		table.table.table-striped#nodeDataHoverTable
 
 
-	.devMode
-		input.form-control#devModeInput(type="text")
+	.advMode
+		input.form-control#advModeInput(type="text"
+		  onclick="if(this.value==='Enter Cypher query...'){this.value=''}")

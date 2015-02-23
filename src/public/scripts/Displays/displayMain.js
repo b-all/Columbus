@@ -1,4 +1,6 @@
 var hoverInfoOn = false;
+var advModeOn = false;
+
 $(document).ready(function() {
     "use strict";
 
@@ -20,15 +22,24 @@ $(document).ready(function() {
         if (isHovering) {
             $('.nodeDataHover').css({ 'left' : event.clientX + 10,
                             'top' : event.clientY + 10});
+        }
+      });
 
-    $("#devModeInput").keyup(function (e) {
+    $("#advModeInput").keyup(function (e) {
         if (e.keyCode === 13) {
-            var target = $('#devModeInput').val();
+            var target = $('#advModeInput').val();
             console.log(target);
+            advMode(target,function(results) {
+
+            });
             // search(target, function () {
             //
             // });
         }
+    });
+
+    $("#advModeInput").on('click',function() {
+        editingProperties=true;
     });
 
     /**** MAIN ****/
@@ -74,5 +85,21 @@ function toggleInfoOnHover() {
         $('#hoverInfoBtn').addClass('btn-primary');
         $('#hoverInfoBtn').removeClass('btn-success');
         toastInfo("Hover info turned on.");
+    }
+}
+
+function toggleAdvcancedMode() {
+    advModeOn = !advModeOn;
+    if (!advModeOn) {
+        $('#advancedModeBtn').removeClass('btn-primary');
+        $('#advancedModeBtn').addClass('btn-success');
+        $('.advMode').hide();
+        // toastInfo("Advanced Mode turned off.");
+    } else {
+        $('#advancedModeBtn').addClass('btn-primary');
+        $('#advancedModeBtn').removeClass('btn-success');
+        $('.advMode').show();
+        $('#advModeInput').val('Enter Cypher query...');
+        // toastInfo("Advanced Mode for Cypher queries turned on.");
     }
 }

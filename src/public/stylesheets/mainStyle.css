@@ -140,6 +140,16 @@
 	width:
 }
 
+.advMode {
+	height: 40px;
+	width: 100vw;
+	position: fixed;
+	bottom: 0px;
+	background-color:gray;
+	z-index: 8;
+	display: none;
+}
+
 .rounded {
 	border-radius: 15px;
 	border:0px;
@@ -219,11 +229,4 @@
 	table-layout: fixed;
 	word-wrap: break-word;
 	font-size: 12px;
-.devMode {
-	height: 40px;
-	width: 100vw;
-	position: fixed;
-	bottom: 0px;
-	background-color:gray;
-	z-index: 10;
 }

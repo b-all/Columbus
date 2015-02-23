@@ -215,3 +215,39 @@ function getAllLabels(callback) {
 		toastFail("There was an error communicating with the server");
 	});
 }
+
+function advMode(target, callback) {
+
+	if (typeof target === 'undefined' || target === '') {
+		console.log('Empty query string');
+		return;
+	}
+
+	var obj = { target: target };
+
+	var win = window.open(getBaseURL()+'advMode?target='+target);
+	win.focus();
+	// currentRequest = $.get('advMode', obj).done(function(data) {
+	// 	if (!data.err) {
+	// 		// displayForceData(data, xLoc, yLoc, width, height);
+	//
+	// 		callback(data);
+	// 	} else {
+	// 		console.log(data.err);
+	// 		$('#loader').hide();
+	// 		toastFail(data.err);
+	// 	}
+	// }).fail(function(msg) {
+	// 	if (msg.statusText === 'abort') {
+	// 		toastInfo("Search Canceled");
+	// 	} else {
+	// 		toastFail("There was an error communicating with the server");
+	// 	}
+	// 	console.log(msg);
+	// });
+}
+
+function getBaseURL () {
+	return location.protocol + "//" + location.hostname +
+			(location.port && ":" + location.port) + "/";
+}
