@@ -203,6 +203,13 @@ function loadUserPreferences (prefs) {
     getAllLabels(function(data) {
         $('#loader').hide();
         labelNames = data;
+        if (prefs.hoverPriorities.length === 0 || typeof prefs.hoverPriorities === 'undefined') {
+            $('#editableProperties').append("<button class=\"btn btn-default addPropBtn\">Add</button>");
+            $('.addPropBtn').show();
+            $('.addPropBtn').on('click', function () {
+                addHoverPriority();
+            });
+        }
         for (var i = 0; i < prefs.hoverPriorities.length; i++) {
             loadUserPriorities(prefs.hoverPriorities[i]);
         }
