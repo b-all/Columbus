@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="filterTest"
+             errors="0"
+             failures="0"
+             tests="16">
+  
+  <testsuite errors="0" failures="0" hostname="" id=""
+    name="Test Filter" package="filterTest" skipped="0"
+    tests="16" time="" timestamp="">
+    
+    
+      <testcase name="Element &lt;#graphContainer svg&gt; was visible after 1786 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 224 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Create Node&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was visible after 870 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.successToast&gt; contains text: &quot;Node Created&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was not visible after 1874 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 445 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Filter&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.resultsDesc&gt; was visible after 1008 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Found 1 match...&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was visible after 998 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Node Properties&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 492 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Filter&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.resultsDesc&gt; was visible after 953 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.resultsDesc&gt; contains text: &quot;Found 0 matches...&quot;.">
+        
+        
+      </testcase>
+    
+    
+    </testsuite>
+  
+</testsuites>

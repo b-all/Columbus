@@ -40,7 +40,7 @@ function showFilterSideMenu() {
     $('.filterBtn').off('click');
 
     $('.filterBtn').on('click', function () {
-        sendSearchRequest();
+        filterRequest();
     });
 
     $("#filterInput").keyup(function (e) {

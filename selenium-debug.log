@@ -1,289 +1,198 @@
-16:34:09.955 INFO - Launching a standalone server
-16:34:09.991 INFO - Java: Oracle Corporation 25.20-b23
-16:34:09.991 INFO - OS: Mac OS X 10.10.2 x86_64
-16:34:10.000 INFO - v2.44.0, with Core v2.44.0. Built from revision 76d78cf
-16:34:10.056 INFO - Default driver org.openqa.selenium.ie.InternetExplorerDriver registration is skipped: registration capabilities Capabilities [{ensureCleanSession=true, browserName=internet explorer, version=, platform=WINDOWS}] does not match with current platform: MAC
-16:34:10.101 INFO - RemoteWebDriver instances should connect to: http://127.0.0.1:4444/wd/hub
-16:34:10.102 INFO - Version Jetty/5.1.x
-16:34:10.103 INFO - Started HttpContext[/selenium-server,/selenium-server]
-16:34:10.129 INFO - Started org.openqa.jetty.jetty.servlet.ServletHandler@47f37ef1
-16:34:10.129 INFO - Started HttpContext[/wd,/wd]
-16:34:10.129 INFO - Started HttpContext[/selenium-server/driver,/selenium-server/driver]
-16:34:10.129 INFO - Started HttpContext[/,/]
-16:34:10.134 INFO - Started SocketListener on 0.0.0.0:4444
-16:34:10.134 INFO - Started org.openqa.jetty.jetty.Server@6e2c634b
-16:34:10.301 INFO - Executing: [new session: Capabilities [{acceptSslCerts=true, name=Crud Test, browserName=firefox, javascriptEnabled=true, platform=ANY}]])
-16:34:10.310 INFO - Creating a new session for Capabilities [{acceptSslCerts=true, name=Crud Test, browserName=firefox, javascriptEnabled=true, platform=ANY}]
-16:34:12.295 INFO - Done: [new session: Capabilities [{acceptSslCerts=true, name=Crud Test, browserName=firefox, javascriptEnabled=true, platform=ANY}]]
-16:34:12.304 INFO - Executing: [get: http://localhost:8080])
-16:34:12.695 INFO - Done: [get: http://localhost:8080]
-16:34:12.701 INFO - Executing: [find element: By.selector: #graphContainer svg])
-16:34:13.039 INFO - Done: [find element: By.selector: #graphContainer svg]
-16:34:13.042 INFO - Executing: [is displayed: 0 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #graphContainer svg]])
-16:34:13.397 INFO - Done: [is displayed: 0 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #graphContainer svg]]
-16:34:13.401 INFO - Executing: [find element: By.selector: #graphContainer svg])
-16:34:13.637 INFO - Done: [find element: By.selector: #graphContainer svg]
-16:34:13.640 INFO - Executing: [mousemove: 0 true])
-16:34:13.811 INFO - Done: [mousemove: 0 true]
-16:34:13.814 INFO - Executing: [doubleclick: no args])
-16:34:14.037 INFO - Done: [doubleclick: no args]
-16:34:14.040 INFO - Executing: [find element: By.selector: .sideMenuHeader])
-16:34:14.149 INFO - Done: [find element: By.selector: .sideMenuHeader]
-16:34:14.153 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+18:14:51.181 INFO - Launching a standalone server
+18:14:51.217 INFO - Java: Oracle Corporation 25.20-b23
+18:14:51.217 INFO - OS: Mac OS X 10.10.2 x86_64
+18:14:51.225 INFO - v2.44.0, with Core v2.44.0. Built from revision 76d78cf
+18:14:51.284 INFO - Default driver org.openqa.selenium.ie.InternetExplorerDriver registration is skipped: registration capabilities Capabilities [{ensureCleanSession=true, browserName=internet explorer, version=, platform=WINDOWS}] does not match with current platform: MAC
+18:14:51.327 INFO - RemoteWebDriver instances should connect to: http://127.0.0.1:4444/wd/hub
+18:14:51.328 INFO - Version Jetty/5.1.x
+18:14:51.329 INFO - Started HttpContext[/selenium-server,/selenium-server]
+18:14:51.355 INFO - Started org.openqa.jetty.jetty.servlet.ServletHandler@47f37ef1
+18:14:51.355 INFO - Started HttpContext[/wd,/wd]
+18:14:51.355 INFO - Started HttpContext[/selenium-server/driver,/selenium-server/driver]
+18:14:51.356 INFO - Started HttpContext[/,/]
+18:14:51.359 INFO - Started SocketListener on 0.0.0.0:4444
+18:14:51.359 INFO - Started org.openqa.jetty.jetty.Server@6e2c634b
+18:14:51.536 INFO - Executing: [new session: Capabilities [{acceptSslCerts=true, name=Filter Test, browserName=firefox, javascriptEnabled=true, platform=ANY}]])
+18:14:51.544 INFO - Creating a new session for Capabilities [{acceptSslCerts=true, name=Filter Test, browserName=firefox, javascriptEnabled=true, platform=ANY}]
+18:14:53.635 INFO - Done: [new session: Capabilities [{acceptSslCerts=true, name=Filter Test, browserName=firefox, javascriptEnabled=true, platform=ANY}]]
+18:14:53.644 INFO - Executing: [get: http://localhost:8080])
+18:14:53.860 INFO - Done: [get: http://localhost:8080]
+18:14:53.867 INFO - Executing: [find element: By.selector: #graphContainer svg])
+18:14:54.613 WARN - Exception thrown
+org.openqa.selenium.NoSuchElementException: Unable to locate element: {"method":"css selector","selector":"#graphContainer svg"}
+Command duration or timeout: 15 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.44.0', revision: '76d78cf', time: '2014-10-23 20:02:37'
+System info: host: 'localhost', ip: '127.0.0.1', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.10.2', java.version: '1.8.0_20'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=35.0.1, platform=MAC, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 17dd4fad-cce9-634e-903b-e6c5c2bfd033
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:408)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:204)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:156)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:599)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:352)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByCssSelector(RemoteWebDriver.java:441)
+	at org.openqa.selenium.By$ByCssSelector.findElement(By.java:426)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:344)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.openqa.selenium.support.events.EventFiringWebDriver$2.invoke(EventFiringWebDriver.java:101)
+	at com.sun.proxy.$Proxy1.findElement(Unknown Source)
+	at org.openqa.selenium.support.events.EventFiringWebDriver.findElement(EventFiringWebDriver.java:184)
+	at org.openqa.selenium.remote.server.handler.FindElement.call(FindElement.java:47)
+	at org.openqa.selenium.remote.server.handler.FindElement.call(FindElement.java:1)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.openqa.selenium.remote.server.DefaultSession$1.run(DefaultSession.java:168)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.openqa.selenium.NoSuchElementException: Unable to locate element: {"method":"css selector","selector":"#graphContainer svg"}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.44.0', revision: '76d78cf', time: '2014-10-23 20:02:37'
+System info: host: 'localhost', ip: '127.0.0.1', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.10.2', java.version: '1.8.0_20'
+Driver info: driver.version: unknown
+	at <anonymous class>.FirefoxDriver.prototype.findElementInternal_(file:///var/folders/kx/31fnxbh911bdgthmx2yz6_z80000gn/T/anonymous3963702554673333900webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:9641:26)
+	at <anonymous class>.FirefoxDriver.prototype.findElement(file:///var/folders/kx/31fnxbh911bdgthmx2yz6_z80000gn/T/anonymous3963702554673333900webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:9650:3)
+	at <anonymous class>.DelayedCommand.prototype.executeInternal_/h(file:///var/folders/kx/31fnxbh911bdgthmx2yz6_z80000gn/T/anonymous3963702554673333900webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:11635:16)
+	at <anonymous class>.DelayedCommand.prototype.executeInternal_(file:///var/folders/kx/31fnxbh911bdgthmx2yz6_z80000gn/T/anonymous3963702554673333900webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:11640:7)
+	at <anonymous class>.DelayedCommand.prototype.execute/<(file:///var/folders/kx/31fnxbh911bdgthmx2yz6_z80000gn/T/anonymous3963702554673333900webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:11582:5)
+18:14:54.620 WARN - Exception: Unable to locate element: {"method":"css selector","selector":"#graphContainer svg"}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.44.0', revision: '76d78cf', time: '2014-10-23 20:02:37'
+System info: host: 'localhost', ip: '127.0.0.1', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.10.2', java.version: '1.8.0_20'
+Driver info: driver.version: unknown
+18:14:55.191 INFO - Executing: [find element: By.selector: #graphContainer svg])
+18:14:55.427 INFO - Done: [find element: By.selector: #graphContainer svg]
+18:14:55.431 INFO - Executing: [is displayed: 0 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #graphContainer svg]])
+18:14:55.646 INFO - Done: [is displayed: 0 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #graphContainer svg]]
+18:14:55.651 INFO - Executing: [find element: By.selector: #graphContainer svg])
+18:14:55.849 INFO - Done: [find element: By.selector: #graphContainer svg]
+18:14:55.853 INFO - Executing: [mousemove: 0 true])
+18:14:56.066 INFO - Done: [mousemove: 0 true]
+18:14:56.069 INFO - Executing: [doubleclick: no args])
+18:14:56.290 INFO - Done: [doubleclick: no args]
+18:14:56.294 INFO - Executing: [find element: By.selector: .sideMenuHeader])
+18:14:56.514 INFO - Done: [find element: By.selector: .sideMenuHeader]
+18:14:56.518 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
                   var d = document.getElementById("graph");
                   d.setAttribute("transform", "translate("+ 540 + "," + 196 +
                   ") scale(" + 0.16 + ")");
 
               }.apply(window, passedArgs);, []])
-16:34:14.451 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+18:14:56.751 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
                   var d = document.getElementById("graph");
                   d.setAttribute("transform", "translate("+ 540 + "," + 196 +
                   ") scale(" + 0.16 + ")");
 
               }.apply(window, passedArgs);, []]
-16:34:14.456 INFO - Executing: [find element: By.selector: #sideMenu])
-16:34:14.697 INFO - Done: [find element: By.selector: #sideMenu]
-16:34:14.703 INFO - Executing: [get text: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]])
-16:34:14.993 INFO - Done: [get text: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]]
-16:34:14.997 INFO - Executing: [find element: By.selector: .labelInput])
-16:34:15.215 INFO - Done: [find element: By.selector: .labelInput]
-16:34:15.219 INFO - Executing: [send keys: 3 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .labelInput], [T, e, s, t]])
-16:34:15.633 INFO - Done: [send keys: 3 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .labelInput], [T, e, s, t]]
-16:34:15.638 INFO - Executing: [find element: By.selector: .saveBtn])
-16:34:16.105 INFO - Done: [find element: By.selector: .saveBtn]
-16:34:16.108 INFO - Executing: [click: 4 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .saveBtn]])
-16:34:16.647 INFO - Done: [click: 4 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .saveBtn]]
-16:34:16.651 INFO - Executing: [find element: By.selector: .successToast])
-16:34:17.074 INFO - Done: [find element: By.selector: .successToast]
-16:34:17.078 INFO - Executing: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:17.476 INFO - Done: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:17.480 INFO - Executing: [find element: By.selector: .successToast])
-16:34:17.862 INFO - Done: [find element: By.selector: .successToast]
-16:34:17.874 INFO - Executing: [get text: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:18.284 INFO - Done: [get text: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:18.288 INFO - Executing: [find element: By.selector: .successToast])
-16:34:18.689 INFO - Done: [find element: By.selector: .successToast]
-16:34:18.691 INFO - Executing: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:19.094 INFO - Done: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:19.601 INFO - Executing: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:20.037 INFO - Done: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:20.040 INFO - Executing: [find element: By.selector: #graphContainer svg])
-16:34:20.438 INFO - Done: [find element: By.selector: #graphContainer svg]
-16:34:20.441 INFO - Executing: [mousemove: 0 true])
-16:34:20.805 INFO - Done: [mousemove: 0 true]
-16:34:20.808 INFO - Executing: [doubleclick: no args])
-16:34:21.218 INFO - Done: [doubleclick: no args]
-16:34:21.221 INFO - Executing: [find element: By.selector: .sideMenuHeader])
-16:34:21.688 INFO - Done: [find element: By.selector: .sideMenuHeader]
-16:34:21.690 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-                  var d = document.getElementById("graph");
-                  d.setAttribute("transform", "translate("+ 540 + "," + 196 +
-                  ") scale(" + 0.16 + ")");
-
-              }.apply(window, passedArgs);, []])
-16:34:22.132 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-                  var d = document.getElementById("graph");
-                  d.setAttribute("transform", "translate("+ 540 + "," + 196 +
-                  ") scale(" + 0.16 + ")");
-
-              }.apply(window, passedArgs);, []]
-16:34:22.135 INFO - Executing: [find element: By.selector: #sideMenu])
-16:34:22.649 INFO - Done: [find element: By.selector: #sideMenu]
-16:34:22.651 INFO - Executing: [get text: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]])
-16:34:23.159 INFO - Done: [get text: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]]
-16:34:23.162 INFO - Executing: [find element: By.selector: .labelInput])
-16:34:23.559 INFO - Done: [find element: By.selector: .labelInput]
-16:34:23.562 INFO - Executing: [send keys: 6 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .labelInput], [T, e, s, t]])
-16:34:24.069 INFO - Done: [send keys: 6 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .labelInput], [T, e, s, t]]
-16:34:24.072 INFO - Executing: [find element: By.selector: .saveBtn])
-16:34:24.490 INFO - Done: [find element: By.selector: .saveBtn]
-16:34:24.492 INFO - Executing: [click: 4 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .saveBtn]])
-16:34:25.074 INFO - Done: [click: 4 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .saveBtn]]
-16:34:25.077 INFO - Executing: [find element: By.selector: .successToast])
-16:34:25.508 INFO - Done: [find element: By.selector: .successToast]
-16:34:25.511 INFO - Executing: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:25.932 INFO - Done: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:25.936 INFO - Executing: [find element: By.selector: .successToast])
-16:34:26.390 INFO - Done: [find element: By.selector: .successToast]
-16:34:26.392 INFO - Executing: [get text: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:26.769 INFO - Done: [get text: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:26.772 INFO - Executing: [find element: By.selector: .successToast])
-16:34:27.163 INFO - Done: [find element: By.selector: .successToast]
-16:34:27.166 INFO - Executing: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:27.620 INFO - Done: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:28.124 INFO - Executing: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:28.531 INFO - Done: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:28.535 INFO - Executing: [find element: By.xpath: //*[local-name() = 'g'][@class="node"][last() - 1]])
-16:34:29.010 INFO - Done: [find element: By.xpath: //*[local-name() = 'g'][@class="node"][last() - 1]]
-16:34:29.013 INFO - Executing: [click: 7 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> xpath: //*[local-name() = 'g'][@class="node"][last() - 1]]])
-16:34:29.526 INFO - Done: [click: 7 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> xpath: //*[local-name() = 'g'][@class="node"][last() - 1]]]
-16:34:29.529 INFO - Executing: [find element: By.selector: .sideMenuHeader])
-16:34:29.946 INFO - Done: [find element: By.selector: .sideMenuHeader]
-16:34:29.950 INFO - Executing: [find element: By.selector: #sideMenu])
-16:34:30.400 INFO - Done: [find element: By.selector: #sideMenu]
-16:34:30.403 INFO - Executing: [get text: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]])
-16:34:30.829 INFO - Done: [get text: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]]
-16:34:30.832 INFO - Executing: [find element: By.selector: .addPropBtn])
-16:34:31.282 INFO - Done: [find element: By.selector: .addPropBtn]
-16:34:31.284 INFO - Executing: [click: 8 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .addPropBtn]])
-16:34:31.880 INFO - Done: [click: 8 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .addPropBtn]]
-16:34:31.883 INFO - Executing: [find element: By.selector: input])
-16:34:32.306 INFO - Done: [find element: By.selector: input]
-16:34:32.309 INFO - Executing: [send keys: 9 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: input], [t, e, s, t]])
-16:34:32.757 INFO - Done: [send keys: 9 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: input], [t, e, s, t]]
-16:34:32.759 INFO - Executing: [find element: By.selector: .saveBtn])
-16:34:33.217 INFO - Done: [find element: By.selector: .saveBtn]
-16:34:33.219 INFO - Executing: [click: 4 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .saveBtn]])
-16:34:33.749 INFO - Done: [click: 4 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .saveBtn]]
-16:34:33.753 INFO - Executing: [find element: By.selector: .successToast])
-16:34:34.145 INFO - Done: [find element: By.selector: .successToast]
-16:34:34.147 INFO - Executing: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:34.592 INFO - Done: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:34.595 INFO - Executing: [find element: By.selector: .successToast])
-16:34:34.972 INFO - Done: [find element: By.selector: .successToast]
-16:34:34.974 INFO - Executing: [get text: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:35.379 INFO - Done: [get text: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:35.382 INFO - Executing: [find element: By.selector: .successToast])
-16:34:35.825 INFO - Done: [find element: By.selector: .successToast]
-16:34:35.827 INFO - Executing: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:36.239 INFO - Done: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:36.743 INFO - Executing: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:37.177 INFO - Done: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:37.180 INFO - Executing: [find element: By.xpath: //*[local-name() = 'g'][@class="node"][last() - 1]])
-16:34:37.569 INFO - Done: [find element: By.xpath: //*[local-name() = 'g'][@class="node"][last() - 1]]
-16:34:37.571 INFO - Executing: [get text: 7 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> xpath: //*[local-name() = 'g'][@class="node"][last() - 1]]])
-16:34:38.000 INFO - Done: [get text: 7 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> xpath: //*[local-name() = 'g'][@class="node"][last() - 1]]]
-16:34:38.004 INFO - Executing: [find element: By.xpath: //*[local-name() = 'g'][@class="node"][last()]])
-16:34:38.432 INFO - Done: [find element: By.xpath: //*[local-name() = 'g'][@class="node"][last()]]
-16:34:38.435 INFO - Executing: [get text: 10 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> xpath: //*[local-name() = 'g'][@class="node"][last()]]])
-16:34:38.891 INFO - Done: [get text: 10 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> xpath: //*[local-name() = 'g'][@class="node"][last()]]]
-16:34:38.894 INFO - Executing: [find element: By.selector: #createRelBtn])
-16:34:39.288 INFO - Done: [find element: By.selector: #createRelBtn]
-16:34:39.291 INFO - Executing: [click: 11 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #createRelBtn]])
-16:34:39.908 INFO - Done: [click: 11 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #createRelBtn]]
-16:34:39.911 INFO - Executing: [find element: By.selector: .selectEndNodeBtn])
-16:34:40.323 INFO - Done: [find element: By.selector: .selectEndNodeBtn]
-16:34:40.326 INFO - Executing: [find element: By.selector: #sideMenu])
-16:34:40.331 INFO - Done: [find element: By.selector: #sideMenu]
-16:34:40.334 INFO - Executing: [get text: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]])
-16:34:40.406 INFO - Done: [get text: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]]
-16:34:40.410 INFO - Executing: [find element: By.selector: .labelInput])
-16:34:40.417 INFO - Done: [find element: By.selector: .labelInput]
-16:34:40.420 INFO - Executing: [send keys: 13 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .labelInput], [E, D, G, E]])
-16:34:40.458 INFO - Done: [send keys: 13 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .labelInput], [E, D, G, E]]
-16:34:40.461 INFO - Executing: [find element: By.selector: .startNodeInput])
-16:34:40.467 INFO - Done: [find element: By.selector: .startNodeInput]
-16:34:40.469 INFO - Executing: [send keys: 14 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .startNodeInput], [7, 1, 6, 0, 0]])
-16:34:40.504 INFO - Done: [send keys: 14 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .startNodeInput], [7, 1, 6, 0, 0]]
-16:34:40.507 INFO - Executing: [find element: By.selector: .endNodeInput])
-16:34:40.513 INFO - Done: [find element: By.selector: .endNodeInput]
-16:34:40.515 INFO - Executing: [send keys: 15 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .endNodeInput], [7, 1, 5, 9, 9]])
-16:34:40.545 INFO - Done: [send keys: 15 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .endNodeInput], [7, 1, 5, 9, 9]]
-16:34:40.548 INFO - Executing: [find element: By.selector: .saveBtn])
-16:34:40.556 INFO - Done: [find element: By.selector: .saveBtn]
-16:34:40.558 INFO - Executing: [click: 4 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .saveBtn]])
-16:34:40.896 INFO - Done: [click: 4 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .saveBtn]]
-16:34:40.900 INFO - Executing: [find element: By.selector: .successToast])
-16:34:41.343 INFO - Done: [find element: By.selector: .successToast]
-16:34:41.346 INFO - Executing: [find element: By.selector: .successToast])
-16:34:41.744 INFO - Done: [find element: By.selector: .successToast]
-16:34:41.747 INFO - Executing: [get text: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:42.179 INFO - Done: [get text: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:42.182 INFO - Executing: [find element: By.selector: .successToast])
-16:34:42.570 INFO - Done: [find element: By.selector: .successToast]
-16:34:42.573 INFO - Executing: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:42.994 INFO - Done: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:43.500 INFO - Executing: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:43.912 INFO - Done: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:43.915 INFO - Executing: [find element: By.xpath: //*[local-name() = 'g'][@class="link"][last()]])
-16:34:44.295 INFO - Done: [find element: By.xpath: //*[local-name() = 'g'][@class="link"][last()]]
-16:34:44.297 INFO - Executing: [click: 16 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> xpath: //*[local-name() = 'g'][@class="link"][last()]]])
-16:34:44.760 INFO - Done: [click: 16 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> xpath: //*[local-name() = 'g'][@class="link"][last()]]]
-16:34:44.763 INFO - Executing: [find element: By.selector: .sideMenuHeader])
-16:34:45.131 INFO - Done: [find element: By.selector: .sideMenuHeader]
-16:34:45.134 INFO - Executing: [find element: By.selector: #sideMenu])
-16:34:45.543 INFO - Done: [find element: By.selector: #sideMenu]
-16:34:45.546 INFO - Executing: [get text: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]])
-16:34:45.961 INFO - Done: [get text: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]]
-16:34:45.964 INFO - Executing: [find element: By.selector: .saveBtn])
-16:34:46.373 INFO - Done: [find element: By.selector: .saveBtn]
-16:34:46.377 INFO - Executing: [click: 4 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .saveBtn]])
-16:34:46.867 INFO - Done: [click: 4 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .saveBtn]]
-16:34:46.870 INFO - Executing: [find element: By.selector: .successToast])
-16:34:47.294 INFO - Done: [find element: By.selector: .successToast]
-16:34:47.296 INFO - Executing: [find element: By.selector: .successToast])
-16:34:47.678 INFO - Done: [find element: By.selector: .successToast]
-16:34:47.680 INFO - Executing: [get text: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:48.077 INFO - Done: [get text: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:48.079 INFO - Executing: [find element: By.selector: .successToast])
-16:34:48.466 INFO - Done: [find element: By.selector: .successToast]
-16:34:48.469 INFO - Executing: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:48.864 INFO - Done: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:49.372 INFO - Executing: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:49.785 INFO - Done: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:49.788 INFO - Executing: [find element: By.xpath: //*[local-name() = 'g'][@class="link"][last()]])
-16:34:50.207 INFO - Done: [find element: By.xpath: //*[local-name() = 'g'][@class="link"][last()]]
-16:34:50.209 INFO - Executing: [click: 16 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> xpath: //*[local-name() = 'g'][@class="link"][last()]]])
-16:34:50.706 INFO - Done: [click: 16 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> xpath: //*[local-name() = 'g'][@class="link"][last()]]]
-16:34:50.709 INFO - Executing: [find element: By.selector: .sideMenuHeader])
-16:34:51.117 INFO - Done: [find element: By.selector: .sideMenuHeader]
-16:34:51.121 INFO - Executing: [find element: By.selector: #sideMenu])
-16:34:51.575 INFO - Done: [find element: By.selector: #sideMenu]
-16:34:51.579 INFO - Executing: [get text: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]])
-16:34:51.991 INFO - Done: [get text: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]]
-16:34:51.994 INFO - Executing: [find element: By.selector: .successToast])
-16:34:52.414 INFO - Done: [find element: By.selector: .successToast]
-16:34:52.415 INFO - Executing: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]])
-16:34:52.812 INFO - Done: [is displayed: 5 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .successToast]]
-16:34:52.814 INFO - Executing: [find element: By.selector: .deleteBtn])
-16:34:53.191 INFO - Done: [find element: By.selector: .deleteBtn]
-16:34:53.194 INFO - Executing: [click: 17 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .deleteBtn]])
-16:34:53.723 INFO - Done: [click: 17 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .deleteBtn]]
-16:34:53.725 INFO - Executing: [find element: By.xpath: //*[local-name() = 'g'][@class="node"][last()]])
-16:34:54.143 INFO - Done: [find element: By.xpath: //*[local-name() = 'g'][@class="node"][last()]]
-16:34:54.147 INFO - Executing: [click: 18 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> xpath: //*[local-name() = 'g'][@class="node"][last()]]])
-16:34:54.650 INFO - Done: [click: 18 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> xpath: //*[local-name() = 'g'][@class="node"][last()]]]
-16:34:54.653 INFO - Executing: [find element: By.selector: #sideMenu])
-16:34:55.097 INFO - Done: [find element: By.selector: #sideMenu]
-16:34:55.100 INFO - Executing: [is displayed: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]])
-16:34:55.542 INFO - Done: [is displayed: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]]
-16:34:55.545 INFO - Executing: [find element: By.selector: #sideMenu])
-16:34:55.906 INFO - Done: [find element: By.selector: #sideMenu]
-16:34:55.909 INFO - Executing: [get text: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]])
-16:34:56.296 INFO - Done: [get text: 2 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: #sideMenu]]
-16:34:56.299 INFO - Executing: [find element: By.selector: .deleteBtn])
-16:34:56.712 INFO - Done: [find element: By.selector: .deleteBtn]
-16:34:56.715 INFO - Executing: [click: 17 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .deleteBtn]])
-16:34:57.213 INFO - Done: [click: 17 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .deleteBtn]]
-16:34:57.216 INFO - Executing: [find element: By.xpath: //*[local-name() = 'g'][@class="node"][last()]])
-16:34:57.603 INFO - Done: [find element: By.xpath: //*[local-name() = 'g'][@class="node"][last()]]
-16:34:57.605 INFO - Executing: [click: 19 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> xpath: //*[local-name() = 'g'][@class="node"][last()]]])
-16:34:58.134 INFO - Done: [click: 19 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> xpath: //*[local-name() = 'g'][@class="node"][last()]]]
-16:34:58.137 INFO - Executing: [find element: By.selector: .deleteBtn])
-16:34:58.584 INFO - Done: [find element: By.selector: .deleteBtn]
-16:34:58.586 INFO - Executing: [click: 17 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .deleteBtn]])
-16:34:59.144 INFO - Done: [click: 17 [[FirefoxDriver: firefox on MAC (048931dc-8d4f-0a42-a1f9-d1d11db8a866)] -> css selector: .deleteBtn]]
-16:34:59.147 INFO - Executing: [delete session: dbc83e7e-3197-4e5a-8edb-a548410b4100])
-16:34:59.565 INFO - Done: [delete session: dbc83e7e-3197-4e5a-8edb-a548410b4100]
-16:35:00.716 INFO - Executing: [new session: Capabilities [{acceptSslCerts=true, name=Server Running Test, browserName=firefox, javascriptEnabled=true, platform=ANY}]])
-16:35:00.717 INFO - Creating a new session for Capabilities [{acceptSslCerts=true, name=Server Running Test, browserName=firefox, javascriptEnabled=true, platform=ANY}]
-16:35:02.357 INFO - Done: [new session: Capabilities [{acceptSslCerts=true, name=Server Running Test, browserName=firefox, javascriptEnabled=true, platform=ANY}]]
-16:35:02.360 INFO - Executing: [get: http://localhost:8080])
-16:35:02.599 INFO - Done: [get: http://localhost:8080]
-16:35:02.601 INFO - Executing: [find element: By.selector: body])
-16:35:02.633 INFO - Done: [find element: By.selector: body]
-16:35:02.635 INFO - Executing: [is displayed: 0 [[FirefoxDriver: firefox on MAC (23354dee-cde2-d547-8bcf-fdf98bfcfb04)] -> css selector: body]])
-16:35:02.640 INFO - Done: [is displayed: 0 [[FirefoxDriver: firefox on MAC (23354dee-cde2-d547-8bcf-fdf98bfcfb04)] -> css selector: body]]
-16:35:02.642 INFO - Executing: [get title])
-16:35:02.646 INFO - Done: [get title]
-16:35:02.648 INFO - Executing: [find element: By.selector: .navArrowContainer])
-16:35:02.653 INFO - Done: [find element: By.selector: .navArrowContainer]
-16:35:02.654 INFO - Executing: [click: 1 [[FirefoxDriver: firefox on MAC (23354dee-cde2-d547-8bcf-fdf98bfcfb04)] -> css selector: .navArrowContainer]])
-16:35:02.715 INFO - Done: [click: 1 [[FirefoxDriver: firefox on MAC (23354dee-cde2-d547-8bcf-fdf98bfcfb04)] -> css selector: .navArrowContainer]]
-16:35:02.718 INFO - Executing: [find element: By.selector: #sideMenu])
-16:35:02.723 INFO - Done: [find element: By.selector: #sideMenu]
-16:35:02.725 INFO - Executing: [get text: 2 [[FirefoxDriver: firefox on MAC (23354dee-cde2-d547-8bcf-fdf98bfcfb04)] -> css selector: #sideMenu]])
-16:35:02.755 INFO - Done: [get text: 2 [[FirefoxDriver: firefox on MAC (23354dee-cde2-d547-8bcf-fdf98bfcfb04)] -> css selector: #sideMenu]]
-16:35:02.759 INFO - Executing: [delete session: 188dac82-f77a-4f57-b4c0-855b400b72ff])
-16:35:02.836 INFO - Done: [delete session: 188dac82-f77a-4f57-b4c0-855b400b72ff]
-16:35:02.852 INFO - Shutting down...
+18:14:56.756 INFO - Executing: [find element: By.selector: #sideMenu])
+18:14:57.011 INFO - Done: [find element: By.selector: #sideMenu]
+18:14:57.014 INFO - Executing: [get text: 2 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #sideMenu]])
+18:14:57.266 INFO - Done: [get text: 2 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #sideMenu]]
+18:14:57.271 INFO - Executing: [find element: By.selector: .labelInput])
+18:14:57.513 INFO - Done: [find element: By.selector: .labelInput]
+18:14:57.519 INFO - Executing: [send keys: 3 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .labelInput], [T, e, s, t]])
+18:14:57.854 INFO - Done: [send keys: 3 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .labelInput], [T, e, s, t]]
+18:14:57.856 INFO - Executing: [find element: By.selector: .pNameInput])
+18:14:58.243 INFO - Done: [find element: By.selector: .pNameInput]
+18:14:58.247 INFO - Executing: [send keys: 4 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .pNameInput], [p, r, o, p]])
+18:14:58.688 INFO - Done: [send keys: 4 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .pNameInput], [p, r, o, p]]
+18:14:58.691 INFO - Executing: [find element: By.selector: .pValueInput])
+18:14:59.088 INFO - Done: [find element: By.selector: .pValueInput]
+18:14:59.092 INFO - Executing: [send keys: 5 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .pValueInput], [f, i, l, t, e, r, _, t, e, r, m, _, t, e, s, t, _, 5, _, 3, _, 1, _, 7, _, 4, _, 3, _, 6, _, 2, 9]])
+18:14:59.525 INFO - Done: [send keys: 5 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .pValueInput], [f, i, l, t, e, r, _, t, e, r, m, _, t, e, s, t, _, 5, _, 3, _, 1, _, 7, _, 4, _, 3, _, 6, _, 2, 9]]
+18:14:59.528 INFO - Executing: [find element: By.selector: .saveBtn])
+18:14:59.875 INFO - Done: [find element: By.selector: .saveBtn]
+18:14:59.878 INFO - Executing: [click: 6 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .saveBtn]])
+18:15:00.400 INFO - Done: [click: 6 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .saveBtn]]
+18:15:00.403 INFO - Executing: [find element: By.selector: .successToast])
+18:15:00.816 INFO - Done: [find element: By.selector: .successToast]
+18:15:00.819 INFO - Executing: [is displayed: 7 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .successToast]])
+18:15:01.269 INFO - Done: [is displayed: 7 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .successToast]]
+18:15:01.274 INFO - Executing: [find element: By.selector: .successToast])
+18:15:01.701 INFO - Done: [find element: By.selector: .successToast]
+18:15:01.704 INFO - Executing: [get text: 7 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .successToast]])
+18:15:02.120 INFO - Done: [get text: 7 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .successToast]]
+18:15:02.122 INFO - Executing: [find element: By.selector: .successToast])
+18:15:02.537 INFO - Done: [find element: By.selector: .successToast]
+18:15:02.540 INFO - Executing: [is displayed: 7 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .successToast]])
+18:15:03.045 INFO - Done: [is displayed: 7 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .successToast]]
+18:15:03.553 INFO - Executing: [is displayed: 7 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .successToast]])
+18:15:03.994 INFO - Done: [is displayed: 7 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .successToast]]
+18:15:03.997 INFO - Executing: [find element: By.selector: #filterBtn])
+18:15:04.384 INFO - Done: [find element: By.selector: #filterBtn]
+18:15:04.387 INFO - Executing: [click: 8 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #filterBtn]])
+18:15:04.918 INFO - Done: [click: 8 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #filterBtn]]
+18:15:04.921 INFO - Executing: [find element: By.selector: .sideMenuHeader])
+18:15:05.363 INFO - Done: [find element: By.selector: .sideMenuHeader]
+18:15:05.366 INFO - Executing: [find element: By.selector: #sideMenu])
+18:15:05.766 INFO - Done: [find element: By.selector: #sideMenu]
+18:15:05.768 INFO - Executing: [get text: 2 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #sideMenu]])
+18:15:06.163 INFO - Done: [get text: 2 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #sideMenu]]
+18:15:06.167 INFO - Executing: [find element: By.selector: #filterInput])
+18:15:06.531 INFO - Done: [find element: By.selector: #filterInput]
+18:15:06.535 INFO - Executing: [send keys: 9 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #filterInput], [f, i, l, t, e, r, _, t, e, r, m, _, t, e, s, t, _, 5, _, 3, _, 1, _, 7, _, 4, _, 3, _, 6, _, 2, 9]])
+18:15:06.980 INFO - Done: [send keys: 9 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #filterInput], [f, i, l, t, e, r, _, t, e, r, m, _, t, e, s, t, _, 5, _, 3, _, 1, _, 7, _, 4, _, 3, _, 6, _, 2, 9]]
+18:15:06.983 INFO - Executing: [find element: By.selector: .filterBtn])
+18:15:07.348 INFO - Done: [find element: By.selector: .filterBtn]
+18:15:07.350 INFO - Executing: [click: 10 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .filterBtn]])
+18:15:07.868 INFO - Done: [click: 10 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .filterBtn]]
+18:15:07.871 INFO - Executing: [find element: By.selector: .resultsDesc])
+18:15:08.405 INFO - Done: [find element: By.selector: .resultsDesc]
+18:15:08.408 INFO - Executing: [is displayed: 11 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .resultsDesc]])
+18:15:08.876 INFO - Done: [is displayed: 11 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .resultsDesc]]
+18:15:08.879 INFO - Executing: [find element: By.selector: #sideMenu])
+18:15:09.350 INFO - Done: [find element: By.selector: #sideMenu]
+18:15:09.353 INFO - Executing: [get text: 2 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #sideMenu]])
+18:15:09.960 INFO - Done: [get text: 2 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #sideMenu]]
+18:15:09.963 INFO - Executing: [find element: By.xpath: //*[local-name() = 'g'][@class="node"][last()]])
+18:15:10.438 INFO - Done: [find element: By.xpath: //*[local-name() = 'g'][@class="node"][last()]]
+18:15:10.441 INFO - Executing: [click: 12 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> xpath: //*[local-name() = 'g'][@class="node"][last()]]])
+18:15:11.067 INFO - Done: [click: 12 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> xpath: //*[local-name() = 'g'][@class="node"][last()]]]
+18:15:11.070 INFO - Executing: [find element: By.selector: .sideMenuHeader])
+18:15:11.597 INFO - Done: [find element: By.selector: .sideMenuHeader]
+18:15:11.601 INFO - Executing: [is displayed: 1 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .sideMenuHeader]])
+18:15:12.064 INFO - Done: [is displayed: 1 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .sideMenuHeader]]
+18:15:12.068 INFO - Executing: [find element: By.selector: #sideMenu])
+18:15:12.587 INFO - Done: [find element: By.selector: #sideMenu]
+18:15:12.590 INFO - Executing: [get text: 2 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #sideMenu]])
+18:15:13.080 INFO - Done: [get text: 2 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #sideMenu]]
+18:15:13.083 INFO - Executing: [find element: By.selector: .deleteBtn])
+18:15:13.552 INFO - Done: [find element: By.selector: .deleteBtn]
+18:15:13.554 INFO - Executing: [click: 13 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .deleteBtn]])
+18:15:14.227 INFO - Done: [click: 13 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .deleteBtn]]
+18:15:14.231 INFO - Executing: [find element: By.selector: #filterBtn])
+18:15:14.817 INFO - Done: [find element: By.selector: #filterBtn]
+18:15:14.820 INFO - Executing: [click: 8 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #filterBtn]])
+18:15:15.493 INFO - Done: [click: 8 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #filterBtn]]
+18:15:15.496 INFO - Executing: [find element: By.selector: .sideMenuHeader])
+18:15:15.985 INFO - Done: [find element: By.selector: .sideMenuHeader]
+18:15:15.988 INFO - Executing: [find element: By.selector: #sideMenu])
+18:15:16.531 INFO - Done: [find element: By.selector: #sideMenu]
+18:15:16.534 INFO - Executing: [get text: 2 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #sideMenu]])
+18:15:17.038 INFO - Done: [get text: 2 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #sideMenu]]
+18:15:17.041 INFO - Executing: [find element: By.selector: #filterInput])
+18:15:17.510 INFO - Done: [find element: By.selector: #filterInput]
+18:15:17.513 INFO - Executing: [send keys: 14 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #filterInput], [f, i, l, t, e, r, _, t, e, r, m, _, t, e, s, t, _, 5, _, 3, _, 1, _, 7, _, 4, _, 3, _, 6, _, 2, 9]])
+18:15:18.074 INFO - Done: [send keys: 14 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: #filterInput], [f, i, l, t, e, r, _, t, e, r, m, _, t, e, s, t, _, 5, _, 3, _, 1, _, 7, _, 4, _, 3, _, 6, _, 2, 9]]
+18:15:18.077 INFO - Executing: [find element: By.selector: .filterBtn])
+18:15:18.533 INFO - Done: [find element: By.selector: .filterBtn]
+18:15:18.536 INFO - Executing: [click: 15 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .filterBtn]])
+18:15:19.155 INFO - Done: [click: 15 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .filterBtn]]
+18:15:19.158 INFO - Executing: [find element: By.selector: .resultsDesc])
+18:15:19.628 INFO - Done: [find element: By.selector: .resultsDesc]
+18:15:19.630 INFO - Executing: [is displayed: 16 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .resultsDesc]])
+18:15:20.108 INFO - Done: [is displayed: 16 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .resultsDesc]]
+18:15:20.112 INFO - Executing: [find element: By.selector: .resultsDesc])
+18:15:20.589 INFO - Done: [find element: By.selector: .resultsDesc]
+18:15:20.592 INFO - Executing: [get text: 16 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .resultsDesc]])
+18:15:21.075 INFO - Done: [get text: 16 [[FirefoxDriver: firefox on MAC (17dd4fad-cce9-634e-903b-e6c5c2bfd033)] -> css selector: .resultsDesc]]
+18:15:21.080 INFO - Executing: [delete session: 1bdd1b58-f537-4a36-9db1-3e62a5c2a29e])
+18:15:21.616 INFO - Done: [delete session: 1bdd1b58-f537-4a36-9db1-3e62a5c2a29e]
+18:15:21.632 INFO - Shutting down...
