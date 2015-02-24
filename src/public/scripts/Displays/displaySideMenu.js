@@ -3,6 +3,7 @@ var editingProperties = false;
 
 var showSideMenu = function (type, d) {
 	$('#searchTable').remove();
+	$('#filterTable').remove();
 	killSearch();
 	if (type === 'node') {
 		showNodeData(d);
@@ -25,6 +26,7 @@ var hideSideMenu = function (type) {
 	}
 
 	$('#searchTable').remove();
+	$('#filterTable').remove();
 	killSearch();
 
 	$('.navArrowContainer').css({'transform':'rotate(0deg)'});

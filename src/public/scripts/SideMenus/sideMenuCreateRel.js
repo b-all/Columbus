@@ -3,6 +3,7 @@ var selectingStartNode = false;
 
 function showCreateRelSideMenu (d) {
     $('#searchTable').remove();
+    $('#filterTable').remove();
     killSearch();
     var docEl = document.documentElement,
         bodyEl = document.getElementsByTagName('body')[0];
@@ -98,6 +99,7 @@ function showCreateRelSideMenu (d) {
 
 function showCreateRelSideMenuFromBtn () {
     $('#searchTable').remove();
+    $('#filterTable').remove();
     killSearch();
     var docEl = document.documentElement,
         bodyEl = document.getElementsByTagName('body')[0];
