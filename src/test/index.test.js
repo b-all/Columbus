@@ -75,6 +75,23 @@ describe('index.js', function () {
             });
         });
 
+        it('should get a node\'s neigbors', function (done) {
+            request('http://localhost:8080').get('/getNeighbors/' + node1_id)
+            .end( function (err, res) {
+                assert.equal(200, res.statusCode);
+                done();
+            });
+        });
+
+        it('should return an error - getNeighbors with bad id', function (done) {
+            request('http://localhost:8080').get('/getNeighbors/' + -1)
+            .end( function (err, res) {
+                assert.equal(200, res.statusCode);
+                assert.equal("Cannot communicate with Neo4j database.", JSON.parse(res.text).err);
+                done();
+            });
+        });
+
         it('should return an error - updating relationship', function (done) {
             var data = {rel : JSON.stringify({id: 'undefined', data:{name : 'Test'}})};
             request('http://localhost:8080').post('/updateRel')
@@ -159,6 +176,13 @@ describe('index.js', function () {
 
         it('should delete a node', function (done) {
             request('http://localhost:8080').delete('/deleteNode').send({ id: node2_id }).end( function (err, res) {
+                assert.equal(200, res.statusCode);
+                done();
+            });
+        });
+
+        it('should return 200 - get labels', function (done) {
+            request('http://localhost:8080').get('/getLabels').end(function (err, res) {
                 assert.equal(200, res.statusCode);
                 done();
             });
