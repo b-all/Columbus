@@ -216,6 +216,35 @@ function getAllLabels(callback) {
 	});
 }
 
+function getNeighbors () {
+	var selected = graph.getSelectedNodeId();
+	if (selected !== null) {
+		var id = selected.id;
+		$.get('getNeighbors/' + id).done(function (data) {
+			if(!data.err) {
+				var docEl = document.documentElement,
+			        bodyEl = document.getElementsByTagName('body')[0];
+
+			    var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
+			        height =  window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
+
+			    var xLoc = 0,
+			        yLoc = 0;
+				console.log(JSON.parse(data));
+				displayForceData(JSON.parse(data), xLoc, yLoc, width, height);
+
+			} else {
+				console.log(data.err);
+				toastFail(data.err);
+			}
+		}).fail(function(msg) {
+			toastFail("There was an error communicating with the server");
+		});
+	} else {
+		toastFail("You must first select a node");
+	}
+}
+
 function advMode(target, callback) {
 
 	if (typeof target === 'undefined' || target === '') {

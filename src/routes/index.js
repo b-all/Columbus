@@ -249,6 +249,88 @@ router.get('/getLabels', function (req, res, next) {
 
 });
 
+/* Get all neighbors of a single node */
+router.get('/getNeighbors/:id', function(req,res,next) {
+	var id = req.params.id;
+	// query to get nodes connected to the id provided
+	var q_nodes = 'START p=node('+ id +') MATCH (p) - [] - (n) RETURN distinct n';
+	// query to get the node of the id provided
+	var q_thisNode = 'START n=node('+ id +') RETURN n';
+	// query to get the relationships of the id provided
+	var q_rels = 'START n=node('+ id +') MATCH (n) - [r] - () RETURN distinct r';
+
+	db.query(q_nodes, null, function(err, results) {
+		if (err) { // if error send blank response
+			console.log(err);
+			res.send({err:"Cannot communicate with Neo4j database."});
+		} else {
+			var nodeArray = [];
+			for (var i = 0; i < results.length; i++) {
+				nodeArray.push({
+					title: results[i].n._data.metadata.id.toString(),
+					id: results[i].n._data.metadata.id,
+					x: 0,
+					y: 0,
+					labels: results[i].n._data.metadata.labels,
+					data: results[i].n._data.data,
+					filtered: true
+				});
+
+			}
+			db.query(q_rels, null, function(err, results) {
+				if (err) { // if error send blank response
+					console.log(err);
+					res.send({err:"Cannot communicate with Neo4j database."});
+				} else {
+					var relArray = [];
+
+					for (var i = 0; i < results.length; i++) {
+						var startNodeURI = results[i].r._data.start.split("/");
+						var endNodeURI = results[i].r._data.end.split("/");
+						relArray.push({
+							source: parseInt(startNodeURI[startNodeURI.length - 1]),
+							target: parseInt(endNodeURI[endNodeURI.length - 1]),
+							id: results[i].r._data.metadata.id,
+							type: results[i].r._data.metadata.type,
+							data: results[i].r._data.data,
+							filtered: true
+						});
+					}
+
+					db.query(q_thisNode, null, function(err, results) {
+						if (err) { // if error send blank response
+							console.log(err);
+							res.send({err:"Cannot communicate with Neo4j database."});
+						} else {
+							var thisNodeArray = [];
+							for (var i = 0; i < results.length; i++) {
+								thisNodeArray.push({
+									title: results[i].n._data.metadata.id.toString(),
+									id: results[i].n._data.metadata.id,
+									x: 0,
+									y: 0,
+									labels: results[i].n._data.metadata.labels,
+									data: results[i].n._data.data,
+									filtered: true
+								});
+
+							}
+							nodeArray.push(thisNodeArray[0]);
+
+							var graph = {
+								nodes: nodeArray,
+								relationships: relArray
+							};
+							// send graph data back to client
+							res.send(JSON.stringify(graph));
+						}
+					});
+				}
+			});
+		}
+	});
+});
+
 
 function getAllRelationships(req, res, nodes, callback) {
 	//query all relationships in db

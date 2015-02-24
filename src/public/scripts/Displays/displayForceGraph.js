@@ -39,7 +39,6 @@ var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
     var prevXLoc, prevYLoc, prevRadius;
     var colorIndex;
     var lablen = Object.keys(labels).length;
-    console.log("Label count: "+lablen);
 
     //Attempt at randomizing color algorithm
     // var colorA = [];

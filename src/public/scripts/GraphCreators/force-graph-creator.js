@@ -512,7 +512,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
                 }
             }
         }
-        
+
 
         for (var k = 0; k < thisGraph.edges.length; k++) {
             thisGraph.edges[k].filtered = true;
@@ -543,13 +543,27 @@ var ForceGraphCreator = function(svg, nodes, edges){
     };
 
     ForceGraphCreator.prototype.unfilter = function () {
+        var falseFound = false;
         for (var i = 0; i < thisGraph.nodes.length; i++) {
+            if (!thisGraph.nodes[i].filtered) {
+                falseFound = true;
+            }
             thisGraph.nodes[i].filtered = true;
         }
         for (var k = 0; k < thisGraph.edges.length; k++) {
+            if (!thisGraph.edges[k].filtered) {
+                falseFound = true;
+            }
             thisGraph.edges[k].filtered = true;
         }
-        thisGraph.updateGraph();
+        if (falseFound) {
+            thisGraph.updateGraph();
+        }
+    };
+
+    ForceGraphCreator.prototype.getSelectedNodeId = function () {
+        var thisGraph = this;
+        return thisGraph.state.selectedNode;
     };
 
 };

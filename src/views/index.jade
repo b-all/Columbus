@@ -4,6 +4,9 @@ block content
 	.navigationBar
 		.navBarBtnList
 			span
+				button.btn.btn-success.navBarBtn#getNeighborBtn(onclick="getNeighbors()")
+					svg(width="20" height="20")
+						use(xlink:href="#getNeighborsIcon")
 				button.btn.btn-success.navBarBtn#createNodeBtn(onclick="showCreateNodeSideMenu([0,0])")
 					svg(width="30" height="30")
 						use(xlink:href="#createNodeIcon")
