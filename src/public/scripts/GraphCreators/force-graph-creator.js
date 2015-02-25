@@ -355,6 +355,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
     };
 
     function nodeMouseDown(d) {
+        editingProperties = false;
         d3.event.stopPropagation();
         if (selectingStartNode) {
             loadSelectedStartNode(d.id);
@@ -434,6 +435,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
     }
 
     function linkMouseDown(d) {
+        editingProperties = false;
         thisGraph.state.selectedEdge = d;
         thisGraph.state.selectedNode = null;
         d3.event.stopPropagation();
