@@ -122,7 +122,7 @@ var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
         if(colorIndex === -1){
           colorIndex = Math.floor(Math.random() * colors.length);
         }else{
-          colorIndex = (colorIndex+1) % lablen;
+          colorIndex = (colorIndex+1) % colors.length;
         }
         labels[index].color = colors[colorIndex];
     }
