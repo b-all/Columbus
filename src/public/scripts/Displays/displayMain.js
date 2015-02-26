@@ -62,7 +62,18 @@ $(document).ready(function() {
 
 
     var nodes, edges;
-    pullGraph(displayForceData);
+
+    // check if preferences have been stored
+    if(typeof localStorage.columbusPreferences !== 'undefined') {
+        var prefs = JSON.parse(localStorage.getItem('columbusPreferences'));
+        if (prefs.graphVis === "Dynamic Force Graph") {
+            pullGraph(displayForceData);
+        } else if (prefs.graphVis === "Stationary Force Graph") {
+            pullGraph(displayStillData);
+        }
+    } else {
+        pullGraph(displayForceData);
+    }
 });
 
 

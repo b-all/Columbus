@@ -1,6 +1,8 @@
 var showingPrefs = false;
 var labelNames = [];
+var graphVisTypes = ["Dynamic Force Graph", "Stationary Force Graph"];
 var numPriorities = 0;
+var currentGraphVis = "";
 function showSideMenuPrefs () {
     numPriorities = 0;
     $('#searchTable').remove();
@@ -42,6 +44,18 @@ function showSideMenuPrefs () {
         var prefs = JSON.parse(localStorage.getItem('columbusPreferences'));
         loadUserPreferences(prefs);
         return;
+    }
+
+    editableProps.append(('<h4>Graph Visualization</h4>'));
+    editableProps.append(
+        '<select id="selectGraphVis" class="form-control">' +
+         '</select>'
+    );
+
+    currentGraphVis = graphVisTypes[0];
+
+    for (var i = 0; i < graphVisTypes.length; i++) {
+        $('#selectGraphVis').append('<option>' + graphVisTypes[i] + '</option>');
     }
 
 
@@ -176,15 +190,18 @@ function setPreferencesSaveBtnOnClick () {
             localStorage.removeItem('columbusPreferences');
             localStorage.setItem('columbusPreferences', JSON.stringify(prefs));
             toastSuccess("Preferences Saved");
+            refreshGraphWithDifferentVis();
         });
     });
 }
 
 function parsePreferencesForm(callback) {
-    console.log(numPriorities);
     var prefs = {
+        graphVis : "",
         hoverPriorities : []
     };
+
+    prefs.graphVis = $('#selectGraphVis').val();
     // get hover priority preferences from inputs
     for (var i = 0; i < numPriorities; i++) {
         prefs.hoverPriorities.push({
@@ -196,6 +213,21 @@ function parsePreferencesForm(callback) {
 }
 
 function loadUserPreferences (prefs) {
+    $('#editableProperties').append(('<h4>Graph Visualization</h4>'));
+    $('#editableProperties').append( '<br/>' +
+        '<select id="selectGraphVis" class="form-control selectGraphVis">' +
+         '</select><br/>'
+    );
+
+    for (var i = 0; i < graphVisTypes.length; i++) {
+        if (prefs.graphVis === graphVisTypes[i]) {
+            currentGraphVis = graphVisTypes[i];
+            $('#selectGraphVis').append('<option selected>' + graphVisTypes[i] + '</option>');
+        } else {
+            $('#selectGraphVis').append('<option>' + graphVisTypes[i] + '</option>');
+        }
+    }
+
     //build hover priorities section
     $('#editableProperties').append('<h4>Hover Priorities</h4>');
 
@@ -281,4 +313,20 @@ function loadUserPriorities (hoverPriority) {
     $('.addPropBtn').on('click', function () {
         addHoverPriority();
     });
+}
+
+function refreshGraphWithDifferentVis () {
+    var viz = $('#selectGraphVis').val();
+    if (viz !== currentGraphVis) {
+        switch(viz) {
+            case "Dynamic Force Graph":
+                pullGraph(displayForceData);
+                break;
+            case "Stationary Force Graph":
+                pullGraph(displayStillData);
+                break;
+            default:
+                break;
+        }
+    }
 }

@@ -9,6 +9,7 @@ function pullGraph(callback) {
 
     var xLoc = width/2 - 300,
         yLoc = 200;
+		
 	currentRequest = $.get('graph').done(function (data) {
 		$('#loader').hide();
 		if (data.err) {
@@ -186,7 +187,19 @@ function search(target, callback) {
 
 	currentRequest = $.get('search', obj).done(function(data) {
 		if (!data.err) {
-			displayForceData(data, xLoc, yLoc, width, height);
+
+			// check if preferences have been stored
+		    if(typeof localStorage.columbusPreferences !== 'undefined') {
+		        var prefs = JSON.parse(localStorage.getItem('columbusPreferences'));
+		        if (prefs.graphVis === "Dynamic Force Graph") {
+					displayForceData(data, xLoc, yLoc, width, height);
+		        } else if (prefs.graphVis === "Stationary Force Graph") {
+					displayStillData(data, xLoc, yLoc, width, height);
+		        }
+		    } else {
+				displayForceData(data, xLoc, yLoc, width, height);
+		    }
+
 			callback(data.matches);
 		} else {
 			console.log(data.err);

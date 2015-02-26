@@ -143,10 +143,6 @@
 	color: rgba(0,0,0,.25);
 }
 
-.selectLabel {
-	width:
-}
-
 .advMode {
 	height: 40px;
 	width: 100vw;
@@ -236,4 +232,8 @@
 	table-layout: fixed;
 	word-wrap: break-word;
 	font-size: 12px;
+}
+
+.selectGraphVis {
+	width:75%;
 }

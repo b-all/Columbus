@@ -74,5 +74,7 @@ function sendSearchRequest() {
 
 function killSearch() {
     $('#loader').hide();
-    currentRequest.abort();
+    if (typeof currentRequest !== 'undefined') {
+        currentRequest.abort();
+    }
 }
