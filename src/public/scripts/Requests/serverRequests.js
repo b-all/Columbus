@@ -220,7 +220,9 @@ function getNeighbors () {
 	var selected = graph.getSelectedNodeId();
 	if (selected !== null) {
 		var id = selected.id;
+		toggleAnimateGetNeighborsIcon();
 		$.get('getNeighbors/' + id).done(function (data) {
+			toggleAnimateGetNeighborsIcon();
 			if(!data.err) {
 				var docEl = document.documentElement,
 			        bodyEl = document.getElementsByTagName('body')[0];

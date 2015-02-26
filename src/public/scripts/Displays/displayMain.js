@@ -88,7 +88,7 @@ function toggleInfoOnHover() {
     }
 }
 
-function toggleAdvcancedMode() {
+function toggleAdvancedMode() {
     advModeOn = !advModeOn;
     if (!advModeOn) {
         $('#advancedModeBtn').removeClass('btn-primary');
@@ -101,5 +101,28 @@ function toggleAdvcancedMode() {
         $('.advMode').show();
         $('#advModeInput').val('Enter Cypher query...');
         // toastInfo("Advanced Mode for Cypher queries turned on.");
+    }
+}
+
+var animatingGetNeighborsIcon = false;
+var getNeighborsAnimationIndex = 32;
+function toggleAnimateGetNeighborsIcon () {
+    animatingGetNeighborsIcon = !animatingGetNeighborsIcon;
+    runGetNeighborsAnimation();
+}
+
+function runGetNeighborsAnimation() {
+    if (getNeighborsAnimationIndex !== 32) {
+        $('#svg_' + getNeighborsAnimationIndex - 1).attr("fill", '#00bf00');
+    } else {
+        $('#svg_39').attr("fill", '#00bf00');
+    }
+    $('#svg_' + getNeighborsAnimationIndex).attr("fill", "#ffffff");
+    if (animatingGetNeighborsIcon) {
+        setTimeout(runGetNeighborsAnimation, 100);
+    } else {
+        setTimeout(function () {
+            $('#svg_' + getNeighborsAnimationIndex).attr("fill", '#00bf00');
+        });
     }
 }
