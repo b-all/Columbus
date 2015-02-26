@@ -113,16 +113,20 @@ function toggleAnimateGetNeighborsIcon () {
 
 function runGetNeighborsAnimation() {
     if (getNeighborsAnimationIndex !== 32) {
-        $('#svg_' + getNeighborsAnimationIndex - 1).attr("fill", '#00bf00');
+        $('#svg_' + (getNeighborsAnimationIndex - 1)).attr("fill", "#00bf00");
     } else {
-        $('#svg_39').attr("fill", '#00bf00');
+        $('#svg_39').attr("fill", "#00bf00");
     }
     $('#svg_' + getNeighborsAnimationIndex).attr("fill", "#ffffff");
     if (animatingGetNeighborsIcon) {
+        getNeighborsAnimationIndex++;
+        if (getNeighborsAnimationIndex === 40) {
+            getNeighborsAnimationIndex = 32;
+        }
         setTimeout(runGetNeighborsAnimation, 100);
     } else {
         setTimeout(function () {
-            $('#svg_' + getNeighborsAnimationIndex).attr("fill", '#00bf00');
+            $('#svg_' + getNeighborsAnimationIndex).attr("fill", "#00bf00");
         });
     }
 }
