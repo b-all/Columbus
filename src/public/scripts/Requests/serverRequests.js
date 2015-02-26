@@ -230,8 +230,7 @@ function getNeighbors () {
 
 			    var xLoc = 0,
 			        yLoc = 0;
-				console.log(JSON.parse(data));
-				displayForceData(JSON.parse(data), xLoc, yLoc, width, height);
+				graph.addNodeNeighbors(JSON.parse(data));
 
 			} else {
 				console.log(data.err);

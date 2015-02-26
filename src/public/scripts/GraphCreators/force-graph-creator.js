@@ -7,6 +7,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
     var thisGraph = this;
     thisGraph.nodes = nodes;
     thisGraph.edges = edges;
+    var force;
 
     thisGraph.state = {
         selectedNode: null,
@@ -82,6 +83,46 @@ var ForceGraphCreator = function(svg, nodes, edges){
         state.selectedNode = null;
         thisGraph.updateGraph();
         createLabelKey();
+    };
+
+    ForceGraphCreator.prototype.removeNodeAndNeighbors = function () {
+        var selectedNode = state.selectedNode;
+        thisGraph.nodes.splice(thisGraph.nodes.indexOf(selectedNode), 1);
+        thisGraph.spliceLinksAndTheirNodesForNode(selectedNode);
+        labels[selectedNode.labels[0]].count--;
+        state.selectedNode = null;
+        thisGraph.updateGraph();
+        createLabelKey();
+    };
+
+    ForceGraphCreator.prototype.spliceLinksAndTheirNodesForNode = function (node) {
+        var thisGraph = this,
+
+        toSpliceLinks = thisGraph.edges.filter(function(l) {
+            return (l.source === node || l.target === node);
+        });
+
+        toSpliceLinks.map(function(l) {
+            thisGraph.edges.splice(thisGraph.edges.indexOf(l), 1);
+
+            thisGraph.edges.map(function (l2) {
+                if ((l.source.id === l2.target.id || l.target.id === l2.target.id ||
+                    l.source.id === l2.source.id || l.target.id === l2.source.id) &&
+                    l2.source.id !== node.id && l2.target.id !== node.id) {
+                    thisGraph.edges.splice(thisGraph.edges.indexOf(l2), 1);
+                }
+            });
+
+            if (thisGraph.nodes.indexOf(l.source) !== -1) {
+                thisGraph.nodes.splice(thisGraph.nodes.indexOf(l.source), 1);
+            }
+            if (thisGraph.nodes.indexOf(l.target) !== -1) {
+                thisGraph.nodes.splice(thisGraph.nodes.indexOf(l.target), 1);
+            }
+
+        });
+
+
     };
 
     ForceGraphCreator.prototype.deleteRel = function () {
@@ -221,7 +262,7 @@ var ForceGraphCreator = function(svg, nodes, edges){
 
 
     ForceGraphCreator.prototype.updateGraph = function () {
-        var force = d3.layout.force()
+        force = d3.layout.force()
             .size([width, height])
             .charge(-1000)
             .linkDistance(100)
@@ -566,6 +607,59 @@ var ForceGraphCreator = function(svg, nodes, edges){
     ForceGraphCreator.prototype.getSelectedNodeId = function () {
         var thisGraph = this;
         return thisGraph.state.selectedNode;
+    };
+
+    ForceGraphCreator.prototype.addNodeNeighbors = function (data, xLoc, yLoc, width, height) {
+        var nodes = data.nodes;
+        var edges = data.relationships;
+
+        force.stop();
+        var noNewNodes = true;
+        for (var i = 0; i < nodes.length; i++) {
+            var foundNode = false;
+            for (var j = 0; j < thisGraph.nodes.length; j++) {
+                if (nodes[i].id === thisGraph.nodes[j].id) {
+                    foundNode = true;
+                }
+            }
+            if (!foundNode) {
+                thisGraph.nodes.push(nodes[i]);
+                noNewNodes = false;
+            }
+            nodes[i].color = labels[nodes[i].labels[0]].color;
+        }
+
+        if (noNewNodes) {
+            toastInfo('There are no hidden neighbors of this node');
+            return;
+        }
+
+        for (var y = 0; y < edges.length; y++) {
+            for (var x = 0; x < thisGraph.nodes.length; x++) {
+                if (thisGraph.nodes[x].id === edges[y].target) {
+                    edges[y].target = thisGraph.nodes[x];
+
+                }
+                if (thisGraph.nodes[x].id === edges[y].source) {
+                    edges[y].source = thisGraph.nodes[x];
+                }
+            }
+        }
+
+        for (var k = 0; k < edges.length; k++) {
+            var foundEdge = false;
+            for (var l = 0; l < thisGraph.edges.length; l++) {
+                if (edges[k].id === thisGraph.edges[l].id) {
+                    foundEdge = true;
+                }
+            }
+            if (!foundEdge) {
+                thisGraph.edges.push(edges[k]);
+            }
+        }
+
+
+        thisGraph.updateGraph();
     };
 
 };

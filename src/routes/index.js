@@ -255,7 +255,7 @@ router.get('/getNeighbors/:id', function(req,res,next) {
 	// query to get nodes connected to the id provided
 	var q_nodes = 'START p=node('+ id +') MATCH (p) - [] - (n) RETURN distinct n';
 	// query to get the node of the id provided
-	var q_thisNode = 'START n=node('+ id +') RETURN n';
+	//var q_thisNode = 'START n=node('+ id +') RETURN n';
 	// query to get the relationships of the id provided
 	var q_rels = 'START n=node('+ id +') MATCH (n) - [r] - () RETURN distinct r';
 
@@ -297,7 +297,7 @@ router.get('/getNeighbors/:id', function(req,res,next) {
 						});
 					}
 
-					db.query(q_thisNode, null, function(err, results) {
+					/*db.query(q_thisNode, null, function(err, results) {
 						if (err) { // if error send blank response
 							console.log(err);
 							res.send({err:"Cannot communicate with Neo4j database."});
@@ -315,7 +315,7 @@ router.get('/getNeighbors/:id', function(req,res,next) {
 								});
 
 							}
-							nodeArray.push(thisNodeArray[0]);
+							nodeArray.push(thisNodeArray[0]);*/
 
 							var graph = {
 								nodes: nodeArray,
@@ -323,8 +323,8 @@ router.get('/getNeighbors/:id', function(req,res,next) {
 							};
 							// send graph data back to client
 							res.send(JSON.stringify(graph));
-						}
-					});
+					/*	}
+				});*/
 				}
 			});
 		}
