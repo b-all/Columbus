@@ -15,7 +15,10 @@ router.get('/advMode', function(req,res,next) {
           console.log(err);
           res.send({err:"Cannot communicate with Neo4j database."});
       } else {
-          res.send(results);
+          var str = JSON.stringify(results, null, 2); // spacing level = 2
+          var str1 = '<pre>\n<code class="prettyprint">\n';
+          var str2 = '\n</pre>\n</code>\n';
+          res.send(str1+str+str2);
       }
   });
 });

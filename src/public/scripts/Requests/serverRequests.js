@@ -9,7 +9,7 @@ function pullGraph(callback) {
 
     var xLoc = width/2 - 300,
         yLoc = 200;
-		
+
 	currentRequest = $.get('graph').done(function (data) {
 		$('#loader').hide();
 		if (data.err) {
@@ -267,9 +267,9 @@ function advMode(target, callback) {
 	}
 
 	var obj = { target: target };
-
 	var win = window.open(getBaseURL()+'advMode?target='+target);
-	win.focus();
+	// win.focus();
+
 	// currentRequest = $.get('advMode', obj).done(function(data) {
 	// 	if (!data.err) {
 	// 		// displayForceData(data, xLoc, yLoc, width, height);
