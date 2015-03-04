@@ -1,25 +1,290 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="./bbtp_style.xsl" ?>
 <BlackBoxTestPlan>
-	<test id="Test1">
+	<test id="UC1 Read Graph">
 		<role>User</role>
 		<dateAdded>1/26/2015</dateAdded>
 		<dateModified>1/26/2015</dateModified>
 		<usecase>1</usecase>
 		<description>
-			<precondition>Here's a precondition
-			</precondition>
-			<step>Do this for step 1</step>
-			<step>Do this for step 2</step>
-			<step>Do this for step 3</step>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database. </precondition>
+			<step>Load the Web Application</step>
+			<step>User loads and accesses the Web Application</step>
 		</description>
 		<expectedResults>
-			<eResult>This is the expected result</eResult>
+			<eResult> All nodes and relationships existing in the Neo4j database are graphed. </eResult>
 		</expectedResults>
 		<actualResults>
 			<aResult>
-				This is the actual result
+				All nodes and relationships existing in the Neo4j database are graphed.
 			</aResult>
 		</actualResults>
 	</test>
+	
+	
+	<test id="UC2 Create Node">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>2</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
+			<step>Load the Web Application</step>
+			<step>Click the 'Add Node' Button</step>
+			<step>Give the node a label (i.e. name)</step>
+			<step>Add a property such as 'Color' with a value of 'Green'</step>
+			<step>Click the Save button</step>
+		</description>
+		<expectedResults>
+			<eResult>A new Node is added and is present on the visualization</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				A new Node is added and is present on the visualization
+			</aResult>
+		</actualResults>
+	</test>	
+
+	<test id="UC2 Create Node Alternative">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>2</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
+			<step>Load the Web Application</step>
+			<step>Double click in any empty space on the visualization to create a new node</step>
+			<step>Give the node a label (i.e. name)</step>
+			<step>Add a property such as 'Color' with a value of 'Green'</step>
+			<step>Click the Save button</step>
+		</description>
+		<expectedResults>
+			<eResult>A new Node is added and is present on the visualization</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				A new Node is added and is present on the visualization
+			</aResult>
+		</actualResults>
+	</test>	
+	
+	<test id="UC3 Delete Node">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>3</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database. </precondition>
+			<step>Load the Web Application</step>
+			<step>Select an existing node by left clicking on it</step>
+			<step>Click the delete button icon</step>
+		</description>
+		<expectedResults>
+			<eResult>The selected node is removed</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				The selected node is removed
+			</aResult>
+		</actualResults>
+	</test>	
+	
+	<test id="UC3 Delete Node Alternative">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>3</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database. </precondition>
+			<step>Load the Web Application</step>
+			<step>Select an existing node by left clicking on it</step>
+			<step>Press the 'Delete' key on the user's physical keyboard</step>
+		</description>
+		<expectedResults>
+			<eResult>The selected node is removed</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				The selected node is removed
+			</aResult>
+		</actualResults>
+	</test>	
+	
+	<test id="UC4 Create Relationship">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>4</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
+			<step>Load the Web Application</step>
+			<step>Click the 'Create Relationship' button in the gui <step>
+			<step>Click the 'From Node' button and select the starting node</step>
+			<step>Click the 'To Node' button and select the node to create a relationship to</step>
+			<step>Click the 'Save' button</step>
+		</description>
+		<expectedResults>
+			<eResult>An arrow will appear, connecting the two nodes</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				An arrow will appear, connecting the two nodes
+			</aResult>
+		</actualResults>
+	</test>	
+
+	<test id="UC5 Delete Relationship">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>5</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
+			<step>Load the Web Application</step>
+			<step>Select and existing relationship (arrow) from the visualization via left mouse click</step>
+			<step>Click the delete button/icon</step>
+		</description>
+		<expectedResults>
+			<eResult>The selected relationship between two nodes is removed</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				The selected relationship between two nodes is removed
+			</aResult>
+		</actualResults>
+	</test>	
+	
+	<test id="UC5 Delete Relationship Alternative">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>5</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
+			<step>Load the Web Application</step>
+			<step>Select and existing relationship (arrow) from the visualization via left mouse click</step>
+			<step>Press the physical 'Delete' key on the keyboard</step>
+		</description>
+		<expectedResults>
+			<eResult>The selected relationship between two nodes is removed</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				The selected relationship between two nodes is removed
+			</aResult>
+		</actualResults>
+	</test>	
+
+	<test id="UC6 Edit Node">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>6</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
+			<step>Load the Web Application</step>
+			<step>Select a node from the visualization</step>
+			<step>Edit a property</step>
+			<step>Click save</step>
+		</description>
+		<expectedResults>
+			<eResult>The property has been updated</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				The property has been updated
+			</aResult>
+		</actualResults>
+	</test>	
+	
+	<test id="UC6 Edit Node Alternative">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>6</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
+			<step>Load the Web Application</step>
+			<step>Select a node from the visualization</step>
+			<step>Remove a property</step>
+			<step>Click save</step>
+		</description>
+		<expectedResults>
+			<eResult>The property has been removed</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				The property has been removed
+			</aResult>
+		</actualResults>
+	</test>		
+
+	
+	<test id="UC7 Edit Relationship">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>7</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
+			<step>Load the Web Application</step>
+			<step>Select a relationship (arrow) between two connected nodes </step>
+			<step>Modify the properties of the relationship</step>
+			<step>Click save</step>
+		</description>
+		<expectedResults>
+			<eResult>The property of the relationship has been updated</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				The property of the relationship has been updated
+			</aResult>
+		</actualResults>
+	</test>	
+	
+
+	<test id="UC8 Search for Nodes/Realtionships">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>8</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
+			<step>Load the Web Application</step>
+			<step>Click on the search button</step>
+			<step>In the search bar search for an actor ex: Kevin Bacon</step>
+			<step>Click the magnifying glass to continue</step>
+		</description>
+		<expectedResults>
+			<eResult>The visualization displays the results of the search as nodes containing that property</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				The visualization displays the results of the search as nodes containing that property
+			</aResult>
+		</actualResults>
+	</test>	
+
+	<test id="UC9 Filter Data Visualization">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>9</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
+			<step>Load the Web Application</step>
+			<step>Click on the filter button</step>
+			<step>In the search bar search for an actor ex: Kevin Bacon</step>
+			<step>Click the magnifying glass to continue</step>
+		</description>
+		<expectedResults>
+			<eResult>Any node that contains the filtered query remain on the screen while other/un-related nodes are be grayed out</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				Any node that contains the filtered query remain on the screen while other/un-related nodes are be grayed out
+			</aResult>
+		</actualResults>
+	</test>		
+	
 </BlackBoxTestPlan>
