@@ -76,37 +76,48 @@ function createRel(data, type, startNode, endNode, callback) {
 }
 
 function requestDeleteNode(node, callback) {
-	$.ajax({
-		url : 'deleteNode',
-		type : 'DELETE',
-		data : node
-	}).done(function (data) {
-		if (!data.err) {
-			callback();
-		} else {
-			toastFail("There was an error communicating with the server");
+	var alert = new Alert();
+	alert.confirm("Are you sure you want to delete this node?", function (confirmed) {
+		if (confirmed) {
+			$.ajax({
+				url : 'deleteNode',
+				type : 'DELETE',
+				data : node
+			}).done(function (data) {
+				if (!data.err) {
+					callback();
+				} else {
+					toastFail("There was an error communicating with the server");
+				}
+			}).fail(function (msg) {
+				toastFail("There was an error communicating with the server");
+				console.log(msg);
+			});
 		}
-	}).fail(function (msg) {
-		toastFail("There was an error communicating with the server");
-		console.log(msg);
 	});
+
 
 }
 
 function requestDeleteRelationship(rel, callback) {
-	$.ajax({
-		url : 'deleteRelationship',
-		type : 'DELETE',
-		data : rel
-	}).done(function(data){
-		if (!data.err) {
-			callback();
-		} else {
-			toastFail("There was an error communicating with the server");
+	var alert = new Alert();
+	alert.confirm("Are you sure you want to delete this relationship?", function (confirmed) {
+		if (confirmed) {
+			$.ajax({
+				url : 'deleteRelationship',
+				type : 'DELETE',
+				data : rel
+			}).done(function(data){
+				if (!data.err) {
+					callback();
+				} else {
+					toastFail("There was an error communicating with the server");
+				}
+			}).fail(function (msg) {
+				toastFail("There was an error communicating with the server");
+				console.log(msg);
+			});
 		}
-	}).fail(function (msg) {
-		toastFail("There was an error communicating with the server");
-		console.log(msg);
 	});
 }
 

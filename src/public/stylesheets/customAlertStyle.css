@@ -1,0 +1,68 @@
+#alertBox {
+    position: relative;
+    left: 30vw;
+    top: 30vh;
+    border-radius: 30px;
+    border: 2px solid black;
+    width: 500px;
+    height: 200px;
+    box-shadow: 2px 4px 20px rgba(0,0,0,1),
+                4px 4px 1px rgba(255,255,255,.75) inset,
+                -4px -4px 1px rgba(0,0,0,.3) inset;
+    background-color: #eeeeee;
+    z-index:1000;
+    display: none; 
+}
+
+#alertHeader {
+    font-size: 30px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#alertMessage {
+    margin-top: 25px;
+    text-align: center;
+}
+
+#confirmBtnsPosition {
+    position: absolute;
+    width: 100%;
+    bottom: 40px;
+}
+
+#confirmBtns {
+    text-align: center;
+}
+
+.customBtn {
+    border-radius: 4px;
+    border: 0;
+    padding: 10px;
+}
+
+.customBtn:focus {
+    outline: 0;
+}
+
+.customBtn:active {
+    box-shadow: 2px 2px 4px rgba(0,0,0,.3) inset;
+}
+
+#yesBtn {
+    background-color: #5bc0de;
+    margin-left: 20px;
+}
+
+#yesBtn:hover {
+    background-color: #428bca;
+}
+
+#noBtn {
+    background-color: white;
+    margin-right: 20px;
+}
+
+#noBtn:hover {
+    background-color: #dddddd;
+}

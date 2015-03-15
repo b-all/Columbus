@@ -76,15 +76,6 @@ $(document).ready(function() {
     }
 });
 
-
-function getEdges(graph) {
-
-}
-
-function getNodes(graph) {
-
-}
-
 function toggleInfoOnHover() {
     hoverInfoOn = !hoverInfoOn;
     if (!hoverInfoOn) {
