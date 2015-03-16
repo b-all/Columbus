@@ -2,8 +2,6 @@ var showingSideMenu = false;
 var editingProperties = false;
 
 var showSideMenu = function (type, d) {
-	$('#searchTable').remove();
-	$('#filterTable').remove();
 	killSearch();
 	if (type === 'node') {
 		showNodeData(d);
@@ -25,8 +23,6 @@ var hideSideMenu = function (type) {
 		hideDefaultMenu();
 	}
 
-	$('#searchTable').remove();
-	$('#filterTable').remove();
 	killSearch();
 
 	$('.navArrowContainer').css({'transform':'rotate(0deg)'});
@@ -58,6 +54,14 @@ var hideDefaultMenu = function () {
 	//bring graphContainer back to initial position
 	$('#graphContainer').animate({'left': '0px'}, 400, function () {
 		$('#graphContainer').css({'left': ''});
+		if (showingSearchSideMenu) {
+			showingSearchSideMenu = false;
+			toggleSearch();
+		}
+		if (showingFilterSideMenu) {
+			showingFilterSideMenu = false;
+			toggleFilter();
+		}
 		showingSideMenu = false;
 		editingProperties = false;
 	});

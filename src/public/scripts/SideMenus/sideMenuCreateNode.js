@@ -1,9 +1,7 @@
 function showCreateNodeSideMenu(xycoords) {
-    $('#searchTable').remove();
-    $('#filterTable').remove();
     $('.submitBtn').hide();
     killSearch();
-    
+
     var docEl = document.documentElement,
         bodyEl = document.getElementsByTagName('body')[0];
     var width =  docEl.clientWidth,

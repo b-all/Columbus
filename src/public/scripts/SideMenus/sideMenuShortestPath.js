@@ -1,7 +1,4 @@
 function showShortestPathSideMenu () {
-    // clean up menu
-    $('#searchTable').remove();
-    $('#filterTable').remove();
     killSearch();
     $('.deleteBtn').hide();
     $('.saveBtn').hide();

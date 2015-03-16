@@ -5,7 +5,6 @@ var numPriorities = 0;
 var currentGraphVis = "";
 function showSideMenuPrefs () {
     numPriorities = 0;
-    $('#searchTable').remove();
     killSearch();
     var docEl = document.documentElement,
         bodyEl = document.getElementsByTagName('body')[0];

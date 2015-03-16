@@ -23,9 +23,9 @@ block content
 					i.glyphicon.glyphicon-menu-hamburger
 				button.btn.btn-success.navBarBtn#hoverInfoBtn(onclick="toggleInfoOnHover()")
 					i.glyphicon.glyphicon-hand-up
-				button.btn.btn-success.navBarBtn#filterBtn(onclick="showFilterSideMenu()")
+				button.btn.btn-success.navBarBtn#filterBtn(onclick="toggleFilter()")
 					i.glyphicon.glyphicon-filter
-				button.btn.btn-success.navBarBtn#searchBtn(onclick="showSearchSideMenu()")
+				button.btn.btn-success.navBarBtn#searchBtn(onclick="toggleSearch()")
 					i.glyphicon.glyphicon-search
 				button.btn.btn-success.navBarBtn#advancedModeBtn(onclick="toggleAdvancedMode()")
 					i.glyphicon.glyphicon-sunglasses
@@ -44,6 +44,8 @@ block content
 			i.glyphicon.glyphicon-trash
 		h3.sideMenuHeader
 		br
+		#searchSpace
+		#filterSpace
 		#fixedProperties
 		#editableProperties
 		br
