@@ -54,7 +54,7 @@ function showFilterSideMenu() {
             '</table>'
         );
     } else {
-        $('#searchTable').remove();
+        $('#filterTable').remove();
         $('#filterSpace').append(
             '<table id="filterTable">' +
                 '<tr>' +

@@ -38,6 +38,10 @@ function showSearchSideMenu() {
         $('#searchSpace').prepend(
             '<table id="searchTable">' +
                 '<tr>' +
+                    '<td class="searchCheckLabelTd" colspan="2">Retain Currently Visualized Data:' +
+                    '<input id="additiveSearchCheckbox" type="checkbox" checked></input></td>' +
+                '</tr>'+
+                '<tr>' +
                     '<td>' +
                         '<input id=\"searchInput\" class=\"form-control search\"></input>' +
                     '</td>' +
@@ -56,6 +60,10 @@ function showSearchSideMenu() {
         $('#searchTable').remove();
         $('#searchSpace').prepend(
             '<table id="searchTable">' +
+                '<tr>' +
+                    '<td class="searchCheckLabelTd" colspan="2">Retain Currently Visualized Data:' +
+                    '<input id="additiveSearchCheckbox" type="checkbox" checked></input></td>' +
+                '</tr>'+
                 '<tr>' +
                     '<td>' +
                         '<input id=\"searchInput\" class=\"form-control search\"></input>' +

@@ -142,11 +142,17 @@
 .searchDesc {
 	color: rgba(0,0,0,.25);
 	font-size: 12px;
+	padding-bottom: 10px;
+	padding-left: 10px; 
 }
 
 .resultsDesc {
+	/*position: fixed;
+	bottom: 20px;
+	left: 30px;*/
 	font-size: 16px;
 	color: rgba(0,0,0,.25);
+	margin-bottom:10px;
 }
 
 .advMode {
@@ -211,13 +217,24 @@
 }
 
 #loader {
+	position:fixed;
 	display: none;
 	top: 103px;
 	right: 28px;
 }
 
 #searchTable, #filterTable{
-	width: 90%
+	width: 95%;
+	margin-bottom:20px;
+	background-color: #FFFFFF;
+	border-radius: 5px;
+	border:none;
+	box-shadow: 1px 1px 2px rgba(0,0,0,.4) inset;
+}
+
+#searchTable td, #filterTable td {
+	padding:10px;
+	margin:4px;
 }
 
 .nodeDataHover {
@@ -242,4 +259,17 @@
 
 .selectGraphVis {
 	width:75%;
+}
+
+.searchCheckLabelTd {
+	padding-left:4px;
+	padding-bottom:10px;
+}
+
+#additiveSearchCheckbox {
+	margin-left: 8px;
+}
+
+#filterSpace, #searchSpace {
+	margin: 8px;
 }
