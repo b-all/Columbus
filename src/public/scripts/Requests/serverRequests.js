@@ -270,6 +270,41 @@ function getNeighbors () {
 	}
 }
 
+function getShortestPath(startNodeId, endNodeId, callback) {
+	currentRequest = $.get('getShortestPath/' + startNodeId + '/' + endNodeId).done(function(data) {
+		if (!data.err) {
+			var docEl = document.documentElement,
+				bodyEl = document.getElementsByTagName('body')[0];
+
+			var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
+				height =  window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
+
+			var xLoc = 0,
+				yLoc = 0;
+			// check if preferences have been stored
+		    if(typeof localStorage.columbusPreferences !== 'undefined') {
+		        var prefs = JSON.parse(localStorage.getItem('columbusPreferences'));
+		        if (prefs.graphVis === "Dynamic Force Graph") {
+					displayForceData(data, xLoc, yLoc, width, height);
+		        } else if (prefs.graphVis === "Stationary Force Graph") {
+					displayStillData(data, xLoc, yLoc, width, height);
+		        }
+		    } else {
+				displayForceData(data, xLoc, yLoc, width, height);
+		    }
+			callback(data);
+		} else {
+			console.log(data.err);
+			toastFail("There was an error communicating with the server");
+		}
+	}).fail(function(msg) {
+		toastFail("There was an error communicating with the server");
+		console.log(msg);
+	});
+
+
+}
+
 function advMode(target, callback) {
 
 	if (typeof target === 'undefined' || target === '') {
@@ -279,26 +314,6 @@ function advMode(target, callback) {
 
 	var obj = { target: target };
 	var win = window.open(getBaseURL()+'advMode?target='+target);
-	// win.focus();
-
-	// currentRequest = $.get('advMode', obj).done(function(data) {
-	// 	if (!data.err) {
-	// 		// displayForceData(data, xLoc, yLoc, width, height);
-	//
-	// 		callback(data);
-	// 	} else {
-	// 		console.log(data.err);
-	// 		$('#loader').hide();
-	// 		toastFail(data.err);
-	// 	}
-	// }).fail(function(msg) {
-	// 	if (msg.statusText === 'abort') {
-	// 		toastInfo("Search Canceled");
-	// 	} else {
-	// 		toastFail("There was an error communicating with the server");
-	// 	}
-	// 	console.log(msg);
-	// });
 }
 
 function getBaseURL () {

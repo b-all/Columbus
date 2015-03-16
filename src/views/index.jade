@@ -7,6 +7,9 @@ block content
 				button.btn.btn-success.navBarBtn#getNeighborBtn(onclick="getNeighbors()")
 					svg(width="20" height="20")
 						use(xlink:href="#getNeighborsIcon")
+				button.btn.btn-success.navBarBtn#shortestPathBtn(onclick="showShortestPathSideMenu()")
+					svg(width="25" height="25")
+						use(xlink:href="#shortestPathIcon")
 				//button.btn.btn-success.navBarBtn#hideNodeAndNeighborsBtn(onclick="hideNodeAndNeighbors()")
 					svg(width="25" height="25")
 						use(xlink:href="#hideNodeAndNeighborsIcon")
@@ -45,6 +48,7 @@ block content
 		#editableProperties
 		br
 		button.btn.btn-default.saveBtn Save
+		button.btn.btn-default.submitBtn Submit
 	.successToast
 	.failToast
 	.infoToast

@@ -57,6 +57,12 @@
 	display:none;
 }
 
+.submitBtn {
+	margin-left: 120px;
+	margin-bottom: 10px;
+	display:none;
+}
+
 .deleteBtn {
 	position: absolute;
 	top: 22px;

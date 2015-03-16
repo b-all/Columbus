@@ -6,6 +6,7 @@ function showFilterSideMenu() {
     //hide save button
     $('.saveBtn').hide();
     $('.deleteBtn').hide();
+    $('.submitBtn').hide();
 
     if (!showingSideMenu) {
         $('#sideMenu').css({'right': '-365px', 'left':''});

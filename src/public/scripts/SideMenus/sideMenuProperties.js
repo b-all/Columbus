@@ -7,6 +7,8 @@ var showNodeData = function (d) {
     var width =  docEl.clientWidth,
         height =  docEl.clientHeight;
 
+	$('.submitBtn').hide();
+
     //slide open edit view
    	if (d.x * zoomRatio + translateDelta[0] < width - 400) {
    		if (!showingSideMenu) {

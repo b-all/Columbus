@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var search = require('./routes/search');
 var advMode = require('./routes/advMode');
+var shortestPath = require('./routes/shortestPath')
 
 var app = express();
 app.listen(8080);
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/', search);
 app.use('/', advMode);
+app.use('/', shortestPath);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

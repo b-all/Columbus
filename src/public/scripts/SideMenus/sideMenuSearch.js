@@ -5,6 +5,7 @@ function showSearchSideMenu() {
 
     //hide save button
     $('.saveBtn').hide();
+    $('.submitBtn').hide();
     $('.deleteBtn').hide();
 
     if (!showingSideMenu) {

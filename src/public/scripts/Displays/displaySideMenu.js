@@ -39,6 +39,7 @@ var showDefaultMenu = function () {
 
 	//hide save button
 	$('.saveBtn').hide();
+	$('.submitBtn').hide();
 
 	$('#sideMenu').css({'right': '-365px', 'left':''});
 	$('#sideMenu').animate({'right': '0px'}, 100);

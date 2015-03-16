@@ -5,8 +5,6 @@ var db = new neo4j.GraphDatabase('http://localhost:7474');
 var express = require('express');
 var router = express.Router();
 
-var nodesFound = 0;
-
 router.get('/advMode', function(req,res,next) {
   var target = req.query.target;
   console.log(req.query.target);
