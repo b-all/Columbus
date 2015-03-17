@@ -113,11 +113,17 @@ function addHoverPriority () {
 
             // set click listeners for delete buttons
             $('tr', '.priorityPrefTable').each(function (){
-                var table = $(this).parent();
+                var table = $(this).parent().parent();
                 $('.deletePropBtn', table).off('click');
                 $('.deletePropBtn', table).on('click', function() {
                     $(table).remove();
                     numPriorities--;
+                    var i = 0;
+                    $('.priorityPrefTable').each(function () {
+                        $('select', this).attr('id', 'labelSelect' + i);
+                        $('input', this).attr('id', 'priorityRule' + i);
+                        i++;
+                    });
                 });
             });
 
@@ -161,11 +167,17 @@ function addHoverPriority () {
 
         // set click listeners for delete buttons
         $('tr', '.priorityPrefTable').each(function (){
-            var table = $(this).parent();
+            var table = $(this).parent().parent();
             $('.deletePropBtn', table).off('click');
             $('.deletePropBtn', table).on('click', function() {
                 $(table).remove();
                 numPriorities--;
+                var i = 0;
+                $('.priorityPrefTable').each(function () {
+                    $('select', this).attr('id', 'labelSelect' + i);
+                    $('input', this).attr('id', 'priorityRule' + i);
+                    i++;
+                });
             });
         });
 
@@ -189,6 +201,7 @@ function setPreferencesSaveBtnOnClick () {
         parsePreferencesForm(function (prefs){
             localStorage.removeItem('columbusPreferences');
             localStorage.setItem('columbusPreferences', JSON.stringify(prefs));
+            console.log(localStorage.getItem('columbusPreferences'));
             toastSuccess("Preferences Saved");
             refreshGraphWithDifferentVis();
         });
@@ -295,10 +308,16 @@ function loadUserPriorities (hoverPriority) {
 
     // set click listeners for delete buttons
     $('tr', '.priorityPrefTable').each(function (){
-        var table = $(this).parent();
+        var table = $(this).parent().parent();
         $('.deletePropBtn', table).off('click');
         $('.deletePropBtn', table).on('click', function() {
             $(table).remove();
+            var i = 0;
+            $('.priorityPrefTable').each(function () {
+                $('select', this).attr('id', 'labelSelect' + i);
+                $('input', this).attr('id', 'priorityRule' + i);
+                i++;
+            });
             numPriorities--;
         });
     });
