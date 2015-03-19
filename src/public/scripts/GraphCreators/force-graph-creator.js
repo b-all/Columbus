@@ -337,6 +337,13 @@ var ForceGraphCreator = function(svg, nodes, edges){
 
         //var relLabels = d3.select(".graph").selectAll(".link").append("text");
 
+        // get settings for text to display on each node
+        var nodeTextProps;
+        if (typeof localStorage.columbusPreferences !== 'undefined') {
+            var lsProps = JSON.parse(localStorage.columbusPreferences);
+            nodeTextProps = lsProps.nodeTextProps;
+        }
+
         $('.node').hover(function(){
             $(this).find('circle').css('stroke', 'gray');
         }, function () {
@@ -369,7 +376,25 @@ var ForceGraphCreator = function(svg, nodes, edges){
                 .attr("fill", "black")
                 .attr("font-size", "10")
                 .style("cursor", 'default')
-                .text(function(d){return d.id;});
+                .text(function(d){
+                    var displayedProp;
+                    nodeTextProps.forEach(function (val, i, array) {
+                        if (val.label === d.labels[0]) {
+                            displayedProp = val.property;
+                        }
+                    });
+
+                    var displayedText;
+                    if (typeof d.data[displayedProp] !== 'undefined') {
+                        if (d.data[displayedProp].toString().length >= 7) {
+                            displayedText = d.data[displayedProp].toString().substring(0,8) + '...';
+                        } else if (d.data[displayedProp].toString().length < 7){
+                            displayedText = d.data[displayedProp].toString();
+                        }
+                    }
+
+                    return displayedText || d.id;
+                });
 
             // removed this feature (considering performance)
             /*// label relationships

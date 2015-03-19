@@ -3,7 +3,15 @@ var labelNames = [];
 var graphVisTypes = ["Dynamic Force Graph", "Stationary Force Graph"];
 var numPriorities = 0;
 var currentGraphVis = "";
+var requesting = false;
 function showSideMenuPrefs () {
+    if (requesting) {
+        /* if a user double clicks on Preferences button,
+         * this function will run before the last request completes and
+         * result in a jumbled display
+         */
+        return;
+    }
     numPriorities = 0;
     killSearch();
     var docEl = document.documentElement,
@@ -58,13 +66,38 @@ function showSideMenuPrefs () {
         $('#selectGraphVis').append('<option>' + graphVisTypes[i] + '</option>');
     }
 
-
     //build hover priorities section
     editableProps.append('<h4>Hover Priorities</h4>');
     editableProps.append("<button class=\"btn btn-default addPropBtn\">Add</button>");
     $('.addPropBtn').show();
     $('.addPropBtn').on('click', function () {
         addHoverPriority();
+    });
+
+    //build Node Text section
+    editableProps.append('<h4>Node Displayed Properties</h4>');
+    $('#loader').show();
+    requesting = true;
+    getAllLabels(function(data) {
+        requesting = false;
+        $('#loader').hide();
+        labelNames = data;
+        editableProps.append('<table id="nodeTextPropTable" class="propertyTable"></table>')
+        labelNames.forEach(function(val, i, array) {
+            $('#nodeTextPropTable').append(
+                '<tr>' +
+                    '<td>' +
+                        val +
+                    '</td>' +
+                    '<td>' +
+                        ':' +
+                    '</td>' +
+                    '<td>' +
+                        '<input type="text" id="nodeTextInput' + i +'" value="id">' +
+                    '</td>' +
+                '</tr>'
+            );
+        });
     });
 
     $('#sideMenu').on('click', function () {
@@ -80,7 +113,9 @@ function addHoverPriority () {
     //load all labels from database
     if (labelNames.length === 0) {
         $('#loader').show();
+        requesting = true;
         getAllLabels(function (data) {
+            requesting = false;
             labelNames = data;
             $('#loader').hide();
             $('#editableProperties').append(
@@ -201,9 +236,10 @@ function setPreferencesSaveBtnOnClick () {
         parsePreferencesForm(function (prefs){
             localStorage.removeItem('columbusPreferences');
             localStorage.setItem('columbusPreferences', JSON.stringify(prefs));
-            console.log(localStorage.getItem('columbusPreferences'));
+            //console.log(localStorage.getItem('columbusPreferences'));
             toastSuccess("Preferences Saved");
             refreshGraphWithDifferentVis();
+            graph.updateGraph();
         });
     });
 }
@@ -211,7 +247,8 @@ function setPreferencesSaveBtnOnClick () {
 function parsePreferencesForm(callback) {
     var prefs = {
         graphVis : "",
-        hoverPriorities : []
+        hoverPriorities : [],
+        nodeTextProps: []
     };
 
     prefs.graphVis = $('#selectGraphVis').val();
@@ -222,6 +259,14 @@ function parsePreferencesForm(callback) {
             property: $('#priorityRule' + i).val()
         });
     }
+
+    labelNames.forEach(function(val, i, array) {
+        prefs.nodeTextProps.push({
+            label: val,
+            property: $('#nodeTextInput' + i).val()
+        });
+    });
+
     callback(prefs);
 }
 
@@ -241,15 +286,18 @@ function loadUserPreferences (prefs) {
         }
     }
 
+    var editableProps = $('#editableProperties');
     //build hover priorities section
-    $('#editableProperties').append('<h4>Hover Priorities</h4>');
+    editableProps.append('<h4>Hover Priorities</h4>');
 
     $('#loader').show();
+    requesting = true;
     getAllLabels(function(data) {
+        requesting = false;
         $('#loader').hide();
         labelNames = data;
         if (prefs.hoverPriorities.length === 0 || typeof prefs.hoverPriorities === 'undefined') {
-            $('#editableProperties').append("<button class=\"btn btn-default addPropBtn\">Add</button>");
+            editableProps.append("<button class=\"btn btn-default addPropBtn\">Add</button>");
             $('.addPropBtn').show();
             $('.addPropBtn').on('click', function () {
                 addHoverPriority();
@@ -258,6 +306,36 @@ function loadUserPreferences (prefs) {
         for (var i = 0; i < prefs.hoverPriorities.length; i++) {
             loadUserPriorities(prefs.hoverPriorities[i]);
         }
+
+        //build table for Node Text Properties
+        editableProps.append('<h4>Node Displayed Properties</h4>');
+        editableProps.append('<table id="nodeTextPropTable" class="propertyTable"></table>')
+        labelNames.forEach(function(val, i, array) {
+            $('#nodeTextPropTable').append(
+                '<tr>' +
+                    '<td class="nodeTextPropLabel">' +
+                        val +
+                    '</td>' +
+                    '<td>' +
+                        ':' +
+                    '</td>' +
+                    '<td>' +
+                        '<input type="text" id="nodeTextInput' + i +'" class="form-control">' +
+                    '</td>' +
+                '</tr>'
+            );
+        });
+
+        //load user Node Displayed Properties settings
+        prefs.nodeTextProps.forEach(function(val, i, array) {
+            var count = 0;
+            $('#nodeTextPropTable tr > .nodeTextPropLabel').each(function () {
+                if ($(this).html() === val.label) {
+                    $('#nodeTextInput' + count).val(val.property);
+                }
+                count++;
+            });
+        });
     });
 
 
