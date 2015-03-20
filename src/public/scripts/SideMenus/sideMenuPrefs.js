@@ -46,7 +46,7 @@ function showSideMenuPrefs () {
         editableProps.append('<br /><h4>Preferences can\'t be saved...</h4>');
         return;
     }
-    localStorage.removeItem("columbusPreferences");
+    //localStorage.removeItem("columbusPreferences");
     // check if preferences have been stored
     if(typeof localStorage.columbusPreferences !== 'undefined') {
         var prefs = JSON.parse(localStorage.getItem('columbusPreferences'));
