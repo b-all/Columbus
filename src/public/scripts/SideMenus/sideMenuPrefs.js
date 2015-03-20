@@ -46,7 +46,7 @@ function showSideMenuPrefs () {
         editableProps.append('<br /><h4>Preferences can\'t be saved...</h4>');
         return;
     }
-    //localStorage.removeItem("columbusPreferences");
+    localStorage.removeItem("columbusPreferences");
     // check if preferences have been stored
     if(typeof localStorage.columbusPreferences !== 'undefined') {
         var prefs = JSON.parse(localStorage.getItem('columbusPreferences'));
@@ -65,14 +65,6 @@ function showSideMenuPrefs () {
     for (var i = 0; i < graphVisTypes.length; i++) {
         $('#selectGraphVis').append('<option>' + graphVisTypes[i] + '</option>');
     }
-
-    //build hover priorities section
-    editableProps.append('<h4>Hover Priorities</h4>');
-    editableProps.append("<button class=\"btn btn-default addPropBtn\">Add</button>");
-    $('.addPropBtn').show();
-    $('.addPropBtn').on('click', function () {
-        addHoverPriority();
-    });
 
     //build Node Text section
     editableProps.append('<h4>Node Displayed Properties</h4>');
@@ -97,6 +89,14 @@ function showSideMenuPrefs () {
                     '</td>' +
                 '</tr>'
             );
+        });
+
+        //build hover priorities section
+        editableProps.append('<h4>Hover Priorities</h4>');
+        editableProps.append("<button class=\"btn btn-default addPropBtn\">Add</button>");
+        $('.addPropBtn').show();
+        $('.addPropBtn').on('click', function () {
+            addHoverPriority();
         });
     });
 
@@ -287,8 +287,6 @@ function loadUserPreferences (prefs) {
     }
 
     var editableProps = $('#editableProperties');
-    //build hover priorities section
-    editableProps.append('<h4>Hover Priorities</h4>');
 
     $('#loader').show();
     requesting = true;
@@ -296,16 +294,6 @@ function loadUserPreferences (prefs) {
         requesting = false;
         $('#loader').hide();
         labelNames = data;
-        if (prefs.hoverPriorities.length === 0 || typeof prefs.hoverPriorities === 'undefined') {
-            editableProps.append("<button class=\"btn btn-default addPropBtn\">Add</button>");
-            $('.addPropBtn').show();
-            $('.addPropBtn').on('click', function () {
-                addHoverPriority();
-            });
-        }
-        for (var i = 0; i < prefs.hoverPriorities.length; i++) {
-            loadUserPriorities(prefs.hoverPriorities[i]);
-        }
 
         //build table for Node Text Properties
         editableProps.append('<h4>Node Displayed Properties</h4>');
@@ -336,6 +324,19 @@ function loadUserPreferences (prefs) {
                 count++;
             });
         });
+
+        //build hover priorities section
+        editableProps.append('<h4>Hover Priorities</h4>');
+        if (prefs.hoverPriorities.length === 0 || typeof prefs.hoverPriorities === 'undefined') {
+            editableProps.append("<button class=\"btn btn-default addPropBtn\">Add</button>");
+            $('.addPropBtn').show();
+            $('.addPropBtn').on('click', function () {
+                addHoverPriority();
+            });
+        }
+        for (var i = 0; i < prefs.hoverPriorities.length; i++) {
+            loadUserPriorities(prefs.hoverPriorities[i]);
+        }
     });
 
 
