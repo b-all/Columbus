@@ -378,11 +378,14 @@ var ForceGraphCreator = function(svg, nodes, edges){
                 .style("cursor", 'default')
                 .text(function(d){
                     var displayedProp;
-                    nodeTextProps.forEach(function (val, i, array) {
-                        if (val.label === d.labels[0]) {
-                            displayedProp = val.property;
-                        }
-                    });
+                    if (typeof nodeTextProps !== 'undefined') {
+                        nodeTextProps.forEach(function (val, i, array) {
+                            if (val.label === d.labels[0]) {
+                                displayedProp = val.property;
+                            }
+                        });
+                    }
+
 
                     var displayedText;
                     if (typeof d.data[displayedProp] !== 'undefined') {

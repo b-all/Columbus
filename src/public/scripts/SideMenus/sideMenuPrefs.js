@@ -56,7 +56,7 @@ function showSideMenuPrefs () {
 
     editableProps.append(('<h4>Graph Visualization</h4>'));
     editableProps.append(
-        '<select id="selectGraphVis" class="form-control">' +
+        '<select id="selectGraphVis" class="form-control selectGraphVis">' +
          '</select>'
     );
 
@@ -93,7 +93,7 @@ function showSideMenuPrefs () {
                         ':' +
                     '</td>' +
                     '<td>' +
-                        '<input type="text" id="nodeTextInput' + i +'" value="id">' +
+                        '<input type="text" id="nodeTextInput' + i +'" value="id" class="form-control">' +
                     '</td>' +
                 '</tr>'
             );
