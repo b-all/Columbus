@@ -104,6 +104,7 @@ function showCreateRelSideMenuFromBtn () {
         height =  docEl.clientHeight;
 
     $('.deleteBtn').hide();
+    $('.submitBtn').hide();
 
     //slide open edit view
     if (!showingSideMenu) {
