@@ -132,3 +132,30 @@ function runGetNeighborsAnimation() {
         });
     }
 }
+
+var animatingShortestPathIcon = false;
+var shortestPathAnimationIndex = 48;
+function toggleAnimateShortestPathIcon () {
+    animatingShortestPathIcon = !animatingShortestPathIcon;
+    runShortestPathAnimation();
+}
+
+function runShortestPathAnimation() {
+    if (shortestPathAnimationIndex !== 48) {
+        $('#svg_' + (shortestPathAnimationIndex - 1)).attr("fill", "#00bf00");
+    } else {
+        $('#svg_51').attr("fill", "#00bf00");
+    }
+    $('#svg_' + shortestPathAnimationIndex).attr("fill", "#ffffff");
+    if (animatingShortestPathIcon) {
+        shortestPathAnimationIndex++;
+        if (shortestPathAnimationIndex === 52) {
+            shortestPathAnimationIndex = 48;
+        }
+        setTimeout(runShortestPathAnimation, 200);
+    } else {
+        setTimeout(function () {
+            $('#svg_' + shortestPathAnimationIndex).attr("fill", "#00bf00");
+        });
+    }
+}

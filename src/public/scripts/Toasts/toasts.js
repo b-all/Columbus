@@ -6,6 +6,7 @@ function toastSuccess (msg) {
             $('.successToast').empty();
         });
     } else {
+        $('.successToast').empty();
         $('.successToast').stop(true,true).css({'display':'none'}).append(msg)
         .fadeIn().delay(2000).fadeOut(function() {
             $('.successToast').empty();
@@ -22,6 +23,7 @@ function toastFail (msg) {
             $('.failToast').empty();
         });
     } else {
+        $('.failToast').empty();
         $('.failToast').stop(true,true).css({'display':'none'}).append(msg)
         .fadeIn().delay(2000).fadeOut(function() {
             $('.failToast').empty();
@@ -37,6 +39,7 @@ function toastInfo (msg) {
             $('.infoToast').empty();
         });
     } else {
+        $('.infoToast').empty();
         $('.infoToast').stop(true,true).css({'display':'none'}).append(msg)
         .fadeIn().delay(2000).fadeOut(function() {
             $('.infoToast').empty();

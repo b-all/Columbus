@@ -275,33 +275,46 @@ function getNeighbors () {
 }
 
 function getShortestPath(startNodeId, endNodeId, callback) {
+	toggleAnimateShortestPathIcon();
+	if (startNodeId === '' || endNodeId === '') {
+		toastFail('You must enter a starting node and ending node');
+		toggleAnimateShortestPathIcon();
+		return;
+	}
 	currentRequest = $.get('getShortestPath/' + startNodeId + '/' + endNodeId).done(function(data) {
+		toggleAnimateShortestPathIcon();
 		if (!data.err) {
-			var docEl = document.documentElement,
-				bodyEl = document.getElementsByTagName('body')[0];
+			if(data.nodes.length !== 0) {
+				var docEl = document.documentElement,
+					bodyEl = document.getElementsByTagName('body')[0];
 
-			var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
-				height =  window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
+				var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
+					height =  window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
 
-			var xLoc = 0,
-				yLoc = 0;
-			// check if preferences have been stored
-		    if(typeof localStorage.columbusPreferences !== 'undefined') {
-		        var prefs = JSON.parse(localStorage.getItem('columbusPreferences'));
-		        if (prefs.graphVis === "Dynamic Force Graph") {
+				var xLoc = 0,
+					yLoc = 0;
+				// check if preferences have been stored
+			    if(typeof localStorage.columbusPreferences !== 'undefined') {
+			        var prefs = JSON.parse(localStorage.getItem('columbusPreferences'));
+			        if (prefs.graphVis === "Dynamic Force Graph") {
+						displayForceData(data, xLoc, yLoc, width, height);
+			        } else if (prefs.graphVis === "Stationary Force Graph") {
+						displayStillData(data, xLoc, yLoc, width, height);
+			        }
+			    } else {
 					displayForceData(data, xLoc, yLoc, width, height);
-		        } else if (prefs.graphVis === "Stationary Force Graph") {
-					displayStillData(data, xLoc, yLoc, width, height);
-		        }
-		    } else {
-				displayForceData(data, xLoc, yLoc, width, height);
-		    }
+			    }
+			} else {
+				toastFail("No Shortest Path Results Found");
+			}
+
 			callback(data);
 		} else {
 			console.log(data.err);
 			toastFail("There was an error communicating with the server");
 		}
 	}).fail(function(msg) {
+		toggleAnimateShortestPathIcon();
 		toastFail("There was an error communicating with the server");
 		console.log(msg);
 	});
