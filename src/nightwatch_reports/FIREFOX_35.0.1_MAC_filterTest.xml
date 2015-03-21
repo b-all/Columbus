@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites name="filterTest"
              errors="0"
-             failures="0"
-             tests="16">
+             failures="1"
+             tests="10">
   
-  <testsuite errors="0" failures="0" hostname="" id=""
+  <testsuite errors="0" failures="1" hostname="" id=""
     name="Test Filter" package="filterTest" skipped="0"
-    tests="16" time="" timestamp="">
+    tests="10" time="" timestamp="">
     
     
-      <testcase name="Element &lt;#graphContainer svg&gt; was visible after 1786 milliseconds.">
+      <testcase name="Element &lt;#graphContainer svg&gt; was visible after 1180 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 224 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 243 milliseconds.">
         
         
       </testcase>
@@ -24,7 +24,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was visible after 870 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was visible after 750 milliseconds.">
         
         
       </testcase>
@@ -34,12 +34,12 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was not visible after 1874 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was not visible after 1802 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 445 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 382 milliseconds.">
         
         
       </testcase>
@@ -49,42 +49,19 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.resultsDesc&gt; was visible after 1008 milliseconds.">
+      <testcase name="Element &lt;.resultsDesc&gt; was visible after 984 milliseconds.">
         
         
       </testcase>
     
       <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Found 1 match...&quot;.">
         
-        
-      </testcase>
-    
-      <testcase name="Element &lt;.sideMenuHeader&gt; was visible after 998 milliseconds.">
-        
-        
-      </testcase>
-    
-      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Node Properties&quot;.">
-        
-        
-      </testcase>
-    
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 492 milliseconds.">
-        
-        
-      </testcase>
-    
-      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Filter&quot;.">
-        
-        
-      </testcase>
-    
-      <testcase name="Element &lt;.resultsDesc&gt; was visible after 953 milliseconds.">
-        
-        
-      </testcase>
-    
-      <testcase name="Testing if element &lt;.resultsDesc&gt; contains text: &quot;Found 0 matches...&quot;.">
+          <failure message="Expected &quot;Found 1 match...&quot; but got: &quot;Filter
+
+Filter
+This filter will highlight nodes currently present on the screen that match your filter term.
+
+Filtered on 1 match...&quot;"></failure>
         
         
       </testcase>

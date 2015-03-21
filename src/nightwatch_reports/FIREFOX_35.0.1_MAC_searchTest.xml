@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites name="searchTest"
              errors="0"
-             failures="0"
-             tests="17">
+             failures="1"
+             tests="10">
   
-  <testsuite errors="0" failures="0" hostname="" id=""
+  <testsuite errors="0" failures="1" hostname="" id=""
     name="Test Search" package="searchTest" skipped="0"
-    tests="17" time="" timestamp="">
+    tests="10" time="" timestamp="">
     
     
-      <testcase name="Element &lt;#graphContainer svg&gt; was visible after 636 milliseconds.">
+      <testcase name="Element &lt;#graphContainer svg&gt; was visible after 1196 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 156 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 216 milliseconds.">
         
         
       </testcase>
@@ -24,7 +24,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was visible after 738 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was visible after 780 milliseconds.">
         
         
       </testcase>
@@ -34,12 +34,12 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was not visible after 1709 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was not visible after 1687 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 408 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 448 milliseconds.">
         
         
       </testcase>
@@ -49,47 +49,20 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.resultsDesc&gt; was visible after 6314 milliseconds.">
+      <testcase name="Element &lt;.resultsDesc&gt; was visible after 6387 milliseconds.">
         
         
       </testcase>
     
       <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Found&quot;.">
         
-        
-      </testcase>
-    
-      <testcase name="Element &lt;.sideMenuHeader&gt; was visible after 22 milliseconds.">
-        
-        
-      </testcase>
-    
-      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Node Properties&quot;.">
-        
-        
-      </testcase>
-    
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 7 milliseconds.">
-        
-        
-      </testcase>
-    
-      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Search&quot;.">
-        
-        
-      </testcase>
-    
-      <testcase name="Element &lt;.failToast&gt; was visible after 6680 milliseconds.">
-        
-        
-      </testcase>
-    
-      <testcase name="Testing if element &lt;.failToast&gt; contains text: &quot;No matching results&quot;.">
-        
-        
-      </testcase>
-    
-      <testcase name="Element &lt;.failToast&gt; was not visible after 2580 milliseconds.">
+          <failure message="Expected &quot;Found&quot; but got: &quot;Search
+
+Retain Currently Visualized Data:
+Search
+This search will query the database for property values matching your search term.
+
+Search returned 1 match...&quot;"></failure>
         
         
       </testcase>

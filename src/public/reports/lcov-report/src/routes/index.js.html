@@ -199,16 +199,16 @@
     <h1>Code coverage report for <span class="entity">src/routes/index.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">93.13% <small>(149 / 160)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">94.04% <small>(142 / 151)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">80% <small>(32 / 40)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">81.58% <small>(31 / 38)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class="metric">100% <small>(30 / 30)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(29 / 29)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">93.13% <small>(149 / 160)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">94.04% <small>(142 / 151)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
@@ -846,7 +846,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -888,14 +888,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -906,7 +898,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1219,7 +1219,7 @@ router.get('/getNeighbors/:id', function(req,res,next) {
 	// query to get nodes connected to the id provided
 	var q_nodes = 'START p=node('+ id +') MATCH (p) - [] - (n) RETURN distinct n';
 	// query to get the node of the id provided
-	var q_thisNode = 'START n=node('+ id +') RETURN n';
+	//var q_thisNode = 'START n=node('+ id +') RETURN n';
 	// query to get the relationships of the id provided
 	var q_rels = 'START n=node('+ id +') MATCH (n) - [r] - () RETURN distinct r';
 &nbsp;
@@ -1261,10 +1261,10 @@ router.get('/getNeighbors/:id', function(req,res,next) {
 						});
 					}
 &nbsp;
-					db.query(q_thisNode, null, function(err, results) {
-						<span class="missing-if-branch" title="if path not taken" >I</span>if (err) { // if error send blank response
-<span class="cstat-no" title="statement not covered" >							console.log(err);</span>
-<span class="cstat-no" title="statement not covered" >							res.send({err:"Cannot communicate with Neo4j database."});</span>
+					/*db.query(q_thisNode, null, function(err, results) {
+						if (err) { // if error send blank response
+							console.log(err);
+							res.send({err:"Cannot communicate with Neo4j database."});
 						} else {
 							var thisNodeArray = [];
 							for (var i = 0; i &lt; results.length; i++) {
@@ -1279,7 +1279,7 @@ router.get('/getNeighbors/:id', function(req,res,next) {
 								});
 &nbsp;
 							}
-							nodeArray.push(thisNodeArray[0]);
+							nodeArray.push(thisNodeArray[0]);*/
 &nbsp;
 							var graph = {
 								nodes: nodeArray,
@@ -1287,8 +1287,8 @@ router.get('/getNeighbors/:id', function(req,res,next) {
 							};
 							// send graph data back to client
 							res.send(JSON.stringify(graph));
-						}
-					});
+					/*	}
+				});*/
 				}
 			});
 		}
@@ -1340,7 +1340,7 @@ module.exports = router;
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Feb 24 2015 16:33:44 GMT-0500 (EST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Mar 21 2015 09:33:56 GMT-0400 (EDT)</div>
 </div>
 
 <script src="../../prettify.js"></script>

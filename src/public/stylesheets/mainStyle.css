@@ -82,7 +82,7 @@
 }
 
 .propertyTable {
-	width:85%;
+	width:96%;
 }
 
 .propertyTable td {
@@ -90,7 +90,7 @@
 }
 
 .priorityPrefTable {
-	width:85%;
+	width:96%;
 }
 
 .priorityPrefTable td {
@@ -171,6 +171,8 @@
 }
 
 .createLabelInput {
+	width: 100%;
+	margin-right: -10px;
 	background-color: #FEEAAC;
 	border-radius: 5px;
 	border:none;
@@ -224,7 +226,7 @@
 }
 
 #searchTable, #filterTable{
-	width: 95%;
+	margin-right:10px;
 	margin-bottom:20px;
 	background-color: #FFFFFF;
 	border-radius: 5px;
@@ -234,7 +236,6 @@
 
 #searchTable td, #filterTable td {
 	padding:10px;
-	margin:4px;
 }
 
 .nodeDataHover {
@@ -271,5 +272,13 @@
 }
 
 #filterSpace, #searchSpace {
-	margin: 8px;
+
+}
+
+#editableProperties {
+	margin-right:10px;
+}
+
+.selectEndNodeBtn, .selectStartNodeBtn {
+	width:100px;
 }

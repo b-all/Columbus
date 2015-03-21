@@ -39,7 +39,8 @@ function showCreateNodeSideMenu(xycoords) {
     editableProps.empty();
     var labelInput = "<table class=\"createLabelInput\">" +
                             "<tr>" +
-                                "<td>Label:&nbsp;&nbsp;</td>" +
+                                "<td>Label&nbsp;&nbsp;</td>" +
+                                "<td>:</td>" +
                                 "<td>" +
                                     "<input type=\"text\" class=\"form-control labelInput\"></input>"+
                                 "</td>" +
