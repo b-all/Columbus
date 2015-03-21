@@ -74,6 +74,16 @@ $(document).ready(function() {
     } else {
         pullGraph(displayForceData);
     }
+    $('[data-toggle="tooltip2"]').tooltip({'placement': 'bottom'});
+    $('[data-toggle="tooltip3"]').tooltip({'placement': 'bottom'});
+    $('[data-toggle="tooltip4"]').tooltip({'placement': 'bottom'});
+    $('[data-toggle="tooltip5"]').tooltip({'placement': 'bottom'});
+    $('[data-toggle="tooltip6"]').tooltip({'placement': 'bottom'});
+    $('[data-toggle="tooltip7"]').tooltip({'placement': 'bottom'});
+    $('[data-toggle="tooltip8"]').tooltip({'placement': 'bottom'});
+    $('[data-toggle="tooltip9"]').tooltip({'placement': 'bottom'});
+    $('[data-toggle="tooltip10"]').tooltip({'placement': 'bottom'});
+    $('[data-toggle="tooltip11"]').tooltip({'placement': 'bottom'});
 });
 
 function toggleInfoOnHover() {

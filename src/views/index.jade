@@ -4,30 +4,30 @@ block content
 	.navigationBar
 		.navBarBtnList
 			span
-				button.btn.btn-success.navBarBtn#getNeighborBtn(onclick="getNeighbors()")
+				button.btn.btn-success.navBarBtn#getNeighborBtn(onclick="getNeighbors()" data-container="body" data-toggle="tooltip2" title="Tree Walk: Get neighbors of a node" data-delay="2000")
 					svg(width="20" height="20")
 						use(xlink:href="#getNeighborsIcon")
-				button.btn.btn-success.navBarBtn#shortestPathBtn(onclick="showShortestPathSideMenu()")
+				button.btn.btn-success.navBarBtn#shortestPathBtn(onclick="showShortestPathSideMenu()" data-container="body" data-toggle="tooltip3" title="Shortest Path: Display all shortest paths between 2 nodes" data-delay="2000")
 					svg(width="25" height="25")
 						use(xlink:href="#shortestPathIcon")
-				//button.btn.btn-success.navBarBtn#hideNodeAndNeighborsBtn(onclick="hideNodeAndNeighbors()")
+				//button.btn.btn-success.navBarBtn#hideNodeAndNeighborsBtn(onclick="hideNodeAndNeighbors()" data-container="body" data-toggle="tooltip11" title="Remove node from current display" data-delay="2000")
 					svg(width="25" height="25")
 						use(xlink:href="#hideNodeAndNeighborsIcon")
-				button.btn.btn-success.navBarBtn#createNodeBtn(onclick="showCreateNodeSideMenu([0,0])")
+				button.btn.btn-success.navBarBtn#createNodeBtn(onclick="showCreateNodeSideMenu([0,0])" data-container="body" data-toggle="tooltip4" title="Create a new node" data-delay="2000")
 					svg(width="30" height="30")
 						use(xlink:href="#createNodeIcon")
-				button.btn.btn-success.navBarBtn#createRelBtn(onclick="showCreateRelSideMenuFromBtn()")
+				button.btn.btn-success.navBarBtn#createRelBtn(onclick="showCreateRelSideMenuFromBtn()" data-container="body" data-toggle="tooltip5" title="Create a new relationship" data-delay="2000")
 					svg(width="25" height="25")
 						use(xlink:href="#createRelIcon")
-				button.btn.btn-success.navBarBtn#menuPrefsBtn(onclick="showSideMenuPrefs()")
+				button.btn.btn-success.navBarBtn#menuPrefsBtn(onclick="showSideMenuPrefs()" data-container="body" data-toggle="tooltip6" title="Customize preferences" data-delay="2000")
 					i.glyphicon.glyphicon-menu-hamburger
-				button.btn.btn-success.navBarBtn#hoverInfoBtn(onclick="toggleInfoOnHover()")
+				button.btn.btn-success.navBarBtn#hoverInfoBtn(onclick="toggleInfoOnHover()" data-container="body" data-toggle="tooltip7" title="Toggle hover mode to view properties" data-delay="2000")
 					i.glyphicon.glyphicon-hand-up
-				button.btn.btn-success.navBarBtn#filterBtn(onclick="toggleFilter()")
+				button.btn.btn-success.navBarBtn#filterBtn(onclick="toggleFilter()" data-container="body" data-toggle="tooltip8" title="Filter on the currently displayed data" data-delay="2000")
 					i.glyphicon.glyphicon-filter
-				button.btn.btn-success.navBarBtn#searchBtn(onclick="toggleSearch()")
+				button.btn.btn-success.navBarBtn#searchBtn(onclick="toggleSearch()" data-container="body" data-toggle="tooltip9" title="Search the entire database" data-delay="2000")
 					i.glyphicon.glyphicon-search
-				button.btn.btn-success.navBarBtn#advancedModeBtn(onclick="toggleAdvancedMode()")
+				button.btn.btn-success.navBarBtn#advancedModeBtn(onclick="toggleAdvancedMode()" data-container="body" data-toggle="tooltip10" title="Advanced Mode: Directly enter Cypher queries to the database" data-delay="2000")
 					i.glyphicon.glyphicon-sunglasses
 
 	br
