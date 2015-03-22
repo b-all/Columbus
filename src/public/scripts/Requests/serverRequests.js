@@ -192,7 +192,10 @@ function search(target, callback) {
 		if (!data.err) {
 
 			if ($('#additiveSearchCheckbox').prop("checked")){
+				var dataCopy = JSON.parse(JSON.stringify(data));
 				graph.addNodeNeighbors(data);
+				currentData.nodes = currentData.nodes.concat(dataCopy.nodes).unique();
+				currentData.relationships = currentData.relationships.concat(dataCopy.relationships);
 			} else {
 				displayData(data);
 			}
@@ -242,7 +245,11 @@ function getNeighbors () {
 
 			    var xLoc = 0,
 			        yLoc = 0;
+				var dataCopy = JSON.parse(data);
 				graph.addNodeNeighbors(JSON.parse(data));
+
+				currentData.nodes = currentData.nodes.concat(dataCopy.nodes).unique();
+				currentData.relationships = currentData.relationships.concat(dataCopy.relationships).unique();
 
 			} else {
 				console.log(data.err);
@@ -323,3 +330,15 @@ function displayData (data) {
 		displayForceData(data, xLoc, yLoc, width, height);
 	}
 }
+
+Array.prototype.unique = function() {
+    var a = this.concat();
+    for(var i=0; i<a.length; ++i) {
+        for(var j=i+1; j<a.length; ++j) {
+            if(a[i] === a[j])
+                a.splice(j--, 1);
+        }
+    }
+
+    return a;
+};
