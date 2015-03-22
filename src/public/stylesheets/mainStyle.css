@@ -71,9 +71,11 @@
 }
 
 .addPropBtn {
-	margin-left: 20px;
-	margin-bottom: 10px;
-	display:none;
+	cursor: pointer;
+}
+
+.addPropBtn:hover {
+	background-color: rgba(0,255,0, .1);
 }
 
 .deletePropBtn:hover {

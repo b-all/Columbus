@@ -71,9 +71,8 @@ function showCreateNodeSideMenu(xycoords) {
 
 }
 
-function addProperty () {
+function addProperty (index) {
     //remove add button
-    $('.addPropBtn').remove();
     var editablePropertiesTable = $('#editableProperties > .propertyTable');
     var newRow = "<tr>" +
                     "<td>" +
@@ -86,25 +85,43 @@ function addProperty () {
                         "<input type=\"text\" class=\"form-control pValueInput\"></input>" +
                     "</td>" +
                     "<td>" +
+                        "<span class=\"addPropBtn\">"+
+                            "<i class=\"glyphicon glyphicon-plus\"></i>" +
+                        "</span>"+
+                    "</td>" +
+                    "<td>" +
                         "<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
                             "<use xlink:href=\"#deleteSVG\">" +
                         "</svg>" +
                     "</td>" +
                 "</tr>";
 
-    editablePropertiesTable.append(newRow);
-    var justAddedRow = $('tr', editablePropertiesTable).last();
+    var justAddedRow;
+    if (typeof index === 'undefined') {
+        editablePropertiesTable.append(newRow);
+        justAddedRow = $('tr', editablePropertiesTable).last();
+    } else {
+        $('tr:nth-child('+ (index + 1) +')', editablePropertiesTable).after(newRow);
+        justAddedRow = $('tr:nth-child('+ (index + 2) +')', editablePropertiesTable);
+    }
+    $('.deletePropBtn').hide();
 
     $('.deletePropBtn', justAddedRow).on('click', function() {
-        justAddedRow.remove();
+        if ($('tr', editablePropertiesTable).length > 2) {
+            justAddedRow.remove();
+        }
+        if ($('tr', editablePropertiesTable).length <= 2) {
+            $('.deletePropBtn').hide();
+        }
+    });
+    $('.addPropBtn', justAddedRow).on('click', function() {
+        var index = $('tr', editablePropertiesTable).index(justAddedRow);
+        addProperty(index);
+        if($('tr', editablePropertiesTable).length > 2) {
+            $('.deletePropBtn').show();
+        }
     });
 
-    //attach add button below table
-    $('#editableProperties').append("<button class=\"btn btn-default addPropBtn\">Add</button>");
-    $('.addPropBtn').show();
-    $('.addPropBtn').on('click', function () {
-        addProperty();
-    });
 }
 
 function gatherPropsForReq() {

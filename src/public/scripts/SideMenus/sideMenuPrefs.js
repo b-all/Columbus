@@ -93,11 +93,7 @@ function showSideMenuPrefs () {
 
         //build hover priorities section
         editableProps.append('<h4>Hover Priorities</h4>');
-        editableProps.append("<button class=\"btn btn-default addPropBtn\">Add</button>");
-        $('.addPropBtn').show();
-        $('.addPropBtn').on('click', function () {
-            addHoverPriority();
-        });
+        addHoverPriority();
     });
 
     $('#sideMenu').on('click', function () {
@@ -109,8 +105,9 @@ function showSideMenuPrefs () {
 }
 
 /** makes an row for adding a hover priority by label **/
-function addHoverPriority () {
+function addHoverPriority (index) {
     //load all labels from database
+    var index = index || 0;
     if (labelNames.length === 0) {
         $('#loader').show();
         requesting = true;
@@ -118,11 +115,16 @@ function addHoverPriority () {
             requesting = false;
             labelNames = data;
             $('#loader').hide();
-            $('#editableProperties').append(
+            var newTable =
                 '<table class="priorityPrefTable">' +
                     '<tr>'+
                         '<td>Label : </td>' +
                         '<td><select id="labelSelect'+ numPriorities+ '" class="form-control selectLabel"></select></td>' +
+                        '<td rowspan="2">' +
+                            '<span class=\"addPropBtn\">' +
+                                '<i class=\"glyphicon glyphicon-plus\"></i>' +
+                            '</span>' +
+                        '</td>' +
                         '<td rowspan="2">' +
                             "<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
                                 "<use xlink:href=\"#deleteSVG\">" +
@@ -138,15 +140,19 @@ function addHoverPriority () {
                             '<br />' +
                         '</td>' +
                     '</tr>' +
-                '</table>'
-            );
+                '</table>';
+            if ($('.priorityPrefTable').length > 1) {
+                $('.priorityPrefTable:eq('+index+')').after(newTable);
+            } else {
+                $('#editableProperties').append(newTable);
+            }
             for (var i = 0; i < data.length; i++) {
                 $('#labelSelect' + numPriorities).append(
                     '<option>' + data[i] + '</option>'
                 );
             }
 
-            // set click listeners for delete buttons
+            // set click listeners for delete and add buttons
             $('tr', '.priorityPrefTable').each(function (){
                 var table = $(this).parent().parent();
                 $('.deletePropBtn', table).off('click');
@@ -159,24 +165,42 @@ function addHoverPriority () {
                         $('input', this).attr('id', 'priorityRule' + i);
                         i++;
                     });
+                    $('.deletePropBtn').hide();
+                    if($('.priorityPrefTable').length > 1) {
+                        $('.deletePropBtn').show();
+                    }
+                });
+                $('.addPropBtn', table).off('click');
+                $('.addPropBtn', table).on('click', function() {
+                    var index = $('.priorityPrefTable').index(table);
+                    addHoverPriority(index);
+                    var i = 0;
+                    $('.priorityPrefTable').each(function () {
+                        $('select', this).attr('id', 'labelSelect' + i);
+                        $('input', this).attr('id', 'priorityRule' + i);
+                        i++;
+                    });
                 });
             });
 
+            $('.deletePropBtn').hide();
+            if($('.priorityPrefTable').length > 1) {
+                $('.deletePropBtn').show();
+            }
             numPriorities++;
-            $('.addPropBtn').remove();
-            $('#editableProperties').append("<button class=\"btn btn-default addPropBtn\">Add</button>");
-            $('.addPropBtn').show();
-            $('.addPropBtn').on('click', function () {
-                addHoverPriority();
-            });
         });
     } else {
         // build drop down menu
-        $('#editableProperties').append(
+        var newTable =
             '<table class="priorityPrefTable">' +
                 '<tr>'+
                     '<td>Label : </td>' +
                     '<td><select id="labelSelect'+ numPriorities+ '" class="form-control selectLabel"></select></td>' +
+                    '<td rowspan="2">' +
+                        '<span class=\"addPropBtn\">' +
+                            '<i class=\"glyphicon glyphicon-plus\"></i>' +
+                        '</span>' +
+                    '</td>' +
                     '<td rowspan="2">' +
                         "<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
                             "<use xlink:href=\"#deleteSVG\">" +
@@ -192,15 +216,20 @@ function addHoverPriority () {
                         '<br />' +
                     '</td>' +
                 '</tr>' +
-            '</table>'
-        );
+            '</table>';
+        if ($('.priorityPrefTable').length > 1) {
+            $('.priorityPrefTable:eq('+index+')').after(newTable);
+        } else {
+            $('#editableProperties').append(newTable);
+        }
+
         for (var i = 0; i < labelNames.length; i++) {
             $('#labelSelect' + numPriorities).append(
                 '<option>' + labelNames[i] + '</option>'
             );
         }
 
-        // set click listeners for delete buttons
+        // set click listeners for delete and add buttons
         $('tr', '.priorityPrefTable').each(function (){
             var table = $(this).parent().parent();
             $('.deletePropBtn', table).off('click');
@@ -213,19 +242,29 @@ function addHoverPriority () {
                     $('input', this).attr('id', 'priorityRule' + i);
                     i++;
                 });
+                $('.deletePropBtn').hide();
+                if($('.priorityPrefTable').length > 1) {
+                    $('.deletePropBtn').show();
+                }
+            });
+            $('.addPropBtn', table).off('click');
+            $('.addPropBtn', table).on('click', function() {
+                var index = $('.priorityPrefTable').index(table);
+                addHoverPriority(index);
+                var i = 0;
+                $('.priorityPrefTable').each(function () {
+                    $('select', this).attr('id', 'labelSelect' + i);
+                    $('input', this).attr('id', 'priorityRule' + i);
+                    i++;
+                });
             });
         });
 
-
+        $('.deletePropBtn').hide();
+        if($('.priorityPrefTable').length > 1) {
+            $('.deletePropBtn').show();
+        }
         numPriorities++;
-
-        // reposition add button
-        $('.addPropBtn').remove();
-        $('#editableProperties').append("<button class=\"btn btn-default addPropBtn\">Add</button>");
-        $('.addPropBtn').show();
-        $('.addPropBtn').on('click', function () {
-            addHoverPriority();
-        });
     }
 }
 
@@ -352,11 +391,16 @@ function loadUserPreferences (prefs) {
 function loadUserPriorities (hoverPriority) {
     //load all labels from database
     // build drop down menu
-    $('#editableProperties').append(
+    var newTable =
         '<table class="priorityPrefTable">' +
             '<tr>'+
                 '<td>Label : </td>' +
                 '<td><select id="labelSelect'+ numPriorities+ '" class="form-control selectLabel"></select></td>' +
+                '<td rowspan="2">' +
+                    '<span class=\"addPropBtn\">' +
+                        '<i class=\"glyphicon glyphicon-plus\"></i>' +
+                    '</span>' +
+                '</td>' +
                 '<td rowspan="2">' +
                     "<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
                         "<use xlink:href=\"#deleteSVG\">" +
@@ -373,8 +417,8 @@ function loadUserPriorities (hoverPriority) {
                     '<br />' +
                 '</td>' +
             '</tr>' +
-        '</table>'
-    );
+        '</table>';
+    $('#editableProperties').append(newTable);
     for (var i = 0; i < labelNames.length; i++) {
         var element;
         if (hoverPriority.label === labelNames[i]) {
@@ -385,7 +429,7 @@ function loadUserPriorities (hoverPriority) {
         $('#labelSelect' + numPriorities).append(element);
     }
 
-    // set click listeners for delete buttons
+    // set click listeners for delete and add buttons
     $('tr', '.priorityPrefTable').each(function (){
         var table = $(this).parent().parent();
         $('.deletePropBtn', table).off('click');
@@ -397,20 +441,32 @@ function loadUserPriorities (hoverPriority) {
                 $('input', this).attr('id', 'priorityRule' + i);
                 i++;
             });
+            $('.deletePropBtn').hide();
+            if($('.priorityPrefTable').length > 1) {
+                $('.deletePropBtn').show();
+            }
             numPriorities--;
+        });
+        $('.addPropBtn', table).off('click');
+        $('.addPropBtn', table).on('click', function() {
+            var index = $('.priorityPrefTable').index(table);
+            addHoverPriority(index);
+            var i = 0;
+            $('.priorityPrefTable').each(function () {
+                $('select', this).attr('id', 'labelSelect' + i);
+                $('input', this).attr('id', 'priorityRule' + i);
+                i++;
+            });
         });
     });
 
+    $('.deletePropBtn').hide();
+    if($('.priorityPrefTable').length > 1) {
+        $('.deletePropBtn').show();
+    }
+
 
     numPriorities++;
-
-    // reposition add button
-    $('.addPropBtn').remove();
-    $('#editableProperties').append("<button class=\"btn btn-default addPropBtn\">Add</button>");
-    $('.addPropBtn').show();
-    $('.addPropBtn').on('click', function () {
-        addHoverPriority();
-    });
 }
 
 function refreshGraphWithDifferentVis () {
