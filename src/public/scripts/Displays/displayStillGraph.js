@@ -1,4 +1,3 @@
-var graph, labels, c = colors;
 var displayStillData = function (initialGraph, xLoc, yLoc, width, height) {
     /**
      * Basic data model
@@ -10,6 +9,7 @@ var displayStillData = function (initialGraph, xLoc, yLoc, width, height) {
     */
 
     // initial node data
+    currentData = JSON.parse(JSON.stringify(initialGraph));
     nodes = initialGraph.nodes;
     edges = initialGraph.relationships;
 

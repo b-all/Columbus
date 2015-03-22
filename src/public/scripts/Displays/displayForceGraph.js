@@ -1,4 +1,4 @@
-var graph, labels, c = colors;
+var graph, labels, c = colors, currentData;
 var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
     /**
      * Basic data model
@@ -10,6 +10,7 @@ var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
     */
 
     // initial node data
+    currentData = JSON.parse(JSON.stringify(initialGraph));
     nodes = initialGraph.nodes;
     edges = initialGraph.relationships;
 
@@ -40,39 +41,6 @@ var displayForceData = function (initialGraph, xLoc, yLoc, width, height) {
     var colorIndex;
     var lablen = Object.keys(labels).length;
 
-    //Attempt at randomizing color algorithm
-    // var colorA = [];
-    // var rc,gc,bc;
-    // var maxc = 0xff + 0xff + 0x80;
-    // var minc = 0xa0;
-    // var mindiff = 0x60;
-    // for(colorIndex = 0; colorIndex<=lablen; colorIndex++){
-    //   rc = Math.floor(Math.random() * 255);
-    //   gc = Math.floor(Math.random() * 255);
-    //   bc = Math.floor(Math.random() * 255);
-    //   var csum = rc+bc+gc;
-    //   if(csum > maxc || csum < minc){
-    //     colorIndex--;
-    //     continue;
-    //   } else {  //Check different than other colors
-    //     for(var li=0; li<colorIndex; li++){
-    //       var diff = Math.abs(rc - getRed(colorA[li]));
-    //       diff += Math.abs(gc - getGreen(colorA[li]));
-    //       diff += Math.abs(bc - getBlue(colorA[li]));
-    //       if(diff < mindiff){
-    //         colorIndex--;
-    //         continue;
-    //       }
-    //     }
-    //     if(!(diff < mindiff)){  //Add if was unique enough
-    //       // colorA[colorIndex] = makeColor(rc,gc,bc);
-    //       colorA.push(makeColor(rc,gc,bc));
-    //     }else if(colorIndex === 0){
-    //       // colorA[colorIndex] = makeColor(rc,gc,bc);
-    //       colorA.push(makeColor(rc,gc,bc));
-    //     }
-    //   }
-    // }
     colorIndex = -1; //reset color index
 
     for (var index in labels) {
@@ -218,20 +186,4 @@ function createLabelKey() {
     $('#labelKey').empty();
     $('#labelKey').append(labelKeyString);
     $('#labelKey').show();
-}
-
-function getRed(color) {
-  return color / 0x10000;
-}
-
-function getGreen(color) {
-  return (color % 0x10000) / 0x100;
-}
-
-function getBlue(color) {
-  return color % 0x100;
-}
-
-function makeColor(rc, gc, bc){
-  return '#'+(rc*0x10000 + gc*0x100 + bc).toString(16);
 }

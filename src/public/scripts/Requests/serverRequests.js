@@ -17,6 +17,7 @@ function pullGraph(callback) {
 			return;
 		}
 		data = JSON.parse(data);
+
 		if (typeof callback !== 'undefined') {
 			callback(data, xLoc, yLoc, width, height);
 		} else {
@@ -180,15 +181,6 @@ function getSingleRel(relId, callback) {
 }
 
 function search(target, callback) {
-	var docEl = document.documentElement,
-	bodyEl = document.getElementsByTagName('body')[0];
-
-	var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
-	height =  window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
-
-	var xLoc = width/2 - 300,
-		yLoc = 200;
-
 	if (typeof target === 'undefined' || target === '') {
 		pullGraph();
 		return;
@@ -202,17 +194,7 @@ function search(target, callback) {
 			if ($('#additiveSearchCheckbox').prop("checked")){
 				graph.addNodeNeighbors(data);
 			} else {
-				// check if preferences have been stored
-			    if(typeof localStorage.columbusPreferences !== 'undefined') {
-			        var prefs = JSON.parse(localStorage.getItem('columbusPreferences'));
-			        if (prefs.graphVis === "Dynamic Force Graph") {
-						displayForceData(data, xLoc, yLoc, width, height);
-			        } else if (prefs.graphVis === "Stationary Force Graph") {
-						displayStillData(data, xLoc, yLoc, width, height);
-			        }
-			    } else {
-					displayForceData(data, xLoc, yLoc, width, height);
-			    }
+				displayData(data);
 			}
 
 			callback(data.matches);
@@ -285,25 +267,7 @@ function getShortestPath(startNodeId, endNodeId, callback) {
 		toggleAnimateShortestPathIcon();
 		if (!data.err) {
 			if(data.nodes.length !== 0) {
-				var docEl = document.documentElement,
-					bodyEl = document.getElementsByTagName('body')[0];
-
-				var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
-					height =  window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
-
-				var xLoc = 0,
-					yLoc = 0;
-				// check if preferences have been stored
-			    if(typeof localStorage.columbusPreferences !== 'undefined') {
-			        var prefs = JSON.parse(localStorage.getItem('columbusPreferences'));
-			        if (prefs.graphVis === "Dynamic Force Graph") {
-						displayForceData(data, xLoc, yLoc, width, height);
-			        } else if (prefs.graphVis === "Stationary Force Graph") {
-						displayStillData(data, xLoc, yLoc, width, height);
-			        }
-			    } else {
-					displayForceData(data, xLoc, yLoc, width, height);
-			    }
+				displayData(data);
 			} else {
 				toastFail("No Shortest Path Results Found");
 			}
@@ -336,4 +300,26 @@ function advMode(target, callback) {
 function getBaseURL () {
 	return location.protocol + "//" + location.hostname +
 			(location.port && ":" + location.port) + "/";
+}
+
+function displayData (data) {
+	var docEl = document.documentElement,
+		bodyEl = document.getElementsByTagName('body')[0];
+
+	var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
+		height =  window.innerHeight|| docEl.clientHeight|| bodyEl.clientHeight;
+
+	var xLoc = 0,
+		yLoc = 0;
+	// check if preferences have been stored
+	if(typeof localStorage.columbusPreferences !== 'undefined') {
+		var prefs = JSON.parse(localStorage.getItem('columbusPreferences'));
+		if (prefs.graphVis === "Dynamic Force Graph") {
+			displayForceData(data, xLoc, yLoc, width, height);
+		} else if (prefs.graphVis === "Stationary Force Graph") {
+			displayStillData(data, xLoc, yLoc, width, height);
+		}
+	} else {
+		displayForceData(data, xLoc, yLoc, width, height);
+	}
 }

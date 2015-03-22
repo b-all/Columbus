@@ -471,16 +471,6 @@ function loadUserPriorities (hoverPriority) {
 
 function refreshGraphWithDifferentVis () {
     var viz = $('#selectGraphVis').val();
-    if (viz !== currentGraphVis) {
-        switch(viz) {
-            case "Dynamic Force Graph":
-                pullGraph(displayForceData);
-                break;
-            case "Stationary Force Graph":
-                pullGraph(displayStillData);
-                break;
-            default:
-                break;
-        }
-    }
+
+    displayData(currentData);
 }
