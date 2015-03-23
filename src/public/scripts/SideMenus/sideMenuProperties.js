@@ -51,6 +51,28 @@ var showNodeData = function (d) {
 							"<td> : </td>" +
 							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + escapeHtml(d.data[i]) + "\"></input></td>" +
 							"<td>" +
+		                        "<span class=\"addPropBtn\">"+
+		                            "<i class=\"glyphicon glyphicon-plus\"></i>" +
+		                        "</span>"+
+		                    "</td>" +
+							"<td>" +
+								"<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
+									"<use xlink:href=\"#deleteSVG\">" +
+								"</svg>" +
+							"</td>" +
+						"</tr>";
+	}
+	if (Object.keys(d.data).length === 0) {
+		ePropsString += "<tr>" +
+							"<td><input type=\"text\" class=\"form-control pNameInput\"></input></td>" +
+							"<td> : </td>" +
+							"<td><input type=\"text\" class=\"form-control pValueInput\"></input></td>" +
+							"<td>" +
+		                        "<span class=\"addPropBtn\">"+
+		                            "<i class=\"glyphicon glyphicon-plus\"></i>" +
+		                        "</span>"+
+		                    "</td>" +
+							"<td>" +
 								"<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
 									"<use xlink:href=\"#deleteSVG\">" +
 								"</svg>" +
@@ -59,18 +81,26 @@ var showNodeData = function (d) {
 	}
 	ePropsString += "</table>";
 	editableProps.append(ePropsString);
+	if ($('tr', '#editableProperties > .propertyTable').length <= 1) {
+		$('.deletePropBtn').hide();
+	}
 	$('tr', editableProps).each(function (){
 		var row = this;
 		$('.deletePropBtn', row).on('click', function() {
-			$(row).remove();
+			if ($('tr', '#editableProperties > .propertyTable').length > 1) {
+	            $(row).remove();
+	        }
+	        if ($('tr', '#editableProperties > .propertyTable').length <= 1) {
+	            $('.deletePropBtn').hide();
+	        }
 		});
-	});
-
-
-	editableProps.append("<button class=\"btn btn-default addPropBtn\">Add</button>");
-	$('.addPropBtn').show();
-	$('.addPropBtn').on('click', function () {
-		addProperty();
+		$('.addPropBtn', row).on('click', function() {
+	        var index = $('tr', '#editableProperties > .propertyTable').index(row);
+	        addPropertyUpdate(index);
+	        if($('tr', '#editableProperties > .propertyTable').length > 1) {
+	            $('.deletePropBtn').show();
+	        }
+	    });
 	});
 
 	$('#sideMenu').on('click', function () {
@@ -158,6 +188,28 @@ var showRelData = function (d) {
 							"<td> : </td>" +
 							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + escapeHtml(d.data[i]) + "\"></input></td>" +
 							"<td>" +
+		                        "<span class=\"addPropBtn\">"+
+		                            "<i class=\"glyphicon glyphicon-plus\"></i>" +
+		                        "</span>"+
+		                    "</td>" +
+							"<td>" +
+								"<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
+									"<use xlink:href=\"#deleteSVG\">" +
+								"</svg>" +
+							"</td>" +
+						"</tr>";
+	}
+	if (Object.keys(d.data).length === 0) {
+		ePropsString += "<tr>" +
+							"<td><input type=\"text\" class=\"form-control pNameInput\" value=\"" +  + "\"></input></td>" +
+							"<td> : </td>" +
+							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + + "\"></input></td>" +
+							"<td>" +
+		                        "<span class=\"addPropBtn\">"+
+		                            "<i class=\"glyphicon glyphicon-plus\"></i>" +
+		                        "</span>"+
+		                    "</td>" +
+							"<td>" +
 								"<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
 									"<use xlink:href=\"#deleteSVG\">" +
 								"</svg>" +
@@ -165,20 +217,30 @@ var showRelData = function (d) {
 						"</tr>";
 	}
 	ePropsString += "</table>";
+
 	editableProps.append(ePropsString);
+	if ($('tr', '#editableProperties > .propertyTable').length <= 1) {
+		$('.deletePropBtn').hide();
+	}
 
 	//set delete button on click
 	$('tr', editableProps).each(function (){
 		var row = this;
 		$('.deletePropBtn', row).on('click', function() {
-			$(row).remove();
+			if ($('tr', '#editableProperties > .propertyTable').length > 1) {
+				$(row).remove();
+			}
+			if ($('tr', '#editableProperties > .propertyTable').length <= 1) {
+				$('.deletePropBtn').hide();
+			}
 		});
-	});
-
-	editableProps.append("<button class=\"btn btn-default addPropBtn\">Add</button>");
-	$('.addPropBtn').show();
-	$('.addPropBtn').on('click', function () {
-		addProperty();
+		$('.addPropBtn', row).on('click', function() {
+	        var index = $('tr', '#editableProperties > .propertyTable').index(row);
+	        addPropertyUpdate(index);
+	        if($('tr', '#editableProperties > .propertyTable').length > 1) {
+	            $('.deletePropBtn').show();
+	        }
+	    });
 	});
 
 	$('#sideMenu').on('click', function () {
@@ -286,4 +348,57 @@ function escapeHtml(unsafe) {
 		.replace(/>/g, "&gt;")
 		.replace(/"/g, "&quot;")
 		.replace(/'/g, "&#039;");
+}
+
+function addPropertyUpdate (index) {
+    //remove add button
+    var editablePropertiesTable = $('#editableProperties > .propertyTable');
+    var newRow = "<tr>" +
+                    "<td>" +
+                        "<input type=\"text\" class=\"form-control pNameInput\"></input>" +
+                    "</td>" +
+                    "<td>" +
+                        ":" +
+                    "</td>" +
+                    "<td>" +
+                        "<input type=\"text\" class=\"form-control pValueInput\"></input>" +
+                    "</td>" +
+                    "<td>" +
+                        "<span class=\"addPropBtn\">"+
+                            "<i class=\"glyphicon glyphicon-plus\"></i>" +
+                        "</span>"+
+                    "</td>" +
+                    "<td>" +
+                        "<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
+                            "<use xlink:href=\"#deleteSVG\">" +
+                        "</svg>" +
+                    "</td>" +
+                "</tr>";
+
+    var justAddedRow;
+    if (typeof index === 'undefined') {
+        editablePropertiesTable.append(newRow);
+        justAddedRow = $('tr', editablePropertiesTable).last();
+    } else {
+        $('tr:nth-child('+ (index + 1) +')', editablePropertiesTable).after(newRow);
+        justAddedRow = $('tr:nth-child('+ (index + 2) +')', editablePropertiesTable);
+    }
+    $('.deletePropBtn').hide();
+
+    $('.deletePropBtn', justAddedRow).on('click', function() {
+        if ($('tr', editablePropertiesTable).length > 1) {
+            justAddedRow.remove();
+        }
+        if ($('tr', editablePropertiesTable).length <= 1) {
+            $('.deletePropBtn').hide();
+        }
+    });
+    $('.addPropBtn', justAddedRow).on('click', function() {
+        var index = $('tr', editablePropertiesTable).index(justAddedRow);
+        addPropertyUpdate(index);
+        if($('tr', editablePropertiesTable).length > 1) {
+            $('.deletePropBtn').show();
+        }
+    });
+
 }
