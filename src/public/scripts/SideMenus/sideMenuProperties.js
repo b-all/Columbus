@@ -204,9 +204,9 @@ var showRelData = function (d) {
 	}
 	if (Object.keys(d.data).length === 0) {
 		ePropsString += "<tr>" +
-							"<td><input type=\"text\" class=\"form-control pNameInput\" value=\"" +  + "\"></input></td>" +
+							"<td><input type=\"text\" class=\"form-control pNameInput\" value=\"\"></input></td>" +
 							"<td> : </td>" +
-							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + + "\"></input></td>" +
+							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"\"></input></td>" +
 							"<td>" +
 		                        "<span class=\"addPropBtn\">"+
 		                            "<i class=\"glyphicon glyphicon-plus\"></i>" +

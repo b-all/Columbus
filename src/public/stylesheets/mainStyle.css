@@ -230,8 +230,12 @@
 #loader {
 	position:fixed;
 	display: none;
-	top: 70px;
-	right: 28px;
+	top: 54px;
+	right: 410px;
+	background-color: rgba(230,230,230,1);
+	padding: 4px;
+	border-radius: 4px;
+	z-index:200;
 }
 
 #searchTable, #filterTable{
