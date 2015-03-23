@@ -10,6 +10,7 @@ function showCreateRelSideMenu (d) {
 
     $('.deleteBtn').hide();
     $('.submitBtn').hide();
+    $('.propertyEditBtn').hide();
 
     //slide open edit view
     if (!showingSideMenu) {
@@ -105,6 +106,7 @@ function showCreateRelSideMenuFromBtn () {
 
     $('.deleteBtn').hide();
     $('.submitBtn').hide();
+    $('.propertyEditBtn').hide();
 
     //slide open edit view
     if (!showingSideMenu) {

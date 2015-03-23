@@ -1,5 +1,7 @@
 function showCreateNodeSideMenu(xycoords) {
     $('.submitBtn').hide();
+    $('.deleteBtn').hide();
+    $('.propertyEditBtn').hide();
     killSearch();
 
     var docEl = document.documentElement,

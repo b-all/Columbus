@@ -407,7 +407,7 @@ function setNodePropertyEditBtnOnClick(d) {
 	});
 }
 
-function setRelPropertyEditBtnOnClick(d) {
+function setRelEditPropertyBtnOnClick(d) {
 	$('.propertyEditBtn').off('click');
 	$('.propertyEditBtn').on('click', function () {
 		$('#editPropertiesModalTable').empty();

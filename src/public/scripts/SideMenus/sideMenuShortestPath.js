@@ -2,6 +2,7 @@ function showShortestPathSideMenu () {
     killSearch();
     $('.deleteBtn').hide();
     $('.saveBtn').hide();
+    $('.propertyEditBtn').hide();
 
     // get page dimensions
     var docEl = document.documentElement,
