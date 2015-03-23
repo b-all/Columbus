@@ -110,11 +110,13 @@ var showNodeData = function (d) {
 	//show save button
 	$('.saveBtn').show();
 	$('.deleteBtn').show();
+	$('.propertyEditBtn').show();
 
 	// set save button onclick function
 	setNodeSaveBtnOnClick(d);
 	// set delete button onclick function
 	setNodeDeleteBtnOnClick(d);
+	setNodePropertyEditBtnOnClick(d)
 };
 
 var hideNodeData = function () {
@@ -132,6 +134,7 @@ var hideNodeData = function () {
 	//hide save button
 	$('.saveBtn').hide();
 	$('.deleteBtn').hide();
+	$('.propertyEditBtn').show();
 
 	$('#sideMenu').off('click');
 };
@@ -250,9 +253,12 @@ var showRelData = function (d) {
 	//show save button
 	$('.saveBtn').show();
 	$('.deleteBtn').show();
+	$('.propertyEditBtn').show();
 	setRelSaveBtnOnClick(d);
 	// set delete button onclick function
 	setRelDeleteBtnOnClick(d);
+	setRelEditPropertyBtnOnClick(d);
+
 };
 
 var hideRelData = function () {
@@ -273,6 +279,7 @@ var hideRelData = function () {
 	//hide save button
 	$('.saveBtn').hide();
 	$('.deleteBtn').hide();
+	$('.propertyEditBtn').hide();
 };
 
 function setNodeSaveBtnOnClick (d) {
@@ -338,6 +345,127 @@ function setRelDeleteBtnOnClick (d) {
 	$('.deleteBtn').on('click', function () {
 		requestDeleteRelationship(graph.state.selectedEdge, graph.deleteRel);
 		hideSideMenu('relationship');
+	});
+}
+
+function setNodePropertyEditBtnOnClick(d) {
+	$('.propertyEditBtn').off('click');
+	$('.propertyEditBtn').on('click', function () {
+		$('#editPropertiesModalTable').empty();
+		var j = 0;
+		for (i in d.data) {
+			$('#editPropertiesModalTable').append(
+				'<tr>' +
+					'<td>' +
+						i +
+					'</td>' +
+					'<td width="5px">' +
+						':' +
+					'</td>' +
+					'<td><textarea id="ta'+ j + '" class="form-control">' +
+						d.data[i] +
+					'</textarea></td>' +
+				'</tr>'
+			);
+			j++;
+		}
+
+		$('#editPropertiesModal').modal('show');
+		setTimeout(function(){
+			$('textarea').each(function (){
+				$(this).height($(this)[0].scrollHeight);
+			});
+			$('.modal-backdrop').css({
+		        height: $('#editPropertiesModal')[0].scrollHeight
+		    });
+		},200);
+
+		//set Modal save button on-click
+		$('#modalSaveBtn').off('click');
+		$('#modalSaveBtn').on('click', function () {
+			var updatedProps = {
+				id: d.id,
+				data: {}
+			};
+			var propRows = $('tr', '#editableProperties');
+			propRows.each(function() {
+				var s = $('.pNameInput', this).val();
+				// add inputs to update object
+				if (typeof s !== 'undefined') {
+					updatedProps.data[s] = $('.pValueInput', this).val();
+				}
+			});
+
+			updatedProps = {
+				node: JSON.stringify(updatedProps)
+			};
+			updateNodeProperties(updatedProps, function () {
+				d.data = JSON.parse(updatedProps.node).data;
+			});
+		});
+
+	});
+}
+
+function setRelPropertyEditBtnOnClick(d) {
+	$('.propertyEditBtn').off('click');
+	$('.propertyEditBtn').on('click', function () {
+		$('#editPropertiesModalTable').empty();
+		var j = 0;
+		for (i in d.data) {
+			$('#editPropertiesModalTable').append(
+				'<tr>' +
+					'<td>' +
+						i +
+					'</td>' +
+					'<td width="5px">' +
+						':' +
+					'</td>' +
+					'<td><textarea id="ta'+ j + '" class="form-control">' +
+						d.data[i] +
+					'</textarea></td>' +
+				'</tr>'
+			);
+			j++;
+		}
+
+		$('#editPropertiesModal').modal('show');
+		setTimeout(function(){
+			$('textarea').each(function (){
+				$(this).height($(this)[0].scrollHeight);
+			});
+			$('.modal-backdrop').css({
+		        height: $('#editPropertiesModal')[0].scrollHeight
+		    });
+		},200);
+
+		//set Modal save button on-click
+		$('#modalSaveBtn').off('click');
+		$('#modalSaveBtn').on('click', function () {
+			$('.saveBtn').off('click');
+			$('.saveBtn').on('click', function () {
+				var updatedProps = {
+					id: d.id,
+					data: {}
+				};
+				var propRows = $('tr', '#editableProperties');
+				propRows.each(function() {
+					var s = $('.pNameInput', this).val();
+					// add inputs to update object
+					if (typeof s !== 'undefined') {
+						updatedProps.data[s] = $('.pValueInput', this).val();
+					}
+				});
+
+				updatedProps = {
+					rel: JSON.stringify(updatedProps)
+				};
+				updateRelProperties(updatedProps, function () {
+					d.data = JSON.parse(updatedProps.rel).data;
+				});
+			});
+		});
+
 	});
 }
 

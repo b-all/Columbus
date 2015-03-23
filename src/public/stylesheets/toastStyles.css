@@ -2,7 +2,7 @@
     position: fixed;
     left: calc(50vw - 200px);
     bottom: 25px;
-    z-index:4;
+    z-index:2000;
     display:none;
     background-color: #5cb85c;
     width:400px;
@@ -21,7 +21,7 @@
     position: fixed;
     left: calc(50vw - 200px);
     bottom: 25px;
-    z-index:4;
+    z-index:2000;
     display:none;
     background-color: rgba(247,45,45,1);
     width:400px;
@@ -40,7 +40,7 @@
     position: fixed;
     left: calc(50vw - 200px);
     bottom: 25px;
-    z-index:4;
+    z-index:2000;
     display:none;
     background-color: rgba(80,80,80,1);
     width:400px;

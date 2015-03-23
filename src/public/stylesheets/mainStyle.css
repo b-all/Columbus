@@ -65,8 +65,15 @@
 
 .deleteBtn {
 	position: absolute;
-	top: 22px;
-	right: 25px;
+	top: 20px;
+	right: 15px;
+	display:none;
+}
+
+.propertyEditBtn {
+	position: absolute;
+	top: 20px;
+	right: 55px;
 	display:none;
 }
 
@@ -273,9 +280,6 @@
 	margin-left: 8px;
 }
 
-#filterSpace, #searchSpace {
-
-}
 
 #editableProperties {
 	margin-right:10px;
@@ -283,4 +287,19 @@
 
 .selectEndNodeBtn, .selectStartNodeBtn {
 	width:100px;
+}
+
+#editPropertiesModalTable {
+	background-color: white;
+	padding: 10px;
+	width: 100%;
+	z-index: 10;
+}
+
+#editPropertiesModalTable td{
+	padding: 20px;
+}
+
+textarea {
+	resize: none;
 }

@@ -40,6 +40,8 @@ block content
 				use(xlink:href="#back-arrow")
 		#loader
 			img(src="images/loader.gif")
+		button.btn.btn-default.propertyEditBtn
+			i.glyphicon.glyphicon-edit
 		button.btn.btn-default.deleteBtn
 			i.glyphicon.glyphicon-trash
 		h3.sideMenuHeader
@@ -69,3 +71,15 @@ block content
 			#confirmBtns
 				button.customBtn#noBtn Cancel
 				button.customBtn#yesBtn Confirm
+	#editPropertiesModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='modalLabel', aria-hidden='true')
+		.modal-dialog.modal-lg
+			.modal-content
+				.modal-header
+					button.close(data-dismiss="modal" aria-label="close")
+						span(aria-hidden="true")&times;
+					h4#modalLabel.modal-title Edit Properties
+				.modal-body
+					table#editPropertiesModalTable
+				.modal-footer
+					button.btn.btn-default(data-dismiss="modal") Close
+					button#modalSaveBtn.btn.btn-primary Save
