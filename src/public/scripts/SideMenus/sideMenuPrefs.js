@@ -21,6 +21,7 @@ function showSideMenuPrefs () {
 
     $('.deleteBtn').hide();
     $('.submitBtn').hide();
+    $('.propertyEditBtn').hide();
 
     //slide open edit view
     if (!showingSideMenu) {
