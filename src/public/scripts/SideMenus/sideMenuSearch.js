@@ -34,6 +34,7 @@ function showSearchSideMenu() {
         $('.saveBtn').hide();
         $('.submitBtn').hide();
         $('.deleteBtn').hide();
+        $('.propertyEditBtn').hide();
 
         $('#searchSpace').prepend(
             '<table id="searchTable">' +

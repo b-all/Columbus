@@ -34,6 +34,7 @@ function showFilterSideMenu() {
         //hide save button
         $('.saveBtn').hide();
         $('.deleteBtn').hide();
+        $('.propertyEditBtn').hide();
         $('.submitBtn').hide();
 
         $('#filterSpace').append(
