@@ -169,3 +169,7 @@ function runShortestPathAnimation() {
         });
     }
 }
+
+function flipMenuArrow() {
+    $('.navArrowContainer').css({'transform':'rotate(180deg)'});
+}

@@ -5,6 +5,7 @@ function toggleFilter() {
     if (showingFilter) {
         $('#filterBtn').removeClass('btn-success');
         $('#filterBtn').addClass('btn-primary');
+        flipMenuArrow();
         showFilterSideMenu();
     } else {
         $('#filterBtn').removeClass('btn-primary');

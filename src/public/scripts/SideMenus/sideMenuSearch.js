@@ -5,6 +5,7 @@ function toggleSearch() {
     if (showingSearch) {
         $('#searchBtn').removeClass('btn-success');
         $('#searchBtn').addClass('btn-primary');
+        flipMenuArrow();
         showSearchSideMenu();
     } else {
         $('#searchBtn').removeClass('btn-primary');
