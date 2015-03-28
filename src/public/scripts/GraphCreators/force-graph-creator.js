@@ -654,7 +654,14 @@ var ForceGraphCreator = function(svg, nodes, edges){
                 thisGraph.nodes.push(nodes[i]);
                 noNewNodes = false;
             }
-            nodes[i].color = labels[nodes[i].labels[0]].color;
+            // colorize new nodes based on label
+            if (typeof nodes[i].labels[0] !== 'undefined') {
+                nodes[i].color = labels[nodes[i].labels[0]].color;
+            } else {
+                // use _unlabeled color
+                labels[0].color;
+            }
+
         }
 
         if (noNewNodes) {
