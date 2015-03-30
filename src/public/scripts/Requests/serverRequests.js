@@ -36,7 +36,7 @@ function createNode(data, label, callback) {
 
 	currentRequest = $.post('addNode', data).done(function (data) {
 		if (!data.err) {
-			callback(data[0]['id(n)']);
+			callback(data.data[0][0]);
 			toastSuccess("Node Created");
 		} else {
 			toastFail("There was an error communicating with the server");
@@ -68,7 +68,7 @@ function createRel(data, type, startNode, endNode, callback) {
 
 	currentRequest = $.post('addRel', data).done(function (data) {
 		if (!data.err) {
-			callback(data[0]['id(r)']);
+			callback(data.data[0][0]);
 			toastSuccess("Relationship Created");
 		} else {
 			toastFail("There was an error communicating with the server");

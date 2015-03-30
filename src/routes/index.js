@@ -1,8 +1,9 @@
-// require neo4j Rest client
-var neo4j = require('neo4j');
-var db = new neo4j.GraphDatabase('http://localhost:7474');
+// Neo4j REST variables
+var host = 'localhost', port = 7474;
+
 
 var express = require('express');
+var http = require('http');
 var router = express.Router();
 
 
@@ -14,59 +15,105 @@ router.get('/', function(req, res, next) {
 /* GET all nodes from neo4j database */
 router.get('/graph', function(req, res, next) {
 	//query all nodes in db
-	var query = 'MATCH (n) RETURN n LIMIT 100';
+	var data = {
+		query: 'MATCH (n) RETURN n LIMIT 100',
+		params: {}
+	};
 
-	// send query to database
-	db.query(query, null, function(err, results) {
-		if (err) { // if error send blank response
-			res.send({err:"Cannot communicate with Neo4j database."});
-		} else {
-			var nodeArray = [];
-			for (var i = 0; i < results.length; i++) {
-				nodeArray.push({
-					title: results[i].n._data.metadata.id.toString(),
-					id: results[i].n._data.metadata.id,
-					x: 0,
-					y: 0,
-					labels: results[i].n._data.metadata.labels,
-					data: results[i].n._data.data,
-					filtered: true
+	var headers = {
+		'Content-Type':'application/json'
+	};
+
+	var req = http.request({
+			hostname: host,
+			port: port,
+			path: '/db/data/cypher',
+			method: 'POST',
+			headers: headers
+	}, function (response) {
+		var results = '';
+		response.on('data', function (chunk) {
+			results += chunk;
+		});
+		response.on('end', function () {
+			if (response.statusCode !== 200) { // if error send blank response
+				res.send({err:"Cannot communicate with Neo4j database."});
+			} else {
+				results = JSON.parse(results);
+				var nodeArray = [];
+				for (var i = 0; i < results.data.length; i++) {
+					nodeArray.push({
+						title: results.data[i][0].metadata.id.toString(),
+						id: results.data[i][0].metadata.id,
+						x: 0,
+						y: 0,
+						labels: results.data[i][0].metadata.labels,
+						data: results.data[i][0].data,
+						filtered: true
+					});
+
+				}
+				var relationshipArray = getAllRelationships(req, res, nodeArray, function (relationshipArray) {
+					var graph = {
+						nodes: nodeArray,
+						relationships: relationshipArray
+					};
+					// send graph data back to client
+					res.send(JSON.stringify(graph));
 				});
-
 			}
-			var relationshipArray = getAllRelationships(req, res, nodeArray, function (relationshipArray) {
-				var graph = {
-					nodes: nodeArray,
-					relationships: relationshipArray
-				};
-				// send graph data back to client
-				res.send(JSON.stringify(graph));
-			});
-
-
-		}
+		});
 	});
+
+	req.write(JSON.stringify(data));
+	req.end();
 });
 
 /* add a node to the neo4j database */
 router.post('/addNode', function(req, res, next) {
-	var query;
- 	if (typeof req.body.data !== 'undefined') {
+	var query = "";
+	if (typeof req.body.data !== 'undefined') {
 		query = 'CREATE (n:' + req.body.label + ' ' +
-						CleanJSONForNeo4j(req.body.data) + ')' +
-						'RETURN id(n)';
+					CleanJSONForNeo4j(req.body.data) + ')' +
+					'RETURN id(n)';
 	} else {
 		query = 'CREATE (n:' + req.body.label + ')' +
-						'RETURN id(n)';
+					'RETURN id(n)';
 	}
-	db.query(query, null, function(err, results) {
-		if (err) {
-			console.log(err);
-			res.send(err.message);
-		} else {
-			res.send(results);
-		}
+
+	//query all nodes in db
+	var data = {
+		query: query,
+		params: {}
+	};
+
+	var headers = {
+		'Content-Type':'application/json'
+	};
+
+	var req = http.request({
+			hostname: host,
+			port: port,
+			path: '/db/data/cypher',
+			method: 'POST',
+			headers: headers
+	}, function (response) {
+		var results = '';
+		response.on('data', function (chunk) {
+			results += chunk;
+		});
+		response.on('end', function () {
+			if (response.statusCode !== 200) { // if error send blank response
+				res.send({err:"Cannot communicate with Neo4j database."});
+			} else {
+				results = JSON.parse(results);
+				res.send(results);
+			}
+		});
 	});
+
+	req.write(JSON.stringify(data));
+	req.end();
 });
 
 /* add a relationship to the neo4j database */
@@ -80,14 +127,39 @@ router.post('/addRel', function(req, res, next) {
 					'p=node(' + req.body.endNode + ')' +
 					'CREATE (n) - [r:'+ req.body.type + '] -> (p) RETURN id(r)';
 
-	db.query(query, null, function(err, results) {
-		if (err) {
-			console.log(err);
-			res.send(err.message);
-		} else {
-			res.send(results);
-		}
+	//query all nodes in db
+	var data = {
+		query: query,
+		params: {}
+	};
+
+	var headers = {
+		'Content-Type':'application/json'
+	};
+
+	var req = http.request({
+			hostname: host,
+			port: port,
+			path: '/db/data/cypher',
+			method: 'POST',
+			headers: headers
+	}, function (response) {
+		var results = '';
+		response.on('data', function (chunk) {
+			results += chunk;
+		});
+		response.on('end', function () {
+			if (response.statusCode !== 200) { // if error send blank response
+				res.send({err:"Cannot communicate with Neo4j database."});
+			} else {
+				results = JSON.parse(results);
+				res.send(results);
+			}
+		});
 	});
+
+	req.write(JSON.stringify(data));
+	req.end();
 });
 
 /* Delete a node from the Neo4j DB */
@@ -95,7 +167,70 @@ router.delete('/deleteNode', function(req, res, next) {
 	var node_id = req.body.id;
 	//query to delete all connected relationships
 	var query = "START n=node(" + node_id + ") MATCH (n) - [r] - () DELETE r";
-	db.query(query, null, function (err, results) {
+
+	//query all nodes in db
+	var data1 = {
+		query: query,
+		params: {}
+	};
+
+	var headers = {
+		'Content-Type':'application/json'
+	};
+
+	var req1 = http.request({
+			hostname: host,
+			port: port,
+			path: '/db/data/cypher',
+			method: 'POST',
+			headers: headers
+	}, function (response) {
+		var results = '';
+		response.on('data', function (chunk) {
+			results += chunk;
+		});
+		response.on('end', function () {
+			if (response.statusCode !== 200) { // if error send blank response
+				res.send({err:"Cannot communicate with Neo4j database."});
+			} else {
+				results = JSON.parse(results);
+				//query to delete the node
+				var query2 = "START n=node(" + node_id +") DELETE n";
+				var data2 = {
+					query: query2,
+					params: {}
+				};
+				var req2 = http.request({
+						hostname: host,
+						port: port,
+						path: '/db/data/cypher',
+						method: 'POST',
+						headers: headers
+				}, function (response) {
+					var results = '';
+					response.on('data', function (chunk) {
+						results += chunk;
+					});
+					response.on('end', function () {
+						if (response.statusCode !== 200) { // if error send blank response
+							res.send({err:"Cannot communicate with Neo4j database."});
+						} else {
+							results = JSON.parse(results);
+							//query to delete the node
+							var query2 = "START n=node(" + node_id +") DELETE n";
+							res.send(results);
+						}
+					});
+				});
+				req2.write(JSON.stringify(data2));
+				req2.end();
+			}
+		});
+	});
+
+	req1.write(JSON.stringify(data1));
+	req1.end();
+	/*db.query(query, null, function (err, results) {
 		if (err) { // if error send blank response
 			console.log(err);
 			res.send({err:"Cannot communicate with Neo4j database."});
@@ -110,9 +245,8 @@ router.delete('/deleteNode', function(req, res, next) {
 					res.send("Node deleted...");
 				}
 			});
-
 		}
-	});
+	});*/
 
 });
 
@@ -121,13 +255,45 @@ router.delete('/deleteRelationship', function(req, res, next) {
 	var rel_id = req.body.id;
 	//query to delete node and all connected relationships
 	var query = "START r=rel(" + rel_id + ") DELETE r";
-	db.query(query, null, function (err, results) {
+	//query all nodes in db
+	var data = {
+		query: query,
+		params: {}
+	};
+
+	var headers = {
+		'Content-Type':'application/json'
+	};
+
+	var req = http.request({
+			hostname: host,
+			port: port,
+			path: '/db/data/cypher',
+			method: 'POST',
+			headers: headers
+	}, function (response) {
+		var results = '';
+		response.on('data', function (chunk) {
+			results += chunk;
+		});
+		response.on('end', function () {
+			if (response.statusCode !== 200) { // if error send blank response
+				res.send({err:"Cannot communicate with Neo4j database."});
+			} else {
+				res.send("Relationship deleted...");
+			}
+		});
+	});
+
+	req.write(JSON.stringify(data));
+	req.end();
+	/*db.query(query, null, function (err, results) {
 		if (err) { // if error send blank response
 			res.send({err:"Cannot communicate with Neo4j database."});
 		} else {
 			res.send("Relationship deleted...");
 		}
-	});
+	});*/
 
 });
 
@@ -138,14 +304,47 @@ router.post('/updateNode', function(req, res, next) {
 	var properties = data.data;
 	//query to delete node and all connected relationships
 	var query = "START n=node(" + node_id + ") SET n = " + CleanJSONForNeo4j(JSON.stringify(properties)) ;
-	db.query(query, null, function (err, results) {
+
+	//query all nodes in db
+	var data = {
+		query: query,
+		params: {}
+	};
+
+	var headers = {
+		'Content-Type':'application/json'
+	};
+
+	var req = http.request({
+			hostname: host,
+			port: port,
+			path: '/db/data/cypher',
+			method: 'POST',
+			headers: headers
+	}, function (response) {
+		var results = '';
+		response.on('data', function (chunk) {
+			results += chunk;
+		});
+		response.on('end', function () {
+			if (response.statusCode !== 200) { // if error send blank response
+				res.send({err:"Cannot communicate with Neo4j database."});
+			} else {
+				res.send("Node updated...");
+			}
+		});
+	});
+
+	req.write(JSON.stringify(data));
+	req.end();
+	/*db.query(query, null, function (err, results) {
 		if (err) { // if error send blank response
 			console.log(err);
 			res.send({err:"Cannot communicate with Neo4j database."});
 		} else {
 			res.send("Node updated...");
 		}
-	});
+	});*/
 
 });
 
@@ -156,14 +355,47 @@ router.post('/updateRel', function(req, res, next) {
 	var properties = data.data;
 	//query to delete node and all connected relationships
 	var query = "START r=rel(" + rel_id + ") SET r = " + CleanJSONForNeo4j(JSON.stringify(properties)) ;
-	db.query(query, null, function (err, results) {
+
+	//query all nodes in db
+	var data = {
+		query: query,
+		params: {}
+	};
+
+	var headers = {
+		'Content-Type':'application/json'
+	};
+
+	var req = http.request({
+			hostname: host,
+			port: port,
+			path: '/db/data/cypher',
+			method: 'POST',
+			headers: headers
+	}, function (response) {
+		var results = '';
+		response.on('data', function (chunk) {
+			results += chunk;
+		});
+		response.on('end', function () {
+			if (response.statusCode !== 200) { // if error send blank response
+				res.send({err:"Cannot communicate with Neo4j database."});
+			} else {
+				res.send("Relationship updated...");
+			}
+		});
+	});
+
+	req.write(JSON.stringify(data));
+	req.end();
+	/*db.query(query, null, function (err, results) {
 		if (err) { // if error send blank response
 			console.log(err);
 			res.send({err:"Cannot communicate with Neo4j database."});
 		} else {
 			res.send("Relationship updated...");
 		}
-	});
+	});*/
 
 });
 
@@ -172,7 +404,54 @@ router.get('/getNode/:id', function(req,res,next) {
 	var id = req.params.id;
 	var q = 'START n=node('+ id +') RETURN n';
 
-	db.query(q, null, function(err, results) {
+
+	//query all nodes in db
+	var data = {
+		query: q,
+		params: {}
+	};
+
+	var headers = {
+		'Content-Type':'application/json'
+	};
+
+	var req = http.request({
+			hostname: host,
+			port: port,
+			path: '/db/data/cypher',
+			method: 'POST',
+			headers: headers
+	}, function (response) {
+		var results = '';
+		response.on('data', function (chunk) {
+			results += chunk;
+		});
+		response.on('end', function () {
+			if (response.statusCode !== 200) { // if error send blank response
+				res.send({err:"Cannot communicate with Neo4j database."});
+			} else {
+				results = JSON.parse(results);
+				var nodeArray = [];
+				for (var i = 0; i < results.data.length; i++) {
+					nodeArray.push({
+						title: results.data[i][0].metadata.id.toString(),
+						id: results.data[i][0].metadata.id,
+						x: 0,
+						y: 0,
+						labels: results.data[i][0].metadata.labels,
+						data: results.data[i][0].data,
+						filtered: true
+					});
+
+				}
+				res.send(nodeArray);
+			}
+		});
+	});
+
+	req.write(JSON.stringify(data));
+	req.end();
+	/*db.query(q, null, function(err, results) {
 		if (err) { // if error send blank response
 			console.log(err);
 			res.send({err:"Cannot communicate with Neo4j database."});
@@ -192,7 +471,7 @@ router.get('/getNode/:id', function(req,res,next) {
 			}
 			res.send(nodeArray);
 		}
-	});
+	});*/
 });
 
 /* Get a single relationship by id */
@@ -200,7 +479,53 @@ router.get('/getRel/:id', function(req,res,next) {
 	var id = req.params.id;
 	var q = 'START r=rel('+ id +') RETURN r';
 
-	db.query(q, null, function(err, results) {
+	//query all nodes in db
+	var data = {
+		query: q,
+		params: {}
+	};
+
+	var headers = {
+		'Content-Type':'application/json'
+	};
+
+	var req = http.request({
+			hostname: host,
+			port: port,
+			path: '/db/data/cypher',
+			method: 'POST',
+			headers: headers
+	}, function (response) {
+		var results = '';
+		response.on('data', function (chunk) {
+			results += chunk;
+		});
+		response.on('end', function () {
+			if (response.statusCode !== 200) { // if error send blank response
+				res.send({err:"Cannot communicate with Neo4j database."});
+			} else {
+				results = JSON.parse(results);
+				var relArray = [];
+				for (var i = 0; i < results.data.length; i++) {
+					var startNodeURI = results.data[i][0].start.split("/");
+					var endNodeURI = results.data[i][0].end.split("/");
+					relArray.push({
+						source: parseInt(startNodeURI[startNodeURI.length - 1]),
+						target: parseInt(endNodeURI[endNodeURI.length - 1]),
+						id: results.data[i][0].metadata.id,
+						type: results.data[i][0].metadata.type,
+						data: results.data[i][0].data,
+						filtered: true
+					});
+				}
+				res.send(relArray);
+			}
+		});
+	});
+
+	req.write(JSON.stringify(data));
+	req.end();
+	/*db.query(q, null, function(err, results) {
 		if (err) { // if error send blank response
 			console.log(err);
 			res.send({err:"Cannot communicate with Neo4j database."});
@@ -220,13 +545,59 @@ router.get('/getRel/:id', function(req,res,next) {
 			}
 			res.send(relArray);
 		}
-	});
+	});*/
 });
 
 /* Get all labels in the database */
 router.get('/getLabels', function (req, res, next) {
 	var q = 'MATCH n RETURN distinct labels(n)';
-	db.query(q, null, function (err, results){
+
+	//query all nodes in db
+	var data = {
+		query: q,
+		params: {}
+	};
+
+	var headers = {
+		'Content-Type':'application/json'
+	};
+
+	var req = http.request({
+			hostname: host,
+			port: port,
+			path: '/db/data/cypher',
+			method: 'POST',
+			headers: headers
+	}, function (response) {
+		var results = '';
+		response.on('data', function (chunk) {
+			results += chunk;
+		});
+		response.on('end', function () {
+			if (response.statusCode !== 200) { // if error send blank response
+				res.send({err:"Cannot communicate with Neo4j database."});
+			} else {
+				results = JSON.parse(results);
+				var labelArray = [];
+				for (var i = 0; i < results.data.length; i++) {
+					var found = false;
+					for (var j = 0; j < labelArray.length; j++) {
+						if (labelArray[j] === results[i]['labels(n)'][0]) {
+							found = true;
+						}
+					}
+					if (!found) {
+						labelArray.push(results[i]['labels(n)'][0]);
+					}
+				}
+				res.send(labelArray);
+			}
+		});
+	});
+
+	req.write(JSON.stringify(data));
+	req.end();
+	/*db.query(q, null, function (err, results){
 		if (err) {
 			console.log(err);
 			res.send({err:"Cannot communicate with Neo4j database."});
@@ -245,7 +616,7 @@ router.get('/getLabels', function (req, res, next) {
 			}
 			res.send(labelArray);
 		}
-	});
+	});*/
 
 });
 
@@ -259,13 +630,104 @@ router.get('/getNeighbors/:id', function(req,res,next) {
 	// query to get the relationships of the id provided
 	var q_rels = 'START n=node('+ id +') MATCH (n) - [r] - () RETURN distinct r';
 
-	db.query(q_nodes, null, function(err, results) {
+	//query all nodes in db
+	var data1 = {
+		query: q_nodes,
+		params: {}
+	};
+
+	var headers = {
+		'Content-Type':'application/json'
+	};
+
+	var req1 = http.request({
+			hostname: host,
+			port: port,
+			path: '/db/data/cypher',
+			method: 'POST',
+			headers: headers
+	}, function (response) {
+		var results = '';
+		response.on('data', function (chunk) {
+			results += chunk;
+		});
+		response.on('end', function () {
+			if (response.statusCode !== 200) { // if error send blank response
+				res.send({err:"Cannot communicate with Neo4j database."});
+			} else {
+				results = JSON.parse(results);
+				var nodeArray = [];
+				for (var i = 0; i < results.data.length; i++) {
+					nodeArray.push({
+						title: results.data[i][0].metadata.id.toString(),
+						id: results.data[i][0].metadata.id,
+						x: 0,
+						y: 0,
+						labels: results.data[i][0].metadata.labels,
+						data: results.data[i][0].data,
+						filtered: true
+					});
+				}
+				var data2 = {
+					query: q_rels,
+					params: {}
+				};
+				var req2 = http.request({
+						hostname: host,
+						port: port,
+						path: '/db/data/cypher',
+						method: 'POST',
+						headers: headers
+				}, function (response) {
+					var results = '';
+					response.on('data', function (chunk) {
+						results += chunk;
+					});
+					response.on('end', function () {
+						if (response.statusCode !== 200) { // if error send blank response
+							res.send({err:"Cannot communicate with Neo4j database."});
+						} else {
+							results = JSON.parse(results);
+							var relArray = [];
+
+							for (var i = 0; i < results.data.length; i++) {
+								var startNodeURI = results.data[i][0].start.split("/");
+								var endNodeURI = results.data[i][0].end.split("/");
+								relArray.push({
+									source: parseInt(startNodeURI[startNodeURI.length - 1]),
+									target: parseInt(endNodeURI[endNodeURI.length - 1]),
+									id: results.data[i][0].metadata.id,
+									type: results.data[i][0].metadata.type,
+									data: results.data[i][0].data,
+									filtered: true
+								});
+							}
+
+							var graph = {
+								nodes: nodeArray,
+								relationships: relArray
+							};
+							// send graph data back to client
+							res.send(JSON.stringify(graph));
+						}
+					});
+				});
+				req2.write(JSON.stringify(data2));
+				req2.end();
+			}
+		});
+	});
+
+	req1.write(JSON.stringify(data1));
+	req1.end();
+
+	/*db.query(q_nodes, null, function(err, results) {
 		if (err) { // if error send blank response
 			console.log(err);
 			res.send({err:"Cannot communicate with Neo4j database."});
 		} else {
 			var nodeArray = [];
-			for (var i = 0; i < results.length; i++) {
+			for (var i = 0; i < results.data.length; i++) {
 				nodeArray.push({
 					title: results[i].n._data.metadata.id.toString(),
 					id: results[i].n._data.metadata.id,
@@ -284,7 +746,7 @@ router.get('/getNeighbors/:id', function(req,res,next) {
 				} else {
 					var relArray = [];
 
-					for (var i = 0; i < results.length; i++) {
+					for (var i = 0; i < results.data.length; i++) {
 						var startNodeURI = results[i].r._data.start.split("/");
 						var endNodeURI = results[i].r._data.end.split("/");
 						relArray.push({
@@ -297,43 +759,71 @@ router.get('/getNeighbors/:id', function(req,res,next) {
 						});
 					}
 
-					/*db.query(q_thisNode, null, function(err, results) {
-						if (err) { // if error send blank response
-							console.log(err);
-							res.send({err:"Cannot communicate with Neo4j database."});
-						} else {
-							var thisNodeArray = [];
-							for (var i = 0; i < results.length; i++) {
-								thisNodeArray.push({
-									title: results[i].n._data.metadata.id.toString(),
-									id: results[i].n._data.metadata.id,
-									x: 0,
-									y: 0,
-									labels: results[i].n._data.metadata.labels,
-									data: results[i].n._data.data,
-									filtered: true
-								});
-
-							}
-							nodeArray.push(thisNodeArray[0]);*/
-
-							var graph = {
-								nodes: nodeArray,
-								relationships: relArray
-							};
-							// send graph data back to client
-							res.send(JSON.stringify(graph));
-					/*	}
-				});*/
+					var graph = {
+						nodes: nodeArray,
+						relationships: relArray
+					};
+					// send graph data back to client
+					res.send(JSON.stringify(graph));
 				}
 			});
 		}
-	});
+	});*/
 });
 
 
 function getAllRelationships(req, res, nodes, callback) {
-	//query all relationships in db
+	//query all nodes in db
+	var data = {
+		query: 'START r=rel(*) RETURN r LIMIT 100',
+		params: {}
+	};
+
+	var headers = {
+		'Content-Type':'application/json'
+	};
+
+	var req = http.request({
+			hostname: host,
+			port: port,
+			path: '/db/data/cypher',
+			method: 'POST',
+			headers: headers
+	}, function (response) {
+		var results = '';
+		response.on('data', function (chunk) {
+			results += chunk;
+		});
+		response.on('end', function () {
+			results = JSON.parse(results);
+			if (typeof results !== 'undefined') {
+				if (response.statusCode !== 200) { // if error send blank response
+					res.write("Cannot communicate with Neo4j database.");
+					res.end();
+				} else {
+					var relationships = [];
+					for (var i = 0; i < results.data.length; i++) {
+						var startNodeURI = results.data[i][0].start.split("/");
+						var endNodeURI = results.data[i][0].end.split("/");
+						relationships.push({
+							source: parseInt(startNodeURI[startNodeURI.length - 1]),
+							target: parseInt(endNodeURI[endNodeURI.length - 1]),
+							id: results.data[i][0].metadata.id,
+							type: results.data[i][0].metadata.type,
+							data: results.data[i][0].data,
+							filtered: true
+						});
+					}
+
+					callback(relationships);
+				}
+			}
+		});
+	});
+
+	req.write(JSON.stringify(data));
+	req.end();
+	/*//query all relationships in db
 	var query = 'START r=rel(*) RETURN r LIMIT 100';
 
 	// send query to database
@@ -360,7 +850,7 @@ function getAllRelationships(req, res, nodes, callback) {
 				callback(relationships);
 			}
 		}
-	});
+	});*/
 }
 
 

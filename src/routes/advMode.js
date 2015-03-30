@@ -1,14 +1,50 @@
-// require neo4j Rest client
-var neo4j = require('neo4j');
-var db = new neo4j.GraphDatabase('http://localhost:7474');
+// Neo4j REST variables
+var host = 'localhost', port = 7474;
 
 var express = require('express');
 var router = express.Router();
+var http = require('http');
 
 router.get('/advMode', function(req,res,next) {
   var target = req.query.target;
-  console.log(req.query.target);
-  db.query(target, function (err, results) {
+
+  var data = {
+      query: target,
+      params: {}
+  };
+
+  var headers = {
+      'Content-Type':'application/json'
+  };
+
+  var req = http.request({
+          hostname: host,
+          port: port,
+          path: '/db/data/cypher',
+          method: 'POST',
+          headers: headers
+  }, function (response) {
+      var results = '';
+      response.on('data', function (chunk) {
+          results += chunk;
+      });
+      response.on('end', function () {
+          console.log(results);
+          if (response.statusCode !== 200) { // if error send blank response
+              res.send({err:"Cannot communicate with Neo4j database."});
+          } else {
+              results = JSON.parse(results);
+              var str = JSON.stringify(results, null, 2); // spacing level = 2
+              var str1 = '<pre>\n<code class="prettyprint">\n';
+              var str2 = '\n</pre>\n</code>\n';
+              res.send(str1+str+str2);
+          }
+      });
+  });
+
+  req.write(JSON.stringify(data));
+  req.end();
+  /*db.query(target, function (err, results) {
       if (err) {
           console.log(err);
           res.send({err:"Cannot communicate with Neo4j database."});
@@ -18,7 +54,7 @@ router.get('/advMode', function(req,res,next) {
           var str2 = '\n</pre>\n</code>\n';
           res.send(str1+str+str2);
       }
-  });
+  });*/
 });
 
 module.exports = router;
