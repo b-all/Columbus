@@ -1,16 +1,100 @@
-// require neo4j Rest client
-var neo4j = require('neo4j');
-var db = new neo4j.GraphDatabase('http://localhost:7474');
+// Neo4j REST variables
+var host = 'localhost', port = 7474;
 
 var express = require('express');
 var router = express.Router();
+var http = require('http');
 
 var nodesFound = 0;
 
 router.get('/search', function(req,res,next) {
     var target = req.query.target;
-    console.log(req.query.target);
-    db.query('MATCH n RETURN n', function (err, results) {
+    console.log('Searched for \'' + req.query.target + '\'');
+
+    var data = {
+        query: 'MATCH n RETURN n',
+        params: {}
+    };
+
+    var headers = {
+        'Content-Type':'application/json'
+    };
+
+    var req = http.request({
+            hostname: host,
+            port: port,
+            path: '/db/data/cypher',
+            method: 'POST',
+            headers: headers
+    }, function (response) {
+        var results = '';
+        response.on('data', function (chunk) {
+            results += chunk;
+        });
+        response.on('end', function () {
+            if (response.statusCode !== 200) { // if error send blank response
+                res.send({err:"Cannot communicate with Neo4j database."});
+            } else {
+                results = JSON.parse(results);
+                var nodes = results.data;
+                // iterate over all nodes in db
+                for (var i = 0; i < nodes.length; i++) {
+                    var found = false;
+                    // iterate over node data
+                    for(var j in nodes[i][0].data) {
+                        if (typeof nodes[i][0].data[j] !== 'undefined') {
+                            if (nodes[i][0].data[j].toString().toLowerCase().indexOf(target.toLowerCase()) !== -1) {
+                                found = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!found) {
+                        nodes.splice(i, 1);
+                        i--;
+                    }
+                }
+                var nodeArray = [];
+                for (var k = 0; k < nodes.length; k++) {
+                    nodeArray.push({
+                        title: nodes[k][0].metadata.id.toString(),
+                        id: nodes[k][0].metadata.id,
+                        x: 0,
+                        y: 0,
+                        labels: nodes[k][0].metadata.labels,
+                        data: nodes[k][0].data,
+    					filtered: true
+                    });
+
+                }
+                nodesFound = nodeArray.length;
+                if (nodesFound > 1000) {
+                    res.send({err:"Too many results."});
+                    return;
+                }
+                if (nodeArray.length > 0) {
+                    getAllNodeRelationships(nodeArray, function (relationshipArray) {
+                        getNodesBasedOnRelationships(relationshipArray, function (relNodes) {
+                            var graph = {
+                                nodes: (relNodes.length !== 0) ? relNodes: nodeArray,
+                                relationships: relationshipArray,
+                                matches: nodesFound
+                            };
+                            res.send(graph);
+                        });
+                    });
+                } else {
+                    res.send({err:"No matching results."});
+                    return;
+                }
+            }
+        });
+    });
+
+    req.write(JSON.stringify(data));
+    req.end();
+
+    /*db.query('MATCH n RETURN n', function (err, results) {
         if (err) {
             console.log(err);
             res.send({err:"Cannot communicate with Neo4j database."});
@@ -69,7 +153,7 @@ router.get('/search', function(req,res,next) {
 
 
         }
-    });
+    });*/
 });
 
 function getAllNodeRelationships(nodes, callback) {
@@ -86,7 +170,54 @@ function getAllNodeRelationships(nodes, callback) {
     }
     q += ') MATCH (n)-[r]-() RETURN r';
 
-    db.query(q, null, function(err, results) {
+    var data = {
+        query: q,
+        params: {}
+    };
+
+    var headers = {
+        'Content-Type':'application/json'
+    };
+
+    var req = http.request({
+            hostname: host,
+            port: port,
+            path: '/db/data/cypher',
+            method: 'POST',
+            headers: headers
+    }, function (response) {
+        var results = '';
+        response.on('data', function (chunk) {
+            results += chunk;
+        });
+        response.on('end', function () {
+            if (response.statusCode !== 200) { // if error send blank response
+                res.send({err:"Cannot communicate with Neo4j database."});
+            } else {
+                results = JSON.parse(results);
+                var relationships = [];
+                for (var i = 0; i < results.data.length; i++) {
+                    var startNodeURI = results.data[i][0].start.split("/");
+                    var endNodeURI = results.data[i][0].end.split("/");
+                    relationships.push({
+                        source: parseInt(startNodeURI[startNodeURI.length - 1]),
+                        target: parseInt(endNodeURI[endNodeURI.length - 1]),
+                        id: results.data[i][0].metadata.id,
+                        type: results.data[i][0].metadata.type,
+                        data: results.data[i][0].data,
+                        filtered: true
+                    });
+                }
+
+                callback(relationships);
+            }
+        });
+    });
+
+    req.write(JSON.stringify(data));
+    req.end();
+
+    /*db.query(q, null, function(err, results) {
         if (err) { // if error send blank response
             console.log(err);
             return;
@@ -108,7 +239,7 @@ function getAllNodeRelationships(nodes, callback) {
             callback(relationships);
 
         }
-    });
+    });*/
 }
 
 function getNodesBasedOnRelationships (edges, callback) {
@@ -145,7 +276,54 @@ function getNodesBasedOnRelationships (edges, callback) {
 
     q += ') RETURN n';
 
-    db.query(q, null, function(err, results) {
+    var data = {
+        query: q,
+        params: {}
+    };
+
+    var headers = {
+        'Content-Type':'application/json'
+    };
+
+    var req = http.request({
+            hostname: host,
+            port: port,
+            path: '/db/data/cypher',
+            method: 'POST',
+            headers: headers
+    }, function (response) {
+        var results = '';
+        response.on('data', function (chunk) {
+            results += chunk;
+        });
+        response.on('end', function () {
+            if (response.statusCode !== 200) { // if error send blank response
+                res.send({err:"Cannot communicate with Neo4j database."});
+            } else {
+                results = JSON.parse(results);
+                var nodeArray = [];
+                for (var k = 0; k < results.data.length; k++) {
+                    nodeArray.push({
+                        title: results.data[k][0].metadata.id.toString(),
+                        id: results.data[k][0].metadata.id,
+                        x: 0,
+                        y: 0,
+                        labels: results.data[k][0].metadata.labels,
+                        data: results.data[k][0].data,
+    					filtered: true
+                    });
+
+                }
+
+                callback(nodeArray);
+            }
+        });
+    });
+
+    req.write(JSON.stringify(data));
+    req.end();
+
+    /*db.query(q, null, function(err, results) {
         if (err) { // if error send blank response
             console.log(err);
             return;
@@ -167,7 +345,7 @@ function getNodesBasedOnRelationships (edges, callback) {
             callback(nodeArray);
 
         }
-    });
+    });*/
 
 }
 
