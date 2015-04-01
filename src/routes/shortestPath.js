@@ -92,7 +92,10 @@ router.post('/getShortestPath/:startId/:endId', function(req,res,next) {
                 res.send(graph);
             }
         });
-    });
+    }).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
+	});
 
     req.write(JSON.stringify(data));
     req.end();

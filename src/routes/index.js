@@ -44,6 +44,7 @@ router.post('/graph', function(req, res, next) {
 			results += chunk;
 		});
 		response.on('end', function () {
+			console.log(results);
 			if (response.statusCode !== 200) { // if error send blank response
 				res.send({err:"Cannot communicate with Neo4j database."});
 			} else {
@@ -71,6 +72,9 @@ router.post('/graph', function(req, res, next) {
 				});
 			}
 		});
+	}).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));
@@ -121,6 +125,9 @@ router.post('/addNode', function(req, res, next) {
 				res.send(results);
 			}
 		});
+	}).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));
@@ -170,6 +177,9 @@ router.post('/addRel', function(req, res, next) {
 				res.send(results);
 			}
 		});
+	}).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));
@@ -238,11 +248,17 @@ router.post('/deleteNode', function(req, res, next) {
 							res.send(results);
 						}
 					});
+				}).on('error', function (err) {
+				    console.log(err);
+					res.send({err:"Cannot communicate with Neo4j database."});
 				});
 				req2.write(JSON.stringify(data2));
 				req2.end();
 			}
 		});
+	}).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req1.write(JSON.stringify(data1));
@@ -303,6 +319,9 @@ router.post('/deleteRelationship', function(req, res, next) {
 				res.send("Relationship deleted...");
 			}
 		});
+	}).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));
@@ -358,6 +377,9 @@ router.post('/updateNode', function(req, res, next) {
 				res.send("Node updated...");
 			}
 		});
+	}).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));
@@ -414,6 +436,9 @@ router.post('/updateRel', function(req, res, next) {
 				res.send("Relationship updated...");
 			}
 		});
+	}).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));
@@ -479,6 +504,9 @@ router.post('/getNode/:id', function(req,res,next) {
 				res.send(nodeArray);
 			}
 		});
+	}).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));
@@ -556,6 +584,9 @@ router.post('/getRel/:id', function(req,res,next) {
 				res.send(relArray);
 			}
 		});
+	}).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));
@@ -631,6 +662,9 @@ router.post('/getLabels', function (req, res, next) {
 				res.send(labelArray);
 			}
 		});
+	}).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));
@@ -751,11 +785,17 @@ router.post('/getNeighbors/:id', function(req,res,next) {
 							res.send(JSON.stringify(graph));
 						}
 					});
+				}).on('error', function (err) {
+				    console.log(err);
+					res.send({err:"Cannot communicate with Neo4j database."});
 				});
 				req2.write(JSON.stringify(data2));
 				req2.end();
 			}
 		});
+	}).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req1.write(JSON.stringify(data1));
@@ -860,6 +900,9 @@ function getAllRelationships(req, res, nodes, auth, callback) {
 				}
 			}
 		});
+	}).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));

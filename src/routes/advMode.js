@@ -45,6 +45,9 @@ router.post('/advMode', function(req,res,next) {
               res.send(str1+str+str2);
           }
       });
+  }).on('error', function (err) {
+      console.log(err);
+      res.send({err:"Cannot communicate with Neo4j database."});
   });
 
   req.write(JSON.stringify(data));

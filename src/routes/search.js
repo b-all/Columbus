@@ -17,7 +17,7 @@ router.post('/search', function(req,res,next) {
     };
 
     var auth = JSON.parse(req.body.auth);
-    
+
     var headers = {
         'Content-Type':'application/json',
         'Authorization': auth.pw
@@ -92,7 +92,10 @@ router.post('/search', function(req,res,next) {
                 }
             }
         });
-    });
+    }).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
+	});
 
     req.write(JSON.stringify(data));
     req.end();
@@ -216,7 +219,10 @@ function getAllNodeRelationships(nodes, auth, callback) {
                 callback(relationships);
             }
         });
-    });
+    }).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
+	});
 
     req.write(JSON.stringify(data));
     req.end();
@@ -323,7 +329,10 @@ function getNodesBasedOnRelationships (edges, auth, callback) {
                 callback(nodeArray);
             }
         });
-    });
+    }).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
+	});
 
     req.write(JSON.stringify(data));
     req.end();
