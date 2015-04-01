@@ -4,14 +4,21 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var https = require('https');
+var http = require('http');
+var fs = require('fs');
 
 var routes = require('./routes/index');
 var search = require('./routes/search');
 var advMode = require('./routes/advMode');
-var shortestPath = require('./routes/shortestPath')
+var shortestPath = require('./routes/shortestPath');
 
 var app = express();
-app.listen(8080);
+
+var https_options = {
+    key: fs.readFileSync('./https/key.pem'),
+    cert: fs.readFileSync('./https/cert.crt')
+};
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -61,4 +68,6 @@ if (app.get('env') === 'development') {
     });
 });*/
 
+http.createServer(app).listen(8080);
+https.createServer(https_options, app).listen(443);
 module.exports = app;

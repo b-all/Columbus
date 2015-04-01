@@ -1,4 +1,9 @@
 var currentRequest;
+var auth = {
+	pw: '',
+	host: '',
+	port: ''
+};
 
 function pullGraph(callback) {
 	 var docEl = document.documentElement,
@@ -10,7 +15,7 @@ function pullGraph(callback) {
     var xLoc = width/2 - 300,
         yLoc = 200;
 
-	currentRequest = $.get('graph').done(function (data) {
+	currentRequest = $.post('graph', auth).done(function (data) {
 		$('#loader').hide();
 		if (data.err) {
 			toastFail("Cannot communicate with Neo4j database.");
@@ -29,9 +34,9 @@ function pullGraph(callback) {
 
 function createNode(data, label, callback) {
 	if (!data.hasOwnProperty("")) {
-		data = { data: JSON.stringify(data), label: label};
+		data = { data: JSON.stringify(data), label: label, auth: JSON.stringify(auth)};
 	} else {
-		data = { label: label};
+		data = { label: label, auth: JSON.stringify(auth)};
 	}
 
 	currentRequest = $.post('addNode', data).done(function (data) {
@@ -54,14 +59,16 @@ function createRel(data, type, startNode, endNode, callback) {
 				data: JSON.stringify(data),
 				type: type,
 				startNode: startNode,
-				endNode: endNode
+				endNode: endNode,
+				auth: JSON.stringify(auth)
 			};
 	} else {
 		data =
 			{
 				type: type,
 				startNode: startNode,
-				endNode: endNode
+				endNode: endNode,
+				auth: JSON.stringify(auth)
 			};
 	}
 
@@ -78,12 +85,16 @@ function createRel(data, type, startNode, endNode, callback) {
 
 function requestDeleteNode(node, callback) {
 	var alert = new Alert();
+	var data = {
+		node: JSON.stringify(node),
+		auth: JSON.stringify(auth)
+	};
 	alert.confirm("Are you sure you want to delete this node?", function (confirmed) {
 		if (confirmed) {
 			$.ajax({
 				url : 'deleteNode',
-				type : 'DELETE',
-				data : node
+				type : 'POST',
+				data : data
 			}).done(function (data) {
 				if (!data.err) {
 					callback();
@@ -102,12 +113,16 @@ function requestDeleteNode(node, callback) {
 
 function requestDeleteRelationship(rel, callback) {
 	var alert = new Alert();
+	var data = {
+		rel: JSON.stringify(rel),
+		auth: JSON.stringify(auth)
+	};
 	alert.confirm("Are you sure you want to delete this relationship?", function (confirmed) {
 		if (confirmed) {
 			$.ajax({
 				url : 'deleteRelationship',
-				type : 'DELETE',
-				data : rel
+				type : 'POST',
+				data : data
 			}).done(function(data){
 				if (!data.err) {
 					callback();
@@ -123,7 +138,11 @@ function requestDeleteRelationship(rel, callback) {
 }
 
 function updateNodeProperties(node, callback) {
-	currentRequest = $.post('updateNode', node).done(function (data) {
+	var data = {
+		node: JSON.stringify(node),
+		auth: JSON.stringify(auth)
+	};
+	currentRequest = $.post('updateNode', data).done(function (data) {
 		if (!data.err) {
 			toastSuccess("Properties Updated");
 			callback();
@@ -138,7 +157,11 @@ function updateNodeProperties(node, callback) {
 }
 
 function updateRelProperties(rel, callback) {
-	currentRequest = $.post('updateRel', rel).done(function (data) {
+	var data = {
+		rel: JSON.stringify(rel),
+		auth: JSON.stringify(auth)
+	};
+	currentRequest = $.post('updateRel', data).done(function (data) {
 		if (!data.err) {
 			toastSuccess("Properties Updated");
 			callback();
@@ -153,7 +176,10 @@ function updateRelProperties(rel, callback) {
 }
 
 function getSingleNode(nodeId, callback) {
-	currentRequest = $.get('getNode/' + nodeId).done(function(data) {
+	var data = {
+		auth: JSON.stringify(auth)
+	};
+	currentRequest = $.post('getNode/' + nodeId, data).done(function(data) {
 		if (!data.err) {
 			callback(data);
 		} else {
@@ -167,7 +193,10 @@ function getSingleNode(nodeId, callback) {
 }
 
 function getSingleRel(relId, callback) {
-	currentRequest = $.get('getRel/' + relId).done(function(data) {
+	var data = {
+		auth: JSON.stringify(auth)
+	};
+	currentRequest = $.post('getRel/' + relId, data).done(function(data) {
 		if (!data.err) {
 			callback(data);
 		} else {
@@ -186,9 +215,9 @@ function search(target, callback) {
 		return;
 	}
 
-	var obj = { target: target };
+	var obj = { target: target, auth: JSON.stringify(auth) };
 
-	currentRequest = $.get('search', obj).done(function(data) {
+	currentRequest = $.post('search', obj).done(function(data) {
 		if (!data.err) {
 
 			if ($('#additiveSearchCheckbox').prop("checked")){
@@ -217,7 +246,10 @@ function search(target, callback) {
 }
 
 function getAllLabels(callback) {
-	$.get('getLabels').done(function(data) {
+	var data = {
+		auth: JSON.stringify(auth)
+	};
+	$.post('getLabels', data).done(function(data) {
 		if(!data.err) {
 			callback(data);
 		} else {
@@ -231,10 +263,13 @@ function getAllLabels(callback) {
 
 function getNeighbors () {
 	var selected = graph.getSelectedNodeId();
+	var data = {
+		auth: JSON.stringify(auth)
+	};
 	if (selected !== null) {
 		var id = selected.id;
 		toggleAnimateGetNeighborsIcon();
-		$.get('getNeighbors/' + id).done(function (data) {
+		$.post('getNeighbors/' + id, data).done(function (data) {
 			toggleAnimateGetNeighborsIcon();
 			if(!data.err) {
 				var docEl = document.documentElement,
@@ -270,7 +305,10 @@ function getShortestPath(startNodeId, endNodeId, callback) {
 		toggleAnimateShortestPathIcon();
 		return;
 	}
-	currentRequest = $.get('getShortestPath/' + startNodeId + '/' + endNodeId).done(function(data) {
+	var data = {
+		auth: JSON.stringify(auth)
+	};
+	currentRequest = $.post('getShortestPath/' + startNodeId + '/' + endNodeId, data).done(function(data) {
 		toggleAnimateShortestPathIcon();
 		if (!data.err) {
 			if(data.nodes.length !== 0) {
@@ -300,7 +338,7 @@ function advMode(target, callback) {
 		return;
 	}
 
-	var obj = { target: target };
+	var obj = { target: target, auth: JSON.stringify(auth) };
 	var win = window.open(getBaseURL()+'advMode?target='+target);
 }
 

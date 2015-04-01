@@ -13,20 +13,23 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET all nodes from neo4j database */
-router.get('/graph', function(req, res, next) {
+router.post('/graph', function(req, res, next) {
 	//query all nodes in db
 	var data = {
 		query: 'MATCH (n) RETURN n LIMIT 100',
 		params: {}
 	};
 
+	var auth = req.body;
+
 	var headers = {
-		'Content-Type':'application/json'
+		'Content-Type':'application/json',
+		'Authorization': auth.pw
 	};
 
 	var req = http.request({
-			hostname: host,
-			port: port,
+			hostname: auth.host,
+			port: auth.port,
 			path: '/db/data/cypher',
 			method: 'POST',
 			headers: headers
@@ -53,7 +56,7 @@ router.get('/graph', function(req, res, next) {
 					});
 
 				}
-				var relationshipArray = getAllRelationships(req, res, nodeArray, function (relationshipArray) {
+				var relationshipArray = getAllRelationships(req, res, nodeArray, auth, function (relationshipArray) {
 					var graph = {
 						nodes: nodeArray,
 						relationships: relationshipArray
@@ -87,13 +90,16 @@ router.post('/addNode', function(req, res, next) {
 		params: {}
 	};
 
+	var auth = JSON.parse(req.body.auth);
+
 	var headers = {
-		'Content-Type':'application/json'
+		'Content-Type':'application/json',
+		'Authorization': auth.pw
 	};
 
 	var req = http.request({
-			hostname: host,
-			port: port,
+			hostname: auth.host,
+			port: auth.port,
 			path: '/db/data/cypher',
 			method: 'POST',
 			headers: headers
@@ -133,13 +139,16 @@ router.post('/addRel', function(req, res, next) {
 		params: {}
 	};
 
+	var auth = JSON.parse(req.body.auth);
+
 	var headers = {
-		'Content-Type':'application/json'
+		'Content-Type':'application/json',
+		'Authorization': auth.pw
 	};
 
 	var req = http.request({
-			hostname: host,
-			port: port,
+			hostname: auth.host,
+			port: auth.port,
 			path: '/db/data/cypher',
 			method: 'POST',
 			headers: headers
@@ -163,8 +172,8 @@ router.post('/addRel', function(req, res, next) {
 });
 
 /* Delete a node from the Neo4j DB */
-router.delete('/deleteNode', function(req, res, next) {
-	var node_id = req.body.id;
+router.post('/deleteNode', function(req, res, next) {
+	var node_id = JSON.parse(req.body.node).id;
 	//query to delete all connected relationships
 	var query = "START n=node(" + node_id + ") MATCH (n) - [r] - () DELETE r";
 
@@ -174,13 +183,16 @@ router.delete('/deleteNode', function(req, res, next) {
 		params: {}
 	};
 
+	var auth = JSON.parse(req.body.auth);
+
 	var headers = {
-		'Content-Type':'application/json'
+		'Content-Type':'application/json',
+		'Authorization': auth.pw
 	};
 
 	var req1 = http.request({
-			hostname: host,
-			port: port,
+			hostname: auth.host,
+			port: auth.port,
 			path: '/db/data/cypher',
 			method: 'POST',
 			headers: headers
@@ -201,8 +213,8 @@ router.delete('/deleteNode', function(req, res, next) {
 					params: {}
 				};
 				var req2 = http.request({
-						hostname: host,
-						port: port,
+						hostname: auth.host,
+						port: auth.port,
 						path: '/db/data/cypher',
 						method: 'POST',
 						headers: headers
@@ -251,8 +263,8 @@ router.delete('/deleteNode', function(req, res, next) {
 });
 
 /* Delete a relationship from the Neo4j DB */
-router.delete('/deleteRelationship', function(req, res, next) {
-	var rel_id = req.body.id;
+router.post('/deleteRelationship', function(req, res, next) {
+	var rel_id = JSON.parse(req.body.rel).id;
 	//query to delete node and all connected relationships
 	var query = "START r=rel(" + rel_id + ") DELETE r";
 	//query all nodes in db
@@ -261,13 +273,16 @@ router.delete('/deleteRelationship', function(req, res, next) {
 		params: {}
 	};
 
+	var auth = JSON.parse(req.body.auth);
+
 	var headers = {
-		'Content-Type':'application/json'
+		'Content-Type':'application/json',
+		'Authorization': auth.pw
 	};
 
 	var req = http.request({
-			hostname: host,
-			port: port,
+			hostname: auth.host,
+			port: auth.port,
 			path: '/db/data/cypher',
 			method: 'POST',
 			headers: headers
@@ -300,10 +315,14 @@ router.delete('/deleteRelationship', function(req, res, next) {
 /* Update a node in the Neo4j DB*/
 router.post('/updateNode', function(req, res, next) {
 	var data = JSON.parse(req.body.node);
+	data = JSON.parse(data.node);
+
 	var node_id = data.id;
 	var properties = data.data;
 	//query to delete node and all connected relationships
 	var query = "START n=node(" + node_id + ") SET n = " + CleanJSONForNeo4j(JSON.stringify(properties)) ;
+
+	var auth = JSON.parse(req.body.auth);
 
 	//query all nodes in db
 	var data = {
@@ -312,12 +331,13 @@ router.post('/updateNode', function(req, res, next) {
 	};
 
 	var headers = {
-		'Content-Type':'application/json'
+		'Content-Type':'application/json',
+		'Authorization': auth.pw
 	};
 
 	var req = http.request({
-			hostname: host,
-			port: port,
+			hostname: auth.host,
+			port: auth.port,
 			path: '/db/data/cypher',
 			method: 'POST',
 			headers: headers
@@ -351,10 +371,14 @@ router.post('/updateNode', function(req, res, next) {
 /* Update a relationship in the Neo4j DB*/
 router.post('/updateRel', function(req, res, next) {
 	var data = JSON.parse(req.body.rel);
+	data = JSON.parse(data.rel);
+	
 	var rel_id = data.id;
 	var properties = data.data;
 	//query to delete node and all connected relationships
 	var query = "START r=rel(" + rel_id + ") SET r = " + CleanJSONForNeo4j(JSON.stringify(properties)) ;
+
+	var auth = JSON.parse(req.body.auth);
 
 	//query all nodes in db
 	var data = {
@@ -363,12 +387,13 @@ router.post('/updateRel', function(req, res, next) {
 	};
 
 	var headers = {
-		'Content-Type':'application/json'
+		'Content-Type':'application/json',
+		'Authorization': auth.pw
 	};
 
 	var req = http.request({
-			hostname: host,
-			port: port,
+			hostname: auth.host,
+			port: auth.port,
 			path: '/db/data/cypher',
 			method: 'POST',
 			headers: headers
@@ -400,10 +425,11 @@ router.post('/updateRel', function(req, res, next) {
 });
 
 /* Get a single node by id */
-router.get('/getNode/:id', function(req,res,next) {
+router.post('/getNode/:id', function(req,res,next) {
 	var id = req.params.id;
 	var q = 'START n=node('+ id +') RETURN n';
 
+	var auth = JSON.parse(req.body.auth);
 
 	//query all nodes in db
 	var data = {
@@ -412,12 +438,13 @@ router.get('/getNode/:id', function(req,res,next) {
 	};
 
 	var headers = {
-		'Content-Type':'application/json'
+		'Content-Type':'application/json',
+		'Authorization': auth.pw
 	};
 
 	var req = http.request({
-			hostname: host,
-			port: port,
+			hostname: auth.host,
+			port: auth.port,
 			path: '/db/data/cypher',
 			method: 'POST',
 			headers: headers
@@ -475,9 +502,11 @@ router.get('/getNode/:id', function(req,res,next) {
 });
 
 /* Get a single relationship by id */
-router.get('/getRel/:id', function(req,res,next) {
+router.post('/getRel/:id', function(req,res,next) {
 	var id = req.params.id;
 	var q = 'START r=rel('+ id +') RETURN r';
+
+	var auth = JSON.parse(req.body.auth);
 
 	//query all nodes in db
 	var data = {
@@ -486,12 +515,13 @@ router.get('/getRel/:id', function(req,res,next) {
 	};
 
 	var headers = {
-		'Content-Type':'application/json'
+		'Content-Type':'application/json',
+		'Authorization': auth.pw
 	};
 
 	var req = http.request({
-			hostname: host,
-			port: port,
+			hostname: auth.host,
+			port: auth.port,
 			path: '/db/data/cypher',
 			method: 'POST',
 			headers: headers
@@ -549,7 +579,7 @@ router.get('/getRel/:id', function(req,res,next) {
 });
 
 /* Get all labels in the database */
-router.get('/getLabels', function (req, res, next) {
+router.post('/getLabels', function (req, res, next) {
 	var q = 'MATCH n RETURN distinct labels(n)';
 
 	//query all nodes in db
@@ -558,13 +588,16 @@ router.get('/getLabels', function (req, res, next) {
 		params: {}
 	};
 
+	var auth = JSON.parse(req.body.auth);
+
 	var headers = {
-		'Content-Type':'application/json'
+		'Content-Type':'application/json',
+		'Authorization': auth.pw
 	};
 
 	var req = http.request({
-			hostname: host,
-			port: port,
+			hostname: auth.host,
+			port: auth.port,
 			path: '/db/data/cypher',
 			method: 'POST',
 			headers: headers
@@ -582,12 +615,12 @@ router.get('/getLabels', function (req, res, next) {
 				for (var i = 0; i < results.data.length; i++) {
 					var found = false;
 					for (var j = 0; j < labelArray.length; j++) {
-						if (labelArray[j] === results[i]['labels(n)'][0]) {
+						if (labelArray[j] === results.data[i][0][0]) {
 							found = true;
 						}
 					}
 					if (!found) {
-						labelArray.push(results[i]['labels(n)'][0]);
+						labelArray.push(results.data[i][0][0]);
 					}
 				}
 				res.send(labelArray);
@@ -621,8 +654,9 @@ router.get('/getLabels', function (req, res, next) {
 });
 
 /* Get all neighbors of a single node */
-router.get('/getNeighbors/:id', function(req,res,next) {
+router.post('/getNeighbors/:id', function(req,res,next) {
 	var id = req.params.id;
+	var auth = JSON.parse(req.body.auth);
 	// query to get nodes connected to the id provided
 	var q_nodes = 'START p=node('+ id +') MATCH (p) - [] - (n) RETURN distinct n';
 	// query to get the node of the id provided
@@ -637,12 +671,13 @@ router.get('/getNeighbors/:id', function(req,res,next) {
 	};
 
 	var headers = {
-		'Content-Type':'application/json'
+		'Content-Type':'application/json',
+		'Authorization': auth.pw
 	};
 
 	var req1 = http.request({
-			hostname: host,
-			port: port,
+			hostname: auth.host,
+			port: auth.port,
 			path: '/db/data/cypher',
 			method: 'POST',
 			headers: headers
@@ -673,8 +708,8 @@ router.get('/getNeighbors/:id', function(req,res,next) {
 					params: {}
 				};
 				var req2 = http.request({
-						hostname: host,
-						port: port,
+						hostname: auth.host,
+						port: auth.port,
 						path: '/db/data/cypher',
 						method: 'POST',
 						headers: headers
@@ -772,7 +807,7 @@ router.get('/getNeighbors/:id', function(req,res,next) {
 });
 
 
-function getAllRelationships(req, res, nodes, callback) {
+function getAllRelationships(req, res, nodes, auth, callback) {
 	//query all nodes in db
 	var data = {
 		query: 'START r=rel(*) RETURN r LIMIT 100',
@@ -780,12 +815,13 @@ function getAllRelationships(req, res, nodes, callback) {
 	};
 
 	var headers = {
-		'Content-Type':'application/json'
+		'Content-Type':'application/json',
+		'Authorization': auth.pw
 	};
 
 	var req = http.request({
-			hostname: host,
-			port: port,
+			hostname: auth.host,
+			port: auth.port,
 			path: '/db/data/cypher',
 			method: 'POST',
 			headers: headers

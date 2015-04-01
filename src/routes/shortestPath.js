@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 var http = require('http');
 
-router.get('/getShortestPath/:startId/:endId', function(req,res,next) {
+router.post('/getShortestPath/:startId/:endId', function(req,res,next) {
     var startNodeId = req.params.startId;
     var endNodeId = req.params.endId;
     var q = 'START n=node(' + startNodeId + '), p=node(' + endNodeId + ')'+
@@ -17,13 +17,16 @@ router.get('/getShortestPath/:startId/:endId', function(req,res,next) {
         params: {}
     };
 
+    var auth = JSON.parse(req.body.auth);
+
     var headers = {
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Authorization': auth.pw
     };
 
     var req = http.request({
-            hostname: host,
-            port: port,
+            hostname: auth.host,
+            port: auth.port,
             path: '/db/data/cypher',
             method: 'POST',
             headers: headers

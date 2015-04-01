@@ -63,17 +63,7 @@ $(document).ready(function() {
 
     var nodes, edges;
 
-    // check if preferences have been stored
-    if(typeof localStorage.columbusPreferences !== 'undefined') {
-        var prefs = JSON.parse(localStorage.getItem('columbusPreferences'));
-        if (prefs.graphVis === "Dynamic Force Graph") {
-            pullGraph(displayForceData);
-        } else if (prefs.graphVis === "Stationary Force Graph") {
-            pullGraph(displayStillData);
-        }
-    } else {
-        pullGraph(displayForceData);
-    }
+
     $('[data-toggle="tooltip2"]').tooltip({'placement': 'bottom'});
     $('[data-toggle="tooltip3"]').tooltip({'placement': 'bottom'});
     $('[data-toggle="tooltip4"]').tooltip({'placement': 'bottom'});
@@ -84,6 +74,38 @@ $(document).ready(function() {
     $('[data-toggle="tooltip9"]').tooltip({'placement': 'bottom'});
     $('[data-toggle="tooltip10"]').tooltip({'placement': 'bottom'});
     $('[data-toggle="tooltip11"]').tooltip({'placement': 'bottom'});
+
+    // neo4j settings (authentication)
+    if(typeof localStorage.columbusNeo4jSettings !== 'undefined') {
+		var prefs = JSON.parse(localStorage.getItem('columbusNeo4jSettings'));
+        if (typeof prefs.auth === 'undefined') {
+            $('#neo4jSettingsModal').modal('show');
+            $('#neo4jModalSaveBtn').off('click');
+            $('#neo4jModalSaveBtn').on('click', function () {
+                loadAuthInputs();
+            });
+        } else {
+            // check if preferences have been stored
+            auth = prefs.auth;
+            if(typeof localStorage.columbusPreferences !== 'undefined') {
+                var prefs = JSON.parse(localStorage.getItem('columbusPreferences'));
+                if (prefs.graphVis === "Dynamic Force Graph") {
+                    pullGraph(displayForceData);
+                } else if (prefs.graphVis === "Stationary Force Graph") {
+                    pullGraph(displayStillData);
+                }
+            } else {
+                pullGraph(displayForceData);
+            }
+        }
+	} else {
+        $('#neo4jSettingsModal').modal('show');
+        $('#neo4jModalSaveBtn').off('click');
+        $('#neo4jModalSaveBtn').on('click', function () {
+            loadAuthInputs();
+        });
+	}
+
 });
 
 function toggleInfoOnHover() {
@@ -172,4 +194,25 @@ function runShortestPathAnimation() {
 
 function flipMenuArrow() {
     $('.navArrowContainer').css({'transform':'rotate(180deg)'});
+}
+
+function loadAuthInputs () {
+    auth.host = $('#hostInput').val();
+    auth.port = $('#portInput').val();
+    auth.pw = btoa($('#userNameInput').val + ':' + $('#passwordInput').val());
+    var columbusNeo4jSettings = {auth: auth};
+    localStorage.setItem('columbusNeo4jSettings', JSON.stringify(columbusNeo4jSettings));
+    // check if preferences have been stored
+    if(typeof localStorage.columbusPreferences !== 'undefined') {
+        var prefs = JSON.parse(localStorage.getItem('columbusPreferences'));
+        if (prefs.graphVis === "Dynamic Force Graph") {
+            pullGraph(displayForceData);
+        } else if (prefs.graphVis === "Stationary Force Graph") {
+            pullGraph(displayStillData);
+        }
+    } else {
+        pullGraph(displayForceData);
+    }
+    $('#neo4jSettingsModal').modal('hide');
+
 }

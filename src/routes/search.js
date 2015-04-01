@@ -7,22 +7,25 @@ var http = require('http');
 
 var nodesFound = 0;
 
-router.get('/search', function(req,res,next) {
-    var target = req.query.target;
-    console.log('Searched for \'' + req.query.target + '\'');
+router.post('/search', function(req,res,next) {
+    var target = req.body.target;
+    console.log('Searched for \'' + req.body.target + '\'');
 
     var data = {
         query: 'MATCH n RETURN n',
         params: {}
     };
 
+    var auth = JSON.parse(req.body.auth);
+    
     var headers = {
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Authorization': auth.pw
     };
 
     var req = http.request({
-            hostname: host,
-            port: port,
+            hostname: auth.host,
+            port: auth.port,
             path: '/db/data/cypher',
             method: 'POST',
             headers: headers
@@ -73,8 +76,8 @@ router.get('/search', function(req,res,next) {
                     return;
                 }
                 if (nodeArray.length > 0) {
-                    getAllNodeRelationships(nodeArray, function (relationshipArray) {
-                        getNodesBasedOnRelationships(relationshipArray, function (relNodes) {
+                    getAllNodeRelationships(nodeArray, auth, function (relationshipArray) {
+                        getNodesBasedOnRelationships(relationshipArray, auth, function (relNodes) {
                             var graph = {
                                 nodes: (relNodes.length !== 0) ? relNodes: nodeArray,
                                 relationships: relationshipArray,
@@ -156,7 +159,7 @@ router.get('/search', function(req,res,next) {
     });*/
 });
 
-function getAllNodeRelationships(nodes, callback) {
+function getAllNodeRelationships(nodes, auth, callback) {
     if (nodes.length === 0) {
         callback([]);
     }
@@ -176,12 +179,13 @@ function getAllNodeRelationships(nodes, callback) {
     };
 
     var headers = {
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Authorization': auth.pw
     };
 
     var req = http.request({
-            hostname: host,
-            port: port,
+            hostname: auth.host,
+            port: auth.port,
             path: '/db/data/cypher',
             method: 'POST',
             headers: headers
@@ -242,7 +246,7 @@ function getAllNodeRelationships(nodes, callback) {
     });*/
 }
 
-function getNodesBasedOnRelationships (edges, callback) {
+function getNodesBasedOnRelationships (edges, auth, callback) {
     if (edges.length === 0) {
         callback([]);
     }
@@ -282,12 +286,13 @@ function getNodesBasedOnRelationships (edges, callback) {
     };
 
     var headers = {
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Authorization': auth.pw
     };
 
     var req = http.request({
-            hostname: host,
-            port: port,
+            hostname: auth.host,
+            port: auth.port,
             path: '/db/data/cypher',
             method: 'POST',
             headers: headers

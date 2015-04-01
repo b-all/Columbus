@@ -83,3 +83,36 @@ block content
 				.modal-footer
 					button.btn.btn-default(data-dismiss="modal") Close
 					button#modalSaveBtn.btn.btn-primary Save
+	#neo4jSettingsModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='modalLabel', aria-hidden='true')
+		.modal-dialog.modal-lg
+			.modal-content
+				.modal-header
+					button.close(data-dismiss="modal" aria-label="close")
+						span(aria-hidden="true")&times;
+					div
+						img(src="images/neo4j_logo.png" height="45px")
+						span(style="font-size:20px") &nbsp; Settings
+				.modal-body
+					table.neo4jSettingsTable
+						tr
+							td URL:
+							td
+								input#hostInput.form-control(type="text")
+						tr
+							td Port:
+							td
+								input#portInput.form-control(type="text")
+						tr
+							td &nbsp;
+							td &nbsp;
+						tr
+							td Username:
+							td
+								input#userNameInput.form-control(type="text")
+						tr
+							td Password:
+							td
+								input#passwordInput.form-control(type="text") 
+				.modal-footer
+					button.btn.btn-default(data-dismiss="modal") Close
+					button#neo4jModalSaveBtn.btn.btn-primary Save

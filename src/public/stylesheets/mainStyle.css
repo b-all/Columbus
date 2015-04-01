@@ -307,3 +307,9 @@
 textarea {
 	resize: none;
 }
+
+.neo4jSettingsTable {
+	margin-left:auto;
+	margin-right:auto;
+	width: 400px;
+}

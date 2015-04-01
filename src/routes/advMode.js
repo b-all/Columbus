@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 var http = require('http');
 
-router.get('/advMode', function(req,res,next) {
+router.post('/advMode', function(req,res,next) {
   var target = req.query.target;
 
   var data = {
@@ -13,13 +13,16 @@ router.get('/advMode', function(req,res,next) {
       params: {}
   };
 
+  var auth = JSON.parse(req.body.auth);
+
   var headers = {
-      'Content-Type':'application/json'
+      'Content-Type':'application/json',
+      'Authorization': auth.pw
   };
 
   var req = http.request({
-          hostname: host,
-          port: port,
+          hostname: auth.host,
+          port: auth.port,
           path: '/db/data/cypher',
           method: 'POST',
           headers: headers
