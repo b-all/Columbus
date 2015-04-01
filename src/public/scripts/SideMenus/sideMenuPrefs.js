@@ -41,6 +41,11 @@ function showSideMenuPrefs () {
     fixedProps.empty();
     editableProps.empty();
 
+    fixedProps.append(
+        '<p id="neo4jSettingsLink">Neo4j Server Settings</p><br />'
+    );
+    setNeo4jSettingsOnClick();
+
     // make sure the browser supports local storage
     if(typeof(Storage) === "undefined") {
         editableProps.append('<h4>Your browser doesn\'t support local storage.</h4>');
@@ -474,4 +479,28 @@ function refreshGraphWithDifferentVis () {
     var viz = $('#selectGraphVis').val();
 
     displayData(currentData);
+}
+
+function setNeo4jSettingsOnClick() {
+    $('#neo4jSettingsLink').off('click');
+    $('#neo4jSettingsLink').on('click', function () {
+        $('#neo4jSettingsModal').modal('show');
+        if(typeof localStorage.columbusNeo4jSettings !== 'undefined') {
+    		var prefs = JSON.parse(localStorage.getItem('columbusNeo4jSettings'));
+            if (typeof prefs.auth !== 'undefined') {
+                $('#hostInput').val(prefs.auth.host);
+                $('#portInput').val(prefs.auth.port);
+                var creds = atob(auth.pw);
+                console.log(creds);
+                creds = creds.split(':');
+                var username = creds[0], pass = creds[1];
+                $('#userNameInput').val(username);
+                $('#passwordInput').val(pass);
+            }
+    	}
+        $('#neo4jModalSaveBtn').off('click');
+        $('#neo4jModalSaveBtn').on('click', function () {
+            loadAuthInputs();
+        });
+    });
 }

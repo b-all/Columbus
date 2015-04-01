@@ -313,3 +313,14 @@ textarea {
 	margin-right:auto;
 	width: 400px;
 }
+
+#neo4jSettingsLink {
+	color: #0000EE;
+	text-decoration: underline;
+	text-align: left;
+	cursor: pointer;
+}
+
+#neo4jSettingsLink:active {
+	color: #333333;
+}
