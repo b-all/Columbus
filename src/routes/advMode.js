@@ -5,7 +5,9 @@ var express = require('express');
 var router = express.Router();
 var http = require('http');
 
-router.get('/advMode', function(req,res,next) {
+var lastReq = "";
+
+router.post('/advMode', function(req,res,next) {
   var target = req.query.target;
 
   var data = {

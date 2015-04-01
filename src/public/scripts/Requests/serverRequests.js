@@ -338,8 +338,18 @@ function advMode(target, callback) {
 		return;
 	}
 
+	var data = {
+		auth: JSON.stringify(auth)
+	};
+
 	var obj = { target: target, auth: JSON.stringify(auth) };
-	var win = window.open(getBaseURL()+'advMode?target='+target);
+	$.post('advMode?target=' + target, data).done(function (data) {
+		localStorage.advModeData = JSON.stringify(data);
+		console.log(localStorage.advModeData);
+		var win = window.open(getBaseURL()+'advModeEcho');
+	}).fail(function () {
+		toastFail("There was an error communicating with the server");
+	});
 }
 
 function getBaseURL () {

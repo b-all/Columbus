@@ -12,6 +12,11 @@ router.get('/', function(req, res, next) {
 	res.render('index', { title: 'Columbus' });
 });
 
+/* GET advMode page */
+router.get('/advModeEcho', function (req, res, next) {
+	res.render('advModeEcho', {title: 'Advanced Mode Data'});
+});
+
 /* GET all nodes from neo4j database */
 router.post('/graph', function(req, res, next) {
 	//query all nodes in db
@@ -372,7 +377,7 @@ router.post('/updateNode', function(req, res, next) {
 router.post('/updateRel', function(req, res, next) {
 	var data = JSON.parse(req.body.rel);
 	data = JSON.parse(data.rel);
-	
+
 	var rel_id = data.id;
 	var properties = data.data;
 	//query to delete node and all connected relationships
