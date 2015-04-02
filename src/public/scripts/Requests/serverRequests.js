@@ -209,6 +209,43 @@ function getSingleRel(relId, callback) {
 	});
 }
 
+function searchWhere(prop, val, callback) {
+	var where = {
+		prop: prop,
+		val: val
+	}
+	var data = {
+		auth: JSON.stringify(auth),
+		where: JSON.stringify(where)
+	};
+
+	currentRequest = $.post('searchWhere', data).done(function(data) {
+		if (!data.err) {
+			if ($('#additiveSearchCheckbox').prop("checked")){
+				var dataCopy = JSON.parse(JSON.stringify(data));
+				graph.addNodeNeighbors(data);
+				currentData.nodes = currentData.nodes.concat(dataCopy.nodes).unique();
+				currentData.relationships = currentData.relationships.concat(dataCopy.relationships);
+			} else {
+				displayData(data);
+			}
+
+			callback(data.matches);
+		} else {
+			console.log(data.err);
+			$('#loader').hide();
+			toastFail(data.err);
+		}
+	}).fail(function(msg) {
+		if (msg.statusText === 'abort') {
+			toastInfo("Search Canceled");
+		} else {
+			toastFail("There was an error communicating with the server");
+		}
+		console.log(msg);
+	});
+}
+
 function search(target, callback) {
 	if (typeof target === 'undefined' || target === '') {
 		pullGraph();
@@ -351,6 +388,24 @@ function advMode(target, callback) {
 		toastFail("There was an error communicating with the server");
 	});
 }
+
+function getPropertyKeys(callback) {
+	var data = {
+		auth: JSON.stringify(auth)
+	};
+
+	$.post('getPropertyKeys', data).done(function (data) {
+		callback(data);
+	}).fail(function () {
+		toastFail("There was an error communicating with the server");
+	});
+}
+
+
+/*******************************************************
+ *  Functions that do not interact with the server
+ *
+ *******************************************************/
 
 function getBaseURL () {
 	return location.protocol + "//" + location.hostname +

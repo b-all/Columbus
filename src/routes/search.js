@@ -7,6 +7,115 @@ var http = require('http');
 
 var nodesFound = 0;
 
+router.post('/getPropertyKeys', function(req,res,next) {
+    var auth = JSON.parse(req.body.auth);
+    var headers = {
+        'Content-Type':'application/json',
+        'Authorization': auth.pw
+    };
+
+    var req = http.request({
+            hostname: auth.host,
+            port: auth.port,
+            path: '/db/data/propertykeys',
+            method: 'GET',
+            headers: headers
+    }, function (response) {
+        var results = '';
+        response.on('data', function (chunk) {
+            results += chunk;
+        });
+        response.on('end', function () {
+            if (response.statusCode !== 200) { // if error send blank response
+                res.send({err:"Cannot communicate with Neo4j database."});
+            } else {
+                results = JSON.parse(results);
+                res.send(results);
+            }
+        });
+    }).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
+	});
+
+    req.end();
+
+});
+
+router.post('/searchWhere', function(req,res,next) {
+    var auth = JSON.parse(req.body.auth);
+    var where = JSON.parse(req.body.where);
+    var headers = {
+        'Content-Type':'application/json',
+        'Authorization': auth.pw
+    };
+
+    var data = {
+        query: 'MATCH n WHERE n.' + where.prop + '="' + where.val + '"' +  ' RETURN n',
+        params: {}
+    };
+
+    var req = http.request({
+            hostname: auth.host,
+            port: auth.port,
+            path: '/db/data/cypher',
+            method: 'POST',
+            headers: headers
+    }, function (response) {
+        var results = '';
+        response.on('data', function (chunk) {
+            results += chunk;
+        });
+        response.on('end', function () {
+            if (response.statusCode !== 200) { // if error send blank response
+                res.send({err:"Cannot communicate with Neo4j database."});
+            } else {
+                results = JSON.parse(results);
+                var nodes = results.data;
+                var nodeArray = [];
+                for (var k = 0; k < nodes.length; k++) {
+                    nodeArray.push({
+                        title: nodes[k][0].metadata.id.toString(),
+                        id: nodes[k][0].metadata.id,
+                        x: 0,
+                        y: 0,
+                        labels: nodes[k][0].metadata.labels,
+                        data: nodes[k][0].data,
+    					filtered: true
+                    });
+
+                }
+                nodesFound = nodeArray.length;
+                if (nodesFound > 1000) {
+                    res.send({err:"Too many results."});
+                    return;
+                }
+                if (nodeArray.length > 0) {
+                    getAllNodeRelationships(nodeArray, auth, function (relationshipArray) {
+                        getNodesBasedOnRelationships(relationshipArray, auth, function (relNodes) {
+                            var graph = {
+                                nodes: (relNodes.length !== 0) ? relNodes: nodeArray,
+                                relationships: relationshipArray,
+                                matches: nodesFound
+                            };
+                            res.send(graph);
+                        });
+                    });
+                } else {
+                    res.send({err:"No matching results."});
+                    return;
+                }
+            }
+        });
+    }).on('error', function (err) {
+	    console.log(err);
+		res.send({err:"Cannot communicate with Neo4j database."});
+	});
+
+    req.write(JSON.stringify(data));
+    req.end();
+});
+
 router.post('/search', function(req,res,next) {
     var target = req.body.target;
     console.log('Searched for \'' + req.body.target + '\'');
