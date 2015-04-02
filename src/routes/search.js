@@ -51,7 +51,7 @@ router.post('/searchWhere', function(req,res,next) {
     };
 
     var data = {
-        query: 'MATCH n WHERE n.' + where.prop + '="' + where.val + '"' +  ' RETURN n',
+        query: 'MATCH n WHERE n.' + where.prop + '=~ "(?i)' + where.val + '"' +  ' RETURN n',
         params: {}
     };
 
