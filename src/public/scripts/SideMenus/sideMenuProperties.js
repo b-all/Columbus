@@ -210,11 +210,11 @@ var showRelData = function (d) {
 	editableProps.empty();
 	var ePropsString = "<table class=\"propertyTable\">";
 
-	for (var i in data) {
+	for (var i in d.data) {
 		ePropsString += "<tr>" +
 							"<td><input type=\"text\" class=\"form-control pNameInput\" value=\"" + i + "\"></input></td>" +
 							"<td> : </td>" +
-							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + escapeHtml(data[i]) + "\"></input></td>" +
+							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + escapeHtml(d.data[i]) + "\"></input></td>" +
 							"<td>" +
 		                        "<span class=\"addPropBtn\">"+
 		                            "<i class=\"glyphicon glyphicon-plus\"></i>" +
