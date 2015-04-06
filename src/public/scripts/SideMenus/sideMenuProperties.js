@@ -44,12 +44,36 @@ var showNodeData = function (d) {
 
 	var editableProps = $('#editableProperties');
 	editableProps.empty();
+	var props = [];
+    var data = [];
+    for (var i in d.data) {
+        var obj = {};
+        obj[i] = d.data[i];
+        data.push(obj);
+    }
+    if (typeof localStorage.columbusPreferences !== 'undefined') {
+        var lsProps = JSON.parse(localStorage.columbusPreferences).hoverPriorities;
+        for (var i = 0; i < lsProps.length; i++) {
+            if (d.labels[0] === lsProps[i].label) {
+                props.push(lsProps[i].property);
+            }
+        }
+    }
+    for (var i = 0; i < props.length; i++) {
+        for (var j = 0; j < data.length; j++) {
+            if (data[j].hasOwnProperty(props[i])) {
+                var dataToMove = data[j];
+                data.splice(j, 1);
+                data.unshift(dataToMove);
+            }
+        }
+    }
 	var ePropsString = "<table class=\"propertyTable\">";
-	for (var i in d.data) {
+	for (var i in data) {
 		ePropsString += "<tr>" +
-							"<td><input type=\"text\" class=\"form-control pNameInput\" value=\"" + i + "\"></input></td>" +
+							"<td><input type=\"text\" class=\"form-control pNameInput\" value=\"" + Object.getOwnPropertyNames(data[i])[0] + "\"></input></td>" +
 							"<td> : </td>" +
-							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + escapeHtml(d.data[i]) + "\"></input></td>" +
+							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + data[i][Object.getOwnPropertyNames(data[i])[0]] + "\"></input></td>" +
 							"<td>" +
 		                        "<span class=\"addPropBtn\" title=\"Add another property field\">"+
 		                            "<i class=\"glyphicon glyphicon-plus\"></i>" +
@@ -188,11 +212,12 @@ var showRelData = function (d) {
 	var editableProps = $('#editableProperties');
 	editableProps.empty();
 	var ePropsString = "<table class=\"propertyTable\">";
-	for (var i in d.data) {
+
+	for (var i in data) {
 		ePropsString += "<tr>" +
 							"<td><input type=\"text\" class=\"form-control pNameInput\" value=\"" + i + "\"></input></td>" +
 							"<td> : </td>" +
-							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + escapeHtml(d.data[i]) + "\"></input></td>" +
+							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + escapeHtml(data[i]) + "\"></input></td>" +
 							"<td>" +
 		                        "<span class=\"addPropBtn\" title=\"Add another property field\">"+
 		                            "<i class=\"glyphicon glyphicon-plus\"></i>" +

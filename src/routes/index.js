@@ -3,18 +3,11 @@ var host = 'localhost', port = 7474;
 
 
 var express = require('express');
-var http = require('http');
 var router = express.Router();
-
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	res.render('index', { title: 'Columbus' });
-});
-
-/* GET advMode page */
-router.get('/advModeEcho', function (req, res, next) {
-	res.render('advModeEcho', {title: 'Advanced Mode Data'});
 });
 
 /* GET all nodes from neo4j database */
@@ -26,13 +19,14 @@ router.post('/graph', function(req, res, next) {
 	};
 
 	var auth = req.body;
+	isHTTPS(auth.isHttps);
 
 	var headers = {
 		'Content-Type':'application/json',
 		'Authorization': auth.pw
 	};
 
-	var req = http.request({
+	var req = connection.request({
 			hostname: auth.host,
 			port: auth.port,
 			path: '/db/data/cypher',
@@ -99,13 +93,14 @@ router.post('/addNode', function(req, res, next) {
 	};
 
 	var auth = JSON.parse(req.body.auth);
+	isHTTPS(auth.isHttps);
 
 	var headers = {
 		'Content-Type':'application/json',
 		'Authorization': auth.pw
 	};
 
-	var req = http.request({
+	var req = connection.request({
 			hostname: auth.host,
 			port: auth.port,
 			path: '/db/data/cypher',
@@ -151,13 +146,14 @@ router.post('/addRel', function(req, res, next) {
 	};
 
 	var auth = JSON.parse(req.body.auth);
+	isHTTPS(auth.isHttps);
 
 	var headers = {
 		'Content-Type':'application/json',
 		'Authorization': auth.pw
 	};
 
-	var req = http.request({
+	var req = connection.request({
 			hostname: auth.host,
 			port: auth.port,
 			path: '/db/data/cypher',
@@ -198,13 +194,14 @@ router.post('/deleteNode', function(req, res, next) {
 	};
 
 	var auth = JSON.parse(req.body.auth);
+	isHTTPS(auth.isHttps);
 
 	var headers = {
 		'Content-Type':'application/json',
 		'Authorization': auth.pw
 	};
 
-	var req1 = http.request({
+	var req1 = connection.request({
 			hostname: auth.host,
 			port: auth.port,
 			path: '/db/data/cypher',
@@ -226,7 +223,7 @@ router.post('/deleteNode', function(req, res, next) {
 					query: query2,
 					params: {}
 				};
-				var req2 = http.request({
+				var req2 = connection.request({
 						hostname: auth.host,
 						port: auth.port,
 						path: '/db/data/cypher',
@@ -294,13 +291,14 @@ router.post('/deleteRelationship', function(req, res, next) {
 	};
 
 	var auth = JSON.parse(req.body.auth);
+	isHTTPS(auth.isHttps);
 
 	var headers = {
 		'Content-Type':'application/json',
 		'Authorization': auth.pw
 	};
 
-	var req = http.request({
+	var req = connection.request({
 			hostname: auth.host,
 			port: auth.port,
 			path: '/db/data/cypher',
@@ -346,6 +344,7 @@ router.post('/updateNode', function(req, res, next) {
 	var query = "START n=node(" + node_id + ") SET n = " + CleanJSONForNeo4j(JSON.stringify(properties)) ;
 
 	var auth = JSON.parse(req.body.auth);
+	isHTTPS(auth.isHttps);
 
 	//query all nodes in db
 	var data = {
@@ -358,7 +357,7 @@ router.post('/updateNode', function(req, res, next) {
 		'Authorization': auth.pw
 	};
 
-	var req = http.request({
+	var req = connection.request({
 			hostname: auth.host,
 			port: auth.port,
 			path: '/db/data/cypher',
@@ -405,6 +404,7 @@ router.post('/updateRel', function(req, res, next) {
 	var query = "START r=rel(" + rel_id + ") SET r = " + CleanJSONForNeo4j(JSON.stringify(properties)) ;
 
 	var auth = JSON.parse(req.body.auth);
+	isHTTPS(auth.isHttps);
 
 	//query all nodes in db
 	var data = {
@@ -417,7 +417,7 @@ router.post('/updateRel', function(req, res, next) {
 		'Authorization': auth.pw
 	};
 
-	var req = http.request({
+	var req = connection.request({
 			hostname: auth.host,
 			port: auth.port,
 			path: '/db/data/cypher',
@@ -459,6 +459,7 @@ router.post('/getNode/:id', function(req,res,next) {
 	var q = 'START n=node('+ id +') RETURN n';
 
 	var auth = JSON.parse(req.body.auth);
+	isHTTPS(auth.isHttps);
 
 	//query all nodes in db
 	var data = {
@@ -471,7 +472,7 @@ router.post('/getNode/:id', function(req,res,next) {
 		'Authorization': auth.pw
 	};
 
-	var req = http.request({
+	var req = connection.request({
 			hostname: auth.host,
 			port: auth.port,
 			path: '/db/data/cypher',
@@ -539,6 +540,7 @@ router.post('/getRel/:id', function(req,res,next) {
 	var q = 'START r=rel('+ id +') RETURN r';
 
 	var auth = JSON.parse(req.body.auth);
+	isHTTPS(auth.isHttps);
 
 	//query all nodes in db
 	var data = {
@@ -551,7 +553,7 @@ router.post('/getRel/:id', function(req,res,next) {
 		'Authorization': auth.pw
 	};
 
-	var req = http.request({
+	var req = connection.request({
 			hostname: auth.host,
 			port: auth.port,
 			path: '/db/data/cypher',
@@ -624,13 +626,14 @@ router.post('/getLabels', function (req, res, next) {
 	};
 
 	var auth = JSON.parse(req.body.auth);
+	isHTTPS(auth.isHttps);
 
 	var headers = {
 		'Content-Type':'application/json',
 		'Authorization': auth.pw
 	};
 
-	var req = http.request({
+	var req = connection.request({
 			hostname: auth.host,
 			port: auth.port,
 			path: '/db/data/cypher',
@@ -695,6 +698,7 @@ router.post('/getLabels', function (req, res, next) {
 router.post('/getNeighbors/:id', function(req,res,next) {
 	var id = req.params.id;
 	var auth = JSON.parse(req.body.auth);
+	isHTTPS(auth.isHttps);
 	// query to get nodes connected to the id provided
 	var q_nodes = 'START p=node('+ id +') MATCH (p) - [] - (n) RETURN distinct n';
 	// query to get the node of the id provided
@@ -713,7 +717,7 @@ router.post('/getNeighbors/:id', function(req,res,next) {
 		'Authorization': auth.pw
 	};
 
-	var req1 = http.request({
+	var req1 = connection.request({
 			hostname: auth.host,
 			port: auth.port,
 			path: '/db/data/cypher',
@@ -745,7 +749,7 @@ router.post('/getNeighbors/:id', function(req,res,next) {
 					query: q_rels,
 					params: {}
 				};
-				var req2 = http.request({
+				var req2 = connection.request({
 						hostname: auth.host,
 						port: auth.port,
 						path: '/db/data/cypher',
@@ -863,7 +867,7 @@ function getAllRelationships(req, res, nodes, auth, callback) {
 		'Authorization': auth.pw
 	};
 
-	var req = http.request({
+	var req = connection.request({
 			hostname: auth.host,
 			port: auth.port,
 			path: '/db/data/cypher',
@@ -938,6 +942,18 @@ function getAllRelationships(req, res, nodes, auth, callback) {
 
 
 
+function isHTTPS(isHttps) {
+	isHttps = (isHttps === 'true') ? true : false;
+	if (isHttps) {
+		delete connection;
+		connection = require('https');
+		return true;
+	} else {
+		delete connection;
+		connection = require('http');
+		return false;
+	}
+}
 
 function CleanJSONForNeo4j(json) {
     return json.replace(/"(\w+)"\s*:/g, '$1:');
