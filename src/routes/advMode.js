@@ -40,9 +40,9 @@ router.post('/advMode', function(req,res,next) {
           } else {
               results = JSON.parse(results);
               var str = JSON.stringify(results, null, 2); // spacing level = 2
-              var str1 = '<pre>\n<code class="prettyprint">\n';
+              var str1 = '\n\n<pre>\n<code class="prettyprint">\n';
               var str2 = '\n</pre>\n</code>\n';
-              res.send(str1+str+str2);
+              res.send("\n"+target+str1+str+str2);
           }
       });
   }).on('error', function (err) {

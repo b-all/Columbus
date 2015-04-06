@@ -127,14 +127,15 @@ function addHoverPriority (index) {
                         '<td>Label : </td>' +
                         '<td><select id="labelSelect'+ numPriorities+ '" class="form-control selectLabel"></select></td>' +
                         '<td rowspan="2">' +
-                            '<span class=\"addPropBtn\">' +
-                                '<i class=\"glyphicon glyphicon-plus\"></i>' +
+                            '<span class=\"addPropBtn\" title="Add another hover priority">' +
+                            '<i class=\"glyphicon glyphicon-plus\"></i>' +
                             '</span>' +
                         '</td>' +
                         '<td rowspan="2">' +
-                            "<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
+                            "<span class=\"deletePropBtn\" title=\"Delete this hover priority\">" +
+                            "<svg width=\"16px\" height=\"16px\" >" +
                                 "<use xlink:href=\"#deleteSVG\">" +
-                            "</svg>" +
+                            "</svg></span>" +
                         "</td>" +
                     '</tr>' +
                     '<tr>' +
@@ -203,14 +204,15 @@ function addHoverPriority (index) {
                     '<td>Label : </td>' +
                     '<td><select id="labelSelect'+ numPriorities+ '" class="form-control selectLabel"></select></td>' +
                     '<td rowspan="2">' +
-                        '<span class=\"addPropBtn\">' +
-                            '<i class=\"glyphicon glyphicon-plus\"></i>' +
+                        '<span class=\"addPropBtn\" title="Add another hover priority">' +
+                        '<i class=\"glyphicon glyphicon-plus\"></i>' +
                         '</span>' +
                     '</td>' +
                     '<td rowspan="2">' +
-                        "<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
-                            "<use xlink:href=\"#deleteSVG\">" +
-                        "</svg>" +
+                    "<span class=\"deletePropBtn\" title=\"Delete this hover priority\">" +
+                    "<svg width=\"16px\" height=\"16px\" >" +
+                        "<use xlink:href=\"#deleteSVG\">" +
+                    "</svg></span>" +
                     "</td>" +
                 '</tr>' +
                 '<tr>' +
@@ -403,14 +405,15 @@ function loadUserPriorities (hoverPriority) {
                 '<td>Label : </td>' +
                 '<td><select id="labelSelect'+ numPriorities+ '" class="form-control selectLabel"></select></td>' +
                 '<td rowspan="2">' +
-                    '<span class=\"addPropBtn\">' +
+                    '<span class=\"addPropBtn\" title="Add another hover priority">' +
                         '<i class=\"glyphicon glyphicon-plus\"></i>' +
                     '</span>' +
                 '</td>' +
                 '<td rowspan="2">' +
-                    "<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
-                        "<use xlink:href=\"#deleteSVG\">" +
-                    "</svg>" +
+                "<span class=\"deletePropBtn\" title=\"Delete this hover priority\">" +
+                "<svg width=\"16px\" height=\"16px\" >" +
+                    "<use xlink:href=\"#deleteSVG\">" +
+                "</svg></span>" +
                 "</td>" +
             '</tr>' +
             '<tr>' +

@@ -74,6 +74,8 @@ $(document).ready(function() {
     $('[data-toggle="tooltip9"]').tooltip({'placement': 'bottom'});
     $('[data-toggle="tooltip10"]').tooltip({'placement': 'bottom'});
     $('[data-toggle="tooltip11"]').tooltip({'placement': 'bottom'});
+    $('[data-toggle="tooltip12"]').tooltip({'placement': 'bottom'});
+    $('[data-toggle="tooltip13"]').tooltip({'placement': 'bottom'});
 
     // neo4j settings (authentication)
     if(typeof localStorage.columbusNeo4jSettings !== 'undefined') {

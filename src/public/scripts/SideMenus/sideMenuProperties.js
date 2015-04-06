@@ -51,14 +51,15 @@ var showNodeData = function (d) {
 							"<td> : </td>" +
 							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + escapeHtml(d.data[i]) + "\"></input></td>" +
 							"<td>" +
-		                        "<span class=\"addPropBtn\">"+
+		                        "<span class=\"addPropBtn\" title=\"Add another property field\">"+
 		                            "<i class=\"glyphicon glyphicon-plus\"></i>" +
 		                        "</span>"+
 		                    "</td>" +
 							"<td>" +
-								"<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
+							  "<span class=\"deletePropBtn\" title=\"Delete this property field\">" +
+								"<svg width=\"16px\" height=\"16px\">" +
 									"<use xlink:href=\"#deleteSVG\">" +
-								"</svg>" +
+								"</svg></span>" +
 							"</td>" +
 						"</tr>";
 	}
@@ -68,14 +69,15 @@ var showNodeData = function (d) {
 							"<td> : </td>" +
 							"<td><input type=\"text\" class=\"form-control pValueInput\"></input></td>" +
 							"<td>" +
-		                        "<span class=\"addPropBtn\">"+
+		                        "<span class=\"addPropBtn\" title=\"Add another property field\">"+
 		                            "<i class=\"glyphicon glyphicon-plus\"></i>" +
 		                        "</span>"+
 		                    "</td>" +
 							"<td>" +
-								"<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
-									"<use xlink:href=\"#deleteSVG\">" +
-								"</svg>" +
+									"<span class=\"deletePropBtn\" title=\"Delete this property field\">" +
+									"<svg width=\"16px\" height=\"16px\">" +
+										"<use xlink:href=\"#deleteSVG\">" +
+									"</svg></span>" +
 							"</td>" +
 						"</tr>";
 	}
@@ -109,6 +111,7 @@ var showNodeData = function (d) {
 
 	//show save button
 	$('.saveBtn').show();
+	$('.deleteBtn').attr("data-original-title","Delete selected node");
 	$('.deleteBtn').show();
 	$('.propertyEditBtn').show();
 
@@ -191,14 +194,15 @@ var showRelData = function (d) {
 							"<td> : </td>" +
 							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + escapeHtml(d.data[i]) + "\"></input></td>" +
 							"<td>" +
-		                        "<span class=\"addPropBtn\">"+
+		                        "<span class=\"addPropBtn\" title=\"Add another property field\">"+
 		                            "<i class=\"glyphicon glyphicon-plus\"></i>" +
 		                        "</span>"+
 		                    "</td>" +
 							"<td>" +
-								"<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
-									"<use xlink:href=\"#deleteSVG\">" +
-								"</svg>" +
+									"<span class=\"deletePropBtn\" title=\"Delete this property field\">" +
+									"<svg width=\"16px\" height=\"16px\">" +
+										"<use xlink:href=\"#deleteSVG\">" +
+									"</svg></span>" +
 							"</td>" +
 						"</tr>";
 	}
@@ -208,14 +212,15 @@ var showRelData = function (d) {
 							"<td> : </td>" +
 							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"\"></input></td>" +
 							"<td>" +
-		                        "<span class=\"addPropBtn\">"+
+		                        "<span class=\"addPropBtn\" title=\"Add another property field\">"+
 		                            "<i class=\"glyphicon glyphicon-plus\"></i>" +
 		                        "</span>"+
 		                    "</td>" +
 							"<td>" +
-								"<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
-									"<use xlink:href=\"#deleteSVG\">" +
-								"</svg>" +
+									"<span class=\"deletePropBtn\" title=\"Delete this property field\">" +
+									"<svg width=\"16px\" height=\"16px\">" +
+										"<use xlink:href=\"#deleteSVG\">" +
+									"</svg></span>" +
 							"</td>" +
 						"</tr>";
 	}
@@ -252,6 +257,7 @@ var showRelData = function (d) {
 
 	//show save button
 	$('.saveBtn').show();
+	$('.deleteBtn').attr("data-original-title","Delete selected relationship");
 	$('.deleteBtn').show();
 	$('.propertyEditBtn').show();
 	setRelSaveBtnOnClick(d);
@@ -492,14 +498,15 @@ function addPropertyUpdate (index) {
                         "<input type=\"text\" class=\"form-control pValueInput\"></input>" +
                     "</td>" +
                     "<td>" +
-                        "<span class=\"addPropBtn\">"+
+                        "<span class=\"addPropBtn\" title=\"Add another property field\">"+
                             "<i class=\"glyphicon glyphicon-plus\"></i>" +
                         "</span>"+
                     "</td>" +
                     "<td>" +
-                        "<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
-                            "<use xlink:href=\"#deleteSVG\">" +
-                        "</svg>" +
+												"<span class=\"deletePropBtn\" title=\"Delete this property field\">" +
+												"<svg width=\"16px\" height=\"16px\">" +
+													"<use xlink:href=\"#deleteSVG\">" +
+												"</svg></span>" +
                     "</td>" +
                 "</tr>";
 
