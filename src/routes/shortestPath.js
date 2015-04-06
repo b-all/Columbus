@@ -4,6 +4,8 @@ var host = 'localhost', port = 7474;
 var express = require('express');
 var router = express.Router();
 var http = require('http');
+var https = require('https');
+var connection;
 
 router.post('/getShortestPath/:startId/:endId', function(req,res,next) {
     var startNodeId = req.params.startId;
@@ -18,13 +20,14 @@ router.post('/getShortestPath/:startId/:endId', function(req,res,next) {
     };
 
     var auth = JSON.parse(req.body.auth);
+    isHTTPS(isHttps);
 
     var headers = {
         'Content-Type':'application/json',
         'Authorization': auth.pw
     };
 
-    var req = http.request({
+    var req = connection.request({
             hostname: auth.host,
             port: auth.port,
             path: '/db/data/cypher',
@@ -39,7 +42,6 @@ router.post('/getShortestPath/:startId/:endId', function(req,res,next) {
             if (response.statusCode !== 200) { // if error send blank response
                 res.send({err:"Cannot communicate with Neo4j database."});
             } else {
-                console.log(results);
                 results = JSON.parse(results);
 
                 var nodes = [], rels =[];
@@ -159,5 +161,16 @@ router.post('/getShortestPath/:startId/:endId', function(req,res,next) {
         }
     });*/
 });
+
+function isHTTPS(isHttps) {
+    isHttps = (isHttps === 'true') ? true : false; 
+	if (isHttps) {
+		connection = https;
+		return true;
+	} else {
+		connection = http;
+		return false;
+	}
+}
 
 module.exports = router;

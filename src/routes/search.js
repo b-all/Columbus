@@ -4,17 +4,21 @@ var host = 'localhost', port = 7474;
 var express = require('express');
 var router = express.Router();
 var http = require('http');
+var https = require('https');
+var connection;
 
 var nodesFound = 0;
 
 router.post('/getPropertyKeys', function(req,res,next) {
     var auth = JSON.parse(req.body.auth);
+    isHTTPS(isHttps);
+
     var headers = {
         'Content-Type':'application/json',
         'Authorization': auth.pw
     };
 
-    var req = http.request({
+    var req = connection.request({
             hostname: auth.host,
             port: auth.port,
             path: '/db/data/propertykeys',
@@ -44,6 +48,7 @@ router.post('/getPropertyKeys', function(req,res,next) {
 
 router.post('/searchWhere', function(req,res,next) {
     var auth = JSON.parse(req.body.auth);
+    isHTTPS(isHttps);
     var where = JSON.parse(req.body.where);
     var headers = {
         'Content-Type':'application/json',
@@ -51,11 +56,11 @@ router.post('/searchWhere', function(req,res,next) {
     };
 
     var data = {
-        query: 'MATCH n WHERE n.' + where.prop + '=~ "(?i)' + where.val + '"' +  ' RETURN n',
+        query: 'MATCH n WHERE n.' + where.prop + '=~ "(?i) .*' + where.val + '.*"' +  ' RETURN n',
         params: {}
     };
 
-    var req = http.request({
+    var req = connection.request({
             hostname: auth.host,
             port: auth.port,
             path: '/db/data/cypher',
@@ -126,13 +131,14 @@ router.post('/search', function(req,res,next) {
     };
 
     var auth = JSON.parse(req.body.auth);
+    isHTTPS(isHttps);
 
     var headers = {
         'Content-Type':'application/json',
         'Authorization': auth.pw
     };
 
-    var req = http.request({
+    var req = connection.request({
             hostname: auth.host,
             port: auth.port,
             path: '/db/data/cypher',
@@ -294,8 +300,9 @@ function getAllNodeRelationships(nodes, auth, callback) {
         'Content-Type':'application/json',
         'Authorization': auth.pw
     };
+    isHTTPS(isHttps);
 
-    var req = http.request({
+    var req = connection.request({
             hostname: auth.host,
             port: auth.port,
             path: '/db/data/cypher',
@@ -404,8 +411,9 @@ function getNodesBasedOnRelationships (edges, auth, callback) {
         'Content-Type':'application/json',
         'Authorization': auth.pw
     };
+    isHTTPS(isHttps);
 
-    var req = http.request({
+    var req = connection.request({
             hostname: auth.host,
             port: auth.port,
             path: '/db/data/cypher',
@@ -470,6 +478,17 @@ function getNodesBasedOnRelationships (edges, auth, callback) {
         }
     });*/
 
+}
+
+function isHTTPS(isHttps) {
+    isHttps = (isHttps === 'true') ? true : false; 
+	if (isHttps) {
+		connection = https;
+		return true;
+	} else {
+		connection = http;
+		return false;
+	}
 }
 
 module.exports = router;

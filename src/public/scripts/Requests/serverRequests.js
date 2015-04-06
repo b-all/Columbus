@@ -2,7 +2,8 @@ var currentRequest;
 var auth = {
 	pw: '',
 	host: '',
-	port: ''
+	port: '',
+	isHttps: false
 };
 
 function pullGraph(callback) {

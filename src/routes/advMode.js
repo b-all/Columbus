@@ -4,8 +4,15 @@ var host = 'localhost', port = 7474;
 var express = require('express');
 var router = express.Router();
 var http = require('http');
+var https = require('https');
+var connection;
 
 var lastReq = "";
+
+/* GET advMode page */
+router.get('/advModeEcho', function (req, res, next) {
+	res.render('advModeEcho', {title: 'Advanced Mode Data'});
+});
 
 router.post('/advMode', function(req,res,next) {
   var target = req.query.target;
@@ -16,13 +23,14 @@ router.post('/advMode', function(req,res,next) {
   };
 
   var auth = JSON.parse(req.body.auth);
+  isHTTPS(auth.isHttps);
 
   var headers = {
       'Content-Type':'application/json',
       'Authorization': auth.pw
   };
 
-  var req = http.request({
+  var req = connection.request({
           hostname: auth.host,
           port: auth.port,
           path: '/db/data/cypher',
@@ -64,5 +72,16 @@ router.post('/advMode', function(req,res,next) {
       }
   });*/
 });
+
+function isHTTPS(isHttps) {
+    isHttps = (isHttps === 'true') ? true : false; 
+	if (isHttps) {
+		connection = https;
+		return true;
+	} else {
+		connection = http;
+		return false;
+	}
+}
 
 module.exports = router;

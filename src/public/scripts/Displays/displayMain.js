@@ -199,6 +199,7 @@ function flipMenuArrow() {
 function loadAuthInputs () {
     auth.host = $('#hostInput').val();
     auth.port = $('#portInput').val();
+    auth.isHttps = ($('#httpRadio').prop('checked')) ? false : true;
     auth.pw = btoa($('#userNameInput').val() + ':' + $('#passwordInput').val());
     var columbusNeo4jSettings = {auth: auth};
     localStorage.setItem('columbusNeo4jSettings', JSON.stringify(columbusNeo4jSettings));

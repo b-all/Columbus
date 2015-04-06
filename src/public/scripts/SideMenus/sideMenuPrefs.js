@@ -496,6 +496,12 @@ function setNeo4jSettingsOnClick() {
                 var username = creds[0], pass = creds[1];
                 $('#userNameInput').val(username);
                 $('#passwordInput').val(pass);
+                if (prefs.auth.isHttps) {
+                    $('#httpsRadio').prop('checked', true);
+                } else {
+                    $('#httpRadio').prop('checked', true);
+                    console.log(prefs.auth.isHttps);
+                }
             }
     	}
         $('#neo4jModalSaveBtn').off('click');
