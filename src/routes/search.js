@@ -48,7 +48,7 @@ router.post('/getPropertyKeys', function(req,res,next) {
 
 router.post('/searchWhere', function(req,res,next) {
     var auth = JSON.parse(req.body.auth);
-    isHTTPS(isHttps);
+    isHTTPS(auth.isHttps);
     var where = JSON.parse(req.body.where);
     var headers = {
         'Content-Type':'application/json',
@@ -56,9 +56,11 @@ router.post('/searchWhere', function(req,res,next) {
     };
 
     var data = {
-        query: 'MATCH n WHERE n.' + where.prop + '=~ "(?i) .*' + where.val + '.*"' +  ' RETURN n',
+        query: 'MATCH n WHERE n.' + where.prop + '=~ "(?i).*' + where.val + '.*"' +  ' RETURN n',
         params: {}
     };
+
+    console.log(data.query);
 
     var req = connection.request({
             hostname: auth.host,
@@ -131,7 +133,7 @@ router.post('/search', function(req,res,next) {
     };
 
     var auth = JSON.parse(req.body.auth);
-    isHTTPS(isHttps);
+    isHTTPS(auth.isHttps);
 
     var headers = {
         'Content-Type':'application/json',
@@ -300,7 +302,7 @@ function getAllNodeRelationships(nodes, auth, callback) {
         'Content-Type':'application/json',
         'Authorization': auth.pw
     };
-    isHTTPS(isHttps);
+    isHTTPS(auth.isHttps);
 
     var req = connection.request({
             hostname: auth.host,
@@ -411,7 +413,7 @@ function getNodesBasedOnRelationships (edges, auth, callback) {
         'Content-Type':'application/json',
         'Authorization': auth.pw
     };
-    isHTTPS(isHttps);
+    isHTTPS(auth.isHttps);
 
     var req = connection.request({
             hostname: auth.host,

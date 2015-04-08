@@ -99,6 +99,7 @@ function killSearch() {
 
 function createSearchSpace () {
     getPropertyKeys(function (propKeys) {
+        propKeys = propKeys.sort();
         $('#searchSpace').prepend(
             '<table id="searchTable">' +
                 '<tr>' +
