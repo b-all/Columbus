@@ -42,7 +42,6 @@ router.post('/advMode', function(req,res,next) {
           results += chunk;
       });
       response.on('end', function () {
-          console.log(results);
           if (response.statusCode !== 200) { // if error send blank response
               res.send({err:"Cannot communicate with Neo4j database."});
           } else {
@@ -74,7 +73,7 @@ router.post('/advMode', function(req,res,next) {
 });
 
 function isHTTPS(isHttps) {
-    isHttps = (isHttps === 'true') ? true : false; 
+    isHttps = (isHttps === 'true') ? true : false;
 	if (isHttps) {
 		connection = https;
 		return true;

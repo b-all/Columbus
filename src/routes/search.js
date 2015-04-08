@@ -11,7 +11,7 @@ var nodesFound = 0;
 
 router.post('/getPropertyKeys', function(req,res,next) {
     var auth = JSON.parse(req.body.auth);
-    isHTTPS(isHttps);
+    isHTTPS(auth.isHttps);
 
     var headers = {
         'Content-Type':'application/json',
@@ -481,7 +481,7 @@ function getNodesBasedOnRelationships (edges, auth, callback) {
 }
 
 function isHTTPS(isHttps) {
-    isHttps = (isHttps === 'true') ? true : false; 
+    isHttps = (isHttps === 'true') ? true : false;
 	if (isHttps) {
 		connection = https;
 		return true;
