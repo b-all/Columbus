@@ -302,7 +302,6 @@ function getAllNodeRelationships(nodes, auth, callback) {
         'Content-Type':'application/json',
         'Authorization': auth.pw
     };
-    isHTTPS(auth.isHttps);
 
     var req = connection.request({
             hostname: auth.host,
@@ -413,7 +412,6 @@ function getNodesBasedOnRelationships (edges, auth, callback) {
         'Content-Type':'application/json',
         'Authorization': auth.pw
     };
-    isHTTPS(auth.isHttps);
 
     var req = connection.request({
             hostname: auth.host,
