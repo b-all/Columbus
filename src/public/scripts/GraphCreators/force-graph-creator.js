@@ -79,7 +79,12 @@ var ForceGraphCreator = function(svg, nodes, edges){
         var selectedNode = state.selectedNode;
         thisGraph.nodes.splice(thisGraph.nodes.indexOf(selectedNode), 1);
         thisGraph.spliceLinksForNode(selectedNode);
-        labels[selectedNode.labels[0]].count--;
+        if (typeof selectedNode.labels[0] !== 'undefined') {
+            labels[selectedNode.labels[0]].count--;
+        } else {
+            labels[0].count--;
+        }
+
         state.selectedNode = null;
         thisGraph.updateGraph();
         createLabelKey();
