@@ -211,7 +211,7 @@ router.post('/search', function(req,res,next) {
         });
     }).on('error', function (err) {
 	    console.log(err);
-		res.send({err:"Cannot communicate with Neo4j database."});
+		res.send({err:err});
 	});
 
     req.write(JSON.stringify(data));
