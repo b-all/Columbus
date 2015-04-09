@@ -124,7 +124,7 @@ function addHoverPriority (index) {
             var newTable =
                 '<table class="priorityPrefTable">' +
                     '<tr>'+
-                        '<td>Label : </td>' +
+                        '<td>Label</td><td>:</td>' +
                         '<td><select id="labelSelect'+ numPriorities+ '" class="form-control selectLabel"></select></td>' +
                         '<td rowspan="2">' +
                             '<span class=\"addPropBtn\" title="Add another hover priority">' +
@@ -140,7 +140,10 @@ function addHoverPriority (index) {
                     '</tr>' +
                     '<tr>' +
                         '<td>' +
-                            'Property : ' +
+                            'Property' +
+                        '</td>' +
+                        '<td>' +
+                            ':' +
                         '</td>' +
                         '<td>' +
                             '<input class="form-control" type="text" id="priorityRule' + numPriorities + '"/>' +
@@ -201,7 +204,7 @@ function addHoverPriority (index) {
         var newTable =
             '<table class="priorityPrefTable">' +
                 '<tr>'+
-                    '<td>Label : </td>' +
+                    '<td>Label</td><td>:</td>' +
                     '<td><select id="labelSelect'+ numPriorities+ '" class="form-control selectLabel"></select></td>' +
                     '<td rowspan="2">' +
                         '<span class=\"addPropBtn\" title="Add another hover priority">' +
@@ -217,7 +220,10 @@ function addHoverPriority (index) {
                 '</tr>' +
                 '<tr>' +
                     '<td>' +
-                        'Property : ' +
+                        'Property' +
+                    '</td>' +
+                    '<td>' +
+                        ':' +
                     '</td>' +
                     '<td>' +
                         '<input class="form-control" type="text" id="priorityRule' + numPriorities + '"/>' +
@@ -402,7 +408,7 @@ function loadUserPriorities (hoverPriority) {
     var newTable =
         '<table class="priorityPrefTable">' +
             '<tr>'+
-                '<td>Label : </td>' +
+                '<td>Label</td><td>:</td>' +
                 '<td><select id="labelSelect'+ numPriorities+ '" class="form-control selectLabel"></select></td>' +
                 '<td rowspan="2">' +
                     '<span class=\"addPropBtn\" title="Add another hover priority">' +
@@ -418,7 +424,10 @@ function loadUserPriorities (hoverPriority) {
             '</tr>' +
             '<tr>' +
                 '<td>' +
-                    'Property : ' +
+                    'Property' +
+                '</td>' +
+                '<td>' +
+                    ':' +
                 '</td>' +
                 '<td>' +
                     '<input class="form-control" type="text" id="priorityRule' +

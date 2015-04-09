@@ -71,9 +71,9 @@ var showNodeData = function (d) {
 	var ePropsString = "<table class=\"propertyTable\">";
 	for (var i in data) {
 		ePropsString += "<tr>" +
-							"<td><input type=\"text\" class=\"form-control pNameInput\" value=\"" + Object.getOwnPropertyNames(data[i])[0] + "\"></input></td>" +
+							"<td><input type=\"text\" class=\"form-control pNameInput\" value=\"" + escapeHtml(Object.getOwnPropertyNames(data[i])[0]) + "\"></input></td>" +
 							"<td> : </td>" +
-							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + data[i][Object.getOwnPropertyNames(data[i])[0]] + "\"></input></td>" +
+							"<td><input type=\"text\" class=\"form-control pValueInput\" value=\"" + escapeHtml(data[i][Object.getOwnPropertyNames(data[i])[0]]) + "\"></input></td>" +
 							"<td>" +
 		                        "<span class=\"addPropBtn\" title=\"Add another property field\">"+
 		                            "<i class=\"glyphicon glyphicon-plus\"></i>" +
