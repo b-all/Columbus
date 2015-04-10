@@ -87,14 +87,15 @@ function addProperty (index) {
                         "<input type=\"text\" class=\"form-control pValueInput\"></input>" +
                     "</td>" +
                     "<td>" +
-                        "<span class=\"addPropBtn\">"+
+                        "<span class=\"addPropBtn\" title=\"Add another property field\">"+
                             "<i class=\"glyphicon glyphicon-plus\"></i>" +
                         "</span>"+
                     "</td>" +
                     "<td>" +
-                        "<svg width=\"16px\" height=\"16px\" class=\"deletePropBtn\">" +
+                        "<span class=\"deletePropBtn\" title=\"Delete this property field\">" +
+                        "<svg width=\"16px\" height=\"16px\">" +
                             "<use xlink:href=\"#deleteSVG\">" +
-                        "</svg>" +
+                        "</svg></span>" +
                     "</td>" +
                 "</tr>";
 
