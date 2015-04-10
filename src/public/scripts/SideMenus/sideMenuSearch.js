@@ -114,9 +114,9 @@ function createSearchSpace () {
                 '</tr>'+
                 '<tr id="searchPropKeyRow">' +
                     '<td colspan="2">' +
-                        '<span> Where property &nbsp;</span>' +
+                        '<span> Property &nbsp;</span>' +
                             '<span><select style="width:150px;display:inline-block;" class="form-control" id="searchPropKeySelect"></select></span>' +
-                        '<span> is </span>' +
+                        '<span> &nbsp; contains </span>' +
                     '</td>' +
                 '</tr>'+
                 '<tr>' +
