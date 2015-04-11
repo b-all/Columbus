@@ -500,6 +500,7 @@ function setNeo4jSettingsOnClick() {
         if(typeof localStorage.columbusNeo4jSettings !== 'undefined') {
     		var prefs = JSON.parse(localStorage.getItem('columbusNeo4jSettings'));
             if (typeof prefs.auth !== 'undefined') {
+                console.log(auth.pw);
                 $('#hostInput').val(prefs.auth.host);
                 $('#portInput').val(prefs.auth.port);
                 var creds = atob(auth.pw);

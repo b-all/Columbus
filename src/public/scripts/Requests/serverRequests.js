@@ -383,7 +383,7 @@ function advMode(target, callback) {
 	var obj = { target: target, auth: JSON.stringify(auth) };
 	$.post('advMode?target=' + target, data).done(function (data) {
 		localStorage.advModeData = JSON.stringify(data);
-		console.log(localStorage.advModeData);
+		//console.log(localStorage.advModeData);
 		var win = window.open(getBaseURL()+'advModeEcho');
 	}).fail(function () {
 		toastFail("There was an error communicating with the server");

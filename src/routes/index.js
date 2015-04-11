@@ -344,6 +344,7 @@ router.post('/updateNode', function(req, res, next) {
 	var query = "START n=node(" + node_id + ") SET n = " + CleanJSONForNeo4j(JSON.stringify(properties)) ;
 
 	var auth = JSON.parse(req.body.auth);
+	
 	isHTTPS(auth.isHttps);
 
 	//query all nodes in db

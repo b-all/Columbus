@@ -501,12 +501,14 @@ function setRelEditPropertyBtnOnClick(d) {
 }
 
 function escapeHtml(unsafe) {
-	return unsafe.toString()
-		.replace(/&/g, "&amp;")
-		.replace(/</g, "&lt;")
-		.replace(/>/g, "&gt;")
-		.replace(/"/g, "&quot;")
-		.replace(/'/g, "&#039;");
+	if (unsafe !== null) {
+		return unsafe.toString()
+			.replace(/&/g, "&amp;")
+			.replace(/</g, "&lt;")
+			.replace(/>/g, "&gt;")
+			.replace(/"/g, "&quot;")
+			.replace(/'/g, "&#039;");
+	}
 }
 
 function addPropertyUpdate (index) {

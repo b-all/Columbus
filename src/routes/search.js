@@ -125,6 +125,10 @@ router.post('/searchWhere', function(req,res,next) {
 
 router.post('/search', function(req,res,next) {
     var target = req.body.target;
+    if (target === null) {
+        res.send({err:"Error: Null Search Term"});
+        return;
+    }
     console.log('Searched for \'' + req.body.target + '\'');
 
     var data = {
