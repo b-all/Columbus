@@ -2,16 +2,86 @@
 <testsuites name="crudTest"
              errors="0"
              failures="1"
-             tests="2">
+             tests="15">
   
   <testsuite errors="0" failures="1" hostname="" id=""
-    name="Test CRUD Operations" package="crudTest" skipped="1"
-    tests="2" time="" timestamp="">
+    name="Test CRUD Operations" package="crudTest" skipped="0"
+    tests="15" time="" timestamp="">
     
     
-      <testcase name="Timed out while waiting for element &lt;#graphContainer svg&gt; to be present for 10000 milliseconds.">
+      <testcase name="Element &lt;#hostInput&gt; was visible after 99 milliseconds.">
         
-          <failure message="Expected &quot;visible&quot; but got: &quot;not found&quot;"></failure>
+        
+      </testcase>
+    
+      <testcase name="Element &lt;#graphContainer svg&gt; was visible after 1004 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 476 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Create Node&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was visible after 1003 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.successToast&gt; contains text: &quot;Node Created&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was not visible after 1801 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 511 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Create Node&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was visible after 927 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.successToast&gt; contains text: &quot;Node Created&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was not visible after 1897 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 453 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Node Properties&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Timed out while waiting for element &lt;.successToast&gt; to be visible for 10000 milliseconds.">
+        
+          <failure message="Expected &quot;visible&quot; but got: &quot;not visible&quot;"></failure>
         
         
       </testcase>

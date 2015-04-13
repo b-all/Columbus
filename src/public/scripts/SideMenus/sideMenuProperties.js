@@ -70,6 +70,10 @@ var showNodeData = function (d) {
     }
 	var ePropsString = "<table class=\"propertyTable\">";
 	for (var i in data) {
+		if (Object.getOwnPropertyNames(data[i])[0] === 'prototype' ||
+			Object.getOwnPropertyNames(data[i])[0] === 'length') {
+				continue;
+		}
 		ePropsString += "<tr>" +
 							"<td><input type=\"text\" class=\"form-control pNameInput\" value=\"" + escapeHtml(Object.getOwnPropertyNames(data[i])[0]) + "\"></input></td>" +
 							"<td> : </td>" +
@@ -329,6 +333,7 @@ function setNodeSaveBtnOnClick (d) {
 			}
 		});
 
+		updatedProps.data = cleanData(updatedProps.data);
 		updatedProps = {
 			node: JSON.stringify(updatedProps)
 		};
@@ -354,6 +359,7 @@ function setRelSaveBtnOnClick (d) {
 			}
 		});
 
+		updatedProps.data = cleanData(updatedProps.data);
 		updatedProps = {
 			rel: JSON.stringify(updatedProps)
 		};

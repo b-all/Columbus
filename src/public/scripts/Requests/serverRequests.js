@@ -446,3 +446,11 @@ Array.prototype.unique = function() {
 
     return a;
 };
+
+function cleanData (obj) {
+    delete obj.prototype;
+	delete obj.length;
+	delete obj[""];
+	console.log(obj);
+    return obj;
+}

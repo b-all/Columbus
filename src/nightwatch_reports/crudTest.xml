@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="crudTest"
+             errors="0"
+             failures="0"
+             tests="2">
+  
+  <testsuite errors="0" failures="0" hostname="" id=""
+    name="Test CRUD Operations" package="crudTest" skipped="2"
+    tests="2" time="" timestamp="">
+    
+    
+    
+      <system-err>
+        Object #&lt;Object&gt; has no method &#39;containsText&#39;
+      </system-err>
+    
+    </testsuite>
+  
+</testsuites>

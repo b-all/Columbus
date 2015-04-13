@@ -3,9 +3,25 @@ module.exports = {
   'Test CRUD Operations' : function (client) {
       var nodes_created = 0;
     client
-      .url('http://localhost:8080')
-      .waitForElementVisible('#graphContainer svg', 10000)
+      .url('http://localhost:8080');
       // first create a node - calls createNode function
+      if (client.getText('.modal-header', function (result) {
+          if (result.value.indexOf('Settings') !== -1) {
+              return true;
+          } else {
+              return false;
+          }
+      })) {
+          client.waitForElementVisible('#hostInput', 10000)
+                .click('#httpRadio')
+                .setValue('#hostInput', 'localhost')
+                .setValue('#portInput', '7474')
+                .setValue('#userNameInput', 'neo4j')
+                .setValue('#passwordInput', 'pillage')
+                .click('#neo4jModalSaveBtn');
+      }
+      client
+      .waitForElementVisible('#graphContainer svg', 10000)
       .moveToElement('#graphContainer svg', 400, 400, createNode);
 
 

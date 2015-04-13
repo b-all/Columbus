@@ -86,7 +86,6 @@ router.post('/addNode', function(req, res, next) {
 					'RETURN id(n)';
 	}
 
-	//query all nodes in db
 	var data = {
 		query: query,
 		params: {}
@@ -344,7 +343,7 @@ router.post('/updateNode', function(req, res, next) {
 	var query = "START n=node(" + node_id + ") SET n = " + CleanJSONForNeo4j(JSON.stringify(properties)) ;
 
 	var auth = JSON.parse(req.body.auth);
-	
+
 	isHTTPS(auth.isHttps);
 
 	//query all nodes in db
@@ -371,6 +370,7 @@ router.post('/updateNode', function(req, res, next) {
 		});
 		response.on('end', function () {
 			if (response.statusCode !== 200) { // if error send blank response
+				console.log(results);
 				res.send({err:"Cannot communicate with Neo4j database."});
 			} else {
 				res.send("Node updated...");
