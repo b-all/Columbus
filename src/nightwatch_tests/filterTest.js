@@ -66,7 +66,7 @@ module.exports = {
       function filterBtnClick () {
           client
           .waitForElementVisible('.resultsDesc', 15000)
-          .assert.containsText('#sideMenu', 'Found 1 match...')
+          .assert.containsText('#sideMenu', 'Filtered on 1 match...')
           .useXpath()
           .click('//*[local-name() = \'g\'][@class="node"][last()]', clickDeleteNode);
       }
@@ -79,6 +79,7 @@ module.exports = {
           .click('.deleteBtn', function (){
               client
               .click('#yesBtn')
+              .click('#filterBtn')
               .click('#filterBtn', filterAgain);
           });
       }
@@ -94,7 +95,7 @@ module.exports = {
       function filterBtnClick2 () {
           client
           .waitForElementVisible('.resultsDesc', 10000)
-          .assert.containsText('.resultsDesc', 'Filtered on 1 match...');
+          .assert.containsText('.resultsDesc', 'Filtered on 0 matches...');
       }
 
   },

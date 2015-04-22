@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites name="searchTest"
              errors="0"
-             failures="1"
-             tests="10">
+             failures="0"
+             tests="18">
   
-  <testsuite errors="0" failures="1" hostname="" id=""
-    name="Test Search" package="searchTest" skipped="1"
-    tests="10" time="" timestamp="">
+  <testsuite errors="0" failures="0" hostname="" id=""
+    name="Test Search" package="searchTest" skipped="0"
+    tests="18" time="" timestamp="">
     
     
-      <testcase name="Element &lt;#hostInput&gt; was visible after 95 milliseconds.">
+      <testcase name="Element &lt;#hostInput&gt; was visible after 89 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 412 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 394 milliseconds.">
         
         
       </testcase>
@@ -24,7 +24,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was visible after 1013 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was visible after 945 milliseconds.">
         
         
       </testcase>
@@ -34,12 +34,12 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was not visible after 1864 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was not visible after 1832 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 454 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 478 milliseconds.">
         
         
       </testcase>
@@ -49,9 +49,52 @@
         
       </testcase>
     
-      <testcase name="Timed out while waiting for element &lt;.resultsDesc&gt; to be present for 15000 milliseconds.">
+      <testcase name="Element &lt;.resultsDesc&gt; was visible after 163 milliseconds.">
         
-          <failure message="Expected &quot;visible&quot; but got: &quot;not found&quot;"></failure>
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Search returned&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was visible after 165 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Node Properties&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 99 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Search&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.failToast&gt; was visible after 161 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.failToast&gt; contains text: &quot;No matching results&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.failToast&gt; was not visible after 2717 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;#graphContainer svg&gt; was visible after 130 milliseconds.">
         
         
       </testcase>

@@ -60,6 +60,8 @@ module.exports = {
           client
           .waitForElementPresent('.sideMenuHeader', 10000)
           .assert.containsText('#sideMenu', "Search")
+          .setValue('#searchPropKeySelect', 'prop')
+          .click('#additiveSearchCheckbox')
           .setValue('#searchInput', "search_term_test_5_3_1_7_4_3_6_29")
           .click('.searchBtn', searchBtnClick);
       }
@@ -67,7 +69,7 @@ module.exports = {
       function searchBtnClick () {
           client
           .waitForElementVisible('.resultsDesc', 15000)
-          .assert.containsText('#sideMenu', 'Found')
+          .assert.containsText('#sideMenu', 'Search returned')
           .click('.node', clickDeleteNode);
       }
 
@@ -78,6 +80,8 @@ module.exports = {
           .click('.deleteBtn', function (){
               client
               .click('#yesBtn')
+              .click('#searchBtn')
+              .click('#searchBtn')
               .click('#searchBtn', searchAgain);
           });
       }

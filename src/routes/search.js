@@ -98,8 +98,8 @@ router.post('/searchWhere', function(req,res,next) {
                     return;
                 }
                 if (nodeArray.length > 0) {
-                    getAllNodeRelationships(nodeArray, auth, function (relationshipArray) {
-                        getNodesBasedOnRelationships(relationshipArray, auth, function (relNodes) {
+                    getAllNodeRelationships(nodeArray, auth, res, function (relationshipArray) {
+                        getNodesBasedOnRelationships(relationshipArray, auth, res, function (relNodes) {
                             var graph = {
                                 nodes: (relNodes.length !== 0) ? relNodes: nodeArray,
                                 relationships: relationshipArray,
@@ -197,8 +197,8 @@ router.post('/search', function(req,res,next) {
                     return;
                 }
                 if (nodeArray.length > 0) {
-                    getAllNodeRelationships(nodeArray, auth, function (relationshipArray) {
-                        getNodesBasedOnRelationships(relationshipArray, auth, function (relNodes) {
+                    getAllNodeRelationships(nodeArray, auth, res, function (relationshipArray) {
+                        getNodesBasedOnRelationships(relationshipArray, auth, res, function (relNodes) {
                             var graph = {
                                 nodes: (relNodes.length !== 0) ? relNodes: nodeArray,
                                 relationships: relationshipArray,
@@ -283,7 +283,7 @@ router.post('/search', function(req,res,next) {
     });*/
 });
 
-function getAllNodeRelationships(nodes, auth, callback) {
+function getAllNodeRelationships(nodes, auth, res, callback) {
     if (nodes.length === 0) {
         callback([]);
     }
@@ -373,7 +373,7 @@ function getAllNodeRelationships(nodes, auth, callback) {
     });*/
 }
 
-function getNodesBasedOnRelationships (edges, auth, callback) {
+function getNodesBasedOnRelationships (edges, auth, res, callback) {
     if (edges.length === 0) {
         callback([]);
     }

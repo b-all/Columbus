@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites name="filterTest"
              errors="0"
-             failures="1"
-             tests="11">
+             failures="0"
+             tests="17">
   
-  <testsuite errors="0" failures="1" hostname="" id=""
+  <testsuite errors="0" failures="0" hostname="" id=""
     name="Test Filter" package="filterTest" skipped="0"
-    tests="11" time="" timestamp="">
+    tests="17" time="" timestamp="">
     
     
-      <testcase name="Element &lt;#hostInput&gt; was visible after 121 milliseconds.">
+      <testcase name="Element &lt;#hostInput&gt; was visible after 94 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;#graphContainer svg&gt; was visible after 962 milliseconds.">
+      <testcase name="Element &lt;#graphContainer svg&gt; was visible after 942 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 442 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 380 milliseconds.">
         
         
       </testcase>
@@ -29,7 +29,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was visible after 889 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was visible after 892 milliseconds.">
         
         
       </testcase>
@@ -39,12 +39,12 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was not visible after 1861 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was not visible after 1746 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 440 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 462 milliseconds.">
         
         
       </testcase>
@@ -54,19 +54,42 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.resultsDesc&gt; was visible after 1056 milliseconds.">
+      <testcase name="Element &lt;.resultsDesc&gt; was visible after 973 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Found 1 match...&quot;.">
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Filtered on 1 match...&quot;.">
         
-          <failure message="Expected &quot;Found 1 match...&quot; but got: &quot;Filter
-
-Filter
-This filter will highlight nodes currently present on the screen that match your filter term.
-
-Filtered on 1 match...&quot;"></failure>
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was visible after 993 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Node Properties&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 572 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Filter&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.resultsDesc&gt; was visible after 1046 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.resultsDesc&gt; contains text: &quot;Filtered on 0 matches...&quot;.">
         
         
       </testcase>
