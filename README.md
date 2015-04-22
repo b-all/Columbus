@@ -5,7 +5,7 @@ To run locally:
 3. Enter ```npm install -g forever``` as root to install forever
 4. Enter the command ```npm start``` to start the server
 5. Enter your admin credentials
-6. Make sure you have an instance of Neo4j running at localhost:7474
+6. Make sure you have an instance of Neo4j running at localhost:7474 (tested up to Neo4j Version 2.2.0)
 7. Open a web browser and enter https://localhost:4430 (or http://localhost:8080 if no authorization is required) as the url
 -- To stop the server enter the command ```npm stop``` in a terminal
 
