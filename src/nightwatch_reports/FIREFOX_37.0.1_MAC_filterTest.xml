@@ -2,16 +2,71 @@
 <testsuites name="filterTest"
              errors="0"
              failures="1"
-             tests="2">
+             tests="11">
   
   <testsuite errors="0" failures="1" hostname="" id=""
-    name="Test Filter" package="filterTest" skipped="1"
-    tests="2" time="" timestamp="">
+    name="Test Filter" package="filterTest" skipped="0"
+    tests="11" time="" timestamp="">
     
     
-      <testcase name="Timed out while waiting for element &lt;#graphContainer svg&gt; to be present for 10000 milliseconds.">
+      <testcase name="Element &lt;#hostInput&gt; was visible after 121 milliseconds.">
         
-          <failure message="Expected &quot;visible&quot; but got: &quot;not found&quot;"></failure>
+        
+      </testcase>
+    
+      <testcase name="Element &lt;#graphContainer svg&gt; was visible after 962 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 442 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Create Node&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was visible after 889 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.successToast&gt; contains text: &quot;Node Created&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was not visible after 1861 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 440 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Filter&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.resultsDesc&gt; was visible after 1056 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Found 1 match...&quot;.">
+        
+          <failure message="Expected &quot;Found 1 match...&quot; but got: &quot;Filter
+
+Filter
+This filter will highlight nodes currently present on the screen that match your filter term.
+
+Filtered on 1 match...&quot;"></failure>
         
         
       </testcase>

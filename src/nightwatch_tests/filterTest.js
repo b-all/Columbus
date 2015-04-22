@@ -3,11 +3,26 @@ module.exports = {
   'Test Filter' : function (client) {
       var nodes_created = 0;
     client
-      .url('http://localhost:8080')
-      .waitForElementVisible('#graphContainer svg', 10000)
-      // first create a node - calls createNode function
-      .moveToElement('#graphContainer svg', 400, 400, createNode);
+      .url('http://localhost:8080');
 
+      if (client.getText('.modal-header', function (result) {
+          if (result.value.indexOf('Settings') !== -1) {
+              return true;
+          } else {
+              return false;
+          }
+      })) {
+          client.waitForElementVisible('#hostInput', 10000)
+                .click('#httpRadio')
+                .setValue('#hostInput', 'localhost')
+                .setValue('#portInput', '7474')
+                .setValue('#userNameInput', 'neo4j')
+                .setValue('#passwordInput', 'pillage')
+                .click('#neo4jModalSaveBtn');
+      }
+      // first create a node - calls createNode function
+      client.waitForElementVisible('#graphContainer svg', 10000)
+            .moveToElement('#graphContainer svg', 400, 400, createNode);
 
       // called to create a node
       function createNode () {
@@ -63,6 +78,7 @@ module.exports = {
           .assert.containsText('#sideMenu', 'Node Properties')
           .click('.deleteBtn', function (){
               client
+              .click('#yesBtn')
               .click('#filterBtn', filterAgain);
           });
       }
@@ -78,7 +94,7 @@ module.exports = {
       function filterBtnClick2 () {
           client
           .waitForElementVisible('.resultsDesc', 10000)
-          .assert.containsText('.resultsDesc', 'Found 0 matches...');
+          .assert.containsText('.resultsDesc', 'Filtered on 1 match...');
       }
 
   },

@@ -20,8 +20,8 @@
 			</aResult>
 		</actualResults>
 	</test>
-	
-	
+
+
 	<test id="UC2 Create Node">
 		<role>User</role>
 		<dateAdded>1/26/2015</dateAdded>
@@ -43,7 +43,7 @@
 				A new Node is added and is present on the visualization
 			</aResult>
 		</actualResults>
-	</test>	
+	</test>
 
 	<test id="UC2 Create Node Alternative">
 		<role>User</role>
@@ -66,8 +66,8 @@
 				A new Node is added and is present on the visualization
 			</aResult>
 		</actualResults>
-	</test>	
-	
+	</test>
+
 	<test id="UC3 Delete Node">
 		<role>User</role>
 		<dateAdded>1/26/2015</dateAdded>
@@ -87,8 +87,8 @@
 				The selected node is removed
 			</aResult>
 		</actualResults>
-	</test>	
-	
+	</test>
+
 	<test id="UC3 Delete Node Alternative">
 		<role>User</role>
 		<dateAdded>1/26/2015</dateAdded>
@@ -108,8 +108,8 @@
 				The selected node is removed
 			</aResult>
 		</actualResults>
-	</test>	
-	
+	</test>
+
 	<test id="UC4 Create Relationship">
 		<role>User</role>
 		<dateAdded>1/26/2015</dateAdded>
@@ -118,7 +118,7 @@
 		<description>
 			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
 			<step>Load the Web Application</step>
-			<step>Click the 'Create Relationship' button in the gui <step>
+			<step>Click the 'Create Relationship' button in the gui </step>
 			<step>Click the 'From Node' button and select the starting node</step>
 			<step>Click the 'To Node' button and select the node to create a relationship to</step>
 			<step>Click the 'Save' button</step>
@@ -131,7 +131,7 @@
 				An arrow will appear, connecting the two nodes
 			</aResult>
 		</actualResults>
-	</test>	
+	</test>
 
 	<test id="UC5 Delete Relationship">
 		<role>User</role>
@@ -152,8 +152,8 @@
 				The selected relationship between two nodes is removed
 			</aResult>
 		</actualResults>
-	</test>	
-	
+	</test>
+
 	<test id="UC5 Delete Relationship Alternative">
 		<role>User</role>
 		<dateAdded>1/26/2015</dateAdded>
@@ -173,7 +173,7 @@
 				The selected relationship between two nodes is removed
 			</aResult>
 		</actualResults>
-	</test>	
+	</test>
 
 	<test id="UC6 Edit Node">
 		<role>User</role>
@@ -195,8 +195,8 @@
 				The property has been updated
 			</aResult>
 		</actualResults>
-	</test>	
-	
+	</test>
+
 	<test id="UC6 Edit Node Alternative">
 		<role>User</role>
 		<dateAdded>1/26/2015</dateAdded>
@@ -217,9 +217,9 @@
 				The property has been removed
 			</aResult>
 		</actualResults>
-	</test>		
+	</test>
 
-	
+
 	<test id="UC7 Edit Relationship">
 		<role>User</role>
 		<dateAdded>1/26/2015</dateAdded>
@@ -240,8 +240,8 @@
 				The property of the relationship has been updated
 			</aResult>
 		</actualResults>
-	</test>	
-	
+	</test>
+
 
 	<test id="UC8 Search for Nodes/Realtionships">
 		<role>User</role>
@@ -263,7 +263,7 @@
 				The visualization displays the results of the search as nodes containing that property
 			</aResult>
 		</actualResults>
-	</test>	
+	</test>
 
 	<test id="UC9 Filter Data Visualization">
 		<role>User</role>
@@ -285,6 +285,6 @@
 				Any node that contains the filtered query remain on the screen while other/un-related nodes are be grayed out
 			</aResult>
 		</actualResults>
-	</test>		
-	
+	</test>
+
 </BlackBoxTestPlan>

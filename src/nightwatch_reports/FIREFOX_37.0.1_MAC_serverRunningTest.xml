@@ -2,14 +2,19 @@
 <testsuites name="serverRunningTest"
              errors="0"
              failures="0"
-             tests="3">
+             tests="4">
   
   <testsuite errors="0" failures="0" hostname="" id=""
     name="Test that Columbus server is running" package="serverRunningTest" skipped="0"
-    tests="3" time="" timestamp="">
+    tests="4" time="" timestamp="">
     
     
-      <testcase name="Element &lt;body&gt; was visible after 183 milliseconds.">
+      <testcase name="Element &lt;#hostInput&gt; was visible after 86 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;body&gt; was visible after 994 milliseconds.">
         
         
       </testcase>

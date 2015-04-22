@@ -142,6 +142,7 @@ module.exports = {
           .waitForElementNotVisible('.successToast', 3000)
           .click('.deleteBtn', function () {
               client
+              .click('#yesBtn')
               .useXpath()
               .click('//*[local-name() = \'g\'][@class="node"][last()]', deleteNodes);
           });
@@ -152,8 +153,10 @@ module.exports = {
           if (nodes_deleted === 2){
               client
               .useCss()
+              .click('#yesBtn')
               .click('.deleteBtn', function () {
                   client
+                  .click('#yesBtn')
                   .end();
               });
           } else {
@@ -163,6 +166,7 @@ module.exports = {
               .assert.containsText('#sideMenu', 'Node Properties')
               .click('.deleteBtn', function () {
                   client
+                  .click('#yesBtn')
                   .useXpath()
                   .click('//*[local-name() = \'g\'][@class="node"][last()]', deleteNodes);
               });

@@ -2,14 +2,54 @@
 <testsuites name="searchTest"
              errors="0"
              failures="1"
-             tests="2">
+             tests="10">
   
   <testsuite errors="0" failures="1" hostname="" id=""
     name="Test Search" package="searchTest" skipped="1"
-    tests="2" time="" timestamp="">
+    tests="10" time="" timestamp="">
     
     
-      <testcase name="Timed out while waiting for element &lt;#graphContainer svg&gt; to be present for 10000 milliseconds.">
+      <testcase name="Element &lt;#hostInput&gt; was visible after 95 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 412 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Create Node&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was visible after 1013 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.successToast&gt; contains text: &quot;Node Created&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was not visible after 1864 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 454 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Search&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Timed out while waiting for element &lt;.resultsDesc&gt; to be present for 15000 milliseconds.">
         
           <failure message="Expected &quot;visible&quot; but got: &quot;not found&quot;"></failure>
         

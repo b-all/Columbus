@@ -3,10 +3,26 @@ module.exports = {
   'Test Search' : function (client) {
       var nodes_created = 0;
     client
-      .url('http://localhost:8080')
-      .waitForElementVisible('#graphContainer svg', 10000)
+      .url('http://localhost:8080');
+
+      if (client.getText('.modal-header', function (result) {
+          if (result.value.indexOf('Settings') !== -1) {
+              return true;
+          } else {
+              return false;
+          }
+      })) {
+          client.waitForElementVisible('#hostInput', 10000)
+                .click('#httpRadio')
+                .setValue('#hostInput', 'localhost')
+                .setValue('#portInput', '7474')
+                .setValue('#userNameInput', 'neo4j')
+                .setValue('#passwordInput', 'pillage')
+                .click('#neo4jModalSaveBtn');
+      }
       // first create a node - calls createNode function
-      .moveToElement('#graphContainer svg', 400, 400, createNode);
+      client.moveToElement('#graphContainer svg', 400, 400, createNode)
+            .waitForElementVisible('#graphContainer svg', 10000);
 
 
       // called to create a node
@@ -61,6 +77,7 @@ module.exports = {
           .assert.containsText('#sideMenu', 'Node Properties')
           .click('.deleteBtn', function (){
               client
+              .click('#yesBtn')
               .click('#searchBtn', searchAgain);
           });
       }
@@ -79,7 +96,7 @@ module.exports = {
           .assert.containsText('.failToast', 'No matching results')
           .waitForElementNotVisible('.failToast', 3000);
       }
-      
+
   },
 
   after : function(client) {

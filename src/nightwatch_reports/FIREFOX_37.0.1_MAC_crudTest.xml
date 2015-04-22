@@ -1,50 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites name="crudTest"
              errors="0"
-             failures="1"
-             tests="15">
+             failures="0"
+             tests="32">
   
-  <testsuite errors="0" failures="1" hostname="" id=""
+  <testsuite errors="0" failures="0" hostname="" id=""
     name="Test CRUD Operations" package="crudTest" skipped="0"
-    tests="15" time="" timestamp="">
+    tests="32" time="" timestamp="">
     
     
-      <testcase name="Element &lt;#hostInput&gt; was visible after 99 milliseconds.">
+      <testcase name="Element &lt;#hostInput&gt; was visible after 89 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;#graphContainer svg&gt; was visible after 1004 milliseconds.">
+      <testcase name="Element &lt;#graphContainer svg&gt; was visible after 1068 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 476 milliseconds.">
-        
-        
-      </testcase>
-    
-      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Create Node&quot;.">
-        
-        
-      </testcase>
-    
-      <testcase name="Element &lt;.successToast&gt; was visible after 1003 milliseconds.">
-        
-        
-      </testcase>
-    
-      <testcase name="Testing if element &lt;.successToast&gt; contains text: &quot;Node Created&quot;.">
-        
-        
-      </testcase>
-    
-      <testcase name="Element &lt;.successToast&gt; was not visible after 1801 milliseconds.">
-        
-        
-      </testcase>
-    
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 511 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 477 milliseconds.">
         
         
       </testcase>
@@ -54,7 +29,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was visible after 927 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was visible after 902 milliseconds.">
         
         
       </testcase>
@@ -64,12 +39,37 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was not visible after 1897 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was not visible after 1859 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 453 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 509 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Create Node&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was visible after 990 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.successToast&gt; contains text: &quot;Node Created&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was not visible after 1835 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 471 milliseconds.">
         
         
       </testcase>
@@ -79,9 +79,92 @@
         
       </testcase>
     
-      <testcase name="Timed out while waiting for element &lt;.successToast&gt; to be visible for 10000 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was visible after 837 milliseconds.">
         
-          <failure message="Expected &quot;visible&quot; but got: &quot;not visible&quot;"></failure>
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.successToast&gt; contains text: &quot;Properties Updated&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was not visible after 1759 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.selectEndNodeBtn&gt; was present after 417 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Create Relationship&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was present after 432 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.successToast&gt; contains text: &quot;Relationship Created&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was not visible after 1786 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 431 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Relationship Properties&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was present after 424 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.successToast&gt; contains text: &quot;Properties Updated&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was not visible after 1745 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 456 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Relationship Properties&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.successToast&gt; was not visible after 882 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;#sideMenu&gt; was visible after 862 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#sideMenu&gt; contains text: &quot;Node Properties&quot;.">
         
         
       </testcase>
