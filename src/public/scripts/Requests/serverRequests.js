@@ -291,10 +291,12 @@ function getAllLabels(callback) {
 		if(!data.err) {
 			callback(data);
 		} else {
+			requesting = false;
 			console.log(data.err);
 			toastFail(data.err);
 		}
 	}).fail(function(msg) {
+		requesting = false;
 		toastFail("There was an error communicating with the server");
 	});
 }
