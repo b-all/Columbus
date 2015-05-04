@@ -1,9 +1,14 @@
 // Neo4j REST variables
 var host = 'localhost', port = 7474;
 
-
 var express = require('express');
 var router = express.Router();
+var winston = require('winston');
+
+/*Define winston logging file and remove console output */
+winston.add(winston.transports.File,
+	{ filename: 'dbEdits.log' , zippedArchive: true});
+winston.remove(winston.transports.Console);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -77,14 +82,21 @@ router.post('/graph', function(req, res, next) {
 /* add a node to the neo4j database */
 router.post('/addNode', function(req, res, next) {
 	var query = "";
+	var clabel, cprops;	//creation label and properties
+	var newid;					//Created node ID
 	if (typeof req.body.data !== 'undefined') {
-		query = 'CREATE (n:' + req.body.label + ' ' +
-					CleanJSONForNeo4j(req.body.data) + ')' +
-					'RETURN id(n)';
+		clabel = req.body.label;
+		cprops = CleanJSONForNeo4j(req.body.data);
+		query = 'CREATE (n:' + clabel + ' ' +
+					cprops + ')' + 'RETURN id(n)';
 	} else {
-		query = 'CREATE (n:' + req.body.label + ')' +
+		clabel = req.body.label;
+		cprops = "";
+		query = 'CREATE (n:' + clabel + ')' +
 					'RETURN id(n)';
 	}
+	//console.log("Clabel: "+clabel);
+	//console.log("Cprops: "+cprops);
 
 	var data = {
 		query: query,
@@ -98,6 +110,7 @@ router.post('/addNode', function(req, res, next) {
 		'Content-Type':'application/json',
 		'Authorization': auth.pw
 	};
+	var usname = atob(auth.pw).split(":")[0];
 
 	var req = connection.request({
 			hostname: auth.host,
@@ -109,18 +122,26 @@ router.post('/addNode', function(req, res, next) {
 		var results = '';
 		response.on('data', function (chunk) {
 			results += chunk;
+			newid = getRetID(chunk);
 		});
 		response.on('end', function () {
 			if (response.statusCode !== 200) { // if error send blank response
+				winston.info("Create Node (fail)1", { label: clabel }, cprops,
+					{ user: usname } );
 				res.send({err:"Cannot communicate with Neo4j database."});
 			} else {
 				results = JSON.parse(results);
+				winston.info("Create Node (success)", { label: clabel }, cprops,
+				 { user: usname } );
+				console.log("User: "+usname+", created Node w/ ID: "+newid.toString());
 				res.send(results);
 			}
 		});
 	}).on('error', function (err) {
 	    console.log(err);
-		res.send({err:"Cannot communicate with Neo4j database."});
+			winston.info("Create Node (fail)2", { label: clabel }, cprops,
+				{ user: usname } );
+			res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));
@@ -129,14 +150,25 @@ router.post('/addNode', function(req, res, next) {
 
 /* add a relationship to the neo4j database */
 router.post('/addRel', function(req, res, next) {
-	var query = (typeof req.body.data !== 'undefined') ?
-	 				'START n=node(' + req.body.startNode + '),' +
-	 				'p=node(' + req.body.endNode + ')' +
-					'CREATE (n) - [r:'+ req.body.type + ' ' +
-					CleanJSONForNeo4j(req.body.data) + '] -> (p) RETURN id(r)' :
-					'START n=node(' + req.body.startNode + '),' +
-					'p=node(' + req.body.endNode + ')' +
-					'CREATE (n) - [r:'+ req.body.type + '] -> (p) RETURN id(r)';
+
+	var snode = req.body.startNode;
+	var enode = req.body.endNode;
+	var ctype = req.body.type;
+	var cdata, newid;
+
+	var query = "";
+	if (typeof req.body.data !== 'undefined') {
+		cdata = CleanJSONForNeo4j(req.body.data);
+		query = 'START n=node(' + snode + '),' +
+						'p=node(' + enode + ')' +
+						'CREATE (n) - [r:'+ ctype + ' ' +
+						cdata + '] -> (p) RETURN id(r)';
+	} else {
+		cdata = "";
+		query = 'START n=node(' + snode + '),' +
+						'p=node(' + enode + ')' +
+						'CREATE (n) - [r:'+ ctype + '] -> (p) RETURN id(r)';
+	}
 
 	//query all nodes in db
 	var data = {
@@ -151,6 +183,7 @@ router.post('/addRel', function(req, res, next) {
 		'Content-Type':'application/json',
 		'Authorization': auth.pw
 	};
+	var usname = atob(auth.pw).split(":")[0];
 
 	var req = connection.request({
 			hostname: auth.host,
@@ -162,18 +195,27 @@ router.post('/addRel', function(req, res, next) {
 		var results = '';
 		response.on('data', function (chunk) {
 			results += chunk;
+			//console.log("Added R Chunk: "+chunk.toString());
+			newid = getRetID(chunk);
 		});
 		response.on('end', function () {
 			if (response.statusCode !== 200) { // if error send blank response
+				winston.info("Create Rel (fail)1", { type: ctype }, cdata,
+				 { user: usname } );
 				res.send({err:"Cannot communicate with Neo4j database."});
 			} else {
 				results = JSON.parse(results);
+				winston.info("Create Rel (success)", { type: ctype }, cdata,
+				 { user: usname } );
+				console.log("User: "+usname+", created Rel w/ ID: "+newid.toString());
 				res.send(results);
 			}
 		});
 	}).on('error', function (err) {
 	    console.log(err);
-		res.send({err:"Cannot communicate with Neo4j database."});
+			winston.info("Create Rel (fail)2", { type: ctype }, cdata,
+			{ user: usname } );
+			res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));
@@ -199,6 +241,7 @@ router.post('/deleteNode', function(req, res, next) {
 		'Content-Type':'application/json',
 		'Authorization': auth.pw
 	};
+	var usname = atob(auth.pw).split(":")[0];
 
 	var req1 = connection.request({
 			hostname: auth.host,
@@ -213,6 +256,8 @@ router.post('/deleteNode', function(req, res, next) {
 		});
 		response.on('end', function () {
 			if (response.statusCode !== 200) { // if error send blank response
+				winston.info("Delete Node (fail)1", { id: node_id },
+				{ user: usname } );
 				res.send({err:"Cannot communicate with Neo4j database."});
 			} else {
 				results = JSON.parse(results);
@@ -235,17 +280,24 @@ router.post('/deleteNode', function(req, res, next) {
 					});
 					response.on('end', function () {
 						if (response.statusCode !== 200) { // if error send blank response
+							winston.info("Delete Node (fail)2", { id: node_id },
+							 { user: usname } );
 							res.send({err:"Cannot communicate with Neo4j database."});
 						} else {
 							results = JSON.parse(results);
 							//query to delete the node
 							var query2 = "START n=node(" + node_id +") DELETE n";
+							winston.info("Delete Node (success)", { id: node_id },
+							 { user: usname } );
+							console.log("User: "+usname+", deleted Node w/ ID: "+node_id);
 							res.send(results);
 						}
 					});
 				}).on('error', function (err) {
 				    console.log(err);
-					res.send({err:"Cannot communicate with Neo4j database."});
+						winston.info("Delete Node (fail)3", { id: node_id },
+						{ user: usname } );
+						res.send({err:"Cannot communicate with Neo4j database."});
 				});
 				req2.write(JSON.stringify(data2));
 				req2.end();
@@ -253,7 +305,9 @@ router.post('/deleteNode', function(req, res, next) {
 		});
 	}).on('error', function (err) {
 	    console.log(err);
-		res.send({err:"Cannot communicate with Neo4j database."});
+			winston.info("Delete Node (fail)4", { id: node_id },
+			{ user: usname } );
+			res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req1.write(JSON.stringify(data1));
@@ -296,6 +350,7 @@ router.post('/deleteRelationship', function(req, res, next) {
 		'Content-Type':'application/json',
 		'Authorization': auth.pw
 	};
+	var usname = atob(auth.pw).split(":")[0];
 
 	var req = connection.request({
 			hostname: auth.host,
@@ -310,14 +365,20 @@ router.post('/deleteRelationship', function(req, res, next) {
 		});
 		response.on('end', function () {
 			if (response.statusCode !== 200) { // if error send blank response
+				winston.info("Delete Rel (fail)1", { id: rel_id },
+					{ user: usname } );
 				res.send({err:"Cannot communicate with Neo4j database."});
 			} else {
+				winston.info("Delete Rel (success)", { id: rel_id },
+					{ user: usname } );
 				res.send("Relationship deleted...");
 			}
 		});
 	}).on('error', function (err) {
 	    console.log(err);
-		res.send({err:"Cannot communicate with Neo4j database."});
+			winston.info("Delete Rel (fail)2", { id: rel_id },
+				{ user: usname } );
+			res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));
@@ -339,8 +400,10 @@ router.post('/updateNode', function(req, res, next) {
 
 	var node_id = data.id;
 	var properties = data.data;
+	var uprop = CleanJSONForNeo4j(JSON.stringify(properties));
+	console.log("Update prop: "+uprop);
 	//query to delete node and all connected relationships
-	var query = "START n=node(" + node_id + ") SET n = " + CleanJSONForNeo4j(JSON.stringify(properties)) ;
+	var query = "START n=node(" + node_id + ") SET n = " + uprop;
 
 	var auth = JSON.parse(req.body.auth);
 
@@ -356,6 +419,7 @@ router.post('/updateNode', function(req, res, next) {
 		'Content-Type':'application/json',
 		'Authorization': auth.pw
 	};
+	var usname = atob(auth.pw).split(":")[0];
 
 	var req = connection.request({
 			hostname: auth.host,
@@ -371,14 +435,20 @@ router.post('/updateNode', function(req, res, next) {
 		response.on('end', function () {
 			if (response.statusCode !== 200) { // if error send blank response
 				console.log(results);
+				winston.info("Update Node (fail)1", { id: node_id }, uprop,
+					{ user: usname } );
 				res.send({err:"Cannot communicate with Neo4j database."});
 			} else {
+				winston.info("Update Node (success)", { id: rel_id }, uprop,
+					{ user: usname } );
 				res.send("Node updated...");
 			}
 		});
 	}).on('error', function (err) {
 	    console.log(err);
-		res.send({err:"Cannot communicate with Neo4j database."});
+			winston.info("Update Node (fail)2", { id: node_id }, uprop,
+				{ user: usname } );
+			res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));
@@ -401,8 +471,9 @@ router.post('/updateRel', function(req, res, next) {
 
 	var rel_id = data.id;
 	var properties = data.data;
+	var uprop = CleanJSONForNeo4j(JSON.stringify(properties));
 	//query to delete node and all connected relationships
-	var query = "START r=rel(" + rel_id + ") SET r = " + CleanJSONForNeo4j(JSON.stringify(properties)) ;
+	var query = "START r=rel(" + rel_id + ") SET r = " + uprop;
 
 	var auth = JSON.parse(req.body.auth);
 	isHTTPS(auth.isHttps);
@@ -417,6 +488,7 @@ router.post('/updateRel', function(req, res, next) {
 		'Content-Type':'application/json',
 		'Authorization': auth.pw
 	};
+	var usname = atob(auth.pw).split(":")[0];
 
 	var req = connection.request({
 			hostname: auth.host,
@@ -431,14 +503,20 @@ router.post('/updateRel', function(req, res, next) {
 		});
 		response.on('end', function () {
 			if (response.statusCode !== 200) { // if error send blank response
+				winston.info("Update Rel (fail)1", { id: rel_id }, uprop,
+					{ user: usname } );
 				res.send({err:"Cannot communicate with Neo4j database."});
 			} else {
+				winston.info("Update Rel (success)", { id: rel_id }, uprop,
+					{ user: usname } );
 				res.send("Relationship updated...");
 			}
 		});
 	}).on('error', function (err) {
 	    console.log(err);
-		res.send({err:"Cannot communicate with Neo4j database."});
+			winston.info("Update Rel (fail)2", { id: rel_id }, uprop,
+				{ user: usname } );
+			res.send({err:"Cannot communicate with Neo4j database."});
 	});
 
 	req.write(JSON.stringify(data));
@@ -941,6 +1019,30 @@ function getAllRelationships(req, res, nodes, auth, callback) {
 	});*/
 }
 
+
+/* Globally define atob for base64 conversion */
+global.atob = function(text) {
+	var buf = new Buffer(text, "base64");
+	var bytes = [];
+	for ( var i = buf.length; i >= 0; i-- ) {
+	    bytes[i] = String.fromCharCode(buf[i]);
+	}
+	return bytes.join("");
+};
+
+/*Get the returned ID assuming hardcoded format of coulumn 0 */
+function getRetID(rchunk) {
+	var newid = "";
+	if(typeof rchunk != 'undefined') {
+		newid = rchunk.toString().split("data\" : [ [ ")[1];
+		if(typeof newid != 'undefined') {
+			newid = newid.split(" ] ]")[0];
+		} else {
+			newid = "failed";
+		}
+	}
+	return newid;
+}
 
 
 function isHTTPS(isHttps) {

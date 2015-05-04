@@ -6,6 +6,7 @@ var router = express.Router();
 var http = require('http');
 var https = require('https');
 var connection;
+var winston = require('winston');
 
 var lastReq = "";
 
@@ -43,8 +44,15 @@ router.post('/advMode', function(req,res,next) {
       });
       response.on('end', function () {
           if (response.statusCode !== 200) { // if error send blank response
-              res.send({err:"Cannot communicate with Neo4j database."});
+							//Log this failed advanced mode interaction
+							var usname = atob(auth.pw).split(":")[0];
+							winston.info('AdvMode (fail): ' +target, { user: usname } );
+              res.send({err:"Cannot communicate with Neo4j database."});							
           } else {
+							//Log this successful advanced mode interaction
+							var usname = atob(auth.pw).split(":")[0];
+							winston.info('AdvMode (success): ' +target, { user: usname } );
+
               results = JSON.parse(results);
               var str = JSON.stringify(results, null, 2); // spacing level = 2
               var str1 = '\n\n<pre>\n<code class="prettyprint">\n';
@@ -56,6 +64,8 @@ router.post('/advMode', function(req,res,next) {
       console.log(err);
       res.send({err:"Cannot communicate with Neo4j database."});
   });
+
+
 
   req.write(JSON.stringify(data));
   req.end();

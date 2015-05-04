@@ -28,7 +28,7 @@ $(document).ready(function() {
     $("#advModeInput").keyup(function (e) {
         if (e.keyCode === 13) {
             var target = $('#advModeInput').val();
-            console.log(target);
+            //console.log(target);
             advMode(target,function(results) {
 
             });
