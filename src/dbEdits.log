@@ -1,1 +1,2 @@
 {"user":"neo4j","level":"info","message":"AdvMode (fail): Begin Log","timestamp":"2015-05-04T18:48:49.830Z"}
+{"user":"neo4j","level":"info","message":"Update Node (success) { id: 369 } {name:\"Yolande Moreau\",biography:\"\",lastModified:\"1300035527000\",id:\"2415\",version:\"51\"}","timestamp":"2015-05-06T00:56:01.125Z"}

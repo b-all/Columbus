@@ -9,12 +9,12 @@
     tests="18" time="" timestamp="">
     
     
-      <testcase name="Element &lt;#hostInput&gt; was visible after 89 milliseconds.">
+      <testcase name="Element &lt;#hostInput&gt; was visible after 106 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 394 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 413 milliseconds.">
         
         
       </testcase>
@@ -24,7 +24,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.successToast&gt; was visible after 945 milliseconds.">
+      <testcase name="Element &lt;.successToast&gt; was visible after 882 milliseconds.">
         
         
       </testcase>
@@ -39,7 +39,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 478 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 424 milliseconds.">
         
         
       </testcase>
@@ -49,7 +49,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.resultsDesc&gt; was visible after 163 milliseconds.">
+      <testcase name="Element &lt;.resultsDesc&gt; was visible after 134 milliseconds.">
         
         
       </testcase>
@@ -59,7 +59,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was visible after 165 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was visible after 168 milliseconds.">
         
         
       </testcase>
@@ -69,7 +69,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 99 milliseconds.">
+      <testcase name="Element &lt;.sideMenuHeader&gt; was present after 100 milliseconds.">
         
         
       </testcase>
@@ -79,7 +79,7 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.failToast&gt; was visible after 161 milliseconds.">
+      <testcase name="Element &lt;.failToast&gt; was visible after 159 milliseconds.">
         
         
       </testcase>
@@ -89,12 +89,12 @@
         
       </testcase>
     
-      <testcase name="Element &lt;.failToast&gt; was not visible after 2717 milliseconds.">
+      <testcase name="Element &lt;.failToast&gt; was not visible after 2716 milliseconds.">
         
         
       </testcase>
     
-      <testcase name="Element &lt;#graphContainer svg&gt; was visible after 130 milliseconds.">
+      <testcase name="Element &lt;#graphContainer svg&gt; was visible after 129 milliseconds.">
         
         
       </testcase>

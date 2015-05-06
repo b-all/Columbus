@@ -439,7 +439,7 @@ router.post('/updateNode', function(req, res, next) {
 					{ user: usname } );
 				res.send({err:"Cannot communicate with Neo4j database."});
 			} else {
-				winston.info("Update Node (success)", { id: rel_id }, uprop,
+				winston.info("Update Node (success)", { id: node_id }, uprop,
 					{ user: usname } );
 				res.send("Node updated...");
 			}
