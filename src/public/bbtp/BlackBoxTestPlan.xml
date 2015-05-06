@@ -21,6 +21,29 @@
 		</actualResults>
 	</test>
 
+	<test id="UC1 Read Graph Alternative">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>1</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database. </precondition>
+			<step>Load the Web Application</step>
+			<step>Click the Preferences icon</step>
+			<step>Click Neo4j Server Settings link</step>
+			<step>Enter host: 52.4.114.120, port: 7474, username: neo4j, password: merck123</step>
+			<step>Select HTTP radio button</step>
+			<step>Click Save</step>
+		</description>
+		<expectedResults>
+			<eResult> All nodes and relationships existing in the Merck Neo4j database are graphed. </eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				All nodes and relationships existing in the Merck Neo4j database are graphed.
+			</aResult>
+		</actualResults>
+	</test>
 
 	<test id="UC2 Create Node">
 		<role>User</role>
@@ -118,9 +141,32 @@
 		<description>
 			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
 			<step>Load the Web Application</step>
-			<step>Click the 'Create Relationship' button in the gui </step>
+			<step>Click the 'Create Relationship' button in the GUI </step>
 			<step>Click the 'From Node' button and select the starting node</step>
 			<step>Click the 'To Node' button and select the node to create a relationship to</step>
+			<step>Click the 'Save' button</step>
+		</description>
+		<expectedResults>
+			<eResult>An arrow will appear, connecting the two nodes</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				An arrow will appear, connecting the two nodes
+			</aResult>
+		</actualResults>
+	</test>
+
+	<test id="UC4 Create Relationship Alternative">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>4</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
+			<step>Load the Web Application</step>
+			<step>Click the 'Create Relationship' button in the GUI </step>
+			<step>Enter a node ID in the 'From Node' input box</step>
+			<step>Enter a node ID in the 'To Node' input box</step>
 			<step>Click the 'Save' button</step>
 		</description>
 		<expectedResults>
@@ -142,7 +188,7 @@
 			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
 			<step>Load the Web Application</step>
 			<step>Select and existing relationship (arrow) from the visualization via left mouse click</step>
-			<step>Click the delete button/icon</step>
+			<step>Click the delete button icon</step>
 		</description>
 		<expectedResults>
 			<eResult>The selected relationship between two nodes is removed</eResult>
@@ -206,7 +252,7 @@
 			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
 			<step>Load the Web Application</step>
 			<step>Select a node from the visualization</step>
-			<step>Remove a property</step>
+			<step>Remove a property by clicking the 'x' icon next to that property</step>
 			<step>Click save</step>
 		</description>
 		<expectedResults>
@@ -218,7 +264,6 @@
 			</aResult>
 		</actualResults>
 	</test>
-
 
 	<test id="UC7 Edit Relationship">
 		<role>User</role>
@@ -242,8 +287,29 @@
 		</actualResults>
 	</test>
 
+	<test id="UC7 Edit Relationship ALternative">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>7</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
+			<step>Load the Web Application</step>
+			<step>Select a relationship (arrow) between two connected nodes </step>
+			<step>Remove a property by clicking the 'x' icon next to that property</step>
+			<step>Click save</step>
+		</description>
+		<expectedResults>
+			<eResult>The property of the relationship has been removed</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				The property of the relationship has been removed
+			</aResult>
+		</actualResults>
+	</test>
 
-	<test id="UC8 Search for Nodes/Realtionships">
+	<test id="UC8 Search for Nodes">
 		<role>User</role>
 		<dateAdded>1/26/2015</dateAdded>
 		<dateModified>1/26/2015</dateModified>
@@ -252,15 +318,39 @@
 			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
 			<step>Load the Web Application</step>
 			<step>Click on the search button</step>
+			<step>Select the 'Search All Properties' radio button</step>
 			<step>In the search bar search for an actor ex: Kevin Bacon</step>
-			<step>Click the magnifying glass to continue</step>
+			<step>Click the Search button</step>
 		</description>
 		<expectedResults>
-			<eResult>The visualization displays the results of the search as nodes containing that property</eResult>
+			<eResult>The visualization displays the results of the search as nodes with any property containing that search term and their directly connected neighbors</eResult>
 		</expectedResults>
 		<actualResults>
 			<aResult>
-				The visualization displays the results of the search as nodes containing that property
+				The visualization displays the results of the search as nodes with any property containing that search term and their directly connected neighbors
+			</aResult>
+		</actualResults>
+	</test>
+
+	<test id="UC8 Search for Nodes Alternative">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>8</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
+			<step>Load the Web Application</step>
+			<step>Click on the search button</step>
+			<step>Select the 'name' property in the drop-down menu</step>
+			<step>In the search bar search for an actor ex: Kevin Bacon</step>
+			<step>Click the Search button</step>
+		</description>
+		<expectedResults>
+			<eResult>The visualization displays the results of the search as nodes with name property containing that search term and their directly connected neighbors</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				The visualization displays the results of the search as nodes with name property containing that search term and their directly connected neighbors
 			</aResult>
 		</actualResults>
 	</test>
@@ -275,16 +365,229 @@
 			<step>Load the Web Application</step>
 			<step>Click on the filter button</step>
 			<step>In the search bar search for an actor ex: Kevin Bacon</step>
-			<step>Click the magnifying glass to continue</step>
+			<step>Click the Filter button</step>
 		</description>
 		<expectedResults>
-			<eResult>Any node that contains the filtered query remain on the screen while other/un-related nodes are be grayed out</eResult>
+			<eResult>Any node that contains the filtered query remain the same while other/un-related nodes be grayed out</eResult>
 		</expectedResults>
 		<actualResults>
 			<aResult>
-				Any node that contains the filtered query remain on the screen while other/un-related nodes are be grayed out
+				Any node that contains the filtered query remain the same while other/un-related nodes are grayed out
 			</aResult>
 		</actualResults>
 	</test>
 
+	<test id="UC9 Filter Data Visualization Alternative">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>9</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database.</precondition>
+			<step>Load the Web Application</step>
+			<step>Click on the filter button</step>
+			<step>In the search bar search for an non-existent result: fdsafdsa</step>
+			<step>Click the Filter button</step>
+		</description>
+		<expectedResults>
+			<eResult>All nodes are grayed out</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				All nodes are grayed out
+			</aResult>
+		</actualResults>
+	</test>
+
+	<test id="UC10 Tree Walk">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>10</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database with data.</precondition>
+			<step>Load the Web Application</step>
+			<step>Left mouse click onto any node on the visualization</step>
+			<step>Click on the Tree Walk button in the tool-bar</step>
+		</description>
+		<expectedResults>
+			<eResult>Any and all neighbors of the selected node will be displayed by appending the current visualization</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				Any and all neighbors of the selected node will be displayed by appending the current visualization
+			</aResult>
+		</actualResults>
+	</test>
+	
+	<test id="UC10 Tree Walk Alternative">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>10</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database with data.</precondition>
+			<step>Load the Web Application</step>
+			<step>Left mouse click onto any node on the visualization that is known to have no unvisualized connected neighbors (This can be done by choosing the same node as that in UC10 Tree Walk after that test has been run)</step>
+			<step>Click on the Tree Walk button in the tool-bar</step>
+		</description>
+		<expectedResults>
+			<eResult>An error message is displayed stating that "There are no hidden neighbors of this node"</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				An error message is displayed stating that "There are no hidden neighbors of this node"
+			</aResult>
+		</actualResults>
+	</test>
+	
+	<test id="UC11 Shortest Path">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>11</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database with data.</precondition>
+			<step>Load the Web Application</step>
+			<step>Click the Shortest Path button, </step>
+			<step>In the panel displayed on the right of the application click the “From” button and then using the cursor click on a starting node on the visualization. </step>
+			<step>Proceed by clicking the “To” button and selection another node, </step>
+			<step>Click the “Search” button.</step>
+		</description>
+		<expectedResults>
+			<eResult>The shortest path(s) will be displayed in the visualization.</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				The shortest path(s) will be displayed in the visualization.
+			</aResult>
+		</actualResults>
+	</test>	
+	
+	<test id="UC11 Shortest Path Alternative">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>11</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database with data.</precondition>
+			<step>Load the Web Application</step>
+			<step>Click the Shortest Path button</step>
+			<step>In the panel displayed on the right of the application and manually provide the node IDs for the “To” and “From” fields. </step>
+			<step>Click the “Search” button.</step>
+		</description>
+		<expectedResults>
+			<eResult>The shortest path(s) will be displayed in the visualization.</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				The shortest path(s) will be displayed in the visualization.
+			</aResult>
+		</actualResults>
+	</test>		
+	
+	<test id="UC12 Advanced User Mode">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>12</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI is successfully connected to the database with data.</precondition>
+			<step>Load the Web Application</step>
+			<step>Click the Advance mode button on the tool-bar</step> 
+			<step>A developer console input box will display at the bottom of the application. Proceed by supplying any custom cypher query</step>
+			<step>Press the “Enter” key on the keyboard. </step>
+		</description>
+		<expectedResults>
+			<eResult>A new window will open up with the result of the query in AJAX</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				A new window will open up with the result of the query in AJAX
+			</aResult>
+		</actualResults>
+	</test>		
+
+	<test id="UC13 Editing Application Settings">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>13</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI</precondition>
+			<step>Click the Application Preferences button on the tool bar</step>
+			<step>In the panel on the right, under Node Displayed Properties, change the Person property to 'name'</step>
+			<step>Click the Save button </step>
+		</description>
+		<expectedResults>
+			<eResult>The graph is re-visualized with the Actors names as node labels</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				The graph is re-visualized with the Actors names as node labels
+			</aResult>
+		</actualResults>
+	</test>			
+
+	<test id="UC13 Editing Application Settings Alternative">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>13</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI</precondition>
+			<step>Click the Application Preferences button on the tool bar</step>
+			<step>Select 'Stationary Force Graph' in the drop-down box</step>
+			<step>Click the Save button </step>
+		</description>
+		<expectedResults>
+			<eResult>The graph will be re-visualized using the stationary force graph algorithm</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				The graph will be re-visualized using the stationary force graph algorithm
+			</aResult>
+		</actualResults>
+	</test>			
+
+	<test id="UC14 Hover Mode enable">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>14</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI, connected to the database and contains data. Hover mode is currently disabled</precondition>
+			<step>Activate Hover Mode by clicking the Hover mode icon from the Toolbar</step>
+			<step>Mouse over any existing node</step>
+		</description>
+		<expectedResults>
+			<eResult>A popup window displays information summary about the node being hovered over</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				A popup window displays information summary about the node being hovered over
+			</aResult>
+		</actualResults>
+	</test>		
+	
+	<test id="UC14 Hover Mode disable">
+		<role>User</role>
+		<dateAdded>1/26/2015</dateAdded>
+		<dateModified>1/26/2015</dateModified>
+		<usecase>14</usecase>
+		<description>
+			<precondition>The Neo4j database is running and the Web UI, connected to the database and contains data. Hover Mode is currently Enabled.</precondition>
+			<step>Disable hover mode by clicking on the Hover mode icon on the tool bar</step>
+			<step>Mouse over any existing node</step>
+		</description>
+		<expectedResults>
+			<eResult>Nothing happens</eResult>
+		</expectedResults>
+		<actualResults>
+			<aResult>
+				Nothing happens
+			</aResult>
+		</actualResults>
+	</test>		
+	
 </BlackBoxTestPlan>
