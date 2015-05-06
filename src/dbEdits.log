@@ -1,2 +1,18 @@
 {"user":"neo4j","level":"info","message":"AdvMode (fail): Begin Log","timestamp":"2015-05-04T18:48:49.830Z"}
 {"user":"neo4j","level":"info","message":"Update Node (success) { id: 369 } {name:\"Yolande Moreau\",biography:\"\",lastModified:\"1300035527000\",id:\"2415\",version:\"51\"}","timestamp":"2015-05-06T00:56:01.125Z"}
+{"user":"neo4j","level":"info","message":"Update Node (success) { id: 370 } {name:\"Lorella Cravotta\",biography:\"\",lastModified:\"1299494695000\",id:\"2409\",version:\"23\"}","timestamp":"2015-05-06T01:07:21.662Z"}
+{"user":"neo4j","level":"info","message":"Update Node (success) { id: 370 } {}","timestamp":"2015-05-06T01:16:38.431Z"}
+{"user":"neo4j","level":"info","message":"Update Node (success) { id: 361 } {}","timestamp":"2015-05-06T01:19:35.584Z"}
+{"user":"neo4j","level":"info","message":"Update Node (success) { id: 369 } {name:\"Yolande Moreau\",biography:\"test\",lastModified:\"1300035527000\",id:\"2415\",version:\"51\"}","timestamp":"2015-05-06T01:21:45.748Z"}
+{"user":"neo4j","level":"info","message":"Update Node (success) { id: 369 } {name:\"Yolande Moreau\",biography:\"\",lastModified:\"1300035527000\",id:\"2415\",version:\"51\"}","timestamp":"2015-05-06T01:23:21.260Z"}
+{"user":"neo4j","level":"info","message":"Update Node (success) { id: 412 } {name:\"Dee Wallace\",biography:\"\",lastModified:\"1300090462000\",id:\"101763\",profileImageUrl:\"http://cf1.imgobject.com/profiles/24f/4bf197d0017a3c321300024f/dee-wallace-profile.jpg\",version:\"43\"}","timestamp":"2015-05-06T01:28:20.572Z"}
+{"user":"neo4j","level":"info","message":"Update Node (success) { id: 412 } {name:\"Dee Wallace\",biography:\"\",lastModified:\"1300090462000\",id:\"101763\",profileImageUrl:\"http://cf1.imgobject.com/profiles/24f/4bf197d0017a3c321300024f/dee-wallace-profile.jpg\",version:\"43\"}","timestamp":"2015-05-06T01:28:33.085Z"}
+{"user":"neo4j","level":"info","message":"Update Node (success) { id: 363 } {name:\"Rufus\",biography:\"\",lastModified:\"1299715556000\",id:\"2407\",version:\"48\"}","timestamp":"2015-05-06T01:28:56.007Z"}
+{"user":"neo4j","level":"info","message":"Update Node (success) { id: 367 } {name:\"Dominique Pinon\",biography:\"\",lastModified:\"1299835296000\",id:\"2413\",version:\"71\"}","timestamp":"2015-05-06T01:30:02.648Z"}
+{"user":"neo4j","level":"info","message":"Update Node (success) { id: 365 } {name:\"Claire Maurier\",biography:\"\",lastModified:\"1299833824000\",id:\"1654\",version:\"27\"}","timestamp":"2015-05-06T01:33:23.133Z"}
+{"user":"neo4j","level":"info","message":"Update Node (success) { id: 370 } {}","timestamp":"2015-05-06T01:36:43.551Z"}
+{"user":"neo4j","level":"info","message":"Update Node (success) { id: 368 } {name:\"Artus de Penguern\",biography:\"\",lastModified:\"1299493388000\",id:\"2414\",version:\"29\"}","timestamp":"2015-05-06T01:43:06.675Z"}
+{"user":"neo4j","level":"info","message":"Update Rel (success) { id: 432 } {}","timestamp":"2015-05-06T01:43:34.276Z"}
+{"user":"neo4j","level":"info","message":"Update Rel (success) { id: 432 } {}","timestamp":"2015-05-06T01:44:55.129Z"}
+{"user":"neo4j","level":"info","message":"Update Node (success) { id: 365 } {name:\"Claire Maurier\",biography:\"\",lastModified:\"1299833824000\",id:\"1654\",version:\"27\"}","timestamp":"2015-05-06T01:47:02.208Z"}
+{"user":"neo4j","level":"info","message":"Update Rel (success) { id: 439 } {name:\"Hipolito\"}","timestamp":"2015-05-06T01:47:13.606Z"}

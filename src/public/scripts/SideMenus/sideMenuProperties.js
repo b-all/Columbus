@@ -393,13 +393,13 @@ function setNodePropertyEditBtnOnClick(d) {
 		for (i in d.data) {
 			$('#editPropertiesModalTable').append(
 				'<tr>' +
-					'<td>' +
+					'<td class="pNameInput">' +
 						i +
 					'</td>' +
 					'<td width="5px">' +
 						':' +
 					'</td>' +
-					'<td><textarea id="ta'+ j + '" class="form-control">' +
+					'<td><textarea id="ta'+ j + '" class="form-control pValueInput">' +
 						d.data[i] +
 					'</textarea></td>' +
 				'</tr>'
@@ -424,9 +424,9 @@ function setNodePropertyEditBtnOnClick(d) {
 				id: d.id,
 				data: {}
 			};
-			var propRows = $('tr', '#editableProperties');
+			var propRows = $('tr', '#editPropertiesModalTable');
 			propRows.each(function() {
-				var s = $('.pNameInput', this).val();
+				var s = $('.pNameInput', this).html();
 				// add inputs to update object
 				if (typeof s !== 'undefined') {
 					updatedProps.data[s] = $('.pValueInput', this).val();
@@ -438,7 +438,9 @@ function setNodePropertyEditBtnOnClick(d) {
 			};
 			updateNodeProperties(updatedProps, function () {
 				d.data = JSON.parse(updatedProps.node).data;
+				hideSideMenu('node');
 			});
+
 		});
 
 	});
@@ -452,13 +454,13 @@ function setRelEditPropertyBtnOnClick(d) {
 		for (i in d.data) {
 			$('#editPropertiesModalTable').append(
 				'<tr>' +
-					'<td>' +
+					'<td class="pNameInput">' +
 						i +
 					'</td>' +
 					'<td width="5px">' +
 						':' +
 					'</td>' +
-					'<td><textarea id="ta'+ j + '" class="form-control">' +
+					'<td><textarea id="ta'+ j + '" class="form-control pValueInput">' +
 						d.data[i] +
 					'</textarea></td>' +
 				'</tr>'
@@ -479,28 +481,27 @@ function setRelEditPropertyBtnOnClick(d) {
 		//set Modal save button on-click
 		$('#modalSaveBtn').off('click');
 		$('#modalSaveBtn').on('click', function () {
-			$('.saveBtn').off('click');
-			$('.saveBtn').on('click', function () {
-				var updatedProps = {
-					id: d.id,
-					data: {}
-				};
-				var propRows = $('tr', '#editableProperties');
-				propRows.each(function() {
-					var s = $('.pNameInput', this).val();
-					// add inputs to update object
-					if (typeof s !== 'undefined') {
-						updatedProps.data[s] = $('.pValueInput', this).val();
-					}
-				});
-
-				updatedProps = {
-					rel: JSON.stringify(updatedProps)
-				};
-				updateRelProperties(updatedProps, function () {
-					d.data = JSON.parse(updatedProps.rel).data;
-				});
+			var updatedProps = {
+				id: d.id,
+				data: {}
+			};
+			var propRows = $('tr', '#editPropertiesModalTable');
+			propRows.each(function() {
+				var s = $('.pNameInput', this).html();
+				// add inputs to update object
+				if (typeof s !== 'undefined') {
+					updatedProps.data[s] = $('.pValueInput', this).val();
+				}
 			});
+
+			updatedProps = {
+				rel: JSON.stringify(updatedProps)
+			};
+			updateRelProperties(updatedProps, function () {
+				d.data = JSON.parse(updatedProps.rel).data;
+				hideSideMenu('relationship');
+			});
+
 		});
 
 	});
